@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+    
+    <entry>
+      <title><![CDATA[Test]]></title>
+      <url>%2F2017%2F04%2Ftest%2F</url>
+      <content type="text"></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Sublime Text 3 配置]]></title>
+      <url>%2F2017%2F04%2Fsublime-text-3-%E9%85%8D%E7%BD%AE%2F</url>
+      <content type="text"><![CDATA[这篇博客主要讲怎么配置自己的sublime text， 安装可以去官网下载自行安装。 Package Control之后我们要安装Package Control, 既sublime的包管理工具 后面我们的包下载安装都用他。 按快捷键ctrl + ` 调出或者菜单view&gt; show Control 调出control 复制下面代码到control sublime Text 31import urllib.request,os,hashlib; h = &apos;2915d1851351e5ee549c20394736b442&apos; + &apos;8bc59f460fa1548d1514676163dafc88&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &apos;wb&apos; ).write(by) sublime Text 21import urllib2,os,hashlib; h = &apos;df21e130d211cfc94d9b0905775a7c0f&apos; + &apos;1e3d39e33b79698005270310898eea76&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), &apos;wb&apos; ).write(by) if dh == h else None; print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h) if dh != h else &apos;Please restart Sublime Text to finish installation&apos;) 复制完敲回车就可以安装，稍等片刻出现即可，安装完成后在 Preferences菜单下会出现 Package Control 选项 详细安装可看Package Control 插件打开 Package Control或按快捷键cmd/ctrl + shift + p， 输入 install package 选中第一个选项既进入安装插件的列表。 这时候可能需要等一会加载远程仓库，具体在左下角会有一个loading标识， 加载完在弹窗输入要安装的插件即可。 所有的插件都可以在https://packagecontrol.io/ 找到，下面列出比较常用的几个插件 Themesublime 编辑器虽然轻巧强大，但是默认的主题实在有点看不下去。主题可以在https://packagecontrol.io/browse/labels/theme 找自己喜欢的。目前个人使用的是 Material Theme 。 直接在install package 弹窗输入 Material Theme 选第一个即可（后面安装方法类似）。 安装完成后会弹出一个README，根据提示修改一下配置。打开Preferences &gt; settings &gt; User添加以下配置，保存即可生效12&quot;color_scheme&quot;: &quot;Packages/Material Theme/schemes/Material-Theme.tmTheme&quot;,&quot;theme&quot;: &quot;Material-Theme.sublime-theme&quot;, Material Theme 个人比较喜欢的主题还有 ayu Agila Theme Emmet前端工程师使用sublime编辑的必备插件，可以极大提高开发效率。最简单的应用就是在空白的.html页面输入!再按 tab键会自动生成html5基本页面解构。还有基本如 #div1&gt;span.child{这是子级}*2+button.name[disabled]{按钮}快捷语法等具体看emmet, Emmet-package SideBarEnhancementssublime 自带的侧边栏文件（夹）功能特别少，这个插件可以为其添加很多其他功能。docs BracketHighlighter前后标签高亮的插件，如[], (), {}, &quot;&quot;, &#39;&#39;, &lt;tag&gt;&lt;/tag&gt;等，可以比较方便看清代码块的起始点。docs AutoFileName按照路径提示该路径目录下的文件名，对于引入文件资源等很有帮助 All AutoComplete让代码自动完成的匹配从所有打开的文件里去匹配，而不是只在当前文件里匹配。 HTML-CSS-JS Prettifyhtml, css, js &amp;&amp; Json 的格式化插件。需要本地安装了node。默认格式化快捷键为ctrl+shift+h END基本上比较通用的插件就这些，可以发现这些插件基本上都在package Control前十位。学会举一反三，工作中用到的另一些插件再上https://packagecontrol.io/ 搜索关键字安装如 git, less, vuejs等等。 最后附上自己的配置12345678910111213141516&#123; "color_scheme": "Packages/Material Theme/schemes/Material-Theme-Lighter.tmTheme", "ignored_packages": [ "Vintage" ], "always_show_minimap_viewport": true, "theme": "Material-Theme-Lighter.sublime-theme", "word_wrap":true, "wrap_width": 120, "font_size": 10, "line_padding_bottom": 2, "line_padding_top": 2, "highlight_line":true, "font_face": "Monaco"&#125;]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Chrome插件开发]]></title>
+      <url>%2F2017%2F04%2Fchrome%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%2F</url>
+      <content type="text"><![CDATA[先放上入门的英语文档https://developer.chrome.com/extensions/getstarted 后面的教程是参照文档学习的。 新建配置文件首先创建一个manifest.json 用于整个项目的配置文件， 类似平时 js 的 package.json。 包含了项目的版本号， 项目名（扩展插件名）， 描述等。 12345678910111213141516171819202122232425262728293031&#123; "manifest_version": 2, "name": "Getting started example", "description": "This extension shows a Google Image search result for the current page", "version": "1.0", "browser_action": &#123; "default_icon": "icon.png", "default_popup": "popup.html" &#125;, "permissions": [ "activeTab", "https://ajax.googleapis.com/" ]&#125;&#123; "manifest_version": 2, // 版本号 "name": "Getting started example", // 项目名 "description": "This extension shows a Google Image search result for the current page", // 描述 "version": "1.0", // 项目版本号 "browser_action": &#123; "default_icon": "icon.png", // 默认icon "default_popup": "popup.html" // 默认弹窗 &#125;, "permissions": [ "activeTab", // "https://ajax.googleapis.com/" ]&#125; 资源文件在配置文件中我们定义了一个 default_icon 和 default_popup， 现在让我们来创建他们。 default_icondefault_icon 指向的是用于显示在工具栏的图标 可以选自己喜欢的图片，不过要选取 19px 的 .png文件。 可以用google提供的例子 icon.png popup.htmlpopup.html用于用户点击时弹出的一个操作框。为html 文件 所以你可以自己捣鼓自己想显示的东西。 可以用google提供的例子 popup.html 主要的逻辑以外部js的格式独立写在一个js文件里。 popup.js 现在你的文件夹里应该有四个文件: icon.png popup.html popup.js manifest.json 这些完成之后，我们接下来就在chrome加载我们的插件 加载插件调试chrome 访问 chrome://extensions 或手动从菜单进入 扩展程序 打开右上角的开发者模式 如果电脑没有装chrome….趁早装一个]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Animate-Text]]></title>
+      <url>%2F2017%2F04%2Fanimate-text%2F</url>
+      <content type="text"><![CDATA[animate-text文字动画和数字动画 animate text查看DEMO git仓库 轻巧的文字动画库, 使用简单, 文件大小4k可以给文字添加出现动画, 支持字符串打字效果和数字变化效果, 支持监听动画结束事件 项原项目地址, 这里对其代码改造优化。 使用方法12345678910111213141516import AnimateText from './animate-text'// 最简单的使用方法new AnimateText('.text')// 如果需要定义动画时间可以这样初始化new AnimateText('.text', 1000)// 如果还有其它设置 请这样写new AnimateText('.text', &#123; time: 1000, // 动画时长 isNumber: true, // 是否渲染为数字动画 startNumber: 0, // 渲染为数字动画时 动画的开始数字 changeCount: 32, // 数字动画数字变化次数 onAnimated: function () &#123;console.log('动画结束')&#125; // 动画结束事件回调&#125;) 参数说明AnimateText接收两个参数, 例如: new AnimateText(element, options) 参数 类型 是否必填 描述 element String or Object 是 可以是选择器或者dom节点对象(请保证这个节点内只有文本而没有其它节点) options Number or Object 否 如果第二个参数是数字, 则当作动画时间处理, 如果有其他参数, 以对象格式传递, 具体每个属性的描述请看下方的 options说明 options说明第二个参数options详细说明 参数 类型 默认值 是否必填 描述 time Number 500 否 动画持续的时间 isNumber Boolean false 否 是否渲染为数字动画 startNumber Number 0 否 数字动画的开始数字 changeCount Number 32 否 数字动画变化次数 也就是数字经过多少次跳动才变为最终数字 onAnimated Function null 否 动画结束监听函数 实例对象方法说明1234567// 实例化var animateText = new AnimateText('.text')// 实例化对象后 对象提供play方法重新播放动画// 接受参数作为动画时间// 不传递参数则使用实例化的时间animateText.play(1000)]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Hexo-第三方服务集成]]></title>
+      <url>%2F2017%2F04%2F%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90%2F</url>
+      <content type="text"><![CDATA[静态站点拥有一定的局限性，因此我们需要借助于第三方服务来扩展站点的功能。 以下是 NexT 目前支持的第三方服务，你可以根据你的需求集成一些功能进来。 评论系统NexT 支持多款评论系统。如需取消某个 页面/文章 的评论，在 md 文件的 front-matter 中增加 comments: false 暂没开评论，多说准备下架。 站内搜索本站用 Hexo 提供的 Local Search， 原理是通过hexo-generator-search插件在本地生成一个search.xml文件，搜索的时候从这个文件中根据关键字检索出相应的链接。 安装安装 hexo-generator-search1$ npm install hexo-generator-search 安装 hexo-generator-searchdb1$ npm install hexo-generator-searchdb --save 修改站点配置编辑 站点配置 根目录下的_config.yml.12345search: path: search.xml field: post format: html limit: 10000 站内搜索原文教程-EZLippi-浮生志]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Next-主题设置]]></title>
+      <url>%2F2017%2F04%2Fnext-%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE%2F</url>
+      <content type="text"><![CDATA[下面的主题配置指的是 themes&gt;Next&gt;_config.yml, 站点配置指的是根目录下的_config.yml; 添加[标签]页面新建「标签」页面，并在菜单中显示「标签」链接。「标签」页面将展示站点的所有标签，若你的所有文章都未包含标签，此页面将是空的。 底下代码是一篇包含标签的文章的例子： 12345title: 标签测试文章tags: - Testing - Another Tag--- 新建tags页面使用hexo new page tags 新建一个页面，命名为tags:12$ cd you-hexo-site$ hexo new page tags 设置新建的tags页面类型，改为tags123456---title: tagsdate: 2017-04-03 11:35:36type: "tags"comments: false # tags页面自定义是否要开启评论（前提你已经集成了评论）--- 修改主题配置文件，把tag添加到menu中1234menu: home: / archives: /archives tags: /tags 添加[分类]页面新建「分类」页面，并在菜单中显示「分类」链接。「分类」页面将展示站点的所有分类，若你的所有文章都未包含分类，此页面将是空的。 底下代码是一篇包含分类的文章的例子： 123title: 分类测试文章categories: Testing--- 分类和标签的区别详见Hexo的分类与标签文档 新建页面在终端窗口下，定位到 Hexo 站点目录下。使用 hexo new page 新建一个页面，命名为 categories ：1234567891011$ cd your-hexo-site$ hexo new page categories``` #### 设置页面类型编辑刚新建的页面，将页面的 `type` 设置为 `categories` ，主题将自动为这个页面显示分类。页面内容如下：```ymltitle: 分类date: 2014-12-22 12:39:04type: "categories"--- 修改菜单在菜单中添加链接。编辑 主题配置文件 ， 添加 categories 到 menu 中，如下:1234menu: home: / archives: /archives categories: /categories 设置字体Next提供了5个特定范围的字体设定 全局字体：定义的字体将在全站范围使用 标题字体：文章内标题的字体（h1, h2, h3, h4, h5, h6） 文章字体：文章所使用的字体 Logo字体：Logo 所使用的字体 代码字体： 代码块所使用的字体 该配置中的 external 可以用来控制是否使用外链字体库。 开放此属性方便你设定那些已经安装在系统中的字体，减少不必要的请求（请求大小）。 设置代码高亮主题NexT 使用 Tomorrow Theme 作为代码高亮，共有5款主题供你选择。 NexT 默认使用的是 白色的 normal 主题，可选的值有 normal，night， night blue， night bright， night eighties：可以自行更改 highlight_theme 字段， 设置成你自己喜欢的高亮主题。 侧边栏社交链接侧栏社交链接的修改包含两个部分，第一是链接，第二是链接图标。 两者配置均在 主题配置文件 中。 设置链接在 主题配置 中找到 social字段， 其格式为 显示文本: 链接地址。 scoial123social: Github: https://github.com/jsonz1993 微博: http://weibo.com/u/1638841204 设置图标在 主题配置 中找到 social_icons字段， 其格式为 匹配键: Font Awesome 图标名称。enable 为是否显示图标控制。 注意此时的匹配建要与 social的键一致,图标依旧是Font Awesome图标 站点建立时间这个时间将在站点的底部显示，例如 © 2013 - 2015。 编辑 主题配置文件，新增字段 since。 1since: 2013 设置「动画效果」NexT 默认开启动画效果，效果使用 JavaScript 编写，因此需要等待 JavaScript 脚本完全加载完毕后才会显示内容。 如果您比较在乎速度，可以将设置此字段的值为 false 来关闭动画。编辑 主题配置文件， 搜索 use_motion，根据您的需求设置值为 true 或者 false 即可：1use_motion: true # 开启动画 设置「背景动画」NexT 自带两种背景动画效果 编辑 主题配置文件， 搜索 canvas_nest 或 three_waves，根据您的需求设置值为 true 或者 false 即可：只能同时开启一种背景效果， 建议酌情开启，会影响电脑网页性能(macbook pro或笔记本容易出现过热现象).12canvas_nest: false //关闭动画three_waves: true //开启动画]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Hello Next]]></title>
+      <url>%2F2017%2F04%2Fhellp-next%2F</url>
+      <content type="text"><![CDATA[next 入门配置 主题安装下面Next下的_config称主题配置， 根目录Hexo的_config称站点配置 安装next 到目录 themes/next:注意安装完themes下应该有一个 next 文件夹1$ git clone https://github.com/iissnan/hexo-theme-next themes/next 启动主题修改 站点配置:1theme: next 验证主题先清除缓存再启动服务，启动完成后打开 http://localhost:4000/1$ hexo clean &amp;&amp; hexo s 主题设定选择SchemeScheme 是 NexT 提供的一种特性，借助于 Scheme，NexT 为你提供多种不同的外观。同时，几乎所有的配置都可以 在 Scheme 之间共用。在主题配置配置中的Scheme选项。目前提供三种方案： Muse - 默认 Scheme，这是 NexT 最初的版本，黑白主调，大量留白 Mist - Muse 的紧凑版本，整洁有序的单栏外观 Pisces - 双栏 Scheme，小家碧玉似的清新 目前使用的是 scheme: Mist方案 设置语言在站点配置 language 中设置 zh-Hans (简体中文)。支持的语言可在 themes/next/languages 中查看 设置菜单菜单格式为 item name: link此处只是将 url映射到对应 菜单上，若要具体显示文案需要到语言配置文件修改123456menu: home: / # 主页 categories: /categories # 分类 archives: /archives # 归档 tags: /tags # 标签 about: /about # 关于我 设置菜单图标图标可从http://fontawesome.io/选择123456789menu_icons: enable: true # 是否显示图标 # Icon Mapping. home: home about: user categories: th tags: tags archives: archive commonweal: heartbeat 设置侧栏 设置侧栏位置：主题配置 修改 sidebar.position 的值，支持 left &amp; right但目前只有Pisces Scheme支持该设置 设置侧栏显示的时机主题配置 修改 sidebar.display，目前支持的有： post 默认行文，文展页面自动展开 首页等不自动展开 always 所有页面都自动展开 hide 所有页面都隐藏，可以手动展开 remove 完全移除 设置头像主题配置 修改 avatar字段。支持互联网URI 如 https://www.img.com/img.jpg或站内地址 /images/avatar.jpg 集成第三方服务百度统计 登录百度统计， 定位到站点的代码获取页面 复制 hm.js? 后面那串统计脚本 id，如:hm.src = &quot;https://hm.baidu.com/hm.js?dksjklsajdlkasjkl&quot;;则id = dksjklsajdlkasjkl 修改主题配置 baidu_analytics 字段，改为上述id 骚等一段时间后可以自行登录百度统计查看PV,UV等数据。 文章阅读量统计为Next主题添加文章阅读量]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Hexo-辅助函数]]></title>
+      <url>%2F2017%2F04%2Fhexo-%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0%2F</url>
+      <content type="text"><![CDATA[主要用于模板中辅助的函数，如 date(Date, &#39;YYYY-DD-MM&#39;) 详见https://hexo.io/zh-cn/docs/helpers.html]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Hexo-变量]]></title>
+      <url>%2F2017%2F04%2Fhexo-%E5%8F%98%E9%87%8F%2F</url>
+      <content type="text"><![CDATA[变量主要用于 layout 等的应用 全局变量 变量 描述 site 网站变量 page 针对该页面的内容以及 front-matter 所设定的变量。 config 网站配置 theme 主题配置。继承自网站配置。 _ (单下划线) Lodash 函数库 path 当前页面的路径（不含根路径） url 当前页面的完整网址 env 环境变量 网站变量 变量 描述 site.posts 所有文章 site.pages 所有分页 site.categories 所有分类 site.tags 所有标签 页面变量页面page 变量 描述 page.title 页面标题 page.date 页面建立日期（Moment.js 对象） page.updated 页面更新日期（Moment.js 对象） page.comments 留言是否开启 page.layout 布局名称 page.content 页面的完整内容 page.excerpt 页面摘要 page.more 除了页面摘要的其余内容 page.source 页面原始路径 page.full_source 页面的完整原始路径 page.path 页面网址（不含根路径）。我们通常在主题 中使用 url_for(page.path)。 page.permalink 页面的完整网址 page.prev 上一个页面。如果此为第一个页面则为 null。 page.next 下一个页面。如果此为最后一个页面则为 null。 page.raw 文章的原始内容 page.photos 文章的照片（用于相簿） page.link 文章的外部链接（用于链接文章） 文章post与page类似 但是添加了下列变量 变量 描述 page.published 如果该文章已发布则为True page.categories 该文章的所有分类 page.tags 该文章的所有标签 首页 index 变量 描述 page.per_page 每页显示的文章数量 page.total 总文章数 page.current 目前页数 page.current_url 目前分页的网址 page.posts 本页文章 page.prev 上一页的页数。如果此页是第一页的话则为 0。 page.prev_link 上一页的网址。如果此页是第一页的话则为 ‘’。 page.next 下一页的页数。如果此页是最后一页的话则为 0。 page.next_link 下一页的网址。如果此页是最后一页的话则为 ‘’。 page.path 当前页面的路径（不含根目录）。我们通常在主题中使用 url_for(page.path)。 归档 (archive)与 index 布局相同， 但新增了以下变量 变量 描述 page.archive 等于 true page.year 年份归档 (4位) page.month 月份归档 (没有前导零的2位数) 分类 (category)与 index 布局相同， 但新增了以下变量 变量 描述 page.category 分类名称 标签(tag)与 index 布局相同， 但新增了以下变量 变量 描述 page.tag 标签名称]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Hexo-模板]]></title>
+      <url>%2F2017%2F04%2Fhexo-%E6%A8%A1%E6%9D%BF%2F</url>
+      <content type="text"><![CDATA[模板决定了网站内容的呈现方式，每个主题至少都应包含一个 index 模板，以下是各页面相对应的模板名称： 模板 用途 回调 index 首页 post 文章 index page 分页 index archive 归档 index category 分类归档 archive tag 标签归档 archive 布局 Layout布局这块可参考 next 主题看, Hexo 默认的引擎模板为swig 如果页面结构类似，例如两个模板都有页首（Header）和页脚（Footer），您可考虑通过「布局」让两个模板共享相同的结构。一个布局文件必须要能显示 body 变量的内容，如此一来模板的内容才会被显示，举例来说： index.ejs1index layout.ejs1234&lt;!DOCTYPE html&gt;&lt;html&gt; &lt;body&gt;&lt;%- body %&gt;&lt;/body&gt;&lt;/html&gt; 生成1234&lt;!DOCTYPE html&gt;&lt;html&gt; &lt;body&gt;index&lt;/body&gt;&lt;/html&gt; 每个模板都默认使用 layout 布局，您可在 front-matter 指定其他布局，或是设为 false 来关闭布局功能，您甚至可在布局中再使用其他布局来建立嵌套布局。 局部模板 Partial局部模板让您在不同模板之间共享相同的组件，例如页首（Header）、页脚（Footer）或侧边栏（Sidebar）等，可利用局部模板功能分割为个别文件，让维护更加便利。 官网说的都是ejs语法， 目前next采用的是swig 语法。 TODO 后面再补上 Next主题学习 &amp;&amp; swig]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Hexo-主题概述]]></title>
+      <url>%2F2017%2F04%2Fhexo-%E4%B8%BB%E9%A2%98%E6%A6%82%E8%BF%B0%2F</url>
+      <content type="text"><![CDATA[了解一款主题的文件结构可以让你在有自定义需求的时候，快速定位到目标文件，也为后面的定制化主题做铺垫。 创建 Hexo 主题非常容易，您只要在 themes 文件夹内，新增一个任意名称的文件夹，并修改 _config.yml 内的 theme 设定，即可切换主题。一个主题可能会有以下的结构： 123456.├── _config.yml├── languages├── layout├── scripts└── source _config.yml主题的配置文件。修改时会自动更新，无需重启服务器。 languages语言文件夹。请参见 国际化 (i18n)。 layout布局文件夹。用于存放主题的模板文件，决定了网站内容的呈现方式，Hexo 内建 Swig 模板引擎，您可以另外安装插件来获得 EJS、Haml 或 Jade 支持，Hexo 根据模板文件的扩展名来决定所使用的模板引擎，例如：12layout.ejs - 使用 EJSlayout.swig - 使用 Swig 详细见 模板 scripts脚本文件夹。在启动时，Hexo 会载入此文件夹内的 JavaScript 文件，详细见 插件 。 source资源文件夹，除了模板以外的 Asset，例如 CSS、JavaScript 文件等，都应该放在这个文件夹中。文件或文件夹开头名称为 _（下划线线）或隐藏的文件会被忽略。 如果文件可以被渲染的话，会经过解析然后储存到 public 文件夹，否则会直接拷贝到 public 文件夹 发布（略）]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Hexo-永久链接]]></title>
+      <url>%2F2017%2F04%2Fhexo-%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5%2F</url>
+      <content type="text"><![CDATA[你可以在_config.yml &gt; permalink配置网站的永久链接或者每篇文章的Front-matter自定义该文章的永久链接, 如: :year/:month/:title/ 对应 2017/04/hexo-永久链接/ 变量除了下列变量外，您还可使用 Front-matter 中的所有属性。 变量 描述 :year 文章的发表年份（4 位数） :month 文章的发表月份（2 位数） :i_month 文章的发表月份（去掉开头的零） :day 文章的发表日期 (2 位数) :i_day 文章的发表日期（去掉开头的零） :title 文件名称 :id 文章 ID :category 分类。如果文章没有分类，则是 default_category 配置信息。 也可以在 permalink_defaults 参数下调整永久链接中各变量的默认值：12permalink_defaults: lang: en]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Hexo-生成文件与部署]]></title>
+      <url>%2F2017%2F04%2F%E7%94%9F%E6%88%90%E6%96%87%E4%BB%B6%E4%B8%8E%E9%83%A8%E7%BD%B2%2F</url>
+      <content type="text"><![CDATA[生成文件生成文件一般是用于生成静态资源文件部署服务器用的 12345$ hexo generate快捷方式为:$hexo g 也可以让Hexo在监视到文件变动后立即重新生成静态文件，在生成时会比对文件的 SHA1 checksum，只有变动的文件才会写入。1$ hexo generate --watch 一般会跑以下命令，方便在Hexo生成文件后直接部署到Github上123456789$ hexo generate --deploy$ hexo deploy --generate(上面两条命令效果一样)或者简写$ hexo g -d$ hexo d -g(上面两条命令效果一样) 部署服务器在部署之前先要在 _config.yml 将部署信息补充完整，此处以 Github 为例: _config.yml配置12345deploy: type: git # type repo: https://github.com/jsonz1993/jsonz1993.github.io.git # 仓库地址 branch: master # 分支 可不填自动识别 message: "feat(hexo)-生成文件与部署" # 提交的信息 参数说明123repo 库（Repository）地址branch 分支名称。如果您使用的是 GitHub 或 GitCafe 的话，程序会尝试自动检测。message 自定义提交信息 (默认为 Site updated: &#123;&#123; now(&apos;YYYY-MM-DD HH:mm:ss&apos;) &#125;&#125;) 确保本地安装了 hexo-deployer-git， 可通过以下方法安装1$ npm install hexo-deployer-git --save 你也可以通过 generate 生成静态资源，再手动copy或上传到服务器.]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Hexo-本地服务器]]></title>
+      <url>%2F2017%2F04%2F%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%2F</url>
+      <content type="text"><![CDATA[一般安装hexo时会自动安装服务器，如果本地没有安装hexo服务器可通过以下命令安装：1$ npm install hexo-server --save 安装完成后，启动服务器，会启动一个（默认4000端口）本地服务器，可通过 http://localhost:4000 访问，Hexo会监视文件变动自动更新，如果是改动配置，需要手动重启服务：1$ hexo server 缩写1$ hexo s 如果您想要更改端口，或是在执行时遇到了 EADDRINUSE 错误，可以在执行时使用 -p 选项指定其他端口，如下：1$ hexo server -p 5000 自定义IP服务器默认运行在 0.0.0.0，您可以覆盖默认的 IP 设置，如下：1$ hexo server -i 192.168.1.1 指定这个参数后，您就只能通过该IP才能访问站点。例如，对于一台使用无线网络的笔记本电脑，除了指向本机的127.0.0.1外，通常还有一个192.168.*.*的局域网IP，如果像上面那样使用-i参数，就不能用127.0.0.1来访问站点了。对于有公网IP的主机，如果您指定一个局域网IP作为-i参数的值，那么就无法通过公网来访问站点。]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Hexo-资源文件夹与数据文件夹]]></title>
+      <url>%2F2017%2F04%2F%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E5%A4%B9%2F</url>
+      <content type="text"><![CDATA[资源文件资源（Asset）代表 source 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。比方说，如果你的Hexo项目中只有少量图片，那最简单的方法就是将它们放在 source/images 文件夹中。然后通过类似于 ![](/images/image.jpg) 的方法访问它们。 文章资源文件夹可以通过设置 _config.yml 来使生成的每个文章都有对应的静态资源文件夹。 _config.yml1post_asset_folder: true 数据文件有时您可能需要在主题中使用某些资料，而这些资料并不在文章内，并且是需要重复使用的，那么您可以考虑使用 Hexo 3.0 新增的「数据文件」功能。此功能会载入 source/_data 内的 YAML 或 JSON 文件，如此一来您便能在网站中复用这些文件了。 举例来说，在 source/_data 文件夹中新建 menu.yml 文件： 123Home: /Gallery: /gallery/Archives: /archives/ 您就能在模板中使用这些资料： 123&#123;% for link in site.data.menu %&#125; &lt;a href=&quot;&#123;&#123; link &#125;&#125;&quot;&gt;&#123;&#123; loop.key &#125;&#125;&lt;/a&gt;&#123;% endfor %&#125;]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Tag Plugins]]></title>
+      <url>%2F2017%2F04%2Ftag-plugins%2F</url>
+      <content type="text"><![CDATA[tag plugins 用于在文章中快速插入特定内容的插件,下面列出常用几种 具体参见https://hexo.io/zh-cn/docs/tag-plugins.html 引用快在文章中插入引言，可包含作者、来源和标题。123&#123;% blockquote @Jsonz http://weibo.com/u/1638841204 %&#125;引用内容&#123;% endblockquote %&#125; 引用内容 @Jsonzweibo.com/u/1638841204 代码块样式可以在 themes&gt;next&gt;source&gt;css修改[language] [title] [url] [link text] code snippet 这是标题,Jsonz's Github1234const a = ()=&gt; &#123; [..."123"].forEach(item=&gt; ++item); return &#123;&#125;;&#125; iframe1&#123;% iframe url [width] [height] %&#125; image插入指定大小图片 1&#123;% img [class names] /path/to/image [width] [height] [title text [alt text]] %&#125;]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Hello Hexo]]></title>
+      <url>%2F2017%2F04%2Fhello-hexo%2F</url>
+      <content type="text"><![CDATA[折腾了一晚上终于把搭好自己喜欢的主题的Hexo博客。接下来一步一步配置 Hexo __config.yml 文件Hexo 官网配置项 一步一步跟着改配置，比较麻烦的是每次修改配置都要hexo s 重启一下服务器看效果如果修改配置后重启服务看不到效果，可以先运行hexo clean清除缓存再重启服务 Site 网站123456title: jsonz1993 # 网站标题，也会显示在该主题导航左上角subtitle: # 网站副标题 会生成在导航栏主标题旁边（这里隐藏了）description: 前端开发 Jsonz 张欣欣 # 网站描述，会出现在head，侧边菜单上 主要用做SEOauthor: Jsonz # 博客作者 Your Namelanguage: zh-Hans # 语言，支持的语言可以在themes&gt;your-thems&gt;languages 找到timezone: # 默认使用电脑的时区，一般不填 URL 网址123456url: https://jsonz1993.github.io/root: /# 文章永久链接的格式 [https://hexo.io/zh-cn/docs/permalinks.html]# 可以使用的变量有[:year, :month, :day, :title, :id, :category, Front-matter所有属性]permalink: :year/:month/:day/:title/ permalink_defaults: # 可以给变量指定默认值 Directory 目录123456789# 定义文件目录, 这部分一般用默认的就可以source_dir: sourcepublic_dir: publictag_dir: tagsarchive_dir: archivescategory_dir: categoriescode_dir: downloads/codei18n_dir: :langskip_render: Writing 文章相关配置123456789101112131415161718# 新文章的名称 我喜欢配合年月按文件夹分类，这样后面方便管理# 此时生成的文件位于: source/_posts/:year/:month/:title.mdnew_post_name: :year/:month/:title.md default_layout: post #命令行 hexo new &lt;layout&gt; name 中 layout默认值titlecase: false # 标题转换为首字母大写external_link: true # 是否在新标签打开连接filename_case: 0 # 文件名大小写转换 (0)不转换（1)小写 (2)大写render_drafts: false # 显示草稿# 启动资源文件夹 看个人可用可不用# 主要每次创建文件都会生成一个同名文件夹用于存放图片等资源post_asset_folder: truerelative_link: false # 把链接改为与根目录的相对位址future: true # 显示下一条文章highlight: # 代码块设置 既现在看到的这块 enable: true line_number: true auto_detect: false tab_replace: Category &amp; Tag 分类&amp;标签123default_category: uncategorized # 默认的分类category_map: # 分类映射（别名）tag_map: # 标签映射（别名） Date / Time format 日期&amp;时间格式12date_format: YYYY-MM-DDtime_format: HH:mm:ss Pagination 分页设置123# 文章数量有限，未实践过该功能per_page: 10 # 每页文章数量 0 为关闭分页pagination_dir: page # 分页的目录 Extensions 其他拓展设置12# 此处有插件与主题设置theme: next #设置的主题应存放在 根目录/themes下]]></content>
+    </entry>
+
+    
+  
+  
+</search>
