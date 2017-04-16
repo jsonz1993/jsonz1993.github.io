@@ -4,26 +4,6 @@
   
     
     <entry>
-      <title><![CDATA[Testdsa]]></title>
-      <url>https://jsonz1993.github.io/2017/04/testdsa/</url>
-      <content type="html"></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> github </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[Sublime Text 3 配置]]></title>
       <url>https://jsonz1993.github.io/2017/04/sublime-text-3-%E9%85%8D%E7%BD%AE/</url>
       <content type="html"><![CDATA[<p>这篇博客主要讲怎么配置自己的<code>sublime text</code>， 安装可以去<a href="http://www.sublimetext.com/" target="_blank" rel="external">官网</a>下载自行安装。</p>
