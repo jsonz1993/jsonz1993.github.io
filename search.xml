@@ -1,989 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   
-  
     
     <entry>
       <title><![CDATA[Sublime Text 3 配置]]></title>
-      <url>https://jsonz1993.github.io/2017/04/sublime-text-3-%E9%85%8D%E7%BD%AE/</url>
-      <content type="html"><![CDATA[<p>这篇博客主要讲怎么配置自己的<code>sublime text</code>， 安装可以去<a href="http://www.sublimetext.com/" target="_blank" rel="external">官网</a>下载自行安装。</p>
-<h2 id="Package-Control"><a href="#Package-Control" class="headerlink" title="Package Control"></a>Package Control</h2><p>之后我们要安装<code>Package Control</code>, 既sublime的包管理工具 后面我们的包下载安装都用他。</p>
-<p>按快捷键<code>ctrl + ` </code> 调出或者菜单<code>view&gt; show Control</code> 调出control</p>
-<p>复制下面代码到control</p>
-<p>sublime Text 3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import urllib.request,os,hashlib; h = &apos;2915d1851351e5ee549c20394736b442&apos; + &apos;8bc59f460fa1548d1514676163dafc88&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &apos;wb&apos; ).write(by)</div></pre></td></tr></table></figure></p>
-<p>sublime Text 2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import urllib2,os,hashlib; h = &apos;df21e130d211cfc94d9b0905775a7c0f&apos; + &apos;1e3d39e33b79698005270310898eea76&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), &apos;wb&apos; ).write(by) if dh == h else None; print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h) if dh != h else &apos;Please restart Sublime Text to finish installation&apos;)</div></pre></td></tr></table></figure></p>
-<p>复制完敲回车就可以安装，稍等片刻出现即可，安装完成后在 <code>Preferences</code>菜单下会出现 <code>Package Control</code> 选项</p>
-<p>详细安装可看<a href="https://packagecontrol.io/installation" target="_blank" rel="external">Package Control</a></p>
-<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>打开 <code>Package Control</code>或按快捷键<code>cmd/ctrl + shift + p</code>， 输入 <code>install package</code> 选中第一个选项既进入安装插件的列表。</p>
-<p>这时候可能需要等一会加载远程仓库，具体在左下角会有一个loading标识， 加载完在弹窗输入要安装的插件即可。</p>
-<p><img src="./package.png" alt="package list"></p>
-<p>所有的插件都可以在<a href="https://packagecontrol.io/" target="_blank" rel="external">https://packagecontrol.io/</a> 找到，下面列出比较常用的几个插件</p>
-<h3 id="Theme"><a href="#Theme" class="headerlink" title="Theme"></a>Theme</h3><p>sublime 编辑器虽然轻巧强大，但是默认的主题实在有点看不下去。<br>主题可以在<a href="https://packagecontrol.io/browse/labels/theme" target="_blank" rel="external">https://packagecontrol.io/browse/labels/theme</a> 找自己喜欢的。<br>目前个人使用的是 <code>Material Theme</code> 。</p>
-<p>直接在<code>install package</code> 弹窗输入 <code>Material Theme</code> 选第一个即可（后面安装方法类似）。</p>
-<p>安装完成后会弹出一个README，根据提示修改一下配置。<br>打开<code>Preferences &gt; settings &gt; User</code><br>添加以下配置，保存即可生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;color_scheme&quot;: &quot;Packages/Material Theme/schemes/Material-Theme.tmTheme&quot;,</div><div class="line">&quot;theme&quot;: &quot;Material-Theme.sublime-theme&quot;,</div></pre></td></tr></table></figure></p>
-<h4 id="Material-Theme"><a href="#Material-Theme" class="headerlink" title="Material Theme"></a>Material Theme</h4><p><img src="./material.gif" alt="material"></p>
-<p>个人比较喜欢的主题还有</p>
-<h4 id="ayu"><a href="#ayu" class="headerlink" title="ayu"></a>ayu</h4><p><img src="./ayu.png" alt="ayu"></p>
-<h4 id="Agila-Theme"><a href="#Agila-Theme" class="headerlink" title="Agila Theme"></a>Agila Theme</h4><p><img src="./agila.png" alt="Agila"></p>
-<h3 id="Emmet"><a href="#Emmet" class="headerlink" title="Emmet"></a>Emmet</h3><p>前端工程师使用sublime编辑的必备插件，可以极大提高开发效率。<br>最简单的应用就是在空白的<code>.html</code>页面输入<code>!</code>再按 <code>tab</code>键会自动生成html5基本页面解构。<br>还有基本如 <code>#div1&gt;span.child{这是子级}*2+button.name[disabled]{按钮}</code>快捷语法等<br>具体看<a href="https://www.emmet.io/" target="_blank" rel="external">emmet</a>, <a href="https://packagecontrol.io/packages/Emmet" target="_blank" rel="external">Emmet-package</a></p>
-<h3 id="SideBarEnhancements"><a href="#SideBarEnhancements" class="headerlink" title="SideBarEnhancements"></a>SideBarEnhancements</h3><p>sublime 自带的侧边栏文件（夹）功能特别少，这个插件可以为其添加很多其他功能。<a href="https://packagecontrol.io/packages/SideBarEnhancements" target="_blank" rel="external">docs</a></p>
-<h3 id="BracketHighlighter"><a href="#BracketHighlighter" class="headerlink" title="BracketHighlighter"></a>BracketHighlighter</h3><p>前后标签高亮的插件，如<code>[], (), {}, &quot;&quot;, &#39;&#39;, &lt;tag&gt;&lt;/tag&gt;</code>等，可以比较方便看清代码块的起始点。<a href="https://packagecontrol.io/packages/BracketHighlighter" target="_blank" rel="external">docs</a></p>
-<h3 id="AutoFileName"><a href="#AutoFileName" class="headerlink" title="AutoFileName"></a>AutoFileName</h3><p>按照路径提示该路径目录下的文件名，对于引入文件资源等很有帮助</p>
-<h3 id="All-AutoComplete"><a href="#All-AutoComplete" class="headerlink" title="All AutoComplete"></a>All AutoComplete</h3><p>让代码自动完成的匹配从所有打开的文件里去匹配，而不是只在当前文件里匹配。</p>
-<h3 id="HTML-CSS-JS-Prettify"><a href="#HTML-CSS-JS-Prettify" class="headerlink" title="HTML-CSS-JS Prettify"></a>HTML-CSS-JS Prettify</h3><p>html, css, js &amp;&amp; Json 的格式化插件。需要本地安装了node。<br>默认格式化快捷键为<code>ctrl+shift+h</code></p>
-<h2 id="END"><a href="#END" class="headerlink" title="END"></a>END</h2><p>基本上比较通用的插件就这些，可以发现这些插件基本上都在<code>package Control</code>前十位。<br>学会举一反三，工作中用到的另一些插件再上<a href="https://packagecontrol.io/" target="_blank" rel="external">https://packagecontrol.io/</a> 搜索关键字安装<br>如 <code>git</code>, <code>less</code>, <code>vuejs</code>等等。</p>
-<p>最后附上自己的配置<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"color_scheme"</span>: <span class="string">"Packages/Material Theme/schemes/Material-Theme-Lighter.tmTheme"</span>,</div><div class="line">	<span class="attr">"ignored_packages"</span>:</div><div class="line">	[</div><div class="line">		<span class="string">"Vintage"</span></div><div class="line">	],</div><div class="line">	<span class="attr">"always_show_minimap_viewport"</span>: <span class="literal">true</span>,</div><div class="line">	<span class="attr">"theme"</span>: <span class="string">"Material-Theme-Lighter.sublime-theme"</span>,</div><div class="line">	<span class="attr">"word_wrap"</span>:<span class="literal">true</span>,</div><div class="line">	<span class="attr">"wrap_width"</span>: <span class="number">120</span>,</div><div class="line">	<span class="attr">"font_size"</span>: <span class="number">10</span>,</div><div class="line">	<span class="attr">"line_padding_bottom"</span>: <span class="number">2</span>,</div><div class="line">	<span class="attr">"line_padding_top"</span>: <span class="number">2</span>,</div><div class="line">	<span class="attr">"highlight_line"</span>:<span class="literal">true</span>,</div><div class="line">	<span class="attr">"font_face"</span>: <span class="string">"Monaco"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> github </tag>
-            
-            <tag> editor </tag>
-            
-        </tags>
-        
+      <url>%2F2017%2F04%2Fsublime-text-3-%E9%85%8D%E7%BD%AE%2F</url>
+      <content type="text"><![CDATA[这篇博客主要讲怎么配置自己的sublime text， 安装可以去官网下载自行安装。 Package Control之后我们要安装Package Control, 既sublime的包管理工具 后面我们的包下载安装都用他。 按快捷键ctrl + ` 调出或者菜单view&gt; show Control 调出control 复制下面代码到control sublime Text 31import urllib.request,os,hashlib; h = &apos;2915d1851351e5ee549c20394736b442&apos; + &apos;8bc59f460fa1548d1514676163dafc88&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &apos;wb&apos; ).write(by) sublime Text 21import urllib2,os,hashlib; h = &apos;df21e130d211cfc94d9b0905775a7c0f&apos; + &apos;1e3d39e33b79698005270310898eea76&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), &apos;wb&apos; ).write(by) if dh == h else None; print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h) if dh != h else &apos;Please restart Sublime Text to finish installation&apos;) 复制完敲回车就可以安装，稍等片刻出现即可，安装完成后在 Preferences菜单下会出现 Package Control 选项 详细安装可看Package Control 插件打开 Package Control或按快捷键cmd/ctrl + shift + p， 输入 install package 选中第一个选项既进入安装插件的列表。 这时候可能需要等一会加载远程仓库，具体在左下角会有一个loading标识， 加载完在弹窗输入要安装的插件即可。 所有的插件都可以在https://packagecontrol.io/ 找到，下面列出比较常用的几个插件 Themesublime 编辑器虽然轻巧强大，但是默认的主题实在有点看不下去。主题可以在https://packagecontrol.io/browse/labels/theme 找自己喜欢的。目前个人使用的是 Material Theme 。 直接在install package 弹窗输入 Material Theme 选第一个即可（后面安装方法类似）。 安装完成后会弹出一个README，根据提示修改一下配置。打开Preferences &gt; settings &gt; User添加以下配置，保存即可生效12&quot;color_scheme&quot;: &quot;Packages/Material Theme/schemes/Material-Theme.tmTheme&quot;,&quot;theme&quot;: &quot;Material-Theme.sublime-theme&quot;, Material Theme 个人比较喜欢的主题还有 ayu Agila Theme Emmet前端工程师使用sublime编辑的必备插件，可以极大提高开发效率。最简单的应用就是在空白的.html页面输入!再按 tab键会自动生成html5基本页面解构。还有基本如 #div1&gt;span.child{这是子级}*2+button.name[disabled]{按钮}快捷语法等具体看emmet, Emmet-package SideBarEnhancementssublime 自带的侧边栏文件（夹）功能特别少，这个插件可以为其添加很多其他功能。docs BracketHighlighter前后标签高亮的插件，如[], (), {}, &quot;&quot;, &#39;&#39;, &lt;tag&gt;&lt;/tag&gt;等，可以比较方便看清代码块的起始点。docs AutoFileName按照路径提示该路径目录下的文件名，对于引入文件资源等很有帮助 All AutoComplete让代码自动完成的匹配从所有打开的文件里去匹配，而不是只在当前文件里匹配。 HTML-CSS-JS Prettifyhtml, css, js &amp;&amp; Json 的格式化插件。需要本地安装了node。默认格式化快捷键为ctrl+shift+h END基本上比较通用的插件就这些，可以发现这些插件基本上都在package Control前十位。学会举一反三，工作中用到的另一些插件再上https://packagecontrol.io/ 搜索关键字安装如 git, less, vuejs等等。 最后附上自己的配置12345678910111213141516&#123; "color_scheme": "Packages/Material Theme/schemes/Material-Theme-Lighter.tmTheme", "ignored_packages": [ "Vintage" ], "always_show_minimap_viewport": true, "theme": "Material-Theme-Lighter.sublime-theme", "word_wrap":true, "wrap_width": 120, "font_size": 10, "line_padding_bottom": 2, "line_padding_top": 2, "highlight_line":true, "font_face": "Monaco"&#125;]]></content>
     </entry>
+
     
     <entry>
       <title><![CDATA[Chrome插件开发]]></title>
-      <url>https://jsonz1993.github.io/2017/04/chrome%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/</url>
-      <content type="html"><![CDATA[<p>先放上入门的英语文档<a href="https://developer.chrome.com/extensions/getstarted" target="_blank" rel="external">https://developer.chrome.com/extensions/getstarted</a></p>
-<p>后面的教程是参照文档学习的。</p>
-<h2 id="新建配置文件"><a href="#新建配置文件" class="headerlink" title="新建配置文件"></a>新建配置文件</h2><p>首先创建一个<code>manifest.json</code> 用于整个项目的配置文件， 类似平时 <code>js</code> 的 <code>package.json</code>。 包含了项目的版本号， 项目名（扩展插件名）， 描述等。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  "manifest_version": 2,</div><div class="line"></div><div class="line">  "name": "Getting started example",</div><div class="line">  "description": "This extension shows a Google Image search result for the current page",</div><div class="line">  "version": "1.0",</div><div class="line"></div><div class="line">  "browser_action": &#123;</div><div class="line">    "default_icon": "icon.png",</div><div class="line">    "default_popup": "popup.html"</div><div class="line">  &#125;,</div><div class="line">  "permissions": [</div><div class="line">    "activeTab",</div><div class="line">    "https://ajax.googleapis.com/"</div><div class="line">  ]</div><div class="line">&#125;</div><div class="line"></div><div class="line">&#123;</div><div class="line">  "manifest_version": 2, // 版本号</div><div class="line">  "name": "Getting started example", // 项目名</div><div class="line">  "description": "This extension shows a Google Image search result for the current page", // 描述</div><div class="line">  "version": "1.0", // 项目版本号</div><div class="line">  "browser_action": &#123;</div><div class="line">    "default_icon": "icon.png", // 默认icon</div><div class="line">    "default_popup": "popup.html" // 默认弹窗</div><div class="line">  &#125;,</div><div class="line">  "permissions": [</div><div class="line">    "activeTab", // </div><div class="line">    "https://ajax.googleapis.com/"</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="资源文件"><a href="#资源文件" class="headerlink" title="资源文件"></a>资源文件</h2><p>在配置文件中我们定义了一个 <code>default_icon</code> 和 <code>default_popup</code>， 现在让我们来创建他们。</p>
-<h3 id="default-icon"><a href="#default-icon" class="headerlink" title="default_icon"></a>default_icon</h3><p><code>default_icon</code> 指向的是用于显示在工具栏的图标 可以选自己喜欢的图片，不过要选取 <code>19px</code> 的 <code>.png</code>文件。</p>
-<p>可以用google提供的例子 <a href="https://developer.chrome.com/extensions/examples/tutorials/getstarted/icon.png" target="_blank" rel="external">icon.png</a></p>
-<h3 id="popup-html"><a href="#popup-html" class="headerlink" title="popup.html"></a>popup.html</h3><p><code>popup.html</code>用于用户点击时弹出的一个操作框。为<code>html</code> 文件 所以你可以自己捣鼓自己想显示的东西。</p>
-<p>可以用google提供的例子 <a href="https://developer.chrome.com/extensions/examples/tutorials/getstarted/popup.html" target="_blank" rel="external">popup.html</a></p>
-<p>主要的逻辑以外部js的格式独立写在一个js文件里。 <a href="https://developer.chrome.com/extensions/examples/tutorials/getstarted/popup.js" target="_blank" rel="external">popup.js</a></p>
-<p>现在你的文件夹里应该有四个文件:</p>
-<ul>
-<li>icon.png</li>
-<li>popup.html</li>
-<li>popup.js</li>
-<li>manifest.json</li>
-</ul>
-<p>这些完成之后，我们接下来就在<code>chrome</code>加载我们的插件</p>
-<h3 id="加载插件调试"><a href="#加载插件调试" class="headerlink" title="加载插件调试"></a>加载插件调试</h3><p>chrome 访问 <strong>chrome://extensions</strong> 或手动从菜单进入 <code>扩展程序</code></p>
-<p>打开右上角的开发者模式</p>
-<p><img src="./dev-checkbox.jpeg" alt="打开开发者模式"></p>
-<p>如果电脑没有装chrome….趁早装一个</p>
-]]></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> js </tag>
-            
-            <tag> chrome </tag>
-            
-        </tags>
-        
+      <url>%2F2017%2F04%2Fchrome%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91%2F</url>
+      <content type="text"><![CDATA[先放上入门的英语文档https://developer.chrome.com/extensions/getstarted 后面的教程是参照文档学习的。 新建配置文件首先创建一个manifest.json 用于整个项目的配置文件， 类似平时 js 的 package.json。 包含了项目的版本号， 项目名（扩展插件名）， 描述等。 12345678910111213141516171819202122232425262728293031&#123; "manifest_version": 2, "name": "Getting started example", "description": "This extension shows a Google Image search result for the current page", "version": "1.0", "browser_action": &#123; "default_icon": "icon.png", "default_popup": "popup.html" &#125;, "permissions": [ "activeTab", "https://ajax.googleapis.com/" ]&#125;&#123; "manifest_version": 2, // 版本号 "name": "Getting started example", // 项目名 "description": "This extension shows a Google Image search result for the current page", // 描述 "version": "1.0", // 项目版本号 "browser_action": &#123; "default_icon": "icon.png", // 默认icon "default_popup": "popup.html" // 默认弹窗 &#125;, "permissions": [ "activeTab", // "https://ajax.googleapis.com/" ]&#125; 资源文件在配置文件中我们定义了一个 default_icon 和 default_popup， 现在让我们来创建他们。 default_icondefault_icon 指向的是用于显示在工具栏的图标 可以选自己喜欢的图片，不过要选取 19px 的 .png文件。 可以用google提供的例子 icon.png popup.htmlpopup.html用于用户点击时弹出的一个操作框。为html 文件 所以你可以自己捣鼓自己想显示的东西。 可以用google提供的例子 popup.html 主要的逻辑以外部js的格式独立写在一个js文件里。 popup.js 现在你的文件夹里应该有四个文件: icon.png popup.html popup.js manifest.json 这些完成之后，我们接下来就在chrome加载我们的插件 加载插件调试chrome 访问 chrome://extensions 或手动从菜单进入 扩展程序 打开右上角的开发者模式 如果电脑没有装chrome….趁早装一个]]></content>
     </entry>
+
     
     <entry>
       <title><![CDATA[Animate-Text]]></title>
-      <url>https://jsonz1993.github.io/2017/04/animate-text/</url>
-      <content type="html"><![CDATA[<h2 id="animate-text"><a href="#animate-text" class="headerlink" title="animate-text"></a>animate-text</h2><h3 id="文字动画和数字动画-animate-text"><a href="#文字动画和数字动画-animate-text" class="headerlink" title="文字动画和数字动画 animate text"></a>文字动画和数字动画 animate text</h3><p><a href="https://jsonz1993.github.io/demo/animate-text/index.html">查看DEMO</a> <a href="https://github.com/jsonz1993/learn/tree/master/finish/animate-text" target="_blank" rel="external">git仓库</a></p>
-<p>轻巧的文字动画库, 使用简单, 文件大小4k<br>可以给文字添加出现动画, 支持字符串打字效果和数字变化效果, 支持监听动画结束事件</p>
-<p><strong><a href="https://github.com/qgh810/animate-text" target="_blank" rel="external">项原项目地址</a>, 这里对其代码改造优化。</strong></p>
-<p><img src="./demo.gif"></p>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> AnimateText <span class="keyword">from</span> <span class="string">'./animate-text'</span></div><div class="line"></div><div class="line"><span class="comment">// 最简单的使用方法</span></div><div class="line"><span class="keyword">new</span> AnimateText(<span class="string">'.text'</span>)</div><div class="line"></div><div class="line"><span class="comment">// 如果需要定义动画时间可以这样初始化</span></div><div class="line"><span class="keyword">new</span> AnimateText(<span class="string">'.text'</span>, <span class="number">1000</span>)</div><div class="line"></div><div class="line"><span class="comment">// 如果还有其它设置 请这样写</span></div><div class="line"><span class="keyword">new</span> AnimateText(<span class="string">'.text'</span>, &#123;</div><div class="line">  <span class="attr">time</span>: <span class="number">1000</span>, <span class="comment">// 动画时长</span></div><div class="line">  isNumber: <span class="literal">true</span>, <span class="comment">// 是否渲染为数字动画</span></div><div class="line">  startNumber: <span class="number">0</span>, <span class="comment">// 渲染为数字动画时 动画的开始数字</span></div><div class="line">  changeCount: <span class="number">32</span>, <span class="comment">// 数字动画数字变化次数</span></div><div class="line">  onAnimated: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="built_in">console</span>.log(<span class="string">'动画结束'</span>)&#125; <span class="comment">// 动画结束事件回调</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p><br></p>
-<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><p>AnimateText接收两个参数, 例如: new AnimateText(element, options)</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">参数</th>
-<th style="text-align:left">类型</th>
-<th style="text-align:center">是否必填</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">element</td>
-<td style="text-align:left">String or Object</td>
-<td style="text-align:center">是</td>
-<td style="text-align:left">可以是选择器或者dom节点对象(请保证这个节点内只有文本而没有其它节点)</td>
-</tr>
-<tr>
-<td style="text-align:center">options</td>
-<td style="text-align:left">Number or Object</td>
-<td style="text-align:center">否</td>
-<td style="text-align:left">如果第二个参数是数字, 则当作动画时间处理, 如果有其他参数, 以对象格式传递, 具体每个属性的描述请看下方的 options说明</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<h3 id="options说明"><a href="#options说明" class="headerlink" title="options说明"></a>options说明</h3><p>第二个参数options详细说明</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">参数</th>
-<th style="text-align:left">类型</th>
-<th style="text-align:center">默认值</th>
-<th style="text-align:center">是否必填</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">time</td>
-<td style="text-align:left">Number</td>
-<td style="text-align:center">500</td>
-<td style="text-align:center">否</td>
-<td style="text-align:left">动画持续的时间</td>
-</tr>
-<tr>
-<td style="text-align:center">isNumber</td>
-<td style="text-align:left">Boolean</td>
-<td style="text-align:center">false</td>
-<td style="text-align:center">否</td>
-<td style="text-align:left">是否渲染为数字动画</td>
-</tr>
-<tr>
-<td style="text-align:center">startNumber</td>
-<td style="text-align:left">Number</td>
-<td style="text-align:center">0</td>
-<td style="text-align:center">否</td>
-<td style="text-align:left">数字动画的开始数字</td>
-</tr>
-<tr>
-<td style="text-align:center">changeCount</td>
-<td style="text-align:left">Number</td>
-<td style="text-align:center">32</td>
-<td style="text-align:center">否</td>
-<td style="text-align:left">数字动画变化次数 也就是数字经过多少次跳动才变为最终数字</td>
-</tr>
-<tr>
-<td style="text-align:center">onAnimated</td>
-<td style="text-align:left">Function</td>
-<td style="text-align:center">null</td>
-<td style="text-align:center">否</td>
-<td style="text-align:left">动画结束监听函数</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<h3 id="实例对象方法说明"><a href="#实例对象方法说明" class="headerlink" title="实例对象方法说明"></a>实例对象方法说明</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 实例化</span></div><div class="line"><span class="keyword">var</span> animateText = <span class="keyword">new</span> AnimateText(<span class="string">'.text'</span>)</div><div class="line"></div><div class="line"><span class="comment">// 实例化对象后 对象提供play方法重新播放动画</span></div><div class="line"><span class="comment">// 接受参数作为动画时间</span></div><div class="line"><span class="comment">// 不传递参数则使用实例化的时间</span></div><div class="line">animateText.play(<span class="number">1000</span>)</div></pre></td></tr></table></figure>]]></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> js </tag>
-            
-            <tag> github </tag>
-            
-            <tag> learn </tag>
-            
-        </tags>
-        
+      <url>%2F2017%2F04%2Fanimate-text%2F</url>
+      <content type="text"><![CDATA[animate-text文字动画和数字动画 animate text查看DEMO git仓库 轻巧的文字动画库, 使用简单, 文件大小4k可以给文字添加出现动画, 支持字符串打字效果和数字变化效果, 支持监听动画结束事件 项原项目地址, 这里对其代码改造优化。 使用方法12345678910111213141516import AnimateText from './animate-text'// 最简单的使用方法new AnimateText('.text')// 如果需要定义动画时间可以这样初始化new AnimateText('.text', 1000)// 如果还有其它设置 请这样写new AnimateText('.text', &#123; time: 1000, // 动画时长 isNumber: true, // 是否渲染为数字动画 startNumber: 0, // 渲染为数字动画时 动画的开始数字 changeCount: 32, // 数字动画数字变化次数 onAnimated: function () &#123;console.log('动画结束')&#125; // 动画结束事件回调&#125;) 参数说明AnimateText接收两个参数, 例如: new AnimateText(element, options) 参数 类型 是否必填 描述 element String or Object 是 可以是选择器或者dom节点对象(请保证这个节点内只有文本而没有其它节点) options Number or Object 否 如果第二个参数是数字, 则当作动画时间处理, 如果有其他参数, 以对象格式传递, 具体每个属性的描述请看下方的 options说明 options说明第二个参数options详细说明 参数 类型 默认值 是否必填 描述 time Number 500 否 动画持续的时间 isNumber Boolean false 否 是否渲染为数字动画 startNumber Number 0 否 数字动画的开始数字 changeCount Number 32 否 数字动画变化次数 也就是数字经过多少次跳动才变为最终数字 onAnimated Function null 否 动画结束监听函数 实例对象方法说明1234567// 实例化var animateText = new AnimateText('.text')// 实例化对象后 对象提供play方法重新播放动画// 接受参数作为动画时间// 不传递参数则使用实例化的时间animateText.play(1000)]]></content>
     </entry>
+
     
     <entry>
       <title><![CDATA[Hexo-第三方服务集成]]></title>
-      <url>https://jsonz1993.github.io/2017/04/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/</url>
-      <content type="html"><![CDATA[<p>静态站点拥有一定的局限性，因此我们需要借助于第三方服务来扩展站点的功能。 以下是 NexT 目前支持的第三方服务，你可以根据你的需求集成一些功能进来。</p>
-<h3 id="评论系统"><a href="#评论系统" class="headerlink" title="评论系统"></a>评论系统</h3><p>NexT 支持多款评论系统。<br>如需取消某个 页面/文章 的评论，在 <code>md</code> 文件的 <code>front-matter</code> 中增加 <code>comments: false</code></p>
-<p>暂没开评论，多说准备下架。</p>
-<h3 id="站内搜索"><a href="#站内搜索" class="headerlink" title="站内搜索"></a>站内搜索</h3><p>本站用 Hexo 提供的 Local Search， 原理是通过hexo-generator-search插件在本地生成一个search.xml文件，搜索的时候从这个文件中根据关键字检索出相应的链接。</p>
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><h5 id="安装-hexo-generator-search"><a href="#安装-hexo-generator-search" class="headerlink" title="安装 hexo-generator-search"></a>安装 hexo-generator-search</h5><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-generator-<span class="built_in">search</span></div></pre></td></tr></table></figure>
-<h5 id="安装-hexo-generator-searchdb"><a href="#安装-hexo-generator-searchdb" class="headerlink" title="安装 hexo-generator-searchdb"></a>安装 hexo-generator-searchdb</h5><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-generator-searchdb --save</div></pre></td></tr></table></figure>
-<h4 id="修改站点配置"><a href="#修改站点配置" class="headerlink" title="修改站点配置"></a>修改站点配置</h4><p>编辑 <code>站点配置</code>  根目录下的<code>_config.yml</code>.<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="attr">search:</span></div><div class="line"><span class="attr">  path:</span> <span class="string">search.xml</span></div><div class="line"><span class="attr">  field:</span> <span class="string">post</span></div><div class="line"><span class="attr">  format:</span> <span class="string">html</span></div><div class="line"><span class="attr">  limit:</span> <span class="number">10000</span></div></pre></td></tr></table></figure></p>
-<p><a href="http://www.ezlippi.com/blog/2017/02/hexo-search.html" target="_blank" rel="external">站内搜索原文教程-EZLippi-浮生志</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-            <category> blog </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-        
+      <url>%2F2017%2F04%2F%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90%2F</url>
+      <content type="text"><![CDATA[静态站点拥有一定的局限性，因此我们需要借助于第三方服务来扩展站点的功能。 以下是 NexT 目前支持的第三方服务，你可以根据你的需求集成一些功能进来。 评论系统NexT 支持多款评论系统。如需取消某个 页面/文章 的评论，在 md 文件的 front-matter 中增加 comments: false 暂没开评论，多说准备下架。 站内搜索本站用 Hexo 提供的 Local Search， 原理是通过hexo-generator-search插件在本地生成一个search.xml文件，搜索的时候从这个文件中根据关键字检索出相应的链接。 安装安装 hexo-generator-search1$ npm install hexo-generator-search 安装 hexo-generator-searchdb1$ npm install hexo-generator-searchdb --save 修改站点配置编辑 站点配置 根目录下的_config.yml.12345search: path: search.xml field: post format: html limit: 10000 站内搜索原文教程-EZLippi-浮生志]]></content>
     </entry>
+
     
     <entry>
       <title><![CDATA[Next-主题设置]]></title>
-      <url>https://jsonz1993.github.io/2017/04/next-%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE/</url>
-      <content type="html"><![CDATA[<p>下面的<code>主题配置</code>指的是 <code>themes&gt;Next&gt;_config.yml</code>, <code>站点配置</code>指的是根目录下的<code>_config.yml</code>;</p>
-<h3 id="添加-标签-页面"><a href="#添加-标签-页面" class="headerlink" title="添加[标签]页面"></a>添加[标签]页面</h3><p>新建「标签」页面，并在菜单中显示「标签」链接。「标签」页面将展示站点的所有标签，若你的所有文章都未包含标签，此页面将是空的。 底下代码是一篇包含标签的文章的例子：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="attr">title:</span> <span class="string">标签测试文章</span></div><div class="line"><span class="attr">tags:</span></div><div class="line"><span class="bullet">  -</span> <span class="string">Testing</span></div><div class="line"><span class="bullet">  -</span> <span class="string">Another</span> <span class="string">Tag</span></div><div class="line"><span class="meta">---</span></div></pre></td></tr></table></figure>
-<h4 id="新建tags页面"><a href="#新建tags页面" class="headerlink" title="新建tags页面"></a>新建<code>tags</code>页面</h4><p>使用<code>hexo new page tags</code> 新建一个页面，命名为<code>tags</code>:<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="keyword">cd</span> you-hexo-site</div><div class="line">$ hexo <span class="keyword">new</span> page <span class="keyword">tags</span></div></pre></td></tr></table></figure></p>
-<h4 id="设置新建的tags页面类型，改为tags"><a href="#设置新建的tags页面类型，改为tags" class="headerlink" title="设置新建的tags页面类型，改为tags"></a>设置新建的<code>tags</code>页面类型，改为<code>tags</code></h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">---</span></div><div class="line"><span class="attr">title:</span> <span class="string">tags</span></div><div class="line"><span class="attr">date:</span> <span class="number">2017</span><span class="bullet">-04</span><span class="bullet">-03</span> <span class="number">11</span><span class="string">:35:36</span></div><div class="line"><span class="attr">type:</span> <span class="string">"tags"</span></div><div class="line"><span class="attr">comments:</span> <span class="literal">false</span> <span class="comment"># tags页面自定义是否要开启评论（前提你已经集成了评论）</span></div><div class="line"><span class="meta">---</span></div></pre></td></tr></table></figure>
-<h4 id="修改主题配置文件，把tag添加到menu中"><a href="#修改主题配置文件，把tag添加到menu中" class="headerlink" title="修改主题配置文件，把tag添加到menu中"></a>修改主题配置文件，把tag添加到menu中</h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">menu:</span></div><div class="line"><span class="attr">  home:</span> <span class="string">/</span></div><div class="line"><span class="attr">  archives:</span> <span class="string">/archives</span></div><div class="line"><span class="attr">  tags:</span> <span class="string">/tags</span></div></pre></td></tr></table></figure>
-<h3 id="添加-分类-页面"><a href="#添加-分类-页面" class="headerlink" title="添加[分类]页面"></a>添加[分类]页面</h3><p>新建「分类」页面，并在菜单中显示「分类」链接。「分类」页面将展示站点的所有分类，若你的所有文章都未包含分类，此页面将是空的。 底下代码是一篇包含分类的文章的例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">title: 分类测试文章</div><div class="line">categories: Testing</div><div class="line">---</div></pre></td></tr></table></figure>
-<p>分类和标签的区别详见<a href="https://hexo.io/zh-cn/docs/front-matter.html#分类和标签" target="_blank" rel="external">Hexo的分类与标签文档</a></p>
-<h4 id="新建页面"><a href="#新建页面" class="headerlink" title="新建页面"></a>新建页面</h4><p>在终端窗口下，定位到 Hexo 站点目录下。使用 hexo new page 新建一个页面，命名为 categories ：<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="string">$</span> <span class="string">cd</span> <span class="string">your-hexo-site</span></div><div class="line"><span class="string">$</span> <span class="string">hexo</span> <span class="string">new</span> <span class="string">page</span> <span class="string">categories</span></div><div class="line"><span class="string">```</span> </div><div class="line"></div><div class="line"><span class="comment">#### 设置页面类型</span></div><div class="line"><span class="string">编辑刚新建的页面，将页面的</span> <span class="string">`type`</span> <span class="string">设置为</span> <span class="string">`categories`</span> <span class="string">，主题将自动为这个页面显示分类。页面内容如下：</span></div><div class="line"><span class="string">```yml</span></div><div class="line"><span class="attr">title:</span> <span class="string">分类</span></div><div class="line"><span class="attr">date:</span> <span class="number">2014</span><span class="bullet">-12</span><span class="bullet">-22</span> <span class="number">12</span><span class="string">:39:04</span></div><div class="line"><span class="attr">type:</span> <span class="string">"categories"</span></div><div class="line"><span class="meta">---</span></div></pre></td></tr></table></figure></p>
-<h4 id="修改菜单"><a href="#修改菜单" class="headerlink" title="修改菜单"></a>修改菜单</h4><p>在菜单中添加链接。编辑 <code>主题配置文件</code> ， 添加 <code>categories</code> 到 <code>menu</code> 中，如下:<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">menu:</span></div><div class="line"><span class="attr">  home:</span> <span class="string">/</span></div><div class="line"><span class="attr">  archives:</span> <span class="string">/archives</span></div><div class="line"><span class="attr">  categories:</span> <span class="string">/categories</span></div></pre></td></tr></table></figure></p>
-<h3 id="设置字体"><a href="#设置字体" class="headerlink" title="设置字体"></a>设置字体</h3><p>Next提供了5个特定范围的字体设定</p>
-<ul>
-<li>全局字体：定义的字体将在全站范围使用</li>
-<li>标题字体：文章内标题的字体（h1, h2, h3, h4, h5, h6）</li>
-<li>文章字体：文章所使用的字体</li>
-<li>Logo字体：Logo 所使用的字体</li>
-<li>代码字体： 代码块所使用的字体</li>
-</ul>
-<p>该配置中的 <code>external</code> 可以用来控制是否使用外链字体库。 开放此属性方便你设定那些已经安装在系统中的字体，减少不必要的请求（请求大小）。</p>
-<h3 id="设置代码高亮主题"><a href="#设置代码高亮主题" class="headerlink" title="设置代码高亮主题"></a>设置代码高亮主题</h3><p>NexT 使用 <a href="https://github.com/chriskempson/tomorrow-theme" target="_blank" rel="external">Tomorrow Theme</a> 作为代码高亮，共有5款主题供你选择。 NexT 默认使用的是 白色的 <code>normal</code> 主题，可选的值有 <code>normal</code>，<code>night</code>， <code>night blue</code>， <code>night bright</code>， <code>night eighties</code>：<br>可以自行更改 <code>highlight_theme</code> 字段， 设置成你自己喜欢的高亮主题。</p>
-<h3 id="侧边栏社交链接"><a href="#侧边栏社交链接" class="headerlink" title="侧边栏社交链接"></a>侧边栏社交链接</h3><p>侧栏社交链接的修改包含两个部分，第一是链接，第二是链接图标。 两者配置均在 <code>主题配置文件</code> 中。</p>
-<h4 id="设置链接"><a href="#设置链接" class="headerlink" title="设置链接"></a>设置链接</h4><p>在 <code>主题配置</code> 中找到 <code>social</code>字段， 其格式为 <code>显示文本: 链接地址</code>。</p>
-<figure class="highlight yml"><figcaption><span>scoial</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">social:</span></div><div class="line"><span class="attr">  Github:</span> <span class="attr">https://github.com/jsonz1993</span></div><div class="line">  <span class="string">微博:</span> <span class="attr">http://weibo.com/u/1638841204</span></div></pre></td></tr></table></figure>
-<h4 id="设置图标"><a href="#设置图标" class="headerlink" title="设置图标"></a>设置图标</h4><p>在 <code>主题配置</code> 中找到 <code>social_icons</code>字段， 其格式为 <code>匹配键: Font Awesome 图标名称</code>。<br><code>enable</code> 为是否显示图标控制。 注意此时的匹配建要与 <code>social</code>的键一致,图标依旧是<code>Font Awesome</code>图标</p>
-<h3 id="站点建立时间"><a href="#站点建立时间" class="headerlink" title="站点建立时间"></a>站点建立时间</h3><p>这个时间将在站点的底部显示，例如 <code>© 2013 - 2015</code>。 编辑 <code>主题配置文件</code>，新增字段 <code>since</code>。</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">since:</span> <span class="number">2013</span></div></pre></td></tr></table></figure>
-<h3 id="设置「动画效果」"><a href="#设置「动画效果」" class="headerlink" title="设置「动画效果」"></a>设置「动画效果」</h3><p>NexT 默认开启动画效果，效果使用 JavaScript 编写，因此需要等待 JavaScript 脚本完全加载完毕后才会显示内容。 如果您比较在乎速度，可以将设置此字段的值为 <code>false</code> 来关闭动画。<br>编辑 <code>主题配置文件</code>， 搜索 <code>use_motion</code>，根据您的需求设置值为 <code>true</code> 或者 <code>false</code> 即可：<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">use_motion:</span> <span class="literal">true</span> <span class="comment"># 开启动画</span></div></pre></td></tr></table></figure></p>
-<h3 id="设置「背景动画」"><a href="#设置「背景动画」" class="headerlink" title="设置「背景动画」"></a>设置「背景动画」</h3><p>NexT 自带两种背景动画效果</p>
-<p>编辑 <code>主题配置文件</code>， 搜索 <code>canvas_nest</code> 或 <code>three_waves</code>，根据您的需求设置值为 <code>true</code> 或者 <code>false</code> 即可：<br>只能同时开启一种背景效果， 建议酌情开启，会影响电脑网页性能(macbook pro或笔记本容易出现过热现象).<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attr">canvas_nest:</span> <span class="literal">false</span> <span class="string">//关闭动画</span></div><div class="line"><span class="attr">three_waves:</span> <span class="literal">true</span> <span class="string">//开启动画</span></div></pre></td></tr></table></figure></p>
-]]></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-            <category> blog </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-        
+      <url>%2F2017%2F04%2Fnext-%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE%2F</url>
+      <content type="text"><![CDATA[下面的主题配置指的是 themes&gt;Next&gt;_config.yml, 站点配置指的是根目录下的_config.yml; 添加[标签]页面新建「标签」页面，并在菜单中显示「标签」链接。「标签」页面将展示站点的所有标签，若你的所有文章都未包含标签，此页面将是空的。 底下代码是一篇包含标签的文章的例子： 12345title: 标签测试文章tags: - Testing - Another Tag--- 新建tags页面使用hexo new page tags 新建一个页面，命名为tags:12$ cd you-hexo-site$ hexo new page tags 设置新建的tags页面类型，改为tags123456---title: tagsdate: 2017-04-03 11:35:36type: "tags"comments: false # tags页面自定义是否要开启评论（前提你已经集成了评论）--- 修改主题配置文件，把tag添加到menu中1234menu: home: / archives: /archives tags: /tags 添加[分类]页面新建「分类」页面，并在菜单中显示「分类」链接。「分类」页面将展示站点的所有分类，若你的所有文章都未包含分类，此页面将是空的。 底下代码是一篇包含分类的文章的例子： 123title: 分类测试文章categories: Testing--- 分类和标签的区别详见Hexo的分类与标签文档 新建页面在终端窗口下，定位到 Hexo 站点目录下。使用 hexo new page 新建一个页面，命名为 categories ：1234567891011$ cd your-hexo-site$ hexo new page categories``` #### 设置页面类型编辑刚新建的页面，将页面的 `type` 设置为 `categories` ，主题将自动为这个页面显示分类。页面内容如下：```ymltitle: 分类date: 2014-12-22 12:39:04type: "categories"--- 修改菜单在菜单中添加链接。编辑 主题配置文件 ， 添加 categories 到 menu 中，如下:1234menu: home: / archives: /archives categories: /categories 设置字体Next提供了5个特定范围的字体设定 全局字体：定义的字体将在全站范围使用 标题字体：文章内标题的字体（h1, h2, h3, h4, h5, h6） 文章字体：文章所使用的字体 Logo字体：Logo 所使用的字体 代码字体： 代码块所使用的字体 该配置中的 external 可以用来控制是否使用外链字体库。 开放此属性方便你设定那些已经安装在系统中的字体，减少不必要的请求（请求大小）。 设置代码高亮主题NexT 使用 Tomorrow Theme 作为代码高亮，共有5款主题供你选择。 NexT 默认使用的是 白色的 normal 主题，可选的值有 normal，night， night blue， night bright， night eighties：可以自行更改 highlight_theme 字段， 设置成你自己喜欢的高亮主题。 侧边栏社交链接侧栏社交链接的修改包含两个部分，第一是链接，第二是链接图标。 两者配置均在 主题配置文件 中。 设置链接在 主题配置 中找到 social字段， 其格式为 显示文本: 链接地址。 scoial123social: Github: https://github.com/jsonz1993 微博: http://weibo.com/u/1638841204 设置图标在 主题配置 中找到 social_icons字段， 其格式为 匹配键: Font Awesome 图标名称。enable 为是否显示图标控制。 注意此时的匹配建要与 social的键一致,图标依旧是Font Awesome图标 站点建立时间这个时间将在站点的底部显示，例如 © 2013 - 2015。 编辑 主题配置文件，新增字段 since。 1since: 2013 设置「动画效果」NexT 默认开启动画效果，效果使用 JavaScript 编写，因此需要等待 JavaScript 脚本完全加载完毕后才会显示内容。 如果您比较在乎速度，可以将设置此字段的值为 false 来关闭动画。编辑 主题配置文件， 搜索 use_motion，根据您的需求设置值为 true 或者 false 即可：1use_motion: true # 开启动画 设置「背景动画」NexT 自带两种背景动画效果 编辑 主题配置文件， 搜索 canvas_nest 或 three_waves，根据您的需求设置值为 true 或者 false 即可：只能同时开启一种背景效果， 建议酌情开启，会影响电脑网页性能(macbook pro或笔记本容易出现过热现象).12canvas_nest: false //关闭动画three_waves: true //开启动画]]></content>
     </entry>
+
     
     <entry>
       <title><![CDATA[Hello Next]]></title>
-      <url>https://jsonz1993.github.io/2017/04/hellp-next/</url>
-      <content type="html"><![CDATA[<p>next 入门配置</p>
-<h3 id="主题安装"><a href="#主题安装" class="headerlink" title="主题安装"></a>主题安装</h3><p><strong>下面Next下的<code>_config</code>称<code>主题配置</code>， 根目录Hexo的<code>_config</code>称<code>站点配置</code></strong></p>
-<h4 id="安装next-到目录-themes-next"><a href="#安装next-到目录-themes-next" class="headerlink" title="安装next 到目录 themes/next:"></a>安装next 到目录 <code>themes/next</code>:</h4><p>注意安装完themes下应该有一个 <code>next</code> 文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git clone https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure></p>
-<h4 id="启动主题"><a href="#启动主题" class="headerlink" title="启动主题"></a>启动主题</h4><p>修改 <code>站点配置</code>:<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">theme:</span> <span class="string">next</span></div></pre></td></tr></table></figure></p>
-<h4 id="验证主题"><a href="#验证主题" class="headerlink" title="验证主题"></a>验证主题</h4><p>先清除缓存再启动服务，启动完成后打开 <code>http://localhost:4000/</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo clean &amp;&amp; hexo s</div></pre></td></tr></table></figure></p>
-<h3 id="主题设定"><a href="#主题设定" class="headerlink" title="主题设定"></a>主题设定</h3><h4 id="选择Scheme"><a href="#选择Scheme" class="headerlink" title="选择Scheme"></a>选择Scheme</h4><p>Scheme 是 NexT 提供的一种特性，借助于 Scheme，NexT 为你提供多种不同的外观。同时，几乎所有的配置都可以 在 Scheme 之间共用。在<code>主题配置</code>配置中的<code>Scheme</code>选项。目前提供三种方案：</p>
-<ul>
-<li>Muse - 默认 Scheme，这是 NexT 最初的版本，黑白主调，大量留白</li>
-<li>Mist - Muse 的紧凑版本，整洁有序的单栏外观</li>
-<li>Pisces - 双栏 Scheme，小家碧玉似的清新</li>
-</ul>
-<p>目前使用的是 <code>scheme: Mist</code>方案</p>
-<h4 id="设置语言"><a href="#设置语言" class="headerlink" title="设置语言"></a>设置语言</h4><p>在<code>站点配置</code> <code>language</code> 中设置 <code>zh-Hans</code> (简体中文)。<br>支持的语言可在 <code>themes/next/languages</code> 中查看</p>
-<h4 id="设置菜单"><a href="#设置菜单" class="headerlink" title="设置菜单"></a>设置菜单</h4><p>菜单格式为 <code>item name: link</code><br>此处只是将 url映射到对应 菜单上，若要具体显示文案需要到语言配置文件修改<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attr">menu:</span></div><div class="line"><span class="attr">  home:</span> <span class="string">/</span> <span class="comment"># 主页</span></div><div class="line"><span class="attr">  categories:</span> <span class="string">/categories</span> <span class="comment"># 分类</span></div><div class="line"><span class="attr">  archives:</span> <span class="string">/archives</span> <span class="comment"># 归档</span></div><div class="line"><span class="attr">  tags:</span> <span class="string">/tags</span> <span class="comment"># 标签</span></div><div class="line"><span class="attr">  about:</span> <span class="string">/about</span> <span class="comment"># 关于我</span></div></pre></td></tr></table></figure></p>
-<p>设置菜单图标<br>图标可从<a href="http://fontawesome.io/" target="_blank" rel="external">http://fontawesome.io/</a>选择<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="attr">menu_icons:</span></div><div class="line"><span class="attr">  enable:</span> <span class="literal">true</span> <span class="comment"># 是否显示图标</span></div><div class="line">  <span class="comment"># Icon Mapping.</span></div><div class="line"><span class="attr">  home:</span> <span class="string">home</span></div><div class="line"><span class="attr">  about:</span> <span class="string">user</span></div><div class="line"><span class="attr">  categories:</span> <span class="string">th</span></div><div class="line"><span class="attr">  tags:</span> <span class="string">tags</span></div><div class="line"><span class="attr">  archives:</span> <span class="string">archive</span></div><div class="line"><span class="attr">  commonweal:</span> <span class="string">heartbeat</span></div></pre></td></tr></table></figure></p>
-<h4 id="设置侧栏"><a href="#设置侧栏" class="headerlink" title="设置侧栏"></a>设置侧栏</h4><ol>
-<li><p>设置侧栏位置：<br><code>主题配置</code> 修改 <code>sidebar.position</code> 的值，支持 <code>left</code> &amp; <code>right</code><br>但目前只有<code>Pisces Scheme</code>支持该设置</p>
-</li>
-<li><p>设置侧栏显示的时机<br><code>主题配置</code> 修改 <code>sidebar.display</code>，目前支持的有：</p>
-<ul>
-<li><code>post</code> 默认行文，文展页面自动展开 <code>首页</code>等不自动展开</li>
-<li><code>always</code> 所有页面都自动展开</li>
-<li><code>hide</code> 所有页面都隐藏，可以手动展开</li>
-<li><code>remove</code> 完全移除</li>
-</ul>
-</li>
-<li><p>设置头像<br><code>主题配置</code> 修改 <code>avatar</code>字段。<br>支持互联网URI 如 <code>https://www.img.com/img.jpg</code><br>或站内地址 <code>/images/avatar.jpg</code></p>
-</li>
-</ol>
-<h3 id="集成第三方服务"><a href="#集成第三方服务" class="headerlink" title="集成第三方服务"></a>集成第三方服务</h3><h4 id="百度统计"><a href="#百度统计" class="headerlink" title="百度统计"></a>百度统计</h4><ol>
-<li>登录<a href="http://tongji.baidu.com/" target="_blank" rel="external">百度统计</a>， 定位到站点的代码获取页面</li>
-<li>复制 hm.js? 后面那串统计脚本 id，如:<br><code>hm.src = &quot;https://hm.baidu.com/hm.js?dksjklsajdlkasjkl&quot;;</code><br>则id = <code>dksjklsajdlkasjkl</code></li>
-<li>修改<code>主题配置</code> <code>baidu_analytics</code> 字段，改为上述id</li>
-<li>骚等一段时间后可以自行登录<a href="http://tongji.baidu.com/" target="_blank" rel="external">百度统计</a>查看<code>PV</code>,<code>UV</code>等数据。</li>
-</ol>
-<h4 id="文章阅读量统计"><a href="#文章阅读量统计" class="headerlink" title="文章阅读量统计"></a>文章阅读量统计</h4><p><a href="https://notes.wanghao.work/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html#%E9%85%8D%E7%BD%AELeanCloud" target="_blank" rel="external">为Next主题添加文章阅读量</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-            <category> blog </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-        
+      <url>%2F2017%2F04%2Fhellp-next%2F</url>
+      <content type="text"><![CDATA[next 入门配置 主题安装下面Next下的_config称主题配置， 根目录Hexo的_config称站点配置 安装next 到目录 themes/next:注意安装完themes下应该有一个 next 文件夹1$ git clone https://github.com/iissnan/hexo-theme-next themes/next 启动主题修改 站点配置:1theme: next 验证主题先清除缓存再启动服务，启动完成后打开 http://localhost:4000/1$ hexo clean &amp;&amp; hexo s 主题设定选择SchemeScheme 是 NexT 提供的一种特性，借助于 Scheme，NexT 为你提供多种不同的外观。同时，几乎所有的配置都可以 在 Scheme 之间共用。在主题配置配置中的Scheme选项。目前提供三种方案： Muse - 默认 Scheme，这是 NexT 最初的版本，黑白主调，大量留白 Mist - Muse 的紧凑版本，整洁有序的单栏外观 Pisces - 双栏 Scheme，小家碧玉似的清新 目前使用的是 scheme: Mist方案 设置语言在站点配置 language 中设置 zh-Hans (简体中文)。支持的语言可在 themes/next/languages 中查看 设置菜单菜单格式为 item name: link此处只是将 url映射到对应 菜单上，若要具体显示文案需要到语言配置文件修改123456menu: home: / # 主页 categories: /categories # 分类 archives: /archives # 归档 tags: /tags # 标签 about: /about # 关于我 设置菜单图标图标可从http://fontawesome.io/选择123456789menu_icons: enable: true # 是否显示图标 # Icon Mapping. home: home about: user categories: th tags: tags archives: archive commonweal: heartbeat 设置侧栏 设置侧栏位置：主题配置 修改 sidebar.position 的值，支持 left &amp; right但目前只有Pisces Scheme支持该设置 设置侧栏显示的时机主题配置 修改 sidebar.display，目前支持的有： post 默认行文，文展页面自动展开 首页等不自动展开 always 所有页面都自动展开 hide 所有页面都隐藏，可以手动展开 remove 完全移除 设置头像主题配置 修改 avatar字段。支持互联网URI 如 https://www.img.com/img.jpg或站内地址 /images/avatar.jpg 集成第三方服务百度统计 登录百度统计， 定位到站点的代码获取页面 复制 hm.js? 后面那串统计脚本 id，如:hm.src = &quot;https://hm.baidu.com/hm.js?dksjklsajdlkasjkl&quot;;则id = dksjklsajdlkasjkl 修改主题配置 baidu_analytics 字段，改为上述id 骚等一段时间后可以自行登录百度统计查看PV,UV等数据。 文章阅读量统计为Next主题添加文章阅读量]]></content>
     </entry>
+
     
     <entry>
       <title><![CDATA[Hexo-辅助函数]]></title>
-      <url>https://jsonz1993.github.io/2017/04/hexo-%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0/</url>
-      <content type="html"><![CDATA[<p>主要用于模板中辅助的函数，如 <code>date(Date, &#39;YYYY-DD-MM&#39;)</code></p>
-<p>详见<a href="https://hexo.io/zh-cn/docs/helpers.html" target="_blank" rel="external">https://hexo.io/zh-cn/docs/helpers.html</a></p>
-]]></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-            <category> blog </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-        
+      <url>%2F2017%2F04%2Fhexo-%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0%2F</url>
+      <content type="text"><![CDATA[主要用于模板中辅助的函数，如 date(Date, &#39;YYYY-DD-MM&#39;) 详见https://hexo.io/zh-cn/docs/helpers.html]]></content>
     </entry>
+
     
     <entry>
       <title><![CDATA[Hexo-变量]]></title>
-      <url>https://jsonz1993.github.io/2017/04/hexo-%E5%8F%98%E9%87%8F/</url>
-      <content type="html"><![CDATA[<p>变量主要用于 <code>layout</code> 等的应用</p>
-<h4 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h4><table>
-<thead>
-<tr>
-<th style="text-align:left">变量</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">site</td>
-<td style="text-align:left">网站变量</td>
-</tr>
-<tr>
-<td style="text-align:left">page</td>
-<td style="text-align:left">针对该页面的内容以及 front-matter 所设定的变量。</td>
-</tr>
-<tr>
-<td style="text-align:left">config</td>
-<td style="text-align:left">网站配置</td>
-</tr>
-<tr>
-<td style="text-align:left">theme</td>
-<td style="text-align:left">主题配置。继承自网站配置。</td>
-</tr>
-<tr>
-<td style="text-align:left">_ (单下划线)</td>
-<td style="text-align:left">Lodash 函数库</td>
-</tr>
-<tr>
-<td style="text-align:left">path</td>
-<td style="text-align:left">当前页面的路径（不含根路径）</td>
-</tr>
-<tr>
-<td style="text-align:left">url</td>
-<td style="text-align:left">当前页面的完整网址</td>
-</tr>
-<tr>
-<td style="text-align:left">env</td>
-<td style="text-align:left">环境变量</td>
-</tr>
-</tbody>
-</table>
-<h4 id="网站变量"><a href="#网站变量" class="headerlink" title="网站变量"></a>网站变量</h4><table>
-<thead>
-<tr>
-<th style="text-align:left">变量</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">site.posts</td>
-<td style="text-align:left">所有文章</td>
-</tr>
-<tr>
-<td style="text-align:left">site.pages</td>
-<td style="text-align:left">所有分页</td>
-</tr>
-<tr>
-<td style="text-align:left">site.categories</td>
-<td style="text-align:left">所有分类</td>
-</tr>
-<tr>
-<td style="text-align:left">site.tags</td>
-<td style="text-align:left">所有标签</td>
-</tr>
-</tbody>
-</table>
-<h4 id="页面变量"><a href="#页面变量" class="headerlink" title="页面变量"></a>页面变量</h4><h6 id="页面page"><a href="#页面page" class="headerlink" title="页面page"></a>页面page</h6><table>
-<thead>
-<tr>
-<th style="text-align:left">变量</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">page.title</td>
-<td style="text-align:left">页面标题</td>
-</tr>
-<tr>
-<td style="text-align:left">page.date</td>
-<td style="text-align:left">页面建立日期（Moment.js 对象）</td>
-</tr>
-<tr>
-<td style="text-align:left">page.updated</td>
-<td style="text-align:left">页面更新日期（Moment.js 对象）</td>
-</tr>
-<tr>
-<td style="text-align:left">page.comments</td>
-<td style="text-align:left">留言是否开启</td>
-</tr>
-<tr>
-<td style="text-align:left">page.layout</td>
-<td style="text-align:left">布局名称</td>
-</tr>
-<tr>
-<td style="text-align:left">page.content</td>
-<td style="text-align:left">页面的完整内容</td>
-</tr>
-<tr>
-<td style="text-align:left">page.excerpt</td>
-<td style="text-align:left">页面摘要</td>
-</tr>
-<tr>
-<td style="text-align:left">page.more</td>
-<td style="text-align:left">除了页面摘要的其余内容</td>
-</tr>
-<tr>
-<td style="text-align:left">page.source</td>
-<td style="text-align:left">页面原始路径</td>
-</tr>
-<tr>
-<td style="text-align:left">page.full_source</td>
-<td style="text-align:left">页面的完整原始路径</td>
-</tr>
-<tr>
-<td style="text-align:left">page.path</td>
-<td style="text-align:left">页面网址（不含根路径）。我们通常在主题 中使用 url_for(page.path)。</td>
-</tr>
-<tr>
-<td style="text-align:left">page.permalink</td>
-<td style="text-align:left">页面的完整网址</td>
-</tr>
-<tr>
-<td style="text-align:left">page.prev</td>
-<td style="text-align:left">上一个页面。如果此为第一个页面则为 null。</td>
-</tr>
-<tr>
-<td style="text-align:left">page.next</td>
-<td style="text-align:left">下一个页面。如果此为最后一个页面则为  null。</td>
-</tr>
-<tr>
-<td style="text-align:left">page.raw</td>
-<td style="text-align:left">文章的原始内容</td>
-</tr>
-<tr>
-<td style="text-align:left">page.photos</td>
-<td style="text-align:left">文章的照片（用于相簿）</td>
-</tr>
-<tr>
-<td style="text-align:left">page.link</td>
-<td style="text-align:left">文章的外部链接（用于链接文章）</td>
-</tr>
-</tbody>
-</table>
-<h6 id="文章post"><a href="#文章post" class="headerlink" title="文章post"></a>文章post</h6><p>与<code>page</code>类似 但是添加了下列变量</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">变量</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">page.published</td>
-<td style="text-align:left">如果该文章已发布则为True</td>
-</tr>
-<tr>
-<td style="text-align:left">page.categories</td>
-<td style="text-align:left">该文章的所有分类</td>
-</tr>
-<tr>
-<td style="text-align:left">page.tags</td>
-<td style="text-align:left">该文章的所有标签</td>
-</tr>
-</tbody>
-</table>
-<h6 id="首页-index"><a href="#首页-index" class="headerlink" title="首页 index"></a>首页 index</h6><table>
-<thead>
-<tr>
-<th style="text-align:left">变量</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">page.per_page</td>
-<td style="text-align:left">每页显示的文章数量</td>
-</tr>
-<tr>
-<td style="text-align:left">page.total</td>
-<td style="text-align:left">总文章数</td>
-</tr>
-<tr>
-<td style="text-align:left">page.current</td>
-<td style="text-align:left">目前页数</td>
-</tr>
-<tr>
-<td style="text-align:left">page.current_url</td>
-<td style="text-align:left">目前分页的网址</td>
-</tr>
-<tr>
-<td style="text-align:left">page.posts</td>
-<td style="text-align:left">本页文章</td>
-</tr>
-<tr>
-<td style="text-align:left">page.prev</td>
-<td style="text-align:left">上一页的页数。如果此页是第一页的话则为 0。</td>
-</tr>
-<tr>
-<td style="text-align:left">page.prev_link</td>
-<td style="text-align:left">上一页的网址。如果此页是第一页的话则为 ‘’。</td>
-</tr>
-<tr>
-<td style="text-align:left">page.next</td>
-<td style="text-align:left">下一页的页数。如果此页是最后一页的话则为 0。</td>
-</tr>
-<tr>
-<td style="text-align:left">page.next_link</td>
-<td style="text-align:left">下一页的网址。如果此页是最后一页的话则为 ‘’。</td>
-</tr>
-<tr>
-<td style="text-align:left">page.path</td>
-<td style="text-align:left">当前页面的路径（不含根目录）。我们通常在主题中使用 url_for(page.path)。</td>
-</tr>
-</tbody>
-</table>
-<h6 id="归档-archive"><a href="#归档-archive" class="headerlink" title="归档 (archive)"></a>归档 (archive)</h6><p>与 <code>index</code> 布局相同， 但新增了以下变量</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">变量</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">page.archive</td>
-<td style="text-align:left">等于 true</td>
-</tr>
-<tr>
-<td style="text-align:left">page.year</td>
-<td style="text-align:left">年份归档 (4位)</td>
-</tr>
-<tr>
-<td style="text-align:left">page.month</td>
-<td style="text-align:left">月份归档 (没有前导零的2位数)</td>
-</tr>
-</tbody>
-</table>
-<h6 id="分类-category"><a href="#分类-category" class="headerlink" title="分类 (category)"></a>分类 (category)</h6><p>与 <code>index</code> 布局相同， 但新增了以下变量</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">变量</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">page.category</td>
-<td style="text-align:left">分类名称</td>
-</tr>
-</tbody>
-</table>
-<h6 id="标签-tag"><a href="#标签-tag" class="headerlink" title="标签(tag)"></a>标签(tag)</h6><p>与 <code>index</code> 布局相同， 但新增了以下变量</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">变量</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">page.tag</td>
-<td style="text-align:left">标签名称</td>
-</tr>
-</tbody>
-</table>
-]]></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-            <category> blog </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-        
+      <url>%2F2017%2F04%2Fhexo-%E5%8F%98%E9%87%8F%2F</url>
+      <content type="text"><![CDATA[变量主要用于 layout 等的应用 全局变量 变量 描述 site 网站变量 page 针对该页面的内容以及 front-matter 所设定的变量。 config 网站配置 theme 主题配置。继承自网站配置。 _ (单下划线) Lodash 函数库 path 当前页面的路径（不含根路径） url 当前页面的完整网址 env 环境变量 网站变量 变量 描述 site.posts 所有文章 site.pages 所有分页 site.categories 所有分类 site.tags 所有标签 页面变量页面page 变量 描述 page.title 页面标题 page.date 页面建立日期（Moment.js 对象） page.updated 页面更新日期（Moment.js 对象） page.comments 留言是否开启 page.layout 布局名称 page.content 页面的完整内容 page.excerpt 页面摘要 page.more 除了页面摘要的其余内容 page.source 页面原始路径 page.full_source 页面的完整原始路径 page.path 页面网址（不含根路径）。我们通常在主题 中使用 url_for(page.path)。 page.permalink 页面的完整网址 page.prev 上一个页面。如果此为第一个页面则为 null。 page.next 下一个页面。如果此为最后一个页面则为 null。 page.raw 文章的原始内容 page.photos 文章的照片（用于相簿） page.link 文章的外部链接（用于链接文章） 文章post与page类似 但是添加了下列变量 变量 描述 page.published 如果该文章已发布则为True page.categories 该文章的所有分类 page.tags 该文章的所有标签 首页 index 变量 描述 page.per_page 每页显示的文章数量 page.total 总文章数 page.current 目前页数 page.current_url 目前分页的网址 page.posts 本页文章 page.prev 上一页的页数。如果此页是第一页的话则为 0。 page.prev_link 上一页的网址。如果此页是第一页的话则为 ‘’。 page.next 下一页的页数。如果此页是最后一页的话则为 0。 page.next_link 下一页的网址。如果此页是最后一页的话则为 ‘’。 page.path 当前页面的路径（不含根目录）。我们通常在主题中使用 url_for(page.path)。 归档 (archive)与 index 布局相同， 但新增了以下变量 变量 描述 page.archive 等于 true page.year 年份归档 (4位) page.month 月份归档 (没有前导零的2位数) 分类 (category)与 index 布局相同， 但新增了以下变量 变量 描述 page.category 分类名称 标签(tag)与 index 布局相同， 但新增了以下变量 变量 描述 page.tag 标签名称]]></content>
     </entry>
+
     
     <entry>
       <title><![CDATA[Hexo-模板]]></title>
-      <url>https://jsonz1993.github.io/2017/04/hexo-%E6%A8%A1%E6%9D%BF/</url>
-      <content type="html"><![CDATA[<p>模板决定了网站内容的呈现方式，每个主题至少都应包含一个 index 模板，以下是各页面相对应的模板名称：</p>
-<table>
-<thead>
-<tr>
-<th>模板</th>
-<th style="text-align:center">用途</th>
-<th>回调</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>index</td>
-<td style="text-align:center">首页</td>
-<td></td>
-</tr>
-<tr>
-<td>post</td>
-<td style="text-align:center">文章</td>
-<td>index</td>
-</tr>
-<tr>
-<td>page</td>
-<td style="text-align:center">分页</td>
-<td>index</td>
-</tr>
-<tr>
-<td>archive</td>
-<td style="text-align:center">归档</td>
-<td>index</td>
-</tr>
-<tr>
-<td>category</td>
-<td style="text-align:center">分类归档</td>
-<td>archive</td>
-</tr>
-<tr>
-<td>tag</td>
-<td style="text-align:center">标签归档</td>
-<td>archive</td>
-</tr>
-</tbody>
-</table>
-<h4 id="布局-Layout"><a href="#布局-Layout" class="headerlink" title="布局 Layout"></a>布局 Layout</h4><p>布局这块可参考 <code>next</code> 主题看, Hexo 默认的引擎模板为<a href="http://www.iqianduan.net/blog/how_to_use_swig" target="_blank" rel="external">swig</a></p>
-<p>如果页面结构类似，例如两个模板都有页首（Header）和页脚（Footer），您可考虑通过「布局」让两个模板共享相同的结构。一个布局文件必须要能显示 <code>body</code> 变量的内容，如此一来模板的内容才会被显示，举例来说：</p>
-<figure class="highlight plain"><figcaption><span>index.ejs</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">index</div></pre></td></tr></table></figure>
-<figure class="highlight html"><figcaption><span>layout.ejs</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;<span class="name">%-</span> <span class="attr">body</span> %&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>生成<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span>index<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>每个模板都默认使用 <code>layout</code> 布局，您可在 front-matter 指定其他布局，或是设为 <code>false</code> 来关闭布局功能，您甚至可在布局中再使用其他布局来建立嵌套布局。</p>
-<h4 id="局部模板-Partial"><a href="#局部模板-Partial" class="headerlink" title="局部模板 Partial"></a>局部模板 Partial</h4><p>局部模板让您在不同模板之间共享相同的组件，例如页首（Header）、页脚（Footer）或侧边栏（Sidebar）等，可利用局部模板功能分割为个别文件，让维护更加便利。</p>
-<p>官网说的都是<code>ejs</code>语法， 目前next采用的是<code>swig</code> 语法。</p>
-<p>TODO 后面再补上 <code>Next</code>主题学习 &amp;&amp; <code>swig</code> </p>
-]]></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-            <category> blog </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-        
+      <url>%2F2017%2F04%2Fhexo-%E6%A8%A1%E6%9D%BF%2F</url>
+      <content type="text"><![CDATA[模板决定了网站内容的呈现方式，每个主题至少都应包含一个 index 模板，以下是各页面相对应的模板名称： 模板 用途 回调 index 首页 post 文章 index page 分页 index archive 归档 index category 分类归档 archive tag 标签归档 archive 布局 Layout布局这块可参考 next 主题看, Hexo 默认的引擎模板为swig 如果页面结构类似，例如两个模板都有页首（Header）和页脚（Footer），您可考虑通过「布局」让两个模板共享相同的结构。一个布局文件必须要能显示 body 变量的内容，如此一来模板的内容才会被显示，举例来说： index.ejs1index layout.ejs1234&lt;!DOCTYPE html&gt;&lt;html&gt; &lt;body&gt;&lt;%- body %&gt;&lt;/body&gt;&lt;/html&gt; 生成1234&lt;!DOCTYPE html&gt;&lt;html&gt; &lt;body&gt;index&lt;/body&gt;&lt;/html&gt; 每个模板都默认使用 layout 布局，您可在 front-matter 指定其他布局，或是设为 false 来关闭布局功能，您甚至可在布局中再使用其他布局来建立嵌套布局。 局部模板 Partial局部模板让您在不同模板之间共享相同的组件，例如页首（Header）、页脚（Footer）或侧边栏（Sidebar）等，可利用局部模板功能分割为个别文件，让维护更加便利。 官网说的都是ejs语法， 目前next采用的是swig 语法。 TODO 后面再补上 Next主题学习 &amp;&amp; swig]]></content>
     </entry>
+
     
     <entry>
       <title><![CDATA[Hexo-主题概述]]></title>
-      <url>https://jsonz1993.github.io/2017/04/hexo-%E4%B8%BB%E9%A2%98%E6%A6%82%E8%BF%B0/</url>
-      <content type="html"><![CDATA[<p>了解一款主题的文件结构可以让你在有自定义需求的时候，快速定位到目标文件，也为后面的定制化主题做铺垫。</p>
-<p>创建 Hexo 主题非常容易，您只要在 themes 文件夹内，新增一个任意名称的文件夹，并修改 _config.yml 内的 theme 设定，即可切换主题。一个主题可能会有以下的结构：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="string">.</span></div><div class="line"><span class="string">├──</span> <span class="string">_config.yml</span></div><div class="line"><span class="string">├──</span> <span class="string">languages</span></div><div class="line"><span class="string">├──</span> <span class="string">layout</span></div><div class="line"><span class="string">├──</span> <span class="string">scripts</span></div><div class="line"><span class="string">└──</span> <span class="string">source</span></div></pre></td></tr></table></figure>
-<h4 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h4><p>主题的配置文件。修改时会自动更新，无需重启服务器。</p>
-<h4 id="languages"><a href="#languages" class="headerlink" title="languages"></a>languages</h4><p>语言文件夹。请参见 <a href="https://hexo.io/zh-cn/docs/internationalization.html" target="_blank" rel="external">国际化 (i18n)</a>。</p>
-<h4 id="layout"><a href="#layout" class="headerlink" title="layout"></a>layout</h4><p>布局文件夹。用于存放主题的模板文件，决定了网站内容的呈现方式，Hexo 内建 <code>Swig</code> 模板引擎，您可以另外安装插件来获得 <code>EJS</code>、<code>Haml</code> 或 <code>Jade</code> 支持，Hexo 根据模板文件的扩展名来决定所使用的模板引擎，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">layout.ejs   - 使用 EJS</div><div class="line">layout.swig  - 使用 Swig</div></pre></td></tr></table></figure></p>
-<p>详细见 <a href="https://hexo.io/zh-cn/docs/templates.html" target="_blank" rel="external">模板</a></p>
-<h4 id="scripts"><a href="#scripts" class="headerlink" title="scripts"></a>scripts</h4><p>脚本文件夹。在启动时，Hexo 会载入此文件夹内的 JavaScript 文件，详细见 <a href="https://hexo.io/zh-cn/docs/plugins.html" target="_blank" rel="external">插件</a> 。</p>
-<h4 id="source"><a href="#source" class="headerlink" title="source"></a>source</h4><p>资源文件夹，除了模板以外的 Asset，例如 CSS、JavaScript 文件等，都应该放在这个文件夹中。文件或文件夹开头名称为 <code>_</code>（下划线线）或隐藏的文件会被忽略。</p>
-<p>如果文件可以被渲染的话，会经过解析然后储存到 <code>public</code> 文件夹，否则会直接拷贝到 <code>public</code> 文件夹</p>
-<h4 id="发布（略）"><a href="#发布（略）" class="headerlink" title="发布（略）"></a>发布（略）</h4>]]></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-            <category> blog </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-        
+      <url>%2F2017%2F04%2Fhexo-%E4%B8%BB%E9%A2%98%E6%A6%82%E8%BF%B0%2F</url>
+      <content type="text"><![CDATA[了解一款主题的文件结构可以让你在有自定义需求的时候，快速定位到目标文件，也为后面的定制化主题做铺垫。 创建 Hexo 主题非常容易，您只要在 themes 文件夹内，新增一个任意名称的文件夹，并修改 _config.yml 内的 theme 设定，即可切换主题。一个主题可能会有以下的结构： 123456.├── _config.yml├── languages├── layout├── scripts└── source _config.yml主题的配置文件。修改时会自动更新，无需重启服务器。 languages语言文件夹。请参见 国际化 (i18n)。 layout布局文件夹。用于存放主题的模板文件，决定了网站内容的呈现方式，Hexo 内建 Swig 模板引擎，您可以另外安装插件来获得 EJS、Haml 或 Jade 支持，Hexo 根据模板文件的扩展名来决定所使用的模板引擎，例如：12layout.ejs - 使用 EJSlayout.swig - 使用 Swig 详细见 模板 scripts脚本文件夹。在启动时，Hexo 会载入此文件夹内的 JavaScript 文件，详细见 插件 。 source资源文件夹，除了模板以外的 Asset，例如 CSS、JavaScript 文件等，都应该放在这个文件夹中。文件或文件夹开头名称为 _（下划线线）或隐藏的文件会被忽略。 如果文件可以被渲染的话，会经过解析然后储存到 public 文件夹，否则会直接拷贝到 public 文件夹 发布（略）]]></content>
     </entry>
+
     
     <entry>
       <title><![CDATA[Hexo-永久链接]]></title>
-      <url>https://jsonz1993.github.io/2017/04/hexo-%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5/</url>
-      <content type="html"><![CDATA[<p>你可以在<code>_config.yml &gt; permalink</code>配置网站的永久链接或者每篇文章的Front-matter自定义该文章的永久链接, 如: <code>:year/:month/:title/</code> 对应 <code>2017/04/hexo-永久链接/</code></p>
-<h6 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h6><p>除了下列变量外，您还可使用 Front-matter 中的所有属性。</p>
-<table>
-<thead>
-<tr>
-<th>变量</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>:year</td>
-<td style="text-align:center">文章的发表年份（4 位数）</td>
-</tr>
-<tr>
-<td>:month</td>
-<td style="text-align:center">文章的发表月份（2 位数）</td>
-</tr>
-<tr>
-<td>:i_month</td>
-<td style="text-align:center">文章的发表月份（去掉开头的零）</td>
-</tr>
-<tr>
-<td>:day</td>
-<td style="text-align:center">文章的发表日期 (2 位数)</td>
-</tr>
-<tr>
-<td>:i_day</td>
-<td style="text-align:center">文章的发表日期（去掉开头的零）</td>
-</tr>
-<tr>
-<td>:title</td>
-<td style="text-align:center">文件名称</td>
-</tr>
-<tr>
-<td>:id</td>
-<td style="text-align:center">文章 ID</td>
-</tr>
-<tr>
-<td>:category</td>
-<td style="text-align:center">分类。如果文章没有分类，则是 default_category 配置信息。</td>
-</tr>
-</tbody>
-</table>
-<p>也可以在 <code>permalink_defaults</code> 参数下调整永久链接中各变量的默认值：<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attr">permalink_defaults:</span></div><div class="line"><span class="attr">  lang:</span> <span class="string">en</span></div></pre></td></tr></table></figure></p>
-]]></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-            <category> blog </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-        
+      <url>%2F2017%2F04%2Fhexo-%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5%2F</url>
+      <content type="text"><![CDATA[你可以在_config.yml &gt; permalink配置网站的永久链接或者每篇文章的Front-matter自定义该文章的永久链接, 如: :year/:month/:title/ 对应 2017/04/hexo-永久链接/ 变量除了下列变量外，您还可使用 Front-matter 中的所有属性。 变量 描述 :year 文章的发表年份（4 位数） :month 文章的发表月份（2 位数） :i_month 文章的发表月份（去掉开头的零） :day 文章的发表日期 (2 位数) :i_day 文章的发表日期（去掉开头的零） :title 文件名称 :id 文章 ID :category 分类。如果文章没有分类，则是 default_category 配置信息。 也可以在 permalink_defaults 参数下调整永久链接中各变量的默认值：12permalink_defaults: lang: en]]></content>
     </entry>
+
     
     <entry>
       <title><![CDATA[Hexo-生成文件与部署]]></title>
-      <url>https://jsonz1993.github.io/2017/04/%E7%94%9F%E6%88%90%E6%96%87%E4%BB%B6%E4%B8%8E%E9%83%A8%E7%BD%B2/</url>
-      <content type="html"><![CDATA[<h2 id="生成文件"><a href="#生成文件" class="headerlink" title="生成文件"></a>生成文件</h2><p>生成文件一般是用于生成静态资源文件部署服务器用的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div><div class="line"></div><div class="line">快捷方式为:</div><div class="line"></div><div class="line">$hexo g</div></pre></td></tr></table></figure>
-<p>也可以让Hexo在监视到文件变动后立即重新生成静态文件，<br>在生成时会比对文件的 SHA1 checksum，只有变动的文件才会写入。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate --watch</div></pre></td></tr></table></figure></p>
-<p>一般会跑以下命令，方便在Hexo生成文件后直接部署到Github上<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ hexo generate --deploy</div><div class="line">$ hexo deploy --generate</div><div class="line">(上面两条命令效果一样)</div><div class="line"></div><div class="line">或者简写</div><div class="line"></div><div class="line">$ hexo g -d</div><div class="line">$ hexo d -g</div><div class="line">(上面两条命令效果一样)</div></pre></td></tr></table></figure></p>
-<h2 id="部署服务器"><a href="#部署服务器" class="headerlink" title="部署服务器"></a>部署服务器</h2><p>在部署之前先要在 <code>_config.yml</code> 将部署信息补充完整，此处以 Github 为例:</p>
-<figure class="highlight yml"><figcaption><span>_config.yml配置</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="attr">deploy:</span></div><div class="line"><span class="attr">  type:</span> <span class="string">git</span> <span class="comment"># type</span></div><div class="line"><span class="attr">  repo:</span> <span class="attr">https://github.com/jsonz1993/jsonz1993.github.io.git</span> <span class="comment"># 仓库地址</span></div><div class="line"><span class="attr">  branch:</span> <span class="string">master</span> <span class="comment"># 分支 可不填自动识别</span></div><div class="line"><span class="attr">  message:</span> <span class="string">"feat(hexo)-生成文件与部署"</span> <span class="comment"># 提交的信息</span></div></pre></td></tr></table></figure>
-<figure class="highlight plain"><figcaption><span>参数说明</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">repo	库（Repository）地址</div><div class="line">branch	分支名称。如果您使用的是 GitHub 或 GitCafe 的话，程序会尝试自动检测。</div><div class="line">message	自定义提交信息 (默认为 Site updated: &#123;&#123; now(&apos;YYYY-MM-DD HH:mm:ss&apos;) &#125;&#125;)</div></pre></td></tr></table></figure>
-<p>确保本地安装了 <code>hexo-deployer-git</code>， 可通过以下方法安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
-<p>你也可以通过 <code>generate</code> 生成静态资源，再手动copy或上传到服务器.</p>
-]]></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-            <category> blog </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-        
+      <url>%2F2017%2F04%2F%E7%94%9F%E6%88%90%E6%96%87%E4%BB%B6%E4%B8%8E%E9%83%A8%E7%BD%B2%2F</url>
+      <content type="text"><![CDATA[生成文件生成文件一般是用于生成静态资源文件部署服务器用的 12345$ hexo generate快捷方式为:$hexo g 也可以让Hexo在监视到文件变动后立即重新生成静态文件，在生成时会比对文件的 SHA1 checksum，只有变动的文件才会写入。1$ hexo generate --watch 一般会跑以下命令，方便在Hexo生成文件后直接部署到Github上123456789$ hexo generate --deploy$ hexo deploy --generate(上面两条命令效果一样)或者简写$ hexo g -d$ hexo d -g(上面两条命令效果一样) 部署服务器在部署之前先要在 _config.yml 将部署信息补充完整，此处以 Github 为例: _config.yml配置12345deploy: type: git # type repo: https://github.com/jsonz1993/jsonz1993.github.io.git # 仓库地址 branch: master # 分支 可不填自动识别 message: "feat(hexo)-生成文件与部署" # 提交的信息 参数说明123repo 库（Repository）地址branch 分支名称。如果您使用的是 GitHub 或 GitCafe 的话，程序会尝试自动检测。message 自定义提交信息 (默认为 Site updated: &#123;&#123; now(&apos;YYYY-MM-DD HH:mm:ss&apos;) &#125;&#125;) 确保本地安装了 hexo-deployer-git， 可通过以下方法安装1$ npm install hexo-deployer-git --save 你也可以通过 generate 生成静态资源，再手动copy或上传到服务器.]]></content>
     </entry>
+
     
     <entry>
       <title><![CDATA[Hexo-本地服务器]]></title>
-      <url>https://jsonz1993.github.io/2017/04/%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-      <content type="html"><![CDATA[<p>一般安装hexo时会自动安装服务器，如果本地没有安装hexo服务器可通过以下命令安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-server --save</div></pre></td></tr></table></figure></p>
-<p>安装完成后，启动服务器，会启动一个（默认4000端口）本地服务器，可通过 <code>http://localhost:4000</code> 访问，Hexo会监视文件变动自动更新，如果是改动配置，需要手动重启服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><figcaption><span>缩写</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo s</div></pre></td></tr></table></figure>
-<p>如果您想要更改端口，或是在执行时遇到了 EADDRINUSE 错误，可以在执行时使用 -p 选项指定其他端口，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server -p 5000</div></pre></td></tr></table></figure></p>
-<h4 id="自定义IP"><a href="#自定义IP" class="headerlink" title="自定义IP"></a>自定义IP</h4><p>服务器默认运行在 <code>0.0.0.0</code>，您可以覆盖默认的 IP 设置，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server -i 192.168.1.1</div></pre></td></tr></table></figure></p>
-<p>指定这个参数后，您就只能通过该IP才能访问站点。例如，对于一台使用无线网络的笔记本电脑，除了指向本机的<code>127.0.0.1</code>外，通常还有一个<code>192.168.*.*</code>的局域网IP，如果像上面那样使用<code>-i</code>参数，就不能用<code>127.0.0.1</code>来访问站点了。对于有公网IP的主机，如果您指定一个局域网IP作为<code>-i</code>参数的值，那么就无法通过公网来访问站点。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-            <category> blog </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-        
+      <url>%2F2017%2F04%2F%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%2F</url>
+      <content type="text"><![CDATA[一般安装hexo时会自动安装服务器，如果本地没有安装hexo服务器可通过以下命令安装：1$ npm install hexo-server --save 安装完成后，启动服务器，会启动一个（默认4000端口）本地服务器，可通过 http://localhost:4000 访问，Hexo会监视文件变动自动更新，如果是改动配置，需要手动重启服务：1$ hexo server 缩写1$ hexo s 如果您想要更改端口，或是在执行时遇到了 EADDRINUSE 错误，可以在执行时使用 -p 选项指定其他端口，如下：1$ hexo server -p 5000 自定义IP服务器默认运行在 0.0.0.0，您可以覆盖默认的 IP 设置，如下：1$ hexo server -i 192.168.1.1 指定这个参数后，您就只能通过该IP才能访问站点。例如，对于一台使用无线网络的笔记本电脑，除了指向本机的127.0.0.1外，通常还有一个192.168.*.*的局域网IP，如果像上面那样使用-i参数，就不能用127.0.0.1来访问站点了。对于有公网IP的主机，如果您指定一个局域网IP作为-i参数的值，那么就无法通过公网来访问站点。]]></content>
     </entry>
+
     
     <entry>
       <title><![CDATA[Hexo-资源文件夹与数据文件夹]]></title>
-      <url>https://jsonz1993.github.io/2017/04/%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E5%A4%B9/</url>
-      <content type="html"><![CDATA[<h2 id="资源文件"><a href="#资源文件" class="headerlink" title="资源文件"></a>资源文件</h2><p>资源（Asset）代表 <code>source</code> 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。比方说，如果你的Hexo项目中只有少量图片，那最简单的方法就是将它们放在 <code>source/images</code> 文件夹中。然后通过类似于 <code>![](/images/image.jpg)</code> 的方法访问它们。</p>
-<h6 id="文章资源文件夹"><a href="#文章资源文件夹" class="headerlink" title="文章资源文件夹"></a>文章资源文件夹</h6><p>可以通过设置 <code>_config.yml</code> 来使生成的每个文章都有对应的静态资源文件夹。</p>
-<figure class="highlight yml"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></div></pre></td></tr></table></figure>
-<h2 id="数据文件"><a href="#数据文件" class="headerlink" title="数据文件"></a>数据文件</h2><p>有时您可能需要在主题中使用某些资料，而这些资料并不在文章内，并且是需要重复使用的，那么您可以考虑使用 Hexo 3.0 新增的「数据文件」功能。此功能会载入 <code>source/_data</code> 内的 <code>YAML</code> 或 <code>JSON</code> 文件，如此一来您便能在网站中复用这些文件了。</p>
-<p>举例来说，在 <code>source/_data</code> 文件夹中新建 <code>menu.yml</code> 文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Home: /</div><div class="line">Gallery: /gallery/</div><div class="line">Archives: /archives/</div></pre></td></tr></table></figure>
-<p>您就能在模板中使用这些资料：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;% for link in site.data.menu %&#125;</div><div class="line">  &lt;a href=&quot;&#123;&#123; link &#125;&#125;&quot;&gt;&#123;&#123; loop.key &#125;&#125;&lt;/a&gt;</div><div class="line">&#123;% endfor %&#125;</div></pre></td></tr></table></figure>
-]]></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-            <category> blog </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-        
+      <url>%2F2017%2F04%2F%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E5%A4%B9%2F</url>
+      <content type="text"><![CDATA[资源文件资源（Asset）代表 source 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。比方说，如果你的Hexo项目中只有少量图片，那最简单的方法就是将它们放在 source/images 文件夹中。然后通过类似于 ![](/images/image.jpg) 的方法访问它们。 文章资源文件夹可以通过设置 _config.yml 来使生成的每个文章都有对应的静态资源文件夹。 _config.yml1post_asset_folder: true 数据文件有时您可能需要在主题中使用某些资料，而这些资料并不在文章内，并且是需要重复使用的，那么您可以考虑使用 Hexo 3.0 新增的「数据文件」功能。此功能会载入 source/_data 内的 YAML 或 JSON 文件，如此一来您便能在网站中复用这些文件了。 举例来说，在 source/_data 文件夹中新建 menu.yml 文件： 123Home: /Gallery: /gallery/Archives: /archives/ 您就能在模板中使用这些资料： 123&#123;% for link in site.data.menu %&#125; &lt;a href=&quot;&#123;&#123; link &#125;&#125;&quot;&gt;&#123;&#123; loop.key &#125;&#125;&lt;/a&gt;&#123;% endfor %&#125;]]></content>
     </entry>
+
     
     <entry>
       <title><![CDATA[Tag Plugins]]></title>
-      <url>https://jsonz1993.github.io/2017/04/tag-plugins/</url>
-      <content type="html"><![CDATA[<p>tag plugins 用于在文章中快速插入特定内容的插件,下面列出常用几种 具体参见<a href="https://hexo.io/zh-cn/docs/tag-plugins.html" target="_blank" rel="external">https://hexo.io/zh-cn/docs/tag-plugins.html</a></p>
-<h4 id="引用快"><a href="#引用快" class="headerlink" title="引用快"></a>引用快</h4><p>在文章中插入引言，可包含作者、来源和标题。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;% blockquote @Jsonz http://weibo.com/u/1638841204 %&#125;</div><div class="line">引用内容</div><div class="line">&#123;% endblockquote %&#125;</div></pre></td></tr></table></figure></p>
-<blockquote><p>引用内容</p>
-<footer><strong>@Jsonz</strong><cite><a href="http://weibo.com/u/1638841204" target="_blank" rel="external">weibo.com/u/1638841204</a></cite></footer></blockquote>
-<h4 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h4><p>样式可以在 <code>themes&gt;next&gt;source&gt;css</code>修改<br>[language] [title] [url] [link text] code snippet</p>
-<figure class="highlight javascript"><figcaption><span>这是标题</span><a href="https://github.com/jsonz1993" target="_blank" rel="external">,Jsonz's Github</a></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> a = <span class="function"><span class="params">()</span>=&gt;</span> &#123;</div><div class="line">  [...<span class="string">"123"</span>].forEach(<span class="function"><span class="params">item</span>=&gt;</span> ++item);</div><div class="line">  <span class="keyword">return</span> &#123;&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="iframe"><a href="#iframe" class="headerlink" title="iframe"></a>iframe</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;% iframe url [width] [height] %&#125;</div></pre></td></tr></table></figure>
-<iframe src="https://hexo.io/zh-cn/docs/tag-plugins.html" width="100%" height="200px" frameborder="0" allowfullscreen></iframe>
-<h4 id="image"><a href="#image" class="headerlink" title="image"></a>image</h4><p>插入指定大小图片<br><img src="https://imgsa.baidu.com/baike/c0%3Dbaike60%2C5%2C5%2C60%2C20/sign=e1f5e7b9dcc451dae2fb04b9d7943903/7acb0a46f21fbe099143bcf36a600c338744ad3c.jpg" class="img-class" width="200" title="新垣结衣"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;% img [class names] /path/to/image [width] [height] [title text [alt text]] %&#125;</div></pre></td></tr></table></figure>]]></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-            <category> blog </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-        
+      <url>%2F2017%2F04%2Ftag-plugins%2F</url>
+      <content type="text"><![CDATA[tag plugins 用于在文章中快速插入特定内容的插件,下面列出常用几种 具体参见https://hexo.io/zh-cn/docs/tag-plugins.html 引用快在文章中插入引言，可包含作者、来源和标题。123&#123;% blockquote @Jsonz http://weibo.com/u/1638841204 %&#125;引用内容&#123;% endblockquote %&#125; 引用内容 @Jsonzweibo.com/u/1638841204 代码块样式可以在 themes&gt;next&gt;source&gt;css修改[language] [title] [url] [link text] code snippet 这是标题,Jsonz's Github1234const a = ()=&gt; &#123; [..."123"].forEach(item=&gt; ++item); return &#123;&#125;;&#125; iframe1&#123;% iframe url [width] [height] %&#125; image插入指定大小图片 1&#123;% img [class names] /path/to/image [width] [height] [title text [alt text]] %&#125;]]></content>
     </entry>
+
     
     <entry>
       <title><![CDATA[Hello Hexo]]></title>
-      <url>https://jsonz1993.github.io/2017/04/hello-hexo/</url>
-      <content type="html"><![CDATA[<p>折腾了一晚上终于把搭好自己喜欢的主题的Hexo博客。<br>接下来一步一步配置 Hexo <code>__config.yml</code> 文件<br><a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="external">Hexo 官网配置项 </a></p>
-<p>一步一步跟着改配置，比较麻烦的是每次修改配置都要<code>hexo s</code> 重启一下服务器看效果<br>如果修改配置后重启服务看不到效果，可以先运行<code>hexo clean</code>清除缓存再重启服务</p>
-<h6 id="Site-网站"><a href="#Site-网站" class="headerlink" title="Site 网站"></a>Site 网站</h6><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attr">title:</span> <span class="string">jsonz1993</span> <span class="comment"># 网站标题，也会显示在该主题导航左上角</span></div><div class="line"><span class="attr">subtitle:</span> <span class="comment"># 网站副标题 会生成在导航栏主标题旁边（这里隐藏了）</span></div><div class="line"><span class="attr">description:</span> <span class="string">前端开发</span> <span class="string">Jsonz</span> <span class="string">张欣欣</span> <span class="comment"># 网站描述，会出现在head，侧边菜单上 主要用做SEO</span></div><div class="line"><span class="attr">author:</span> <span class="string">Jsonz</span> <span class="comment"># 博客作者 Your Name</span></div><div class="line"><span class="attr">language:</span> <span class="string">zh-Hans</span> <span class="comment"># 语言，支持的语言可以在themes&gt;your-thems&gt;languages 找到</span></div><div class="line"><span class="attr">timezone:</span> <span class="comment"># 默认使用电脑的时区，一般不填</span></div></pre></td></tr></table></figure>
-<h6 id="URL-网址"><a href="#URL-网址" class="headerlink" title="URL 网址"></a>URL 网址</h6><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attr">url:</span> <span class="attr">https://jsonz1993.github.io/</span></div><div class="line"><span class="attr">root:</span> <span class="string">/</span></div><div class="line"><span class="comment"># 文章永久链接的格式 [https://hexo.io/zh-cn/docs/permalinks.html]</span></div><div class="line"><span class="comment"># 可以使用的变量有[:year, :month, :day, :title, :id, :category, Front-matter所有属性]</span></div><div class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span> </div><div class="line"><span class="attr">permalink_defaults:</span> <span class="comment"># 可以给变量指定默认值</span></div></pre></td></tr></table></figure>
-<h6 id="Directory-目录"><a href="#Directory-目录" class="headerlink" title="Directory 目录"></a>Directory 目录</h6><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 定义文件目录, 这部分一般用默认的就可以</span></div><div class="line"><span class="attr">source_dir:</span> <span class="string">source</span></div><div class="line"><span class="attr">public_dir:</span> <span class="string">public</span></div><div class="line"><span class="attr">tag_dir:</span> <span class="string">tags</span></div><div class="line"><span class="attr">archive_dir:</span> <span class="string">archives</span></div><div class="line"><span class="attr">category_dir:</span> <span class="string">categories</span></div><div class="line"><span class="attr">code_dir:</span> <span class="string">downloads/code</span></div><div class="line"><span class="attr">i18n_dir:</span> <span class="string">:lang</span></div><div class="line"><span class="attr">skip_render:</span></div></pre></td></tr></table></figure>
-<h6 id="Writing-文章相关配置"><a href="#Writing-文章相关配置" class="headerlink" title="Writing 文章相关配置"></a>Writing 文章相关配置</h6><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 新文章的名称 我喜欢配合年月按文件夹分类，这样后面方便管理</span></div><div class="line"><span class="comment"># 此时生成的文件位于: source/_posts/:year/:month/:title.md</span></div><div class="line"><span class="attr">new_post_name:</span> <span class="string">:year/:month/:title.md</span> </div><div class="line"><span class="attr">default_layout:</span> <span class="string">post</span> <span class="comment">#命令行 hexo new &lt;layout&gt; name 中 layout默认值</span></div><div class="line"><span class="attr">titlecase:</span> <span class="literal">false</span> <span class="comment"># 标题转换为首字母大写</span></div><div class="line"><span class="attr">external_link:</span> <span class="literal">true</span> <span class="comment"># 是否在新标签打开连接</span></div><div class="line"><span class="attr">filename_case:</span> <span class="number">0</span> <span class="comment"># 文件名大小写转换 (0)不转换（1)小写 (2)大写</span></div><div class="line"><span class="attr">render_drafts:</span> <span class="literal">false</span> <span class="comment"># 显示草稿</span></div><div class="line"><span class="comment"># 启动资源文件夹 看个人可用可不用</span></div><div class="line"><span class="comment"># 主要每次创建文件都会生成一个同名文件夹用于存放图片等资源</span></div><div class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></div><div class="line"><span class="attr">relative_link:</span> <span class="literal">false</span> <span class="comment"># 把链接改为与根目录的相对位址</span></div><div class="line"><span class="attr">future:</span> <span class="literal">true</span> <span class="comment"># 显示下一条文章</span></div><div class="line"><span class="attr">highlight:</span> <span class="comment"># 代码块设置 既现在看到的这块</span></div><div class="line"><span class="attr">  enable:</span> <span class="literal">true</span></div><div class="line"><span class="attr">  line_number:</span> <span class="literal">true</span></div><div class="line"><span class="attr">  auto_detect:</span> <span class="literal">false</span></div><div class="line"><span class="attr">  tab_replace:</span></div></pre></td></tr></table></figure>
-<h6 id="Category-amp-Tag-分类-amp-标签"><a href="#Category-amp-Tag-分类-amp-标签" class="headerlink" title="Category &amp; Tag 分类&amp;标签"></a>Category &amp; Tag 分类&amp;标签</h6><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">default_category:</span> <span class="string">uncategorized</span> <span class="comment"># 默认的分类</span></div><div class="line"><span class="attr">category_map:</span> <span class="comment"># 分类映射（别名）</span></div><div class="line"><span class="attr">tag_map:</span> <span class="comment"># 标签映射（别名）</span></div></pre></td></tr></table></figure>
-<h6 id="Date-Time-format-日期-amp-时间格式"><a href="#Date-Time-format-日期-amp-时间格式" class="headerlink" title="Date / Time format 日期&amp;时间格式"></a>Date / Time format 日期&amp;时间格式</h6><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attr">date_format:</span> <span class="string">YYYY-MM-DD</span></div><div class="line"><span class="attr">time_format:</span> <span class="attr">HH:mm:ss</span></div></pre></td></tr></table></figure>
-<h6 id="Pagination-分页设置"><a href="#Pagination-分页设置" class="headerlink" title="Pagination 分页设置"></a>Pagination 分页设置</h6><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 文章数量有限，未实践过该功能</span></div><div class="line"><span class="attr">per_page:</span> <span class="number">10</span> <span class="comment"># 每页文章数量 0 为关闭分页</span></div><div class="line"><span class="attr">pagination_dir:</span> <span class="string">page</span> <span class="comment"># 分页的目录</span></div></pre></td></tr></table></figure>
-<h6 id="Extensions-其他拓展设置"><a href="#Extensions-其他拓展设置" class="headerlink" title="Extensions 其他拓展设置"></a>Extensions 其他拓展设置</h6><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 此处有插件与主题设置</span></div><div class="line"><span class="attr">theme:</span> <span class="string">next</span> <span class="comment">#设置的主题应存放在 根目录/themes下</span></div></pre></td></tr></table></figure>
-]]></content>
-      
-        <categories>
-            
-            <category> technology </category>
-            
-            <category> blog </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> hexo </tag>
-            
-        </tags>
-        
+      <url>%2F2017%2F04%2Fhello-hexo%2F</url>
+      <content type="text"><![CDATA[折腾了一晚上终于把搭好自己喜欢的主题的Hexo博客。接下来一步一步配置 Hexo __config.yml 文件Hexo 官网配置项 一步一步跟着改配置，比较麻烦的是每次修改配置都要hexo s 重启一下服务器看效果如果修改配置后重启服务看不到效果，可以先运行hexo clean清除缓存再重启服务 Site 网站123456title: jsonz1993 # 网站标题，也会显示在该主题导航左上角subtitle: # 网站副标题 会生成在导航栏主标题旁边（这里隐藏了）description: 前端开发 Jsonz 张欣欣 # 网站描述，会出现在head，侧边菜单上 主要用做SEOauthor: Jsonz # 博客作者 Your Namelanguage: zh-Hans # 语言，支持的语言可以在themes&gt;your-thems&gt;languages 找到timezone: # 默认使用电脑的时区，一般不填 URL 网址123456url: https://jsonz1993.github.io/root: /# 文章永久链接的格式 [https://hexo.io/zh-cn/docs/permalinks.html]# 可以使用的变量有[:year, :month, :day, :title, :id, :category, Front-matter所有属性]permalink: :year/:month/:day/:title/ permalink_defaults: # 可以给变量指定默认值 Directory 目录123456789# 定义文件目录, 这部分一般用默认的就可以source_dir: sourcepublic_dir: publictag_dir: tagsarchive_dir: archivescategory_dir: categoriescode_dir: downloads/codei18n_dir: :langskip_render: Writing 文章相关配置123456789101112131415161718# 新文章的名称 我喜欢配合年月按文件夹分类，这样后面方便管理# 此时生成的文件位于: source/_posts/:year/:month/:title.mdnew_post_name: :year/:month/:title.md default_layout: post #命令行 hexo new &lt;layout&gt; name 中 layout默认值titlecase: false # 标题转换为首字母大写external_link: true # 是否在新标签打开连接filename_case: 0 # 文件名大小写转换 (0)不转换（1)小写 (2)大写render_drafts: false # 显示草稿# 启动资源文件夹 看个人可用可不用# 主要每次创建文件都会生成一个同名文件夹用于存放图片等资源post_asset_folder: truerelative_link: false # 把链接改为与根目录的相对位址future: true # 显示下一条文章highlight: # 代码块设置 既现在看到的这块 enable: true line_number: true auto_detect: false tab_replace: Category &amp; Tag 分类&amp;标签123default_category: uncategorized # 默认的分类category_map: # 分类映射（别名）tag_map: # 标签映射（别名） Date / Time format 日期&amp;时间格式12date_format: YYYY-MM-DDtime_format: HH:mm:ss Pagination 分页设置123# 文章数量有限，未实践过该功能per_page: 10 # 每页文章数量 0 为关闭分页pagination_dir: page # 分页的目录 Extensions 其他拓展设置12# 此处有插件与主题设置theme: next #设置的主题应存放在 根目录/themes下]]></content>
     </entry>
+
     
   
   
