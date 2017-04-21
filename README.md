@@ -1,8 +1,10 @@
 TODO:
 
-- chrome 插件开发入门
-- scss 语法
-- php 简单入门
-- clipboard 复制插件
-- react
-- redux
+- php 简单入门 !!!
+- react !!!!
+- redux !!!!
+- ios 简单入门 !!!
+- andriod 简单入门 !!!
+- 简单事件系统 !!!!!
+- 简单移动端swipe !!!!!
+- touch 事件 !!!!!
