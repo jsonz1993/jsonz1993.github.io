@@ -8,3 +8,9 @@ TODO:
 - 简单事件系统 !!!!!
 - 简单移动端swipe !!!!!
 - touch 事件 !!!!!
+
+### ing
+IOS
+
+### Next
+[http://www.imooc.com/learn/486](http://www.imooc.com/learn/486)
