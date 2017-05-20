@@ -3,8 +3,15 @@
   
     
     <entry>
-      <title><![CDATA[css- 移动端长按弹出复制等选项设置]]></title>
-      <url>%2F2017%2F05%2Fcss-%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%95%BF%E6%8C%89%E5%BC%B9%E5%87%BA%E5%A4%8D%E5%88%B6%E7%AD%89%E9%80%89%E9%A1%B9%E8%AE%BE%E7%BD%AE%2F</url>
+      <title><![CDATA[获取滚动条宽度]]></title>
+      <url>%2F2017%2F05%2F%E8%8E%B7%E5%8F%96%E6%BB%9A%E5%8A%A8%E6%9D%A1%E5%AE%BD%E5%BA%A6%2F</url>
+      <content type="text"><![CDATA[平时工作的时候，我们经常会遇到需要全局 loading 加 遮罩层 的功能。这时候一般会设置 body { overflow: hidden } 防止页面滚动。 但是在 pc 端 如果一个页面有滚动条，突然给设置为没有的话， 可能会出现抖动的现象。 所以我们的解决思路是 在设置样式之后，给body(也可以是其他) 加多一个 padding-right来填充原本滚动条的宽度。 123456789101112131415161718192021function getScrollBarWidth() &#123; var div = document.createElement('div'), styles = &#123; width: '100px', height: '10px', overflow: 'scroll' &#125;, scrollWidth = 0; for (var key in styles) &#123; div.style[key] = styles[key]; &#125; document.body.appendChild(div); scrollWidth = div.offsetWidth - div.clientWidth; div.remove(); return scrollWidth;&#125;// 伪代码思路&#123; body.overflow = hidden; body.paddingRight += getScrollBarWidth();&#125;]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[移动端长按弹出复制等选项设置]]></title>
+      <url>%2F2017%2F05%2F%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%95%BF%E6%8C%89%E5%BC%B9%E5%87%BA%E5%A4%8D%E5%88%B6%E7%AD%89%E9%80%89%E9%A1%B9%E8%AE%BE%E7%BD%AE%2F</url>
       <content type="text"><![CDATA[今儿产品大佬吐槽一句: 在手机端chrome 浏览器下 点一个文字老是要弹出一个让我划词 好烦。能不能让他不要弹出那些东西来 其实现在很多的 app 内嵌 h5 页面都是喜欢把手机默认的长按弹出菜单[选择， 复制， 剪切] 等禁掉。 1234567// 给所有样式都加上进制弹出长按菜单属性。* &#123; -webkit-user-select: none; user-select: none; &#125;// 记得要给表单排除，一般表单都有复制黏贴的需求input,textarea &#123;-webkit-user-select: text;user-select: text;&#125; 兼容问题 移动端基本兼容]]></content>
     </entry>
 
