@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="learn,JavaScript,github," />
+  <meta name="keywords" content="learn,web,work," />
 
 
 
@@ -88,17 +88,19 @@
 
 
 
-<meta name="description" content="定时器大家平时做js开发都不陌生了 最常见的应用应该就是验证码的倒计时 或 某段函数的异步执行了。 概述js的定时器主要有 setTimeout 和 setInterval. 这两个函数执行后，都会返回一个整数，表示定时器的编号，后面可以通过clearTimeout 或 clearInterval来清除该定时器。 setTimeout和setInterval的运行机制都是 将代码移除本次执行，等待">
-<meta name="keywords" content="learn,JavaScript,github">
+<meta name="description" content="CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）  出于安全考虑，浏览器会限制某些跨域请求。  而 cors 允许浏览器想跨源服务器发起 XMLHttpRequest 和 Fetch 接口请求。 同源策略同源策略限制从一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的关键的安全机制。 那么浏览器是根据">
+<meta name="keywords" content="learn,web,work">
 <meta property="og:type" content="article">
-<meta property="og:title" content="setTimeout && setInterval 学习">
-<meta property="og:url" content="https://jsonz1993.github.io/2017/05/setTimeout-setInterval-学习/index.html">
+<meta property="og:title" content="CORS 跨域资源共享">
+<meta property="og:url" content="https://jsonz1993.github.io/2017/05/CORS-跨域资源共享/index.html">
 <meta property="og:site_name" content="Jsonz">
-<meta property="og:description" content="定时器大家平时做js开发都不陌生了 最常见的应用应该就是验证码的倒计时 或 某段函数的异步执行了。 概述js的定时器主要有 setTimeout 和 setInterval. 这两个函数执行后，都会返回一个整数，表示定时器的编号，后面可以通过clearTimeout 或 clearInterval来清除该定时器。 setTimeout和setInterval的运行机制都是 将代码移除本次执行，等待">
-<meta property="og:updated_time" content="2017-05-16T16:13:44.000Z">
+<meta property="og:description" content="CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）  出于安全考虑，浏览器会限制某些跨域请求。  而 cors 允许浏览器想跨源服务器发起 XMLHttpRequest 和 Fetch 接口请求。 同源策略同源策略限制从一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的关键的安全机制。 那么浏览器是根据">
+<meta property="og:image" content="https://jsonz1993.github.io/2017/05/CORS-跨域资源共享/options请求.png">
+<meta property="og:updated_time" content="2017-05-20T08:13:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="setTimeout && setInterval 学习">
-<meta name="twitter:description" content="定时器大家平时做js开发都不陌生了 最常见的应用应该就是验证码的倒计时 或 某段函数的异步执行了。 概述js的定时器主要有 setTimeout 和 setInterval. 这两个函数执行后，都会返回一个整数，表示定时器的编号，后面可以通过clearTimeout 或 clearInterval来清除该定时器。 setTimeout和setInterval的运行机制都是 将代码移除本次执行，等待">
+<meta name="twitter:title" content="CORS 跨域资源共享">
+<meta name="twitter:description" content="CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）  出于安全考虑，浏览器会限制某些跨域请求。  而 cors 允许浏览器想跨源服务器发起 XMLHttpRequest 和 Fetch 接口请求。 同源策略同源策略限制从一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的关键的安全机制。 那么浏览器是根据">
+<meta name="twitter:image" content="https://jsonz1993.github.io/2017/05/CORS-跨域资源共享/options请求.png">
 
 
 
@@ -126,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="https://jsonz1993.github.io/2017/05/setTimeout-setInterval-学习/"/>
+  <link rel="canonical" href="https://jsonz1993.github.io/2017/05/CORS-跨域资源共享/"/>
 
 
 
 
 
-  <title> setTimeout && setInterval 学习 | Jsonz </title>
+  <title> CORS 跨域资源共享 | Jsonz </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -288,7 +290,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://jsonz1993.github.io/2017/05/setTimeout-setInterval-学习/">
+  <link itemprop="mainEntityOfPage" href="https://jsonz1993.github.io/2017/05/CORS-跨域资源共享/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Jsonz">
@@ -312,7 +314,7 @@
             
             
               
-                setTimeout && setInterval 学习
+                CORS 跨域资源共享
               
             
           </h2>
@@ -327,8 +329,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-16T23:06:32+08:00">
-                2017-05-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-20T15:13:08+08:00">
+                2017-05-20
               </time>
             
 
@@ -369,7 +371,7 @@
 
           
           
-             <span id="/2017/05/setTimeout-setInterval-学习/" class="leancloud_visitors" data-flag-title="setTimeout && setInterval 学习">
+             <span id="/2017/05/CORS-跨域资源共享/" class="leancloud_visitors" data-flag-title="CORS 跨域资源共享">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -399,26 +401,91 @@
       
 
       
-        <p>定时器大家平时做js开发都不陌生了 最常见的应用应该就是验证码的倒计时 或 某段函数的异步执行了。</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>js的定时器主要有 <code>setTimeout</code> 和 <code>setInterval</code>.</p>
-<p>这两个函数执行后，都会返回一个整数，表示定时器的编号，后面可以通过<code>clearTimeout</code> 或 <code>clearInterval</code>来清除该定时器。</p>
-<p><code>setTimeout</code>和<code>setInterval</code>的运行机制都是 将代码移除本次执行，等待下一轮的 Event Loop再检查是否到执行的时间。<br>所以可以用 <code>setTimeout(()=&gt; {}, 0)</code> 来模拟执行异步操作。</p>
-<h2 id="setTimeout"><a href="#setTimeout" class="headerlink" title="setTimeout"></a>setTimeout</h2><h3 id="执行函数"><a href="#执行函数" class="headerlink" title="执行函数"></a>执行函数</h3><p>setTimeout 是用来制定某段函数或代码，在多少毫秒延迟后执行。<br>如果传入的是一段代码，必须是字符串类型的。这时候js会调用<code>eval</code>来执行该代码， 出于安全与性能考虑 建议直接传入一个函数的形式来执行。<br>delay 为延迟的时间，单位是<code>ms</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> timerId = setTimeout(func|code, delay);</div></pre></td></tr></table></figure></p>
-<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>setTimeout可以有多个参数，第三个参数开始为传入运行方法的参数。<br>很经典的闭包面试题就可以用setTimeout传参来解决<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i&lt; <span class="number">10</span>; i++) &#123; setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(i)&#125; ,<span class="number">0</span>) &#125; <span class="comment">// 运行结果是输出10个10</span></div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i&lt; <span class="number">10</span>; i++) &#123; setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params">i</span>) </span>&#123; <span class="built_in">console</span>.log(i)&#125; ,<span class="number">0</span>, i) &#125; <span class="comment">// 运行结果是输出0-9</span></div></pre></td></tr></table></figure></p>
-<h3 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h3><p>setTimeout的运行环境是全局(eval)。<br><figure class="highlight javascript"><figcaption><span>demo1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> x = <span class="number">1</span>;</div><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">	<span class="attr">x</span>: <span class="number">2</span>,</div><div class="line">	<span class="attr">y</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span>.x);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">setTimeout(o.y, <span class="number">0</span>); <span class="comment">// 此时输出的是1，因为全局(window)上的x属性是1</span></div></pre></td></tr></table></figure></p>
-<figure class="highlight javascript"><figcaption><span>demo2</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">User</span>(<span class="params">login</span>) </span>&#123;</div><div class="line">	<span class="keyword">this</span>.login = login;</div><div class="line">	<span class="keyword">this</span>.sayHi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span>.login);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> user = <span class="keyword">new</span> User(<span class="string">'John'</span>);</div><div class="line">setTimeout(user.sayHi, <span class="number">0</span>); <span class="comment">// undefined 因为执行的时候 全局对象没有 login这个属性</span></div></pre></td></tr></table></figure>
-<p>解决方法一： 放到一个匿名函数里面执行<br><figure class="highlight javascript"><figcaption><span>方法1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	user.sayHi();</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>解决方法二： 缓存当前的this变量<br><figure class="highlight javascript"><figcaption><span>方法2</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.body.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> _this = <span class="keyword">this</span>;</div><div class="line">	setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		_this.value = <span class="string">'ok'</span>;</div><div class="line">	&#125;)</div><div class="line">&#125;, <span class="literal">false</span>);</div></pre></td></tr></table></figure></p>
-<p>解决方法三： 目前项目中最常用， 用<code>es6</code>的<code>箭头函数</code><br><figure class="highlight javascript"><figcaption><span>方法3</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span> user.sayHi(), <span class="number">0</span>);</div></pre></td></tr></table></figure></p>
-<h2 id="setInterval"><a href="#setInterval" class="headerlink" title="setInterval"></a>setInterval</h2><p><code>setInterval</code>的使用方法与参数和<code>setTimeout</code>一致。 不过<code>setInterval</code>是间隔 Xms 执行一次该函数。<br>但实际上 函数执行需要时间，所以两次执行函数之间的间隔会小于 <code>setInterval</code>指定的时间.</p>
-<h3 id="setInterval-执行时间"><a href="#setInterval-执行时间" class="headerlink" title="setInterval 执行时间"></a>setInterval 执行时间</h3><p>假定<code>setInterval</code>指定每100ms执行一次，每次执行的函数耗时为 5ms, 那么第一次执行结束后的 95ms 后会执行第二段函数。<br>如果某次执行特别耗时 如 105ms, 那么 当它结束后，会立即执行下一次的函数。 <strong>此段为某博客看到的，个人实践得出执行时间有快与慢的偏差没有绝对提前执行</strong></p>
-<p>下面看代码例子<br><figure class="highlight javascript"><figcaption><span>demo3</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="comment">// 耗时 5ms 的某个操作</span></div><div class="line">	handleMouseClick();</div><div class="line">	<span class="comment">// 耗时 5ms 的某个操作</span></div><div class="line">	setInterval(timerTask, <span class="number">10</span>);</div><div class="line">	<span class="comment">// 耗时 5ms 的某个操作</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleMouseClick</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="comment">// 耗时 8ms 的某个操作</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">timerTask</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="comment">// 耗时 2ms 的某个操作</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">init();</div></pre></td></tr></table></figure></p>
-<p>网上博客说法（此处保留意见）：<br>0-15ms: 运行init<br>15-23ms: 运行handleMouseClick函数。请注意，这个函数是在5ms时触发的，应该在那个时候就立即运行，但是由于单线程的关系，必须等到init函数完成之后再运行。<br>23-25ms: 运行timerTask函数。 规定每10ms运行一次，既在20ms， 30ms， 40ms会运行。但是由于当前还有任务在运行，因此必须延迟到前面任务完成后再运行<br>30-32ms: 运行timerTask<br>40-42ms: 运行timerTask</p>
-<p>由于平时debug调试时，在<code>handleMouseClick</code>应该不会等到<code>init</code>运行后再执行。于是抱着学习的态度自己写了一段代码<br><figure class="highlight javascript"><figcaption><span>demo4</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">_init</span>(<span class="params"></span>) </span>&#123; demo(<span class="number">10</span>);<span class="built_in">console</span>.log(<span class="number">1</span>); demo(<span class="number">10</span>); handle(); demo(<span class="number">10</span>);<span class="built_in">console</span>.log(<span class="number">2</span>); setInterval(<span class="function"><span class="params">()</span>=&gt;</span> <span class="built_in">console</span>.log(<span class="string">'setInterval'</span>), <span class="number">1000</span>); <span class="built_in">console</span>.log(<span class="number">3</span>) &#125;; <span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params"></span>) </span>&#123;demo(<span class="number">15</span>); <span class="built_in">console</span>.log(<span class="string">'handle'</span>)&#125;;<span class="function"><span class="keyword">function</span> <span class="title">demo</span>(<span class="params">i</span>) </span>&#123;<span class="keyword">var</span> sum = <span class="number">0</span>; <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; i * <span class="number">1000000</span>; j++) &#123;sum += j;&#125;&#125;;</div><div class="line">_init();</div></pre></td></tr></table></figure></p>
-<p>利用for循环来造成运行实践的延长<br>运行 <code>_init()</code> 结果是：<br>① 输出<code>1</code> 隔26ms后 输出<code>handle</code> 隔10ms后 输出<code>2</code> 同一时间输出<code>3</code>(此处可以理解成执行的时间小于1ms)。此时 _init()执行结束 由于没有返回值，所以会默认返回 <code>undefined</code><br>② <code>_init()</code>执行结束之后 再去跑 <code>setInterval定时器</code> 所以 隔 1000ms(实际是1005ms) 后输出第一个<code>setInterval</code>。间隔 999ms后输出第二个<code>setInterval</code> 间隔 997ms后输出第三个 <code>setInterval</code><br>所以觉得说<code>setInterval</code>是当前所有函数运行后才开启定时的，而不是执行到<code>setInterval</code>的时候开始计时。<br>而且运行的间隔不是固定偏多或偏少</p>
-<p>最后再给出一个例子理解<code>setTimeout</code>的异步执行机制<br><figure class="highlight javascript"><figcaption><span>demo5</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </div><div class="line">  <span class="built_in">console</span>.log(<span class="string">"Timeout"</span>);</div><div class="line">&#125;, <span class="number">0</span>);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params">x</span>) </span>&#123; </div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"a() 开始运行"</span>);</div><div class="line">    b(x);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"a() 结束运行"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params">y</span>) </span>&#123; </div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"b() 开始运行"</span>);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"传入的值为"</span> + y);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"b() 结束运行"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(<span class="string">"当前任务开始"</span>);</div><div class="line">a(<span class="number">42</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"当前任务结束"</span>);</div></pre></td></tr></table></figure></p>
-<p>运行结果为<br>当前任务开始<br>a() 开始运行<br>b() 开始运行<br>传入的值是 42<br>b() 运行结束<br>a() 运行结束<br>当前任务结束<br>timeout</p>
-<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>无。</p>
+        <p>CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）</p>
+<blockquote>
+<p>出于安全考虑，浏览器会限制某些跨域请求。</p>
+</blockquote>
+<p>而 cors 允许浏览器想跨源服务器发起 <code>XMLHttpRequest</code> 和 <code>Fetch</code> 接口请求。</p>
+<h3 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h3><p>同源策略限制从一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的关键的安全机制。</p>
+<p>那么浏览器是根据什么规则来判定是否为同源呢</p>
+<p><code>http://www.zuzuche.com:80</code></p>
+<ul>
+<li>协议: http</li>
+<li>端口: 80 (默认为80 如果没写 浏览器会帮我们做这些工作)</li>
+<li>域名 www.zuzuche.com</li>
+</ul>
+<p>如果协议， 端口， 域名一致，那么浏览器就会认定我们是在同个源下面。否则就会出现跨域问题。</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy" target="_blank" rel="external">具体文档等可见</a></p>
+<h3 id="简单请求与非简单请求"><a href="#简单请求与非简单请求" class="headerlink" title="简单请求与非简单请求"></a>简单请求与非简单请求</h3><p>简单请求指的是</p>
+<ul>
+<li>请求方法是以下方法之一<ul>
+<li>GET</li>
+<li>POST</li>
+<li>HEAD</li>
+</ul>
+</li>
+<li>不自定义某些头部字段<ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Content-Type （需要注意额外的限制）</li>
+<li>DPR</li>
+<li>Downlink</li>
+<li>Save-Data</li>
+<li>Viewport-Width</li>
+<li>Width</li>
+</ul>
+</li>
+<li>Content-Type 为以下值之一<ul>
+<li>application/x-www-form-urlencoded</li>
+<li>multipart/form-data</li>
+<li>text/plain</li>
+</ul>
+</li>
+</ul>
+<p>非简单请求(预检请求)指的是</p>
+<ul>
+<li>使用了下面任一HTTP方法：<ul>
+<li>PUT</li>
+<li>DELETE</li>
+<li>CONNECT</li>
+<li>OPTIONS</li>
+<li>TRACE</li>
+<li>PATCH</li>
+</ul>
+</li>
+<li>人为设置某些头部字段<ul>
+<li>Accept</li>
+<li>Accept-Language</li>
+<li>Content-Language</li>
+<li>Content-Type (but note the additional requirements below)</li>
+<li>DPR</li>
+<li>Downlink</li>
+<li>Save-Data</li>
+<li>Viewport-Width</li>
+<li>Width</li>
+</ul>
+</li>
+<li>Content-Type的值不属于下列之一<ul>
+<li>application/x-www-form-urlencoded</li>
+<li>multipart/form-data</li>
+<li>text/plain</li>
+</ul>
+</li>
+</ul>
+<h4 id="发起一个简单的请求"><a href="#发起一个简单的请求" class="headerlink" title="发起一个简单的请求"></a>发起一个简单的请求</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fetch(<span class="string">''</span>);</div></pre></td></tr></table></figure>
+<p>此时会发起一个简单请求，和我们平时写的<code>ajax</code>没多大区别</p>
+<h4 id="发起一个非简单请求"><a href="#发起一个非简单请求" class="headerlink" title="发起一个非简单请求"></a>发起一个非简单请求</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var invocation = new XMLHttpRequest();</div><div class="line">var url = &apos;http://bar.other/resources/post-here/&apos;;</div><div class="line">var body = &apos;&lt;?xml version=&quot;1.0&quot;?&gt;&lt;person&gt;&lt;name&gt;Arun&lt;/name&gt;&lt;/person&gt;&apos;;</div><div class="line">    </div><div class="line">function callOtherDomain()&#123;</div><div class="line">  if(invocation)</div><div class="line">    &#123;</div><div class="line">      invocation.open(&apos;POST&apos;, url, true);</div><div class="line">      invocation.setRequestHeader(&apos;X-PINGOTHER&apos;, &apos;pingpong&apos;);</div><div class="line">      invocation.setRequestHeader(&apos;Content-Type&apos;, &apos;application/xml&apos;);</div><div class="line">      invocation.onreadystatechange = function()&#123;&#125;;</div><div class="line">      invocation.send(body); </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">callOtherDomain();</div></pre></td></tr></table></figure>
+<p>此时发起的是一个非简单请求，所以浏览器会先发一个<code>options</code>请求服务器，以获知浏览器是否允许实际请求，如果允许再会发多一个真实请求。<br><img src="./options请求.png" alt="options"></p>
+<h4 id="cors"><a href="#cors" class="headerlink" title="cors"></a>cors</h4><p>我们要跨域获取资源，主要要后台人员配合。</p>
+<p>一般情况我们只需要把报错信息给后台人员看就知道怎么做了，比如我直接调用 报了一个跨域问题</p>
+<blockquote>
+<p>Fetch API cannot load <a href="https://www.baidu.com/" target="_blank" rel="external">https://www.baidu.com/</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘<a href="https://developer.mozilla.org" target="_blank" rel="external">https://developer.mozilla.org</a>‘ is therefore not allowed access. If an opaque response serves your needs, set the request’s mode to ‘no-cors’ to fetch the resource with CORS disabled.</p>
+</blockquote>
+<p>直接把错误丢给后台人员，他们就知道设置一个属性 <code>Access-Control-Allow-Origi</code> 一般设置为 <code>*</code> 谁都可以访问 也可以根据情景设定特定的域名。</p>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><blockquote>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS</a></p>
+</blockquote>
 
       
     </div>
@@ -434,9 +501,9 @@
           
             <a href="/tags/learn/" rel="tag"># learn</a>
           
-            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+            <a href="/tags/web/" rel="tag"># web</a>
           
-            <a href="/tags/github/" rel="tag"># github</a>
+            <a href="/tags/work/" rel="tag"># work</a>
           
         </div>
       
@@ -456,18 +523,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/imooc-React-Native-文字小游戏/" rel="next" title="imooc React-Native 文字小游戏">
-                <i class="fa fa-chevron-left"></i> imooc React-Native 文字小游戏
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/webstorm/" rel="prev" title="webstorm 快捷键整理">
-                webstorm 快捷键整理 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/获取滚动条宽度/" rel="prev" title="获取滚动条宽度">
+                获取滚动条宽度 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -611,7 +674,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setTimeout"><span class="nav-number">2.</span> <span class="nav-text">setTimeout</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#执行函数"><span class="nav-number">2.1.</span> <span class="nav-text">执行函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">2.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行环境"><span class="nav-number">2.3.</span> <span class="nav-text">运行环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#setInterval"><span class="nav-number">3.</span> <span class="nav-text">setInterval</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#setInterval-执行时间"><span class="nav-number">3.1.</span> <span class="nav-text">setInterval 执行时间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">4.</span> <span class="nav-text">后记</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#同源策略"><span class="nav-number">1.</span> <span class="nav-text">同源策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单请求与非简单请求"><span class="nav-number">2.</span> <span class="nav-text">简单请求与非简单请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#发起一个简单的请求"><span class="nav-number">2.1.</span> <span class="nav-text">发起一个简单的请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发起一个非简单请求"><span class="nav-number">2.2.</span> <span class="nav-text">发起一个非简单请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cors"><span class="nav-number">2.3.</span> <span class="nav-text">cors</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">2.4.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
             
 
           </div>
