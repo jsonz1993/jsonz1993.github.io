@@ -88,17 +88,17 @@
 
 
 
-<meta name="description" content="前端开发/Jsonz/张欣欣/潮汕汉纸">
+<meta name="description" content="概述对于单页应用，将所有代码打包成一个文件，可以减少网络请求，并且后面页面不需要再去加载js 可以减少白页时间。 但是对于首页需要快速加载的情况，我们可能需要重新考虑一下， 是否可以把一些不需要第一时间执行的代码异步加载进来。 Webpack有一个功能可以将您的代码库分解成按需加载的“块”，这个功能叫 代码分割。 Webpack的对于块的执行是， 异步创建&amp;lt;script&amp;gt;标签，把需要加">
 <meta name="keywords" content="github">
 <meta property="og:type" content="article">
 <meta property="og:title" content="webpack 代码分割(异步加载加快首屏速度)">
 <meta property="og:url" content="https://jsonz1993.github.io/2017/05/webpack-代码分割-异步加载加快首屏速度/index.html">
 <meta property="og:site_name" content="Jsonz">
-<meta property="og:description" content="前端开发/Jsonz/张欣欣/潮汕汉纸">
-<meta property="og:updated_time" content="2017-05-22T09:51:26.000Z">
+<meta property="og:description" content="概述对于单页应用，将所有代码打包成一个文件，可以减少网络请求，并且后面页面不需要再去加载js 可以减少白页时间。 但是对于首页需要快速加载的情况，我们可能需要重新考虑一下， 是否可以把一些不需要第一时间执行的代码异步加载进来。 Webpack有一个功能可以将您的代码库分解成按需加载的“块”，这个功能叫 代码分割。 Webpack的对于块的执行是， 异步创建&amp;lt;script&amp;gt;标签，把需要加">
+<meta property="og:updated_time" content="2017-05-23T04:00:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack 代码分割(异步加载加快首屏速度)">
-<meta name="twitter:description" content="前端开发/Jsonz/张欣欣/潮汕汉纸">
+<meta name="twitter:description" content="概述对于单页应用，将所有代码打包成一个文件，可以减少网络请求，并且后面页面不需要再去加载js 可以减少白页时间。 但是对于首页需要快速加载的情况，我们可能需要重新考虑一下， 是否可以把一些不需要第一时间执行的代码异步加载进来。 Webpack有一个功能可以将您的代码库分解成按需加载的“块”，这个功能叫 代码分割。 Webpack的对于块的执行是， 异步创建&amp;lt;script&amp;gt;标签，把需要加">
 
 
 
@@ -399,7 +399,29 @@
       
 
       
-        
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>对于单页应用，将所有代码打包成一个文件，可以减少网络请求，并且后面页面不需要再去加载js 可以减少白页时间。 但是对于首页需要快速加载的情况，我们可能需要重新考虑一下， 是否可以把一些不需要第一时间执行的代码异步加载进来。</p>
+<p>Webpack有一个功能可以将您的代码库分解成按需加载的“块”，这个功能叫 <code>代码分割</code>。</p>
+<p>Webpack的对于<code>块</code>的执行是， 异步创建<code>&lt;script&gt;</code>标签，把需要加载的脚本加载进来再执行。</p>
+<p>具体有两种使用方法:</p>
+<ul>
+<li><code>CommonJs: require.ensure</code></li>
+<li><code>AMD: require</code><br><code>ES6 Modules</code> 暂不支持</li>
+</ul>
+<h1 id="AMD-require"><a href="#AMD-require" class="headerlink" title="AMD: require"></a>AMD: require</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>(dependencies, callback)</div><div class="line"></div><div class="line"><span class="built_in">require</span>([<span class="string">"module-a"</span>, <span class="string">"module-b"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>dependencies: 模块依赖数组</li>
+<li>callback: 回调函数</li>
+</ul>
+<h1 id="CommonJs-require-ensure"><a href="#CommonJs-require-ensure" class="headerlink" title="CommonJs: require.ensure"></a>CommonJs: require.ensure</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>.ensure(dependencies, callback, chunkName);</div><div class="line"><span class="built_in">require</span>.ensure([<span class="string">"module-a"</span>, <span class="string">"module-b"</span>], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">"module-a"</span>);</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>dependencies: 依赖的模块数组</li>
+<li>callback: 回调函数，该函数调用时会传一个require参数</li>
+<li>chunkName: 模块名，用于构建时生成文件时命名使用</li>
+</ul>
+<p>对于 <code>CommonJs</code> 方法， 个人在项目中都是这么用的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>.ensure([],<span class="built_in">require</span>=&gt;&#123;</div><div class="line">	<span class="keyword">const</span> menuBar = <span class="built_in">require</span>(<span class="string">'./menuBar'</span>);</div><div class="line">	<span class="keyword">const</span> upcomingTrips = <span class="built_in">require</span>(<span class="string">'./upcomingTrips'</span>);</div><div class="line">	<span class="built_in">require</span>(<span class="string">'./c'</span>);</div><div class="line"></div><div class="line">	menuBar.init();</div><div class="line">	upcomingTrips.init();</div><div class="line">&#125;,<span class="string">'index_later'</span>);</div></pre></td></tr></table></figure>
+<p>依赖不写<code>dependencies</code> 而是直接写在 回调里面。 因为<code>webpack</code>会去递归拿依赖模块，所以就算我 <code>menuBar</code>里面依赖到其他模块，也会被下载下来 所以问题不大。 但是如果对于多模块互相依赖的情况，建议按照官方demo写法 防止重复嵌套打包。</p>
+
       
     </div>
 
@@ -487,8 +509,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.jpeg"
@@ -564,6 +595,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AMD-require"><span class="nav-number">2.</span> <span class="nav-text">AMD: require</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CommonJs-require-ensure"><span class="nav-number">3.</span> <span class="nav-text">CommonJs: require.ensure</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
