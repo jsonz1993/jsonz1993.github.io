@@ -3,6 +3,20 @@
   
     
     <entry>
+      <title><![CDATA[ios9 下 domArray forEach 报错]]></title>
+      <url>%2F2017%2F05%2Fios9-%E4%B8%8B-domArray-forEach-%E6%8A%A5%E9%94%99%2F</url>
+      <content type="text"><![CDATA[起因是这样的，产品需求需要输入框输入后，要根据内容高度自适应，最高不能超过3行， 于是写了一个小函数 123456789101112131415const textareaAutoHeight = (className, &#123;multiple=3&#125;=&#123;&#125;)=&gt;&#123; let domList = document.querySelectorAll(className); domList.forEach(item=&gt; &#123; let _height = item.offsetHeight; // item.offsetHeight 用zepto 的 height保险一点 item.addEventListener('keyup', (e)=&gt; updateHeight(e, _height*multiple)); &#125;); function updateHeight(e, _height) &#123; let o = e.target; o.style.height = '1px'; o.style.height = Math.min(o.scrollHeight, _height) + 'px'; &#125;&#125; 传入dom标识加上行数，用的很开心。没毛病 没问题。 项目上线后，发现说在某些机型下会报错，后面排查到是这个函数的错。原因是 ios9 一下。 domList 不是一个数组。 所以改动了一下 1234567891011121314151617const textareaAutoHeight = (className, &#123;multiple=3&#125;=&#123;&#125;)=&gt;&#123; try &#123; let domList = [...document.querySelectorAll(className)]; domList.forEach(item=&gt; &#123; let _height = item.offsetHeight; // item.offsetHeight 用zepto 的 height保险一点 item.addEventListener('keyup', (e)=&gt; updateHeight(e, _height*multiple)); &#125;); function updateHeight(e, _height) &#123; let o = e.target; o.style.height = '1px'; o.style.height = Math.min(o.scrollHeight, _height) + 'px'; &#125; &#125; catch(e) &#123; console.warn('JSONZ textareaAutoHeight', e)&#125;&#125; 加了一个 try...catch... 并且把 domList 用es6转为数组类型.]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Node.js入门(一) 概述]]></title>
+      <url>%2F2017%2F05%2FNode-js%E5%85%A5%E9%97%A8-%E4%B8%80%EF%BC%89-%E6%A6%82%E8%BF%B0%2F</url>
+      <content type="text"></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[webpack 代码分割(异步加载加快首屏速度)]]></title>
       <url>%2F2017%2F05%2Fwebpack-%E4%BB%A3%E7%A0%81%E5%88%86%E5%89%B2-%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%8A%A0%E5%BF%AB%E9%A6%96%E5%B1%8F%E9%80%9F%E5%BA%A6%2F</url>
       <content type="text"><![CDATA[概述对于单页应用，将所有代码打包成一个文件，可以减少网络请求，并且后面页面不需要再去加载js 可以减少白页时间。 但是对于首页需要快速加载的情况，我们可能需要重新考虑一下， 是否可以把一些不需要第一时间执行的代码异步加载进来。 Webpack有一个功能可以将您的代码库分解成按需加载的“块”，这个功能叫 代码分割。 Webpack的对于块的执行是， 异步创建&lt;script&gt;标签，把需要加载的脚本加载进来再执行。 具体有两种使用方法: CommonJs: require.ensure AMD: requireES6 Modules 暂不支持 AMD: require12345require(dependencies, callback)require(["module-a", "module-b"], function(a, b) &#123; // ...&#125;); dependencies: 模块依赖数组 callback: 回调函数 CommonJs: require.ensure12345require.ensure(dependencies, callback, chunkName);require.ensure(["module-a", "module-b"], function() &#123; var a = require("module-a"); // ...&#125;); dependencies: 依赖的模块数组 callback: 回调函数，该函数调用时会传一个require参数 chunkName: 模块名，用于构建时生成文件时命名使用 对于 CommonJs 方法， 个人在项目中都是这么用的 12345678require.ensure([],require=&gt;&#123; const menuBar = require('./menuBar'); const upcomingTrips = require('./upcomingTrips'); require('./c'); menuBar.init(); upcomingTrips.init();&#125;,'index_later'); 依赖不写dependencies 而是直接写在 回调里面。 因为webpack会去递归拿依赖模块，所以就算我 menuBar里面依赖到其他模块，也会被下载下来 所以问题不大。 但是如果对于多模块互相依赖的情况，建议按照官方demo写法 防止重复嵌套打包。]]></content>
