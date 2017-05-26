@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/05/ios9-%E4%B8%8B-domArray-forEach-%E6%8A%A5%E9%94%99/</loc>
-    <lastmod>2017-05-26T03:40:51.000Z</lastmod>
+    <lastmod>2017-05-26T03:41:51.000Z</lastmod>
     <data>
         <display>
         <title>ios9 下 domArray forEach 报错</title>
@@ -93,11 +93,11 @@
         <title>cookie.js 简单的cookie操作插件</title>
         <pubTime>2017-05-21T07:03:33.000Z</pubTime>
         
-        <tag>github</tag>
-         
         <tag>learn</tag>
          
         <tag>JavaScript</tag>
+         
+        <tag>github</tag>
          
          
            
@@ -187,9 +187,9 @@
         <title>复制黏贴板插件-CopyText</title>
         <pubTime>2017-04-16T14:52:52.000Z</pubTime>
         
-        <tag>github</tag>
-         
         <tag>JavaScript</tag>
+         
+        <tag>github</tag>
          
          
            
@@ -229,13 +229,13 @@
         <title>imooc React-Native 文字小游戏</title>
         <pubTime>2017-05-17T16:24:20.000Z</pubTime>
         
-        <tag>github</tag>
+        <tag>learn</tag>
          
         <tag>imooc</tag>
          
-        <tag>React-Native</tag>
+        <tag>github</tag>
          
-        <tag>learn</tag>
+        <tag>React-Native</tag>
          
          
            
@@ -255,11 +255,11 @@
         <title>setTimeout && setInterval 学习</title>
         <pubTime>2017-05-16T15:06:32.000Z</pubTime>
         
-        <tag>github</tag>
-         
         <tag>learn</tag>
          
         <tag>JavaScript</tag>
+         
+        <tag>github</tag>
          
          
            
@@ -279,13 +279,13 @@
         <title>简单的网页点击热力图</title>
         <pubTime>2017-05-12T08:09:25.000Z</pubTime>
         
-        <tag>github</tag>
-         
         <tag>learn</tag>
          
-        <tag>work</tag>
-         
         <tag>JavaScript</tag>
+         
+        <tag>github</tag>
+         
+        <tag>work</tag>
          
          
            
@@ -325,11 +325,11 @@
         <title>imooc-react-native实战 项目入门知识学习</title>
         <pubTime>2017-05-09T15:15:16.000Z</pubTime>
         
-        <tag>github</tag>
-         
         <tag>imooc</tag>
          
         <tag>JavaScript</tag>
+         
+        <tag>github</tag>
          
         <tag>react-native</tag>
          
@@ -351,13 +351,13 @@
         <title>iOS基础教程之界面初体验</title>
         <pubTime>2017-04-27T14:56:51.000Z</pubTime>
         
-        <tag>imooc</tag>
-         
         <tag>learn</tag>
          
         <tag>Objective-C</tag>
          
         <tag>ios</tag>
+         
+        <tag>imooc</tag>
          
          
            
@@ -377,13 +377,13 @@
         <title>Foundation 入门</title>
         <pubTime>2017-04-23T12:12:21.000Z</pubTime>
         
-        <tag>imooc</tag>
-         
         <tag>learn</tag>
          
         <tag>Objective-C</tag>
          
         <tag>ios</tag>
+         
+        <tag>imooc</tag>
          
          
            
@@ -403,13 +403,13 @@
         <title>征战Objective-C</title>
         <pubTime>2017-04-20T15:17:40.000Z</pubTime>
         
-        <tag>imooc</tag>
-         
         <tag>learn</tag>
          
         <tag>Objective-C</tag>
          
         <tag>ios</tag>
+         
+        <tag>imooc</tag>
          
          
            
@@ -429,11 +429,11 @@
         <title>animate-text</title>
         <pubTime>2017-04-07T05:57:25.000Z</pubTime>
         
-        <tag>github</tag>
-         
         <tag>learn</tag>
          
         <tag>JavaScript</tag>
+         
+        <tag>github</tag>
          
          
            
@@ -453,13 +453,13 @@
         <title>ios网络操作基础教程</title>
         <pubTime>2017-05-02T16:12:11.000Z</pubTime>
         
-        <tag>imooc</tag>
-         
         <tag>learn</tag>
          
         <tag>Objective-C</tag>
          
         <tag>ios</tag>
+         
+        <tag>imooc</tag>
          
          
            
@@ -479,9 +479,9 @@
         <title>Objective-C 面向对象初体验</title>
         <pubTime>2017-04-22T15:56:46.000Z</pubTime>
         
-        <tag>imooc</tag>
-         
         <tag>Objective-C</tag>
+         
+        <tag>imooc</tag>
          
         <tag>learn - ios</tag>
          
@@ -503,11 +503,11 @@
         <title>简单事件系统</title>
         <pubTime>2017-04-19T16:26:07.000Z</pubTime>
         
-        <tag>github</tag>
-         
         <tag>learn</tag>
          
         <tag>JavaScript</tag>
+         
+        <tag>github</tag>
          
          
            
@@ -565,126 +565,12 @@
 
     
   <url>
-    <loc>https://jsonz1993.github.io/2017/04/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/</loc>
-    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>Hexo-第三方服务集成</title>
-        <pubTime>2017-04-03T05:12:53.000Z</pubTime>
-        
-        <tag>hexo</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-             
-              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/04/sublime-text-3-%E9%85%8D%E7%BD%AE/</loc>
-    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>sublime text 3 配置</title>
-        <pubTime>2017-04-07T15:00:23.000Z</pubTime>
-        
-        <tag>github</tag>
-         
-        <tag>editor</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://jsonz1993.github.io/2017/04/hexo-%E5%8F%98%E9%87%8F/</loc>
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
     <data>
         <display>
         <title>hexo-变量</title>
         <pubTime>2017-04-02T12:15:11.000Z</pubTime>
-        
-        <tag>hexo</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-             
-              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/04/hexo-%E6%A8%A1%E6%9D%BF/</loc>
-    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>hexo-模板</title>
-        <pubTime>2017-04-02T10:39:38.000Z</pubTime>
-        
-        <tag>hexo</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-             
-              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/04/next-%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE/</loc>
-    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>next-主题设置</title>
-        <pubTime>2017-04-03T03:21:26.000Z</pubTime>
-        
-        <tag>hexo</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-             
-              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/04/hexo-%E4%B8%BB%E9%A2%98%E6%A6%82%E8%BF%B0/</loc>
-    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>hexo-主题概述</title>
-        <pubTime>2017-04-02T07:04:12.000Z</pubTime>
         
         <tag>hexo</tag>
          
@@ -748,6 +634,74 @@
 
     
   <url>
+    <loc>https://jsonz1993.github.io/2017/04/tag-plugins/</loc>
+    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>tag plugins</title>
+        <pubTime>2017-04-02T03:51:47.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+             
+              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/04/sublime-text-3-%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>sublime text 3 配置</title>
+        <pubTime>2017-04-07T15:00:23.000Z</pubTime>
+        
+        <tag>github</tag>
+         
+        <tag>editor</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/04/next-%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE/</loc>
+    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>next-主题设置</title>
+        <pubTime>2017-04-03T03:21:26.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+             
+              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://jsonz1993.github.io/2017/04/hexo-%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5/</loc>
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
     <data>
@@ -794,6 +748,75 @@
 
     
   <url>
+    <loc>https://jsonz1993.github.io/2017/04/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/</loc>
+    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>Hexo-第三方服务集成</title>
+        <pubTime>2017-04-03T05:12:53.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+             
+              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/04/hexo-%E4%B8%BB%E9%A2%98%E6%A6%82%E8%BF%B0/</loc>
+    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>hexo-主题概述</title>
+        <pubTime>2017-04-02T07:04:12.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+             
+              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/04/hexo-%E6%A8%A1%E6%9D%BF/</loc>
+    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>hexo-模板</title>
+        <pubTime>2017-04-02T10:39:38.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+             
+              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://jsonz1993.github.io/2017/04/hellp-next/</loc>
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
     <data>
@@ -823,29 +846,6 @@
         <display>
         <title>Hexo-资源文件夹与数据文件夹</title>
         <pubTime>2017-04-02T05:48:31.000Z</pubTime>
-        
-        <tag>hexo</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-             
-              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/04/tag-plugins/</loc>
-    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>tag plugins</title>
-        <pubTime>2017-04-02T03:51:47.000Z</pubTime>
         
         <tag>hexo</tag>
          
