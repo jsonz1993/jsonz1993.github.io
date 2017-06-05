@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://jsonz1993.github.io/2017/05/React-Native-%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2017-06-05T12:59:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>React-Native 错误总结</title>
+        <pubTime>2017-05-17T22:42:36.000Z</pubTime>
+        
+        <tag>github</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://jsonz1993.github.io/2017/05/%E6%94%B6%E8%97%8F%E5%A4%B9/</loc>
     <lastmod>2017-06-03T10:54:06.000Z</lastmod>
     <data>
@@ -86,26 +106,6 @@
         <tag>web</tag>
          
         <tag>work</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/05/React-Native-%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2017-05-29T15:37:30.000Z</lastmod>
-    <data>
-        <display>
-        <title>React-Native 错误总结</title>
-        <pubTime>2017-05-17T22:42:36.000Z</pubTime>
-        
-        <tag>github</tag>
          
          
            
@@ -801,29 +801,6 @@
 
     
   <url>
-    <loc>https://jsonz1993.github.io/2017/04/hellp-next/</loc>
-    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>hello next</title>
-        <pubTime>2017-04-02T14:23:05.000Z</pubTime>
-        
-        <tag>hexo</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-             
-              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://jsonz1993.github.io/2017/04/hexo-%E5%8F%98%E9%87%8F/</loc>
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
     <data>
@@ -853,6 +830,29 @@
         <display>
         <title>hexo-主题概述</title>
         <pubTime>2017-04-02T07:04:12.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+             
+              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/04/hellp-next/</loc>
+    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>hello next</title>
+        <pubTime>2017-04-02T14:23:05.000Z</pubTime>
         
         <tag>hexo</tag>
          
