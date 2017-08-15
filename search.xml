@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[浏览器css滚动回弹效果 overflow-scrolling]]></title>
+      <url>%2F2017%2F08%2F%E6%B5%8F%E8%A7%88%E5%99%A8css%E6%BB%9A%E5%8A%A8%E5%9B%9E%E5%BC%B9%E6%95%88%E6%9E%9C-overflow-scrolling%2F</url>
+      <content type="text"><![CDATA[前几天做全屏fixed布局弹窗的时候，去参考了一下淘宝的布局。 无意中发现里面用到一个没见过的css属性 -webkit-overflow-scrolling 该属性控制元素在移动设备上是否使用滚动回弹效果,会有种拟原生的效果 是属于Safari自己实现的css属性 兼容性支持 iOS 5.0 以上。 123-webkit-overflow-scrolling: touch; /* 当手指从触摸屏上移开，会保持一段时间的滚动 */-webkit-overflow-scrolling: auto; /* 当手指从触摸屏上移开，滚动会立即停止 */ 在线demo 示例demo 只在ios手机上有效 浏览器看不出效果12345678910111213141516171819202122232425262728293031323334353637383940&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt; &lt;meta charset="UTF-8"&gt; &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt; &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt; &lt;title&gt;Document&lt;/title&gt; &lt;style&gt; div &#123; height: 200px; overflow: auto; &#125; .scrolling1 &#123; background-color: red; -webkit-overflow-scrolling: auto; &#125; .scrolling2 &#123; background-color: yellow; -webkit-overflow-scrolling: touch; &#125; &lt;/style&gt;&lt;/head&gt;&lt;body&gt; &lt;h1&gt;-webkit-overflow-scrolling: auto;&lt;/h1&gt; &lt;div class="scrolling1"&gt;&lt;/div&gt; &lt;h1&gt;-webkit-overflow-scrolling: touch;&lt;/h1&gt; &lt;div class="scrolling2"&gt;&lt;/div&gt; &lt;script&gt; const divList = Array.from(document.querySelectorAll('div')) let str = '' for (let i= 0;i&lt; 100; i++) &#123; str += `&lt;p&gt;$&#123;i&#125;&lt;/p&gt;` &#125; divList.forEach(item=&gt; &#123; item.innerHTML = str &#125;) &lt;/script&gt;&lt;/body&gt;&lt;/html&gt; 参考资料 MDN Safari CSS]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[8月伊始牢骚]]></title>
       <url>%2F2017%2F08%2F8%E6%9C%88%E7%AC%AC%E4%B8%80%E5%91%A8%E7%9A%84%E7%89%A2%E9%AA%9A%2F</url>
       <content type="text"><![CDATA[看了一下 上一次 commit 的时间。jun 25, 2017从去兰卡威玩之前就开始没写博客了。回来之后又一直很懒散 加上工作实在饱和 差点丢了这个习惯 不好 不好 7月的加班时长，平均时长是 11.30 小时 排公司技术第五 七月尾八月初有个小机会 可以用上react全家桶做一个前端的后台管理系统 [前端性能检测后台 sp] 从只自己捣鼓过 react-native 的小菜鸟 一下子要上手全家桶 真的很蛋疼，好几天都在看 文档api demo 幸亏其毅大哥 此处应该有掌声 整天做我的小 Google GoGoGo react/redux/redux-sage/react-router/react-redux-router/antd/dva 期间做热力图的内嵌 第一次用了 postMessage。 然后意外发现 不知道是 redux-tool还是redux 用了 web-worker 来做计算线程。 跟发现新大陆一样 这周五排到我分享，打算把 postMessage 简单说一下，下次有机会的时候 说一下 sp后台和 dva的大概思路 8.26号第一次参加 FEDAY 挺开心的 可以去北京。 加油 Jsonz 加油P3]]></content>

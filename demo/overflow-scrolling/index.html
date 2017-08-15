@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div {
+            height: 200px;
+            overflow: auto;
+        }
+        .scrolling1 {
+            background-color: red;
+            -webkit-overflow-scrolling: auto;
+        }
+        .scrolling2 {
+            background-color: yellow;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
+</head>
+<body>
+    <h1>-webkit-overflow-scrolling: auto;</h1>
+    <div class="scrolling1"></div>
+    <h1>-webkit-overflow-scrolling: touch;</h1>
+    <div class="scrolling2"></div>
+    <script>
+        const divList = Array.from(document.querySelectorAll('div'))
+        let str = ''
+        for (let i= 0;i< 100; i++) {
+            str += `<p>${i}</p>`
+        }
+
+        divList.forEach(item=> {
+            item.innerHTML = str
+        })
+    </script>
+</body>
+</html>
