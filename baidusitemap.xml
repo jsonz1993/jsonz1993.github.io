@@ -4,6 +4,62 @@
 
     
   <url>
+    <loc>https://jsonz1993.github.io/2017/08/flex-1%E5%9C%A8iOS10-2%E5%AF%BC%E8%87%B4flex-wrap%E4%B8%8D%E8%B5%B7%E4%BD%9C%E7%94%A8bug/</loc>
+    <lastmod>2017-08-28T05:48:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>flex:1在iOS10.2导致flex-wrap 不起作用</title>
+        <pubTime>2017-08-28T04:01:43.000Z</pubTime>
+        
+        <tag>work</tag>
+         
+        <tag>CSS</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/06/%E6%8D%A3%E9%BC%93%E7%9B%AE%E5%BD%95/</loc>
+    <lastmod>2017-08-15T14:49:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>[置顶]捣鼓目录</title>
+        <pubTime>2017-06-06T12:44:48.000Z</pubTime>
+        
+        <tag>learn</tag>
+         
+        <tag>imooc</tag>
+         
+        <tag>JavaScript</tag>
+         
+        <tag>github</tag>
+         
+        <tag>web</tag>
+         
+        <tag>work</tag>
+         
+        <tag>React-Native</tag>
+         
+        <tag>CSS</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://jsonz1993.github.io/2017/08/%E6%B5%8F%E8%A7%88%E5%99%A8css%E6%BB%9A%E5%8A%A8%E5%9B%9E%E5%BC%B9%E6%95%88%E6%9E%9C-overflow-scrolling/</loc>
     <lastmod>2017-08-15T04:14:58.000Z</lastmod>
     <data>
@@ -39,40 +95,6 @@
            
              
               <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/blog/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/06/%E6%8D%A3%E9%BC%93%E7%9B%AE%E5%BD%95/</loc>
-    <lastmod>2017-08-10T14:29:49.000Z</lastmod>
-    <data>
-        <display>
-        <title>[置顶]捣鼓目录</title>
-        <pubTime>2017-06-06T12:44:48.000Z</pubTime>
-        
-        <tag>learn</tag>
-         
-        <tag>imooc</tag>
-         
-        <tag>JavaScript</tag>
-         
-        <tag>github</tag>
-         
-        <tag>web</tag>
-         
-        <tag>work</tag>
-         
-        <tag>React-Native</tag>
-         
-        <tag>CSS</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
           
         </display>
     </data>
@@ -970,12 +992,12 @@
 
     
   <url>
-    <loc>https://jsonz1993.github.io/2017/04/hellp-next/</loc>
+    <loc>https://jsonz1993.github.io/2017/04/hexo-%E4%B8%BB%E9%A2%98%E6%A6%82%E8%BF%B0/</loc>
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
     <data>
         <display>
-        <title>hello next</title>
-        <pubTime>2017-04-02T14:23:05.000Z</pubTime>
+        <title>hexo-主题概述</title>
+        <pubTime>2017-04-02T07:04:12.000Z</pubTime>
         
         <tag>hexo</tag>
          
@@ -993,12 +1015,12 @@
 
     
   <url>
-    <loc>https://jsonz1993.github.io/2017/04/hexo-%E4%B8%BB%E9%A2%98%E6%A6%82%E8%BF%B0/</loc>
+    <loc>https://jsonz1993.github.io/2017/04/hellp-next/</loc>
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
     <data>
         <display>
-        <title>hexo-主题概述</title>
-        <pubTime>2017-04-02T07:04:12.000Z</pubTime>
+        <title>hello next</title>
+        <pubTime>2017-04-02T14:23:05.000Z</pubTime>
         
         <tag>hexo</tag>
          
