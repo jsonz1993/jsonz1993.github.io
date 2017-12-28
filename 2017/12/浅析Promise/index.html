@@ -1,0 +1,1048 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Neucha:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="github," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="背景在ES6流行之前，我们处理异步的方法一般有 事件模式， 回调模式等。 事件模式用户点击按钮或按下键盘上的按钮会触发类似 onClick这样的事件，他会向任务队列添加一个新任务来响应用户的操作。直到事件触发时才执行事件处理程序，且正常执行时上下文与定义时相同JavaScript1234let btn = document.getElementById(&amp;apos;btn1&amp;apos;);btn.">
+<meta name="keywords" content="github">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅析Promise (一)">
+<meta property="og:url" content="https://jsonz1993.github.io/2017/12/浅析Promise/index.html">
+<meta property="og:site_name" content="Jsonz">
+<meta property="og:description" content="背景在ES6流行之前，我们处理异步的方法一般有 事件模式， 回调模式等。 事件模式用户点击按钮或按下键盘上的按钮会触发类似 onClick这样的事件，他会向任务队列添加一个新任务来响应用户的操作。直到事件触发时才执行事件处理程序，且正常执行时上下文与定义时相同JavaScript1234let btn = document.getElementById(&amp;apos;btn1&amp;apos;);btn.">
+<meta property="og:image" content="https://jsonz1993.github.io/2017/12/浅析Promise/promise1.png">
+<meta property="og:updated_time" content="2017-12-27T16:01:00.758Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅析Promise (一)">
+<meta name="twitter:description" content="背景在ES6流行之前，我们处理异步的方法一般有 事件模式， 回调模式等。 事件模式用户点击按钮或按下键盘上的按钮会触发类似 onClick这样的事件，他会向任务队列添加一个新任务来响应用户的操作。直到事件触发时才执行事件处理程序，且正常执行时上下文与定义时相同JavaScript1234let btn = document.getElementById(&amp;apos;btn1&amp;apos;);btn.">
+<meta name="twitter:image" content="https://jsonz1993.github.io/2017/12/浅析Promise/promise1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jsonz1993.github.io/2017/12/浅析Promise/"/>
+
+
+
+
+
+  <title> 浅析Promise (一) | Jsonz </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jsonz</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://jsonz1993.github.io/2017/12/浅析Promise/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jsonz">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jsonz">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jsonz" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                浅析Promise (一)
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-26T13:26:53+08:00">
+                2017-12-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/12/浅析Promise/" class="leancloud_visitors" data-flag-title="浅析Promise (一)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在ES6流行之前，我们处理异步的方法一般有 事件模式， 回调模式等。</p>
+<h4 id="事件模式"><a href="#事件模式" class="headerlink" title="事件模式"></a>事件模式</h4><p>用户点击按钮或按下键盘上的按钮会触发类似 onClick这样的事件，他会向任务队列添加一个新任务来响应用户的操作。<br>直到事件触发时才执行事件处理程序，且正常执行时上下文与定义时相同<br><figure class="highlight plain"><figcaption><span>JavaScript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">let btn = document.getElementById(&apos;btn1&apos;);</div><div class="line">btn.onclick = function(event) &#123;</div><div class="line">	console.log(event);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><figcaption><span>JavaScript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">import iEvent from &apos;event&apos;;</div><div class="line">iEvent.on(&apos;click&apos;, function() &#123;</div><div class="line">	console.log(1);</div><div class="line">&#125;)</div><div class="line">iEvent.emit(&apos;click&apos;);</div></pre></td></tr></table></figure>
+<p>事件模型适用于处理简单的交互，如果多个独立的异步调用连接在一起会使应用变得更加复杂。<br>而且要追踪每个事件的事件目标，比如 我先点击 btn1 再给 btn1绑定事件，或者先 emit 再 on 都会不起作用。</p>
+<h4 id="回调模式"><a href="#回调模式" class="headerlink" title="回调模式"></a>回调模式</h4><p>为Java打Call<br>为PHP打Call<br>为Go打Call<br>为JavaScript打CallBack…</p>
+<figure class="highlight plain"><figcaption><span>JavaScript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">method1(function(data) &#123;</div><div class="line">	method2(function(data) &#123;</div><div class="line">		method3(function(data)) &#123;</div><div class="line">			method4(function(data)) &#123;</div><div class="line">				console.log(&apos;金字塔&apos;);</div><div class="line">			&#125;	</div><div class="line">		&#125;</div><div class="line">	&#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>回调模式虽然是js的一大精髓，但是写着写着可能会因为嵌套太多的回调函数，陷入回调地狱 —— 超级金字塔</p>
+<p>而且如果要处理类似 两个操作都执行完通知你 或者有一个操作执行完就通知你 那么情况可能会变得比较麻烦</p>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><figure class="highlight plain"><figcaption><span>JavaScript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">const promise = new Promise((res, rej)=&gt; &#123;</div><div class="line">	setTimeout(function() &#123;</div><div class="line">		const random = Math.random()</div><div class="line">		if ( random&gt; .5) res(random)</div><div class="line">		else rej(random)</div><div class="line">	&#125;, 1000)</div><div class="line">&#125;)</div><div class="line"></div><div class="line">promise.then(val=&gt; (console.log(val), ++val))</div><div class="line">	.then(val=&gt; console.log(val))</div><div class="line">	.catch(error=&gt; console.warn(error))</div><div class="line"></div><div class="line">// 输出 random &amp;&amp; random+1 or warn(random)</div></pre></td></tr></table></figure>
+<p><code>Promise</code> 规范</p>
+<p>Promise 规范有很多，如 Promise/A，Promise/B，和Promise/A升级版 =&gt; <a href="http://www.ituring.com.cn/article/66566" target="_blank" rel="external">Promise/A+</a><br>在这里统一一下 以下所有 <code>resolved</code> 都指fulfilled。</p>
+<ol>
+<li>Promise 本质是一个状态机。每个 promise 只能是 3 种状态中的一种：pending、resolved 或 rejected。状态转变只能是 pending -&gt; resolved 或者 pending -&gt; rejected。状态转变不可逆。</li>
+<li>then 方法可以被同一个 promise 调用多次。</li>
+<li>then 方法必须返回一个 新 promise。</li>
+</ol>
+<h3 id="三个状态，状态是不可逆的"><a href="#三个状态，状态是不可逆的" class="headerlink" title="三个状态，状态是不可逆的"></a>三个状态，状态是不可逆的</h3><p>可以在 <code>chrome</code> 控制台看到内部属性 [[PromiseStatus]] 状态值</p>
+<ul>
+<li>pending： Promise的初始状态，也就是未被fulfilled或者rejected的状态。</li>
+<li>resolved： 意味着promise代指的操作已经成功完成。</li>
+<li>rejected：意味着promise代指的操作由于某些原因失败。<br><img src="./promise1.png" alt="promise1"></li>
+</ul>
+<h3 id="then"><a href="#then" class="headerlink" title="then"></a>then</h3><p>所有的 Promise 都有 then(onResolve, onReject) 方法，接受两个参数，<br>第一个是当Promise 状态变为 resolved 时调用的函数，与异步操作相关的值会传递给该函数<br>第二个是当Promise 状态变为 rejected 时调用的函数，与失败状态相关（报错）会传递给该函数</p>
+<p>then方法可以被同个promise调用多次<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> Promose(<span class="function"><span class="params">res</span>=&gt;</span> res(<span class="number">1</span>))</div><div class="line">promise.then(<span class="function"><span class="params">val</span>=&gt;</span> <span class="built_in">console</span>.log(++val))</div><div class="line">promise.then(<span class="function"><span class="params">val</span>=&gt;</span> <span class="built_in">console</span>.log(++val))</div><div class="line">promise.then(<span class="function"><span class="params">val</span>=&gt;</span> <span class="built_in">console</span>.log(++val))</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><figcaption><span>JavaScript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">const promise = new Promise(res=&gt; res(1))</div><div class="line">const promiseA = promise.then(val=&gt; ++val)</div><div class="line">const promiseB = promiseA.then(val=&gt; ++val)</div><div class="line">const promiseC = promise.then(val=&gt; ++val)</div><div class="line">console.log( promiseA == promiseB, promiseC == promiseA, promiseB == promiseC);</div></pre></td></tr></table></figure>
+<p>因为promise每次都会返回一个新的promise 所以支持链式写法，上一个 then 的返回值会当成 下一个then的参数<br><figure class="highlight plain"><figcaption><span>JavaScript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">new Promose(res=&gt; res(1)).then(val=&gt; ++val).then(val=&gt; ++val).then(val=&gt; ++val)</div></pre></td></tr></table></figure></p>
+<h3 id="错误情况"><a href="#错误情况" class="headerlink" title="错误情况"></a>错误情况</h3><ol>
+<li>在 <code>Promise(fn)</code> fn执行错误</li>
+</ol>
+<p>每个执行器内部都隐含一个 <code>try...catch...</code>块<br><figure class="highlight plain"><figcaption><span>JavaScript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">const promise = new Promise(function(res, rej) &#123;</div><div class="line">	throw new Error(&apos;喵喵喵&apos;);</div><div class="line">&#125;)</div><div class="line">promise.catch(err=&gt; console.warn)</div></pre></td></tr></table></figure></p>
+<p>以上代码等同于<br><figure class="highlight plain"><figcaption><span>JavaScript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">const promise = new Promise(function(res, rej) &#123;</div><div class="line">	try &#123;</div><div class="line">		throw new Error(&apos;喵喵喵&apos;)</div><div class="line">	&#125; catch(ex) &#123;</div><div class="line">		rej(ex)</div><div class="line">	&#125;</div><div class="line">&#125;)</div><div class="line">promise.then(null, err=&gt; console.warn(err))</div></pre></td></tr></table></figure></p>
+<p>此处可以看出 <strong>promise.catch</strong> 其实是 <strong>promise.then(null, catchFn)</strong> 的一个语法糖</p>
+<ol>
+<li>then 函数内部错误 </li>
+</ol>
+<figure class="highlight plain"><figcaption><span>JavaScript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">const promise = new Promise(res=&gt; res(1))</div><div class="line">promise.then(val=&gt; val+val1)</div><div class="line">	.catch(err=&gt; console.warn(err))</div></pre></td></tr></table></figure>
+<p>这里可以简单的理解为 then 内部会生成一个 Promise 示例，把函数体丢到Promise 里去执行，执行完结果当成 <code>res</code> 方法的参数，出错则调用 <code>rej</code></p>
+<figure class="highlight plain"><figcaption><span>JavaScript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">const promise = new Promise(res=&gt; res(1))</div><div class="line">promise.then(val=&gt; new Promise((res, rej)=&gt; &#123;</div><div class="line">		try &#123;</div><div class="line">			res(val + val1)</div><div class="line">		&#125; catch(e) &#123;</div><div class="line">			rej(e);</div><div class="line">		&#125;</div><div class="line">	&#125;)</div><div class="line">)</div><div class="line">.catch(err=&gt; console.warn(err))</div></pre></td></tr></table></figure>
+<p>.catch &amp;&amp; then(null, catchFn) 不能对后续的报错进行捕获</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">res</span>=&gt;</span> res(<span class="number">1</span>))</div><div class="line">promise.then(<span class="function"><span class="params">val</span> =&gt;</span> ++val)</div><div class="line">.catch(<span class="function"><span class="params">e</span>=&gt;</span> <span class="built_in">console</span>.warn(e))</div><div class="line">.then(<span class="function"><span class="params">val</span>=&gt;</span> <span class="built_in">console</span>.log(val+val1))</div><div class="line"></div><div class="line"><span class="comment">// 此处会抛错，所以一般会在 Promise 的最末端添加一个 catch 对前面可能出现的问题进行处理</span></div></pre></td></tr></table></figure>
+<h3 id="thenable"><a href="#thenable" class="headerlink" title="thenable"></a>thenable</h3><p>上面说了那么多关于 <code>then</code> 的使用，其实只要实现了上述 <code>then</code> 功能的对象都可以叫 <code>thenable</code>。<br>所有的 Promise 都是 thenable 但是不一定所有有then 方法的对象都叫 thenable。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var thenable = &#123;</div><div class="line">  then: function(res, rej) &#123;</div><div class="line">    res(1)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>至于 thenable 有什么用 请往下看</p>
+<h3 id="resolve"><a href="#resolve" class="headerlink" title="resolve"></a>resolve</h3><p>上述说到的 Promise 用法，都是 创建一个未完成状态，执行一些操作之后才从 pending 转变为 resolved 或 rejected<br>那么可以直接创建一个完成状态的 Promise 吗？  这里就要用到 静态方法上面的 <code>resolve</code>。</p>
+<ul>
+<li>Promise.resolve(promise);</li>
+<li>Promise.resolve(thenable);</li>
+<li>Promise.resolve(object);</li>
+</ul>
+<h5 id="参数为-promise-时，返回的也是该promise"><a href="#参数为-promise-时，返回的也是该promise" class="headerlink" title="参数为 promise 时，返回的也是该promise"></a>参数为 promise 时，返回的也是该promise</h5><figure class="highlight plain"><figcaption><span>JavaScript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">const promise = new Promise(()=&gt; &#123;&#125;)</div><div class="line">const promiseA = Promise.resolve(promise)</div><div class="line">promise === promiseA</div></pre></td></tr></table></figure>
+<h5 id="参数为thenable-时，返回标准的promise对象，这个对象有then方法"><a href="#参数为thenable-时，返回标准的promise对象，这个对象有then方法" class="headerlink" title="参数为thenable 时，返回标准的promise对象，这个对象有then方法"></a>参数为thenable 时，返回标准的promise对象，这个对象有then方法</h5><p>这里是 resolve 方法用的最多的地方了<br>平时工作用到最多的 thenable 恐怕就是 jQ 或 zepto 的 ajax<br>那么我们如果要把他转为标准的 promise 怎么办呢？ 比如 zepto 的 ajax 返回的就没有 .catche 方法，而是 .fail</p>
+<p>这里如果有必要 我们可以做一层封装，把他转变为标准的格式 拥抱未来！！！<br><figure class="highlight plain"><figcaption><span>JavaScript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">const ajax = $.ajax(&#123; url, data &#125;)</div><div class="line">Promise.resolve(ajax)</div><div class="line">	.then(response=&gt; &#123;&#125;)</div><div class="line">	.catch(err=&gt; console.warn(err))</div></pre></td></tr></table></figure></p>
+<h5 id="参数是其他值的情况，会返回一个状态为-resolved-的-promise。终值为传入的值"><a href="#参数是其他值的情况，会返回一个状态为-resolved-的-promise。终值为传入的值" class="headerlink" title="参数是其他值的情况，会返回一个状态为 resolved 的 promise。终值为传入的值"></a>参数是其他值的情况，会返回一个状态为 resolved 的 promise。终值为传入的值</h5><figure class="highlight plain"><figcaption><span>JavaScript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Promise.resolve(&#123;name: &quot;Jsonz&quot;&#125;)</div><div class="line">	.then(val=&gt; console.log(&quot;帅哥是 &quot; + val))</div></pre></td></tr></table></figure>
+<h3 id="reject"><a href="#reject" class="headerlink" title="reject"></a>reject</h3><p>Promise.reject 用法与 Promise.resolve 类似 这里不再赘述</p>
+<h3 id="多个情况处理"><a href="#多个情况处理" class="headerlink" title="多个情况处理"></a>多个情况处理</h3><p>开头的时候说了，如果要处理两个及以上的异步操作：</p>
+<ol>
+<li>多个都完成时通知你</li>
+<li>有一个完成时通知你<br>那么回调就显得很尴尬，这里 Promise 提供了两个方法来满足你这种小需求</li>
+</ol>
+<h4 id="all"><a href="#all" class="headerlink" title="all"></a>all</h4><p>业务上经常会有情况是 要等a接口与b接口的数据一起回来才做操作 那么可以用到静态方法 <code>Promise.all</code></p>
+<p>Promise.all 会接受一个 Array 类似的参数，里面是Promise 类型， 返回一个新的Promise 这里取名 <code>PromiseAll</code><br>当所有的Promise 都变成 resolved 时，会将 PromiseAll 的状态改为 resolved 参数为每个 promise 的终值<br>如果有一个Promise 为 rejected， 那么 PromiseAll 会直接变为 rejected 状态 参数为 首个变为 rejected 状态的错误信息</p>
+<figure class="highlight plain"><figcaption><span>JavaScript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">const p1 = new Promise(res=&gt; res(1))</div><div class="line">const p2 = new Promise(res=&gt; res(2))</div><div class="line">const p3 = new Promise((res, rej)=&gt; rej(2))</div><div class="line"></div><div class="line">const p4 = Promise.all([p1, p2]);</div><div class="line">p4.then(val=&gt; &#123;</div><div class="line">	console.log(Array.isArray(val))</div><div class="line">	val.forEach(item=&gt; console.log(item))</div><div class="line">&#125;)</div><div class="line"></div><div class="line">const p5 = Promise.all([p1, p3])</div><div class="line">p5.then(v=&gt; console.log(v), err=&gt; console.log(err))</div></pre></td></tr></table></figure>
+<h4 id="race"><a href="#race" class="headerlink" title="race"></a>race</h4><p>Promise.race 对应的是 <em>有一个完成时通知你</em> 这种状态，用法与参数与 all 类似<br>但是 <code>PromiseRace</code> 的参数为第一个转为 resolved 状态的终值</p>
+<h3 id="继承Promise改造"><a href="#继承Promise改造" class="headerlink" title="继承Promise改造"></a>继承Promise改造</h3><p>如果我们要对原生的 Promise 进行改造，比如添加 success() 或 failure() 方法，那么我们可以直接继承他创建一个新的 JsonzPromise<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class JsonzPromise extends Promise &#123;</div><div class="line">	success(resolve, reject) &#123;</div><div class="line">		return this.then(resolve, reject)</div><div class="line">	&#125;</div><div class="line">	failure(reject) &#123;</div><div class="line">		return this.catch(reject)</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">new JsonzPromise((res, rej)=&gt; res(1))</div><div class="line">	.success(val=&gt; console.log(val));</div></pre></td></tr></table></figure></p>
+<h3 id="全局的拒绝处理"><a href="#全局的拒绝处理" class="headerlink" title="全局的拒绝处理"></a>全局的拒绝处理</h3><p>window.onunhandledrejection = function(e) {<br>    console.log(e)<br>}<br>window.onrejectionhandled = function(e) {<br>    console.log(e)<br>}<br><code>node</code> 则是在 <code>process</code> 绑定监听<br>氮素！！！！ 不知道为何还没跑过成功的demo….</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>emmmmmm 贴出一些比较好的教程吧</p>
+<ul>
+<li><a href="https://www.amazon.cn/dp/B071GW3JDP/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1514389776&amp;sr=1-1&amp;keywords=%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3es6" target="_blank" rel="external">深入理解ES6 - Promise 篇章</a></li>
+<li><a href="http://liubin.org/promises-book/#Promise.resolve" target="_blank" rel="external">JavaScript Promise 迷你书</a></li>
+<li><a href="http://www.ituring.com.cn/article/66566" target="_blank" rel="external">Promise/A+ 规范中文</a></li>
+<li>第二期实现自己的 Promise <a href="https://zhuanlan.zhihu.com/p/25178630" target="_blank" rel="external">参考1</a> <a href="https://github.com/Jocs/jocs.github.io/issues/7" target="_blank" rel="external">参考2</a> <a href="http://coderlt.coding.me/2016/12/03/promise-in-depth-an-introduction-1/" target="_blank" rel="external">参考3</a> <a href="https://github.com/calvinmetcalf/lie" target="_blank" rel="external">参考4</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/github/" rel="tag"># github</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+         
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/http与https杂谈/" rel="prev" title="http与https杂谈">
+                http与https杂谈 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <!-- TODO <div class="post-spread">
+      
+    </div> -->
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpeg"
+               alt="Jsonz" />
+          <p class="site-author-name" itemprop="name">Jsonz</p>
+          <p class="site-description motion-element" itemprop="description">前端开发/Jsonz/张欣欣/潮汕汉纸</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jsonz1993" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1638841204" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事件模式"><span class="nav-number">1.0.1.</span> <span class="nav-text">事件模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回调模式"><span class="nav-number">1.0.2.</span> <span class="nav-text">回调模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识"><span class="nav-number">2.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单使用"><span class="nav-number">2.1.</span> <span class="nav-text">简单使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三个状态，状态是不可逆的"><span class="nav-number">2.2.</span> <span class="nav-text">三个状态，状态是不可逆的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#then"><span class="nav-number">2.3.</span> <span class="nav-text">then</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误情况"><span class="nav-number">2.4.</span> <span class="nav-text">错误情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thenable"><span class="nav-number">2.5.</span> <span class="nav-text">thenable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#resolve"><span class="nav-number">2.6.</span> <span class="nav-text">resolve</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#参数为-promise-时，返回的也是该promise"><span class="nav-number">2.6.0.1.</span> <span class="nav-text">参数为 promise 时，返回的也是该promise</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参数为thenable-时，返回标准的promise对象，这个对象有then方法"><span class="nav-number">2.6.0.2.</span> <span class="nav-text">参数为thenable 时，返回标准的promise对象，这个对象有then方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参数是其他值的情况，会返回一个状态为-resolved-的-promise。终值为传入的值"><span class="nav-number">2.6.0.3.</span> <span class="nav-text">参数是其他值的情况，会返回一个状态为 resolved 的 promise。终值为传入的值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reject"><span class="nav-number">2.7.</span> <span class="nav-text">reject</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个情况处理"><span class="nav-number">2.8.</span> <span class="nav-text">多个情况处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#all"><span class="nav-number">2.8.1.</span> <span class="nav-text">all</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#race"><span class="nav-number">2.8.2.</span> <span class="nav-text">race</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承Promise改造"><span class="nav-number">2.9.</span> <span class="nav-text">继承Promise改造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局的拒绝处理"><span class="nav-number">2.10.</span> <span class="nav-text">全局的拒绝处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">3.</span> <span class="nav-text">后记</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("RAbLFHzWBvLUKbFdTC89bMkN-gzGzoHsz", "3Ahh3qzrwB9FavCLmXSneqVk");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jsonz1993.github.io/2017/12/%E6%B5%85%E6%9E%90Promise/</loc>
+    
+    <lastmod>2017-12-27T16:01:00.758Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jsonz1993.github.io/2017/12/http%E4%B8%8Ehttps%E6%9D%82%E8%B0%88/</loc>
+    
+    <lastmod>2017-12-25T10:29:14.992Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jsonz1993.github.io/2017/08/flex-1%E5%9C%A8iOS10-2%E5%AF%BC%E8%87%B4flex-wrap%E4%B8%8D%E8%B5%B7%E4%BD%9C%E7%94%A8bug/</loc>
     
     <lastmod>2017-08-28T05:51:39.000Z</lastmod>
@@ -247,7 +261,7 @@
   </url>
   
   <url>
-    <loc>https://jsonz1993.github.io/2017/04/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/</loc>
+    <loc>https://jsonz1993.github.io/2017/04/hexo-%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5/</loc>
     
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
     
@@ -282,7 +296,7 @@
   </url>
   
   <url>
-    <loc>https://jsonz1993.github.io/demo/animate-text/dist/animate-text.min.js</loc>
+    <loc>https://jsonz1993.github.io/2017/04/hexo-%E6%A8%A1%E6%9D%BF/</loc>
     
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
     
@@ -296,7 +310,7 @@
   </url>
   
   <url>
-    <loc>https://jsonz1993.github.io/2017/04/hexo-%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5/</loc>
+    <loc>https://jsonz1993.github.io/2017/04/sublime-text-3-%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
     
@@ -331,7 +345,7 @@
   </url>
   
   <url>
-    <loc>https://jsonz1993.github.io/2017/04/sublime-text-3-%E9%85%8D%E7%BD%AE/</loc>
+    <loc>https://jsonz1993.github.io/2017/04/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/</loc>
     
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
     
@@ -359,7 +373,7 @@
   </url>
   
   <url>
-    <loc>https://jsonz1993.github.io/2017/04/hexo-%E6%A8%A1%E6%9D%BF/</loc>
+    <loc>https://jsonz1993.github.io/demo/animate-text/dist/animate-text.min.js</loc>
     
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
     
