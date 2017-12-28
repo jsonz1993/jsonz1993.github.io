@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/12/%E6%B5%85%E6%9E%90Promise/</loc>
-    <lastmod>2017-12-28T02:12:43.335Z</lastmod>
+    <lastmod>2017-12-28T14:14:32.117Z</lastmod>
     <data>
         <display>
         <title>浅析Promise (一)</title>
@@ -870,28 +870,6 @@
     </url>
 
     
-  <url>
-    <loc>https://jsonz1993.github.io/2017/04/%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>Hexo-本地服务器</title>
-        <pubTime>2017-04-02T06:24:23.000Z</pubTime>
-        
-        <tag>hexo</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-             
-              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/tag-plugins/</loc>
@@ -1099,7 +1077,6 @@
     </url>
 
     
-    
   <url>
     <loc>https://jsonz1993.github.io/2017/04/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/</loc>
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
@@ -1130,6 +1107,29 @@
         <display>
         <title>Hexo-生成文件与部署</title>
         <pubTime>2017-04-02T06:33:09.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+             
+              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/04/%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>Hexo-本地服务器</title>
+        <pubTime>2017-04-02T06:24:23.000Z</pubTime>
         
         <tag>hexo</tag>
          
