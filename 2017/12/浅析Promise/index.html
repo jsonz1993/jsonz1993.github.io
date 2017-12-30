@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="JavaScript,github," />
+  <meta name="keywords" content="github,JavaScript," />
 
 
 
@@ -88,19 +88,19 @@
 
 
 
-<meta name="description" content="背景在ES6流行之前，我们处理异步的方法一般有 事件模式， 回调模式等。 事件模式用户点击按钮或按下键盘上的按钮会触发类似 onClick这样的事件，他会向任务队列添加一个新任务来响应用户的操作。直到事件触发时才执行事件处理程序，且正常执行时上下文与定义时相同demo11234let btn = document.getElementById(&apos;btn1&apos;);btn.onclick = funct">
-<meta name="keywords" content="JavaScript,github">
+<meta name="description" content="ppt在此源码 参照 lie背景在ES6流行之前，我们处理异步的方法一般有 事件模式， 回调模式等。 事件模式用户点击按钮或按下键盘上的按钮会触发类似 onClick这样的事件，他会向任务队列添加一个新任务来响应用户的操作。直到事件触发时才执行事件处理程序，且正常执行时上下文与定义时相同demo11234let btn = document.getElementById(&apos;btn1&apos;);btn.o">
+<meta name="keywords" content="github,JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅析Promise (一)">
 <meta property="og:url" content="https://jsonz1993.github.io/2017/12/浅析Promise/index.html">
 <meta property="og:site_name" content="Jsonz">
-<meta property="og:description" content="背景在ES6流行之前，我们处理异步的方法一般有 事件模式， 回调模式等。 事件模式用户点击按钮或按下键盘上的按钮会触发类似 onClick这样的事件，他会向任务队列添加一个新任务来响应用户的操作。直到事件触发时才执行事件处理程序，且正常执行时上下文与定义时相同demo11234let btn = document.getElementById(&apos;btn1&apos;);btn.onclick = funct">
+<meta property="og:description" content="ppt在此源码 参照 lie背景在ES6流行之前，我们处理异步的方法一般有 事件模式， 回调模式等。 事件模式用户点击按钮或按下键盘上的按钮会触发类似 onClick这样的事件，他会向任务队列添加一个新任务来响应用户的操作。直到事件触发时才执行事件处理程序，且正常执行时上下文与定义时相同demo11234let btn = document.getElementById(&apos;btn1&apos;);btn.o">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/12/浅析Promise/promise1.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/12/浅析Promise/promise2.png">
-<meta property="og:updated_time" content="2017-12-28T15:27:08.827Z">
+<meta property="og:updated_time" content="2017-12-30T09:04:16.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅析Promise (一)">
-<meta name="twitter:description" content="背景在ES6流行之前，我们处理异步的方法一般有 事件模式， 回调模式等。 事件模式用户点击按钮或按下键盘上的按钮会触发类似 onClick这样的事件，他会向任务队列添加一个新任务来响应用户的操作。直到事件触发时才执行事件处理程序，且正常执行时上下文与定义时相同demo11234let btn = document.getElementById(&apos;btn1&apos;);btn.onclick = funct">
+<meta name="twitter:description" content="ppt在此源码 参照 lie背景在ES6流行之前，我们处理异步的方法一般有 事件模式， 回调模式等。 事件模式用户点击按钮或按下键盘上的按钮会触发类似 onClick这样的事件，他会向任务队列添加一个新任务来响应用户的操作。直到事件触发时才执行事件处理程序，且正常执行时上下文与定义时相同demo11234let btn = document.getElementById(&apos;btn1&apos;);btn.o">
 <meta name="twitter:image" content="https://jsonz1993.github.io/2017/12/浅析Promise/promise1.png">
 
 
@@ -402,7 +402,7 @@
       
 
       
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在ES6流行之前，我们处理异步的方法一般有 事件模式， 回调模式等。</p>
+        <h4 id="ppt在此"><a href="#ppt在此" class="headerlink" title="ppt在此"></a><a href="https://ppt.baomitu.com/d/5624aeb7" target="_blank" rel="external">ppt在此</a></h4><h4 id="源码-参照-lie"><a href="#源码-参照-lie" class="headerlink" title="源码 参照 lie"></a><a href="https://github.com/jsonz1993/wheel/blob/master/Promise/app.js" target="_blank" rel="external">源码</a> 参照 lie</h4><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在ES6流行之前，我们处理异步的方法一般有 事件模式， 回调模式等。</p>
 <h3 id="事件模式"><a href="#事件模式" class="headerlink" title="事件模式"></a>事件模式</h3><p>用户点击按钮或按下键盘上的按钮会触发类似 onClick这样的事件，他会向任务队列添加一个新任务来响应用户的操作。<br>直到事件触发时才执行事件处理程序，且正常执行时上下文与定义时相同<br><figure class="highlight javascript"><figcaption><span>demo1</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">'btn1'</span>);</div><div class="line">btn.onclick = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(event);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <figure class="highlight javascript"><figcaption><span>demo2</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> iEvent <span class="keyword">from</span> <span class="string">'event'</span>;</div><div class="line">iEvent.on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>);</div><div class="line">&#125;)</div><div class="line">iEvent.emit(<span class="string">'click'</span>);</div></pre></td></tr></table></figure>
 <p>事件模型适用于处理简单的交互，如果多个独立的异步调用连接在一起会使应用变得更加复杂。<br>而且要追踪每个事件的事件目标，比如 我先点击 btn1 再给 btn1绑定事件，或者先 emit 再 on 都会不起作用。</p>
@@ -487,9 +487,9 @@
   
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
-          
             <a href="/tags/github/" rel="tag"># github</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
           
         </div>
       
@@ -660,7 +660,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件模式"><span class="nav-number">1.1.</span> <span class="nav-text">事件模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回调模式"><span class="nav-number">1.2.</span> <span class="nav-text">回调模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识"><span class="nav-number">2.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单使用"><span class="nav-number">2.1.</span> <span class="nav-text">简单使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三个状态，状态是不可逆的"><span class="nav-number">2.2.</span> <span class="nav-text">三个状态，状态是不可逆的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#then"><span class="nav-number">2.3.</span> <span class="nav-text">then</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误情况"><span class="nav-number">2.4.</span> <span class="nav-text">错误情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thenable"><span class="nav-number">2.5.</span> <span class="nav-text">thenable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#resolve"><span class="nav-number">2.6.</span> <span class="nav-text">resolve</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参数为-promise-时，返回的也是该promise"><span class="nav-number">2.6.1.</span> <span class="nav-text">参数为 promise 时，返回的也是该promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数为thenable-时，返回标准的promise对象，这个对象有then方法"><span class="nav-number">2.6.2.</span> <span class="nav-text">参数为thenable 时，返回标准的promise对象，这个对象有then方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数是其他值的情况，会返回一个状态为-resolved-的-promise。终值为传入的值"><span class="nav-number">2.6.3.</span> <span class="nav-text">参数是其他值的情况，会返回一个状态为 resolved 的 promise。终值为传入的值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reject"><span class="nav-number">2.7.</span> <span class="nav-text">reject</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个情况处理"><span class="nav-number">2.8.</span> <span class="nav-text">多个情况处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#all"><span class="nav-number">2.9.</span> <span class="nav-text">all</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#race"><span class="nav-number">2.10.</span> <span class="nav-text">race</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承Promise改造"><span class="nav-number">2.11.</span> <span class="nav-text">继承Promise改造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局的rejected状态处理"><span class="nav-number">2.12.</span> <span class="nav-text">全局的rejected状态处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number">3.</span> <span class="nav-text">后记</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#ppt在此"><span class="nav-number">1.</span> <span class="nav-text">ppt在此</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源码-参照-lie"><span class="nav-number">2.</span> <span class="nav-text">源码 参照 lie</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number"></span> <span class="nav-text">背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件模式"><span class="nav-number"></span> <span class="nav-text">事件模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回调模式"><span class="nav-number"></span> <span class="nav-text">回调模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识"><span class="nav-number"></span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单使用"><span class="nav-number"></span> <span class="nav-text">简单使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三个状态，状态是不可逆的"><span class="nav-number"></span> <span class="nav-text">三个状态，状态是不可逆的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#then"><span class="nav-number"></span> <span class="nav-text">then</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误情况"><span class="nav-number"></span> <span class="nav-text">错误情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thenable"><span class="nav-number"></span> <span class="nav-text">thenable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#resolve"><span class="nav-number"></span> <span class="nav-text">resolve</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参数为-promise-时，返回的也是该promise"><span class="nav-number">1.</span> <span class="nav-text">参数为 promise 时，返回的也是该promise</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数为thenable-时，返回标准的promise对象，这个对象有then方法"><span class="nav-number">2.</span> <span class="nav-text">参数为thenable 时，返回标准的promise对象，这个对象有then方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数是其他值的情况，会返回一个状态为-resolved-的-promise。终值为传入的值"><span class="nav-number">3.</span> <span class="nav-text">参数是其他值的情况，会返回一个状态为 resolved 的 promise。终值为传入的值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reject"><span class="nav-number"></span> <span class="nav-text">reject</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个情况处理"><span class="nav-number"></span> <span class="nav-text">多个情况处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#all"><span class="nav-number"></span> <span class="nav-text">all</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#race"><span class="nav-number"></span> <span class="nav-text">race</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承Promise改造"><span class="nav-number"></span> <span class="nav-text">继承Promise改造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局的rejected状态处理"><span class="nav-number"></span> <span class="nav-text">全局的rejected状态处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后记"><span class="nav-number"></span> <span class="nav-text">后记</span></a></div>
             
 
           </div>
