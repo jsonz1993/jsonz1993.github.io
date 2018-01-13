@@ -1,0 +1,1032 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Neucha:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="learn,JavaScript,github," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="welcome今天在看 babel 的时候，无意中被引到一个外链  关于编译器的优秀/简单的教程，请查看 the-super-tiny-compiler ，同时它也从宏观角度上解释了 Babel 本身是如何工作的。  觉得挺感兴趣的，加上代码也不多，就跟着思路自己理解敲了一遍。 本文主要是帮助理解编译器的原理 不做过多的其他扩展 编译器的基本组成一般简单的编译器可以由以下几部分组成:  token">
+<meta name="keywords" content="learn,JavaScript,github">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手实现一个极简编译器 —— 了解编译器原理">
+<meta property="og:url" content="https://jsonz1993.github.io/2018/01/手把手实现一个极简编译器-——-了解编译器原理/index.html">
+<meta property="og:site_name" content="Jsonz">
+<meta property="og:description" content="welcome今天在看 babel 的时候，无意中被引到一个外链  关于编译器的优秀/简单的教程，请查看 the-super-tiny-compiler ，同时它也从宏观角度上解释了 Babel 本身是如何工作的。  觉得挺感兴趣的，加上代码也不多，就跟着思路自己理解敲了一遍。 本文主要是帮助理解编译器的原理 不做过多的其他扩展 编译器的基本组成一般简单的编译器可以由以下几部分组成:  token">
+<meta property="og:updated_time" content="2018-01-13T14:57:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手把手实现一个极简编译器 —— 了解编译器原理">
+<meta name="twitter:description" content="welcome今天在看 babel 的时候，无意中被引到一个外链  关于编译器的优秀/简单的教程，请查看 the-super-tiny-compiler ，同时它也从宏观角度上解释了 Babel 本身是如何工作的。  觉得挺感兴趣的，加上代码也不多，就跟着思路自己理解敲了一遍。 本文主要是帮助理解编译器的原理 不做过多的其他扩展 编译器的基本组成一般简单的编译器可以由以下几部分组成:  token">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jsonz1993.github.io/2018/01/手把手实现一个极简编译器-——-了解编译器原理/"/>
+
+
+
+
+
+  <title> 手把手实现一个极简编译器 —— 了解编译器原理 | Jsonz </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jsonz</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://jsonz1993.github.io/2018/01/手把手实现一个极简编译器-——-了解编译器原理/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jsonz">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jsonz">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jsonz" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                手把手实现一个极简编译器 —— 了解编译器原理
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-13T17:36:54+08:00">
+                2018-01-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/01/手把手实现一个极简编译器-——-了解编译器原理/" class="leancloud_visitors" data-flag-title="手把手实现一个极简编译器 —— 了解编译器原理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="welcome"><a href="#welcome" class="headerlink" title="welcome"></a>welcome</h2><p>今天在看 babel 的时候，无意中被引到一个外链</p>
+<blockquote>
+<p>关于编译器的优秀/简单的教程，请查看 <a href="https://babeljs.cn/docs/plugins/" target="_blank" rel="external">the-super-tiny-compiler</a> ，同时它也从宏观角度上解释了 Babel 本身是如何工作的。</p>
+</blockquote>
+<p>觉得挺感兴趣的，加上代码也不多，就跟着思路自己理解敲了一遍。</p>
+<p>本文主要是帮助理解编译器的原理 不做过多的其他扩展</p>
+<h2 id="编译器的基本组成"><a href="#编译器的基本组成" class="headerlink" title="编译器的基本组成"></a>编译器的基本组成</h2><p>一般简单的编译器可以由以下几部分组成:</p>
+<ul>
+<li>tokenizer 分词器 把代码或文本按类型分开，返回: <code>tokens</code></li>
+<li>parser 语法剖析器 对分词后的文本按照语法分析转换成 抽象语法树 返回：ast</li>
+<li>transformer 语法转换器 把语法剖析后的抽象语法树转换成我们想要的: newAst</li>
+<li>codeGenerator 代码生成器 把AST 转换为 目标代码</li>
+</ul>
+<blockquote>
+<p>babel 初始阶段并没有做任何事，基本上等于 <code>const babel = code=&gt; code</code>;<br>先 tokenizer， parser 解析代码，再 transformer 的时候，完全不改动原来的 ast</p>
+</blockquote>
+<p>接下来以最简单的编译器组成 一个环节一个环节走下去</p>
+<h2 id="tokenizer-分词器"><a href="#tokenizer-分词器" class="headerlink" title="tokenizer 分词器"></a>tokenizer 分词器</h2><p>分词器其实可以理解为简单的将文本切割，然后将有价值的按照相邻同等类型的 文本组合一起输出。<br><em><small>ps:无价值指对代码生成没有影响的部分，比如js里面非文本 一个空格和一百个空格对编译器来说是没有区别的</small></em></p>
+<p>实现思路：</p>
+<ol>
+<li>有一个值存着当前的光标 <code>current</code></li>
+<li>有一个数组用来存放按类型分出来的值 <code>tokens</code></li>
+<li>对文本进行循环， 取 <code>current</code> 的值做 分类型处理<ol>
+<li><code>(</code></li>
+<li><code>)</code></li>
+<li>空格</li>
+<li>数字</li>
+<li>字符串</li>
+<li>方法名</li>
+</ol>
+</li>
+<li>将处理后的值存进数组 <code>token</code> 并返回</li>
+</ol>
+<figure class="highlight javascript"><figcaption><span>tokenizer</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">tokenizer</span>(<span class="params">input</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> current = <span class="number">0</span>;</div><div class="line">  <span class="keyword">const</span> tokens = [];</div><div class="line">  <span class="keyword">while</span> (current &lt; input.length) &#123;</div><div class="line">    <span class="keyword">let</span> char = input[current];</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (char === <span class="string">"("</span> || char === <span class="string">")"</span>) &#123;</div><div class="line">      tokens.push(&#123;</div><div class="line">        <span class="attr">type</span>: <span class="string">'paren'</span>,</div><div class="line">        <span class="attr">value</span>: char</div><div class="line">      &#125;);</div><div class="line">      current++;</div><div class="line">      <span class="keyword">continue</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> WHITESPACE = <span class="regexp">/\s/</span>;</div><div class="line">    <span class="keyword">if</span> (WHITESPACE.test(char)) &#123;</div><div class="line">      current++;</div><div class="line">      <span class="keyword">continue</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> LETTERS = <span class="regexp">/[a-z]/i</span>;</div><div class="line">    <span class="keyword">if</span> (LETTERS.test(char)) &#123;</div><div class="line">      <span class="keyword">let</span> name = <span class="string">""</span>;</div><div class="line">      </div><div class="line">      <span class="keyword">while</span> (LETTERS.test(char)) &#123;</div><div class="line">        name += char;</div><div class="line">        current++;</div><div class="line">        char = input[current];</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      tokens.push(&#123;</div><div class="line">        <span class="attr">type</span>: <span class="string">'name'</span>,</div><div class="line">        <span class="attr">value</span>: name</div><div class="line">      &#125;);</div><div class="line">      <span class="keyword">continue</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> NUMBERS = <span class="regexp">/[0-9]/</span>;</div><div class="line">    <span class="keyword">if</span> (NUMBERS.test(char)) &#123;</div><div class="line">      <span class="keyword">let</span> numbers = <span class="string">""</span>;</div><div class="line"></div><div class="line">      <span class="keyword">while</span>(NUMBERS.test(char)) &#123;</div><div class="line">        numbers += char;</div><div class="line">        current++;</div><div class="line">        char = input[current];</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      tokens.push(&#123;</div><div class="line">        <span class="attr">type</span>: <span class="string">'number'</span>,</div><div class="line">        <span class="attr">value</span>: numbers</div><div class="line">      &#125;);</div><div class="line">      <span class="keyword">continue</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (char === <span class="string">'"'</span>) &#123;</div><div class="line">      <span class="keyword">let</span> string = <span class="string">''</span>;</div><div class="line">      current++;</div><div class="line">      char = input[current];</div><div class="line"></div><div class="line">      <span class="keyword">while</span>(char !== <span class="string">'"'</span>) &#123;</div><div class="line">        string += char;</div><div class="line">        current++;</div><div class="line">        char = input[current];</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      tokens.push(&#123;</div><div class="line">        <span class="attr">type</span>: <span class="string">'string'</span>,</div><div class="line">        <span class="attr">value</span>: string</div><div class="line">      &#125;);</div><div class="line">      current++;</div><div class="line">      <span class="keyword">continue</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">'不知道你输入的是什么鬼东西 '</span> + char);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> tokens;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> input = <span class="string">'(add 2 (subtract 4 2 "djwqp"))'</span>;</div><div class="line">tokenizer(input);</div><div class="line"><span class="comment">// 输出</span></div><div class="line"><span class="comment">/*</span></div><div class="line">[&#123; type: 'paren', value: '(' &#125;,</div><div class="line">&#123; type: 'name', value: 'add' &#125;,</div><div class="line">&#123; type: 'number', value: '2' &#125;,</div><div class="line">&#123; type: 'paren', value: '(' &#125;,</div><div class="line">&#123; type: 'name', value: 'subtract' &#125;,</div><div class="line">&#123; type: 'number', value: '4' &#125;,</div><div class="line">&#123; type: 'number', value: '2' &#125;,</div><div class="line">&#123; type: 'string', value: 'djwqp' &#125;,</div><div class="line">&#123; type: 'paren', value: ')' &#125;,</div><div class="line">&#123; type: 'paren', value: ')' &#125;];</div><div class="line">*/</div></pre></td></tr></table></figure>
+<h2 id="parser"><a href="#parser" class="headerlink" title="parser"></a>parser</h2><p>语法剖析器就是把 <code>tokens</code> 解析，转化为抽象语法树(AST)，方便后续的处理。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[&#123; <span class="attr">type</span>: <span class="string">'paren'</span>, <span class="attr">value</span>: <span class="string">'('</span> &#125;, ...]   =&gt;   &#123; <span class="attr">type</span>: <span class="string">'Program'</span>, <span class="attr">body</span>: [...] &#125;</div></pre></td></tr></table></figure>
+<p>实现思路：</p>
+<ol>
+<li>首先也要有一个 <code>current</code> 对 <code>tokens</code> 进行遍历，每一项 <code>token</code> 进行分析处理</li>
+<li>有一棵树，顶级结构为 <code>{type: &#39;Program&#39; , body: [...]}</code></li>
+<li>根据 <code>token.type</code> 进行相应的归类处理:<ol>
+<li><code>number</code>： 直接返回  <code>{type: &#39;NumberLiteral&#39;, value, }</code></li>
+<li><code>string</code>： 直接返回 <code>{type: &#39;StringLiteral&#39;, value, }</code></li>
+<li><code>paren (</code> ： 对下一个进行递归，直到出现 <code>paren )</code></li>
+</ol>
+</li>
+<li>将处理后的 ast 返回</li>
+</ol>
+<figure class="highlight javascript"><figcaption><span>parser</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">parser</span>(<span class="params">tokens</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> current = <span class="number">0</span>;</div><div class="line">  <span class="keyword">const</span> ast = &#123; </div><div class="line">    <span class="attr">type</span>: <span class="string">'Program'</span>, </div><div class="line">    <span class="attr">body</span>: []</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">walk</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> token = tokens[current];</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (token.type === <span class="string">'number'</span>) &#123;</div><div class="line">      current ++;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">type</span>: <span class="string">'NumberLiteral'</span>,</div><div class="line">        <span class="attr">value</span>: token.value</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (token.type === <span class="string">'string'</span>) &#123;</div><div class="line">      current ++;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">type</span>: <span class="string">'StringLiteral'</span>,</div><div class="line">        <span class="attr">value</span>: token.value</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (token.type === <span class="string">'paren'</span> &amp;&amp; token.value === <span class="string">'('</span>) &#123;</div><div class="line">      token = tokens[++current];</div><div class="line">      <span class="keyword">let</span> node = &#123;</div><div class="line">        <span class="attr">type</span>: <span class="string">"CallExpression"</span>,</div><div class="line">        <span class="attr">name</span>: token.value,</div><div class="line">        <span class="attr">params</span>: []</div><div class="line">      &#125;</div><div class="line">      </div><div class="line">      token = tokens[++current];</div><div class="line">      <span class="keyword">while</span> ((token.type !== <span class="string">'paren'</span>) || (token.type === <span class="string">'paren'</span> &amp;&amp; token.value !== <span class="string">')'</span>)) &#123;</div><div class="line">        node.params.push(walk());</div><div class="line">        token = tokens[current];</div><div class="line">      &#125;</div><div class="line"></div><div class="line">      current++;</div><div class="line">      <span class="keyword">return</span> node;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(token.type);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">while</span>(current &lt; tokens.length) &#123;</div><div class="line">    ast.body.push(walk());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> ast;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">[&#123; <span class="attr">type</span>: <span class="string">'paren'</span>, <span class="attr">value</span>: <span class="string">'('</span> &#125;,</div><div class="line">&#123; <span class="attr">type</span>: <span class="string">'name'</span>, <span class="attr">value</span>: <span class="string">'add'</span> &#125;,</div><div class="line">&#123; <span class="attr">type</span>: <span class="string">'number'</span>, <span class="attr">value</span>: <span class="string">'2'</span> &#125;,</div><div class="line">&#123; <span class="attr">type</span>: <span class="string">'paren'</span>, <span class="attr">value</span>: <span class="string">'('</span> &#125;,</div><div class="line">&#123; <span class="attr">type</span>: <span class="string">'name'</span>, <span class="attr">value</span>: <span class="string">'subtract'</span> &#125;,</div><div class="line">&#123; <span class="attr">type</span>: <span class="string">'number'</span>, <span class="attr">value</span>: <span class="string">'4'</span> &#125;,</div><div class="line">&#123; <span class="attr">type</span>: <span class="string">'number'</span>, <span class="attr">value</span>: <span class="string">'2'</span> &#125;,</div><div class="line">&#123; <span class="attr">type</span>: <span class="string">'string'</span>, <span class="attr">value</span>: <span class="string">'djwqp'</span> &#125;,</div><div class="line">&#123; <span class="attr">type</span>: <span class="string">'paren'</span>, <span class="attr">value</span>: <span class="string">')'</span> &#125;,</div><div class="line">&#123; <span class="attr">type</span>: <span class="string">'paren'</span>, <span class="attr">value</span>: <span class="string">')'</span> &#125;]</div><div class="line"> =&gt; </div><div class="line">&#123;</div><div class="line">	<span class="string">"type"</span>: <span class="string">"Program"</span>,</div><div class="line">	<span class="string">"body"</span>: [&#123;</div><div class="line">		<span class="string">"type"</span>: <span class="string">"CallExpression"</span>,</div><div class="line">		<span class="string">"name"</span>: <span class="string">"ADD"</span>,</div><div class="line">		<span class="string">"params"</span>: [&#123;</div><div class="line">			<span class="string">"type"</span>: <span class="string">"NumberLiteral"</span>,</div><div class="line">			<span class="string">"value"</span>: <span class="string">"2"</span></div><div class="line">		&#125;, &#123;</div><div class="line">			<span class="string">"type"</span>: <span class="string">"CallExpression"</span>,</div><div class="line">			<span class="string">"name"</span>: <span class="string">"subtract"</span>,</div><div class="line">			<span class="string">"params"</span>: [&#123;</div><div class="line">				<span class="string">"type"</span>: <span class="string">"NumberLiteral"</span>,</div><div class="line">				<span class="string">"value"</span>: <span class="string">"4"</span></div><div class="line">			&#125;, &#123;</div><div class="line">				<span class="string">"type"</span>: <span class="string">"NumberLiteral"</span>,</div><div class="line">				<span class="string">"value"</span>: <span class="string">"2"</span></div><div class="line">			&#125;, &#123;</div><div class="line">				<span class="string">"type"</span>: <span class="string">"StringLiteral"</span>,</div><div class="line">				<span class="string">"value"</span>: <span class="string">"djwqp"</span></div><div class="line">			&#125;]</div><div class="line">		&#125;]</div><div class="line">	&#125;]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="transformer"><a href="#transformer" class="headerlink" title="transformer"></a>transformer</h2><p>transformer 顾名思义，为转换部分，最复杂 也最常用。<br><code>.babelrc</code> 添加的插件，也只是在这个环节进行操作，将原本的 ast( es6 ) 转换为目标的 newAst (es5)。</p>
+<p><a href="http://esprima.org/demo/parse.html#" target="_blank" rel="external">esprima 编译器解析demo</a><br><a href="https://www.zhihu.com/question/33107553" target="_blank" rel="external">知乎</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/learn/" rel="tag"># learn</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/github/" rel="tag"># github</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+         
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/浅析Promise/" rel="prev" title="浅析Promise (一)">
+                浅析Promise (一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <!-- TODO <div class="post-spread">
+      
+    </div> -->
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpeg"
+               alt="Jsonz" />
+          <p class="site-author-name" itemprop="name">Jsonz</p>
+          <p class="site-description motion-element" itemprop="description">前端开发/Jsonz/租租车</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jsonz1993" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1638841204" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#welcome"><span class="nav-number">1.</span> <span class="nav-text">welcome</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译器的基本组成"><span class="nav-number">2.</span> <span class="nav-text">编译器的基本组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tokenizer-分词器"><span class="nav-number">3.</span> <span class="nav-text">tokenizer 分词器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parser"><span class="nav-number">4.</span> <span class="nav-text">parser</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transformer"><span class="nav-number">5.</span> <span class="nav-text">transformer</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("RAbLFHzWBvLUKbFdTC89bMkN-gzGzoHsz", "3Ahh3qzrwB9FavCLmXSneqVk");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
