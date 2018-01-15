@@ -95,7 +95,7 @@
 <meta property="og:url" content="https://jsonz1993.github.io/2018/01/一步步实现极简编译器-——-了解编译器原理/index.html">
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="welcome今天在看 babel 的时候，无意中被引到一个外链  关于编译器的优秀/简单的教程，请查看 the-super-tiny-compiler ，同时它也从宏观角度上解释了 Babel 本身是如何工作的。  觉得挺感兴趣的，加上代码也不多，就跟着思路自己理解敲了一遍。 本文主要是帮助理解编译器的原理 不做过多的其他扩展 编译器的基本组成一般简单的编译器可以由以下几部分组成:  token">
-<meta property="og:updated_time" content="2018-01-15T08:25:14.792Z">
+<meta property="og:updated_time" content="2018-01-15T09:38:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一步步实现极简编译器 —— 了解编译器原理">
 <meta name="twitter:description" content="welcome今天在看 babel 的时候，无意中被引到一个外链  关于编译器的优秀/简单的教程，请查看 the-super-tiny-compiler ，同时它也从宏观角度上解释了 Babel 本身是如何工作的。  觉得挺感兴趣的，加上代码也不多，就跟着思路自己理解敲了一遍。 本文主要是帮助理解编译器的原理 不做过多的其他扩展 编译器的基本组成一般简单的编译器可以由以下几部分组成:  token">
@@ -482,10 +482,8 @@
 <h2 id="compiler"><a href="#compiler" class="headerlink" title="compiler"></a>compiler</h2><p>至此，编译器所需的几个步骤： 分词，解析，转换，生成都已经完成。</p>
 <figure class="highlight javascript"><figcaption><span>compiler</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">compiler</span>(<span class="params">input</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> tokens = tokenizer(input);</div><div class="line">  <span class="keyword">const</span> ast = parser(tokens);</div><div class="line">  <span class="keyword">const</span> newAst = transformer(ast);</div><div class="line">  <span class="keyword">const</span> output = codeGenerator(newAst);</div><div class="line">  <span class="keyword">return</span> output;</div><div class="line">&#125;</div><div class="line"><span class="keyword">const</span> input = <span class="string">'(add 2 (subtract 4 2 "djwaqp"))'</span>;</div><div class="line"><span class="keyword">const</span> output = compilter(input); <span class="comment">// 'add(2, subtract(4, 2, "djwaqp"));'</span></div></pre></td></tr></table></figure>
 <h1 id="emmm"><a href="#emmm" class="headerlink" title="emmm"></a>emmm</h1><p>最后再推一波关于学习中看到的好网站</p>
-<p><a href="https://github.com/jsonz1993/wheel/blob/master/min-compiler/min-compiler.js" target="_blank" rel="external">源码</a><br><a href="http://esprima.org/demo/parse.html#" target="_blank" rel="external">esprima 解析语法树🌲</a><br><a href="https://zh.wikipedia.org/zh-cn/%E6%8A%BD%E8%B1%A1%E8%AA%9E%E6%B3%95%E6%A8%B9" target="_blank" rel="external">ast名词解释</a></p>
-<script>
-setTimeout(location.reload, 5000);
-</script>
+<p><a href="https://github.com/jsonz1993/wheel/blob/master/min-compiler/min-compiler.js" target="_blank" rel="external">源码</a><br><a href="http://esprima.org/demo/parse.html#" target="_blank" rel="external">esprima 解析语法树🌲</a><br><a href="https://zh.wikipedia.org/zh-cn/%E6%8A%BD%E8%B1%A1%E8%AA%9E%E6%B3%95%E6%A8%B9" target="_blank" rel="external">ast名词解释</a><br><a href="https://github.com/thejameskyle/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md" target="_blank" rel="external">babel-plugin-handbook</a></p>
+
       
     </div>
 
