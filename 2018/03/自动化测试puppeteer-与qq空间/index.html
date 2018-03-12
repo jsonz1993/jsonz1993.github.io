@@ -1,0 +1,1014 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Neucha:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="github,learn,JavaScript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="项目背景emmmm 前几天女朋友想加我qq。才想到 万年没用的qq里面qqZone 遗留着千年前的一堆中二留言 &amp;amp;&amp;amp; 中二说说。 刚好最近有接触到 自动化测试 puppeteer 框架， 就想着写个脚本去自动删掉留言板和说说。 整个项目基于 node8 运行 用的 async await语法。 概述首先 puppeteer 可以理解为 是谷歌出的一个无UI版本的Chrome。  先">
+<meta name="keywords" content="github,learn,JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自动化测试 puppeteer 与qq空间">
+<meta property="og:url" content="https://jsonz1993.github.io/2018/03/自动化测试puppeteer-与qq空间/index.html">
+<meta property="og:site_name" content="Jsonz">
+<meta property="og:description" content="项目背景emmmm 前几天女朋友想加我qq。才想到 万年没用的qq里面qqZone 遗留着千年前的一堆中二留言 &amp;amp;&amp;amp; 中二说说。 刚好最近有接触到 自动化测试 puppeteer 框架， 就想着写个脚本去自动删掉留言板和说说。 整个项目基于 node8 运行 用的 async await语法。 概述首先 puppeteer 可以理解为 是谷歌出的一个无UI版本的Chrome。  先">
+<meta property="og:image" content="https://jsonz1993.github.io/2018/03/自动化测试puppeteer-与qq空间/1.png">
+<meta property="og:image" content="https://jsonz1993.github.io/2018/03/自动化测试puppeteer-与qq空间/log.png">
+<meta property="og:updated_time" content="2018-03-12T09:36:44.441Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自动化测试 puppeteer 与qq空间">
+<meta name="twitter:description" content="项目背景emmmm 前几天女朋友想加我qq。才想到 万年没用的qq里面qqZone 遗留着千年前的一堆中二留言 &amp;amp;&amp;amp; 中二说说。 刚好最近有接触到 自动化测试 puppeteer 框架， 就想着写个脚本去自动删掉留言板和说说。 整个项目基于 node8 运行 用的 async await语法。 概述首先 puppeteer 可以理解为 是谷歌出的一个无UI版本的Chrome。  先">
+<meta name="twitter:image" content="https://jsonz1993.github.io/2018/03/自动化测试puppeteer-与qq空间/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jsonz1993.github.io/2018/03/自动化测试puppeteer-与qq空间/"/>
+
+
+
+
+
+  <title> 自动化测试 puppeteer 与qq空间 | Jsonz </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jsonz</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://jsonz1993.github.io/2018/03/自动化测试puppeteer-与qq空间/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jsonz">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jsonz">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jsonz" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                自动化测试 puppeteer 与qq空间
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-12T15:39:25+08:00">
+                2018-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/03/自动化测试puppeteer-与qq空间/" class="leancloud_visitors" data-flag-title="自动化测试 puppeteer 与qq空间">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h1><p>emmmm 前几天女朋友想加我qq。才想到 万年没用的qq里面qqZone 遗留着千年前的一堆中二留言 &amp;&amp; 中二说说。 刚好最近有接触到 自动化测试 <a href="https://github.com/GoogleChrome/puppeteer" target="_blank" rel="external">puppeteer</a> 框架， 就想着写个脚本去自动删掉留言板和说说。 整个项目基于 node8 运行 用的 async await语法。</p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>首先 puppeteer 可以理解为 是谷歌出的一个无UI版本的Chrome。</p>
+<p><img src="./1.png" alt="1.png"></p>
+<p>先从 puppeteer 实例化出一个 <code>Browser</code>， 根据 <code>Browser</code>去new 一个 <code>Page</code>。<br>这个Page可以理解成 我们平时浏览器的一个 tab。 一般操作都是基于 Page去实现的</p>
+<p>Page 提供了很多简单易用的api用于操作网页元素， 基本都是异步操作，所以直接用 async/await 非常方便快捷简单易懂。</p>
+<ul>
+<li>比如获取元素: <code>page.$(&#39;#switcher_plogin&#39;)</code> </li>
+<li>在输入框填入特定信息，每次输入间隔100毫秒模拟输入: <code>page.type(&#39;#mytextarea&#39;, &#39;World&#39;, {delay: 100});</code></li>
+<li>选择下拉框: <code>Page.select(&#39;select#colors&#39;, &#39;blue&#39;);</code></li>
+</ul>
+<h1 id="项目细节"><a href="#项目细节" class="headerlink" title="项目细节"></a>项目细节</h1><h2 id="项目初始化与登录步骤"><a href="#项目初始化与登录步骤" class="headerlink" title="项目初始化与登录步骤"></a>项目初始化与登录步骤</h2><p>首先我们要打开 qq空间 的页面 并登录</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 常用操作的工具函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">pageTool</span>(<span class="params">page</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> _page = &#123;</div><div class="line"></div><div class="line">    <span class="keyword">async</span> _click(selector) &#123;</div><div class="line">      <span class="keyword">await</span> page.waitForSelector(selector, &#123; <span class="attr">visible</span>: <span class="literal">true</span> &#125;);</div><div class="line">      <span class="keyword">return</span> page.click(selector);</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    <span class="keyword">async</span> _waitForNavigation(opts = &#123;&#125;) &#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">await</span> page.waitForNavigation(&#123; <span class="attr">waitUntil</span>: <span class="string">'domcontentloaded'</span>, ...opts &#125;);</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="built_in">Object</span>.assign(page, _page);</div><div class="line"></div><div class="line">  <span class="keyword">return</span> page;</div><div class="line">&#125;</div><div class="line"></div><div class="line">(<span class="keyword">async</span> () =&gt; &#123;</div><div class="line">  <span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.launch(&#123;</div><div class="line">    <span class="attr">headless</span>: <span class="literal">true</span>, <span class="comment">// 是否显示界面</span></div><div class="line">    devtools: <span class="literal">true</span>, <span class="comment">// 是否显示开发者工具</span></div><div class="line">    slowMo: <span class="number">100</span>, <span class="comment">// 延迟每一次操作的毫秒数</span></div><div class="line">    ignoreHTTPSErrors: <span class="literal">true</span>, <span class="comment">// 是否忽略HTTPS错误</span></div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  <span class="keyword">const</span> loginPage = <span class="keyword">await</span> browser.newPage(); <span class="comment">// 打开新tab 获取当前tab的实例</span></div><div class="line">  <span class="keyword">const</span> page = loginPage;</div><div class="line">  </div><div class="line">  <span class="comment">// 仿真 设置窗口大小与 UA 信息。 这里可以设置为 移动端的。</span></div><div class="line">  <span class="comment">// puppeteer 内置了一些设备可供选择 可以通过以下获取：</span></div><div class="line">  <span class="comment">// const devices = require('puppeteer/DeviceDescriptors');</span></div><div class="line">  <span class="comment">// const iPhone = devices['iPhone 6'];</span></div><div class="line">  loginPage.emulate(&#123; <span class="attr">viewport</span>: &#123; <span class="attr">width</span>: <span class="number">1280</span>, <span class="attr">height</span>: <span class="number">800</span> &#125;, <span class="attr">userAgent</span>: <span class="string">'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3347.0 Safari/537.36'</span> &#125;);</div><div class="line"></div><div class="line">  <span class="comment">// 打开特定链接，并等待3秒钟</span></div><div class="line">  <span class="comment">// PS: 一般是用 page.waitForNavigation 去等待页面加载，这里网络问题经常会出现卡住 所以简单设置为等3s</span></div><div class="line">  <span class="keyword">await</span> loginPage.goto(<span class="string">'https://i.qq.com/?s_url=http%3A%2F%2Fuser.qzone.qq.com%2F847691625%2Finfocenter&amp;rd=1'</span>);</div><div class="line">  <span class="keyword">await</span> loginPage.waitFor(<span class="number">3000</span>);</div><div class="line">  </div><div class="line">  <span class="comment">// 这里封装了一点点常用的操作</span></div><div class="line">  pageTool(loginPage);</div><div class="line"></div><div class="line">  <span class="comment">// 打开成功之后 我们开始走登录的步骤了</span></div><div class="line">  (<span class="keyword">async</span> () =&gt; &#123;</div><div class="line">  </div><div class="line">    <span class="comment">// QQ空间里面是用一个 iframe 去装登录的部分，所以这里要先获取 登录iframe对象再进行操作</span></div><div class="line">    <span class="keyword">const</span> iframeDom = <span class="keyword">await</span> loginPage.frames().filter(<span class="function"><span class="params">iframe</span> =&gt;</span> iframe._name === <span class="string">'login_frame'</span>)[<span class="number">0</span>];</div><div class="line"></div><div class="line">    <span class="comment">// 如果有登录qq的话，可以使用快捷登录模式</span></div><div class="line">    <span class="keyword">const</span> iframeLoginBtn = <span class="keyword">await</span> iframeDom.$(<span class="string">'#img_out_847691625'</span>);</div><div class="line">    <span class="keyword">if</span> (iframeLoginBtn) &#123;</div><div class="line">      <span class="keyword">await</span> iframeLoginBtn.click();</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="comment">// 如果没有登录qq 直接读配置里面的信息去用账户密码登录</span></div><div class="line">      <span class="keyword">if</span> (data.qq === <span class="string">'你的qq账号'</span>) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'先在a.js 输入qq账号和密码'</span>);</div><div class="line">      <span class="comment">// 密码模式</span></div><div class="line">      <span class="keyword">const</span> plogin = <span class="keyword">await</span> iframeDom.$(<span class="string">'#switcher_plogin'</span>);</div><div class="line">      <span class="keyword">await</span> plogin.click(); <span class="comment">//点击账户密码登录的按钮</span></div><div class="line">      <span class="keyword">const</span> userName = <span class="keyword">await</span> iframeDom.$(<span class="string">'#u'</span>);</div><div class="line">      <span class="keyword">await</span> userName.type(data.qq); <span class="comment">// 填入账户</span></div><div class="line">      <span class="keyword">const</span> pw = <span class="keyword">await</span> iframeDom.$(<span class="string">'#p'</span>);</div><div class="line">      <span class="keyword">await</span> pw.type(data.pw); <span class="comment">// 填入密码</span></div><div class="line">      <span class="keyword">const</span> loginBtn = <span class="keyword">await</span> iframeDom.$(<span class="string">'#login_button'</span>);</div><div class="line">      <span class="keyword">await</span> loginBtn.click(); <span class="comment">// 点击登录</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'登录完成'</span>);</div><div class="line">    <span class="comment">// 到这里 登录步骤已经完成 大概涵盖了整个项目的80%操作 其他都是类似的dom操作</span></div><div class="line">  &#125;)();</div><div class="line"></div><div class="line">  <span class="comment">/** 删除留言板模块代码，见下一个栏目 **/</span></div><div class="line"></div><div class="line">  <span class="comment">/** 删除说说模块代码，见下下个栏目 **/</span></div><div class="line"></div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<h2 id="删除留言板的功能模块"><a href="#删除留言板的功能模块" class="headerlink" title="删除留言板的功能模块"></a>删除留言板的功能模块</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">delCommit</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">// 等待一个 .head-nav-menu a[title="留言板"] 的元素 css选择器</span></div><div class="line">  <span class="keyword">await</span> page.waitForSelector(<span class="string">'.head-nav-menu a[title="留言板"]'</span>);</div><div class="line">  <span class="keyword">await</span> page.waitFor(<span class="number">1000</span>);</div><div class="line">  <span class="keyword">await</span> page._click(<span class="string">'.head-nav-menu a[title="留言板"]'</span>);</div><div class="line">  <span class="keyword">await</span> page.waitForSelector(<span class="string">'.app_canvas_frame'</span>);</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'留言板iframe加载完成'</span>);</div><div class="line"></div><div class="line">  <span class="comment">// 这里重新获取一个 ifrmae 留言板也是用一个iframe 嵌套进来的....没想到整个qq空间是由一堆的ifrmae堆起来</span></div><div class="line">  <span class="keyword">const</span> iframeDom = <span class="keyword">await</span> page.frames().filter(<span class="function"><span class="params">iframe</span> =&gt;</span> iframe.url().includes(<span class="string">'qzs.qq.com/qzone/msgboard/msgbcanvas.html'</span>))[<span class="number">0</span>];</div><div class="line">  <span class="keyword">await</span> page.waitFor(<span class="number">1000</span>);</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'留言板iframe 获取完成 '</span>, iframeDom);</div><div class="line"></div><div class="line">  <span class="keyword">const</span> btnBatchBottom = <span class="keyword">await</span> iframeDom.$(<span class="string">'#btnBatchBottom'</span>);</div><div class="line">  <span class="keyword">await</span> btnBatchBottom.click();</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'批量点击成功 '</span>, btnBatchBottom);</div><div class="line"></div><div class="line">  <span class="keyword">let</span> delTime = <span class="number">1</span>;</div><div class="line"></div><div class="line">  <span class="comment">// 一次完整的删除逻辑</span></div><div class="line">  <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">delOnes</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`第<span class="subst">$&#123;delTime&#125;</span>次 删除 开始执行`</span>);</div><div class="line"></div><div class="line">    <span class="keyword">await</span> page.waitFor(<span class="number">1000</span>);</div><div class="line"></div><div class="line">    <span class="keyword">const</span> $chkSelectAllBottom = <span class="string">'#chkSelectAllBottom'</span>;</div><div class="line">    <span class="keyword">const</span> chkSelectAllBottom = <span class="keyword">await</span> iframeDom.$($chkSelectAllBottom);</div><div class="line">    <span class="keyword">await</span> chkSelectAllBottom.click();</div><div class="line">    <span class="keyword">if</span> (delTime !== <span class="number">1</span>) <span class="keyword">await</span> chkSelectAllBottom.click();</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`第<span class="subst">$&#123;delTime&#125;</span>次 删除 点击全选`</span>, chkSelectAllBottom);</div><div class="line"></div><div class="line">    <span class="keyword">const</span> $delAll = <span class="string">'#btnDeleteBatchBottom'</span>;</div><div class="line">    <span class="keyword">const</span> delAll = <span class="keyword">await</span> iframeDom.$($delAll);</div><div class="line">    <span class="keyword">await</span> delAll.click();</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`第<span class="subst">$&#123;delTime&#125;</span>次 删除 点击删除`</span>, delAll)</div><div class="line"></div><div class="line">    <span class="keyword">const</span> $sureBtn = <span class="string">'.qz_dialog_layer_btn.qz_dialog_layer_sub span'</span>;</div><div class="line">    <span class="keyword">await</span> page._click($sureBtn);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`第<span class="subst">$&#123;delTime&#125;</span>次 删除 点击确定`</span>)</div><div class="line"></div><div class="line">    <span class="keyword">await</span> page.waitFor(<span class="number">3000</span>);</div><div class="line"></div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`第<span class="subst">$&#123;delTime&#125;</span>次 删除 执行结束`</span>);</div><div class="line">    delTime++;</div><div class="line"></div><div class="line">    <span class="comment">// 递归</span></div><div class="line">    <span class="keyword">const</span> hasCommit = <span class="keyword">await</span> iframeDom.$(<span class="string">'#ulCommentList .bor3'</span>);</div><div class="line">    <span class="keyword">if</span> (hasCommit) &#123;</div><div class="line">      <span class="keyword">await</span> delOnes();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">await</span> delOnes();</div><div class="line"></div><div class="line">&#125;;</div><div class="line"><span class="comment">// delCommit();</span></div></pre></td></tr></table></figure>
+<h2 id="删除说说模块"><a href="#删除说说模块" class="headerlink" title="删除说说模块"></a>删除说说模块</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">delEmotion</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">await</span> page.waitForSelector(<span class="string">'.head-nav-menu a[title="说说"]'</span>);</div><div class="line">  <span class="keyword">await</span> page.waitFor(<span class="number">1000</span>);</div><div class="line">  <span class="keyword">await</span> page._click(<span class="string">'.head-nav-menu a[title="说说"]'</span>);</div><div class="line">  <span class="keyword">await</span> page.waitForSelector(<span class="string">'.app_canvas_frame'</span>);</div><div class="line">  <span class="keyword">await</span> page.waitFor(<span class="number">1000</span>);</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'说说iframe加载完成'</span>);</div><div class="line"></div><div class="line">  <span class="keyword">const</span> iframeDom = <span class="keyword">await</span> page.frames().filter(<span class="function"><span class="params">iframe</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(iframe.url());</div><div class="line">    <span class="keyword">return</span> iframe.url().includes(<span class="string">'qzs.qq.com/qzone/app/mood_v6/html/index.html'</span>);</div><div class="line">  &#125;)[<span class="number">0</span>];</div><div class="line">  <span class="built_in">console</span>.log(<span class="string">'说说iframe 获取完成 '</span>, iframeDom);</div><div class="line"></div><div class="line">  <span class="keyword">let</span> delTime = <span class="number">1</span>;</div><div class="line"></div><div class="line">  <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">delOnes</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">`第 <span class="subst">$&#123;delTime&#125;</span>次删除 开始执行`</span>);</div><div class="line"></div><div class="line">      <span class="keyword">const</span> moreBtn = <span class="keyword">await</span> iframeDom.$(<span class="string">'.dropdown-trigger.c_tx'</span>);</div><div class="line">      <span class="keyword">await</span> moreBtn.hover();</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">`第 <span class="subst">$&#123;delTime&#125;</span>次删除 展示删除按钮`</span>);</div><div class="line"></div><div class="line">      <span class="keyword">const</span> delBtn = <span class="keyword">await</span> iframeDom.$(<span class="string">'.del.del_btn.author_display'</span>);</div><div class="line">      <span class="keyword">await</span> delBtn.click();</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">`第 <span class="subst">$&#123;delTime&#125;</span>次删除 点击删除按钮`</span>);</div><div class="line"></div><div class="line">      <span class="keyword">await</span> page.waitForSelector(<span class="string">'.qz_dialog_layer_btn.qz_dialog_layer_sub span'</span>);</div><div class="line">      <span class="keyword">const</span> delBtnSure = <span class="keyword">await</span> page.$(<span class="string">'.qz_dialog_layer_btn.qz_dialog_layer_sub span'</span>);</div><div class="line">      <span class="keyword">await</span> delBtnSure.click();</div><div class="line"></div><div class="line">      <span class="keyword">await</span> page.waitFor(<span class="number">1000</span>);</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">`第 <span class="subst">$&#123;delTime&#125;</span>次删除 点击确定按钮`</span>);</div><div class="line"></div><div class="line">      <span class="built_in">console</span>.log(<span class="string">`第 <span class="subst">$&#123;delTime&#125;</span> 次删除 执行结束`</span>);</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (delTime % <span class="number">10</span> === <span class="number">0</span>) <span class="keyword">await</span> nextPage();</div><div class="line"></div><div class="line">      <span class="keyword">await</span> page.waitFor(<span class="number">1000</span>);</div><div class="line">      delTime++;</div><div class="line">      <span class="keyword">await</span> delOnes();</div><div class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">      <span class="built_in">console</span>.log(e, <span class="string">'报错了 尝试方案'</span>);</div><div class="line">      <span class="keyword">await</span> delOnes();</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">await</span> delOnes();</div><div class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`第<span class="subst">$&#123;delTime&#125;</span>次 出错 重新try 一遍`</span>)</div><div class="line">    <span class="keyword">await</span> delOnes();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">nextPage</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`第<span class="subst">$&#123;delTime&#125;</span>次执行 遇到跳转`</span>);</div><div class="line">    <span class="keyword">const</span> nextBtn = <span class="keyword">await</span> iframeDom.$(<span class="string">'a[title="下一页"]'</span>);</div><div class="line">    nextBtn.click();</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`第<span class="subst">$&#123;delTime&#125;</span>次执行 点击跳转`</span>);</div><div class="line">    <span class="keyword">await</span> page.waitFor(<span class="number">5000</span>);</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`第<span class="subst">$&#123;delTime&#125;</span>次执行 跳转结束`</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="项目总结"><a href="#项目总结" class="headerlink" title="项目总结"></a>项目总结</h1><p>大概代码都丢👆了 ，附上 <strong><a href="https://github.com/jsonz1993/wheel/tree/master/qqZone" target="_blank" rel="external">源码地址</a></strong> 在 <code>a.js</code> 填上账号密码。<br>再打开源码里面的 <code>// await delCommit();</code> 或者 <code>// await delEmotion();</code> 来删除 留言板或说说。没有做并发操作 所以只能执行一种功能。<br>修改完之后<code>npm install &amp;&amp; node app.js</code> 就可以跑了。</p>
+<p>项目中遇到几个问题：</p>
+<ol>
+<li><p>page.waitForNavigation(options) 一直等不到完成状态, 30s 超时报错<br>可能是一直有一些脚本挂掉或者在loading。所以后面换成 等待3秒 虽然比较 low。。。但是可行</p>
+</li>
+<li><p>iframe 里面的dom元素不能直接通过 page.$ 获取，需要先获取 iframe 再通过这个 iframe去获取想要的dom元素</p>
+</li>
+<li><p>就算是浏览器执行 模拟人为删除，但是连续删除太多行数据的时候， 还是会触发 腾讯的验证码机制。<br>原本用 puppeteer 截图api 去获取验证码，然后用 <a href="https://github.com/tesseract-ocr/tesseract" target="_blank" rel="external">Tesseract</a> 去识别验证码。但是发现说 识别的有效率极低… 也没有去折腾数据训练。 后面就放弃验证码这一块的技术识别，出了验证码就先不跑 隔断时间再跑。</p>
+</li>
+</ol>
+<p>最后给出完整的项目演示</p>
+<p>删除留言板功能演示</p>
+<video src="./1.mov" width="320" height="240" controls="controls"><br>删除留言板功能演示<br></video>
+
+<p>删除说说功能演示</p>
+<video src="./2.mov" width="320" height="240" controls="controls"><br>删除说说功能演示<br></video>
+
+<p>日志输出<br><img src="./log.png" alt="log"></p>
+<h1 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a><a href="https://github.com/jsonz1993/wheel/tree/master/qqZone" target="_blank" rel="external">源码地址</a></h1>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/github/" rel="tag"># github</a>
+          
+            <a href="/tags/learn/" rel="tag"># learn</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+         
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/react全家桶-dva-最佳实践整理总结/" rel="prev" title="react全家桶 + dva 实践整理总结">
+                react全家桶 + dva 实践整理总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <!-- TODO <div class="post-spread">
+      
+    </div> -->
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpeg"
+               alt="Jsonz" />
+          <p class="site-author-name" itemprop="name">Jsonz</p>
+          <p class="site-description motion-element" itemprop="description">前端开发/Jsonz/租租车</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jsonz1993" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1638841204" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#项目背景"><span class="nav-number">1.</span> <span class="nav-text">项目背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">2.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目细节"><span class="nav-number">3.</span> <span class="nav-text">项目细节</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#项目初始化与登录步骤"><span class="nav-number">3.1.</span> <span class="nav-text">项目初始化与登录步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除留言板的功能模块"><span class="nav-number">3.2.</span> <span class="nav-text">删除留言板的功能模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除说说模块"><span class="nav-number">3.3.</span> <span class="nav-text">删除说说模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目总结"><span class="nav-number">4.</span> <span class="nav-text">项目总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源码地址"><span class="nav-number">5.</span> <span class="nav-text">源码地址</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("RAbLFHzWBvLUKbFdTC89bMkN-gzGzoHsz", "3Ahh3qzrwB9FavCLmXSneqVk");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
