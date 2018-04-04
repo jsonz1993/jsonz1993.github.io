@@ -5,7 +5,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2018/04/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/</loc>
-    <lastmod>2018-04-04T09:57:48.488Z</lastmod>
+    <lastmod>2018-04-04T10:13:46.962Z</lastmod>
     <data>
         <display>
         <title>自动化功能测试流程方案</title>
@@ -1000,28 +1000,6 @@
     </url>
 
     
-  <url>
-    <loc>https://jsonz1993.github.io/2017/04/%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
-    <data>
-        <display>
-        <title>Hexo-本地服务器</title>
-        <pubTime>2017-04-02T06:24:23.000Z</pubTime>
-        
-        <tag>hexo</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-             
-              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
-          
-        </display>
-    </data>
-    </url>
-
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/tag-plugins/</loc>
@@ -1092,12 +1070,12 @@
 
     
   <url>
-    <loc>https://jsonz1993.github.io/2017/04/hexo-%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0/</loc>
+    <loc>https://jsonz1993.github.io/2017/04/hexo-%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5/</loc>
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
     <data>
         <display>
-        <title>hexo-辅助函数</title>
-        <pubTime>2017-04-02T12:42:14.000Z</pubTime>
+        <title>hexo-永久链接</title>
+        <pubTime>2017-04-02T06:53:58.000Z</pubTime>
         
         <tag>hexo</tag>
          
@@ -1252,7 +1230,6 @@
     </url>
 
     
-    
   <url>
     <loc>https://jsonz1993.github.io/2017/04/%E7%94%9F%E6%88%90%E6%96%87%E4%BB%B6%E4%B8%8E%E9%83%A8%E7%BD%B2/</loc>
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
@@ -1276,16 +1253,39 @@
     </url>
 
     
+  <url>
+    <loc>https://jsonz1993.github.io/2017/04/%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
+    <data>
+        <display>
+        <title>Hexo-本地服务器</title>
+        <pubTime>2017-04-02T06:24:23.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+             
+              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
     
     
   <url>
-    <loc>https://jsonz1993.github.io/2017/04/hexo-%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5/</loc>
+    <loc>https://jsonz1993.github.io/2017/04/hexo-%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0/</loc>
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
     <data>
         <display>
-        <title>hexo-永久链接</title>
-        <pubTime>2017-04-02T06:53:58.000Z</pubTime>
+        <title>hexo-辅助函数</title>
+        <pubTime>2017-04-02T12:42:14.000Z</pubTime>
         
         <tag>hexo</tag>
          
