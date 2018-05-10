@@ -1,0 +1,1095 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=monaco:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="github,learn,JavaScript,React," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="最近工作开始稳定下来，没有那么多加班，加上说投简历找面试一直没拿到面试机会…所以开始有空闲的时间 之前公司有个大佬写了个类似 create-react-app 的脚手架，用来创建公司的项目。一直不知道里面实现的原理，借此机会一探 create-react-app 源码，了解下里面运行的机制。 大家不要一看到源码就害怕不敢去看，现在这么优秀项目都开源了，加上各种IDE支持很好，直接打个断点进去调试，">
+<meta name="keywords" content="github,learn,JavaScript,React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="create-react-app 源码解析">
+<meta property="og:url" content="https://jsonz1993.github.io/2018/05/create-react-app-o/index.html">
+<meta property="og:site_name" content="Jsonz">
+<meta property="og:description" content="最近工作开始稳定下来，没有那么多加班，加上说投简历找面试一直没拿到面试机会…所以开始有空闲的时间 之前公司有个大佬写了个类似 create-react-app 的脚手架，用来创建公司的项目。一直不知道里面实现的原理，借此机会一探 create-react-app 源码，了解下里面运行的机制。 大家不要一看到源码就害怕不敢去看，现在这么优秀项目都开源了，加上各种IDE支持很好，直接打个断点进去调试，">
+<meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/create-react-app-file.png">
+<meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/debug1.png">
+<meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/debug2.png">
+<meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/debug3.png">
+<meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/debug4.png">
+<meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/debug5.png">
+<meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/create-react-app_index.png">
+<meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/create-react-app1.png">
+<meta property="og:updated_time" content="2018-05-09T17:59:31.830Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="create-react-app 源码解析">
+<meta name="twitter:description" content="最近工作开始稳定下来，没有那么多加班，加上说投简历找面试一直没拿到面试机会…所以开始有空闲的时间 之前公司有个大佬写了个类似 create-react-app 的脚手架，用来创建公司的项目。一直不知道里面实现的原理，借此机会一探 create-react-app 源码，了解下里面运行的机制。 大家不要一看到源码就害怕不敢去看，现在这么优秀项目都开源了，加上各种IDE支持很好，直接打个断点进去调试，">
+<meta name="twitter:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/create-react-app-file.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jsonz1993.github.io/2018/05/create-react-app-o/"/>
+
+
+
+
+
+  <title> create-react-app 源码解析 | Jsonz </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jsonz</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://jsonz1993.github.io/2018/05/create-react-app-o/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jsonz">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jsonz">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jsonz" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                create-react-app 源码解析
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-05T17:44:23+08:00">
+                2018-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/05/create-react-app-o/" class="leancloud_visitors" data-flag-title="create-react-app 源码解析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近工作开始稳定下来，没有那么多加班，加上说投简历找面试一直没拿到面试机会…所以开始有空闲的时间</p>
+<p>之前公司有个大佬写了个类似 create-react-app 的脚手架，用来创建公司的项目。一直不知道里面实现的原理，借此机会一探 <code>create-react-app</code> 源码，了解下里面运行的机制。</p>
+<p>大家不要一看到源码就害怕不敢去看，现在这么优秀项目都开源了，加上各种IDE支持很好，直接打个断点进去调试，很容易看出个大概。<br>也可以用这种思路去了解其他的开源项目</p>
+<h1 id="快速了解"><a href="#快速了解" class="headerlink" title="快速了解"></a><a href="#快速了解">快速了解</a></h1><p>对于想快速了解的直接浏览这一块即可<br>create-react-app 其实就是用node去跑一些包安装流程，并且把文件模板demo考到对于的目录下。<br>可以简单分为以下几个步骤:</p>
+<ul>
+<li>判断Node版本</li>
+<li>做一些命令行处理的初始化，比如输入 <code>-help</code> 则输出帮助内容</li>
+<li>判断是否有输入项目名，有则根据参数去跑包安装，默认是yarn安装方式，eg: <code>yarn add react react-dom react-scripts</code></li>
+<li>修改package.json里面已安装的依赖版本，从精确版本<code>16.0.0</code>改为^向上兼容版本<code>^16.0.0</code> 并加入 <code>start</code>,<code>build</code>等启动脚本</li>
+<li>拷贝 <code>react-scripts</code>下的 <code>template</code> 到目标文件，里面有<code>public</code>,<code>src</code>等文件夹，其实就是一个简单的可运行demo</li>
+<li>END~</li>
+</ul>
+<p>继续往下看的小伙伴可以跟着一步一步了解里面的实现逻辑，先例行交代下环境版本:<br><strong>create-react-app v1.1.4</strong><br>macOS 10.13.4<br>node v8.9.4<br>npm 6.0.0<br>yarn 1.6.0<br>vsCode 1.22.2</p>
+<h1 id="项目初始化"><a href="#项目初始化" class="headerlink" title="项目初始化"></a><a href="#项目初始化">项目初始化</a></h1><p>先上github 拉项目代码，拉下来之后切换到指定的 <code>tag</code></p>
+<ul>
+<li><code>git clone https://github.com/facebook/create-react-app.git</code></li>
+<li><code>git checkout v1.1.4</code></li>
+<li><code>yarn</code> //如果不需要断点调试，这一步可以跳过</li>
+</ul>
+<blockquote>
+<p>这里可能yarn 版本太低的话，会报一系列错误，之前用的是 0.x版本的，升级到1.x就没问题了</p>
+</blockquote>
+<p>下面我们用 <code>root</code> 代替项目的根目录，方便理解</p>
+<p>首先我们打开项目能看到一堆的配置文件和两个文件夹：eslint配置文件、travis部署配置、yarn配置、更新日志、开源声明等等…这些我们全都可以不用去看，那我们要看的核心源码放在哪里呢<br><img src="./create-react-app-file.png" alt=""></p>
+<p>划重点: <strong>如果项目不知道从哪里入手的话，首先从package.json文件开始</strong><br><figure class="highlight json"><figcaption><span>root/package.json</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</div><div class="line">  <span class="attr">"workspaces"</span>: [</div><div class="line">    <span class="string">"packages/*"</span></div><div class="line">  ],</div><div class="line">  <span class="attr">"scripts"</span>: &#123;</div><div class="line">    <span class="attr">"start"</span>: <span class="string">"cd packages/react-scripts &amp;&amp; node scripts/start.js"</span>,</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"devDependencies"</span>: &#123;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"lint-staged"</span>: &#123;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>打开根目录 package.json 我们可以看到里面很简洁~ npm脚本命令，开发依赖，还有提交钩子，剩下的就是我们要关注的 <strong>workspaces</strong> 这里指向的是 <code>&quot;packages/*&quot;</code>，所以我们现在的重点就放在 <strong>packages</strong> 文件夹</p>
+<p>packages 文件夹下面也有几个文件夹，这里文件夹命名很规范，一看就知道功能划分，所以还是老套路直接看 <code>root/packages/create-react-app/package.json</code></p>
+<figure class="highlight json"><figcaption><span>packages/create-react-app/package.json</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"create-react-app"</span>,</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"1.5.2"</span>,</div><div class="line">  <span class="attr">"license"</span>: <span class="string">"MIT"</span>,</div><div class="line">  <span class="attr">"engines"</span>: &#123;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"bugs"</span>: &#123;</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"files"</span>: [</div><div class="line">    <span class="string">"index.js"</span>,</div><div class="line">    <span class="string">"createReactApp.js"</span></div><div class="line">  ],</div><div class="line">  <span class="attr">"bin"</span>: &#123;</div><div class="line">    <span class="attr">"create-react-app"</span>: <span class="string">"./index.js"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"dependencies"</span>: &#123;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这时候没有 <code>workspaces</code>项， 我们可以看 <code>bin</code> bin的功能是把命令对应到可执行的文件，具体的介绍可以看<a href="https://docs.npmjs.com/files/package.json#bin" target="_blank" rel="external">package Document</a></p>
+<p>这里可以简单理解成，当我们全局安装了 <code>create-react-app</code> 之后，跑 <code>create-react-app my-react-app</code> 系统会帮我们去跑 <code>packages/create-react-app/index.js my-react-app</code></p>
+<p>终于找到源码的入口了，对于简单的源码我们可以直接看，对于比较复杂的 或者想要看到执行到每一行代码时那些变量是什么值的情况，我们就要用IDE或其他工具来断点调试代码了。</p>
+<h1 id="配置断点调试"><a href="#配置断点调试" class="headerlink" title="配置断点调试"></a><a href="#配置断点调试">配置断点调试</a></h1><p>对于vscode或node调试 比较熟悉的可以跳过直接看 <a href="#开始断点阅读源码">开始断点阅读源码</a></p>
+<h2 id="vscode-debug"><a href="#vscode-debug" class="headerlink" title="vscode debug"></a><a href="#vscode_debug">vscode debug</a></h2><p>对于vscode用户来说，调试非常简单，点击侧边栏的小甲虫图标，点击设置<br>然后直接修改 “program”的值，修改完点击左上角的绿色箭头就可以跑起来了，如果要在某一处断点，比如 <code>create-react-app/index.js</code> line39 断点，直接在行号的左边点一下鼠标就可以了<br><img src="./debug1.png" alt=""><br><img src="./debug2.png" alt=""><br><figure class="highlight json"><figcaption><span>launch.json 配置</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</div><div class="line">  <span class="attr">"configurations"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"type"</span>: <span class="string">"node"</span>,</div><div class="line">      <span class="attr">"request"</span>: <span class="string">"launch"</span>,</div><div class="line">      <span class="attr">"name"</span>: <span class="string">"启动程序"</span>,</div><div class="line">      <span class="attr">"program"</span>: <span class="string">"$&#123;workspaceFolder&#125;/packages/create-react-app/index.js"</span>,</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="node-调试"><a href="#node-调试" class="headerlink" title="node 调试"></a>node 调试</h2><p>如果平时没有用vscode开发或者习惯chrome-devtool的，可以直接用node命令跑，然后在chrome里面调试<br>首先保证node的版本的 6 以上<br>然后在项目根目录下运行 <code>node --inspect-brk packages/create-react-app/index.js</code><br>在chrome地址栏输入 chrome://inspect/#devices 然后就可以看到我们要调试的脚本了<br>关于node chrome-devtool 调试详细可以看这里 <a href="https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27" target="_blank" rel="external">传送门</a></p>
+<p><img src="./debug3.png" alt="" title="终端启动node调试"><br><img src="./debug4.png" alt=""><br><img src="./debug5.png" alt=""><br>(ps：这里可以看出来node在模块化的实现是通过用一个函数包裹起来，然后把 exports, requestd等参数传进来以供使用)</p>
+<h1 id="开始断点阅读源码"><a href="#开始断点阅读源码" class="headerlink" title="开始断点阅读源码"></a><a href="#开始断点阅读源码">开始断点阅读源码</a></h1><h2 id="packages-create-react-app-index-js-github文件传送门"><a href="#packages-create-react-app-index-js-github文件传送门" class="headerlink" title="packages/create-react-app/index.js github文件传送门"></a><a href="#packages/create-react-app/index.js">packages/create-react-app/index.js</a> <a href="https://github.com/facebook/create-react-app/blob/v1.1.4/packages/create-react-app/index.js" target="_blank" rel="external">github文件传送门</a></h2><p><img src="./create-react-app_index.png" alt="" title="packages/creat-react-app/index.js"><br>这个文件十分简单，只是做为一个入口文件判断一下 node版本，小于 4.x的提示并终止程序， 如果正常则加载 <code>./createReactApp</code> 这个文件，主要的逻辑在该文件实现。</p>
+<h2 id="packages-create-react-app-createReactApp-js-github文件传送门"><a href="#packages-create-react-app-createReactApp-js-github文件传送门" class="headerlink" title="packages/create-react-app/createReactApp.js github文件传送门"></a><a href="#packages/create-react-app/createReactApp.js">packages/create-react-app/createReactApp.js</a> <a href="https://github.com/facebook/create-react-app/blob/v1.1.4/packages/create-react-app/createReactApp.js" target="_blank" rel="external">github文件传送门</a></h2><p>顺着我们的断点进入到 <code>createReactApp.js</code> 这个文件有750行乍一看很多，文件头又有十几个依赖引入，但是不要被吓到，一般这种高质量的开源项目，里面有一大半是注释和错误友好信息。</p>
+<blockquote>
+<p>这里建议没有打断点调试的小伙伴试一下把代码复制到另一个js文件，然后先不看前面的依赖，下面用到再去 npm查一下是什么作用的。不要被绕进去看了一个又一个的依赖，核心代码反而没有看到。 然后看一部分之后就把那部分的代码删掉，比如我看了200行，就把前面200行删了，这样剩下500行看着就没有那么心虚了。当然还是建议用断点调试阅读，逻辑会比较清晰。</p>
+</blockquote>
+<p>首先文件头部这一大串的依赖，我们暂时不去关注他们，等后面用到再去查<br><figure class="highlight javascript"><figcaption><span>createReactApp.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> validateProjectName = <span class="built_in">require</span>(<span class="string">'validate-npm-package-name'</span>);</div><div class="line"><span class="keyword">const</span> chalk = <span class="built_in">require</span>(<span class="string">'chalk'</span>);</div><div class="line"><span class="keyword">const</span> commander = <span class="built_in">require</span>(<span class="string">'commander'</span>);</div><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs-extra'</span>);</div><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"><span class="keyword">const</span> execSync = <span class="built_in">require</span>(<span class="string">'child_process'</span>).execSync;</div><div class="line"><span class="keyword">const</span> spawn = <span class="built_in">require</span>(<span class="string">'cross-spawn'</span>);</div><div class="line"><span class="keyword">const</span> semver = <span class="built_in">require</span>(<span class="string">'semver'</span>);</div><div class="line"><span class="keyword">const</span> dns = <span class="built_in">require</span>(<span class="string">'dns'</span>);</div><div class="line"><span class="keyword">const</span> tmp = <span class="built_in">require</span>(<span class="string">'tmp'</span>);</div><div class="line"><span class="keyword">const</span> unpack = <span class="built_in">require</span>(<span class="string">'tar-pack'</span>).unpack;</div><div class="line"><span class="keyword">const</span> url = <span class="built_in">require</span>(<span class="string">'url'</span>);</div><div class="line"><span class="keyword">const</span> hyperquest = <span class="built_in">require</span>(<span class="string">'hyperquest'</span>);</div><div class="line"><span class="keyword">const</span> envinfo = <span class="built_in">require</span>(<span class="string">'envinfo'</span>);</div></pre></td></tr></table></figure></p>
+<h3 id="commander-命令行处理程序"><a href="#commander-命令行处理程序" class="headerlink" title="commander 命令行处理程序"></a><a href="#commander">commander 命令行处理程序</a></h3><p>接下来顺着我们的断点，第一行被执行的代码是 <a href="https://github.com/facebook/create-react-app/blob/v1.1.4/packages/create-react-app/createReactApp.js#L56" target="_blank" rel="external">L56</a></p>
+<figure class="highlight javascript"><figcaption><span>createReactApp.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> program = <span class="keyword">new</span> commander.Command(packageJson.name)</div><div class="line">  .version(packageJson.version) <span class="comment">// create-react-app -v 时输出 $&#123;packageJson.version&#125;</span></div><div class="line">  .arguments(<span class="string">'&lt;project-directory&gt;'</span>) <span class="comment">// 这里用&lt;&gt; 包着project-directory 表示 project-directory为必填项</span></div><div class="line">  .usage(<span class="string">`<span class="subst">$&#123;chalk.green(<span class="string">'&lt;project-directory&gt;'</span>)&#125;</span> [options]`</span>) <span class="comment">// 用绿色字体输出 &lt;project-directory&gt;</span></div><div class="line">  .action(<span class="function"><span class="params">name</span> =&gt;</span> &#123;</div><div class="line">    projectName = name;</div><div class="line">  &#125;) <span class="comment">// 获取用户传入的第一个参数作为 projectName **下面就会用到**</span></div><div class="line">  .option(<span class="string">'--verbose'</span>, <span class="string">'print additional logs'</span>) <span class="comment">// option用于配置`create-react-app -[option]`的选项，比如这里如果用户参数带了 --verbose， 会自动设置program.verbose = true;</span></div><div class="line">  .option(<span class="string">'--info'</span>, <span class="string">'print environment debug info'</span>) <span class="comment">// 后面会用到这个参数，用于打印出环境调试的版本信息</span></div><div class="line">  .option(</div><div class="line">    <span class="string">'--scripts-version &lt;alternative-package&gt;'</span>,</div><div class="line">    <span class="string">'use a non-standard version of react-scripts'</span></div><div class="line">  )</div><div class="line">  .option(<span class="string">'--use-npm'</span>)</div><div class="line">  .allowUnknownOption()</div><div class="line">   <span class="comment">// on('option', cb) 输入 create-react-app --help 自动执行后面的操作输出帮助</span></div><div class="line">  .on(<span class="string">'--help'</span>, () =&gt; &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`    Only <span class="subst">$&#123;chalk.green(<span class="string">'&lt;project-directory&gt;'</span>)&#125;</span> is required.`</span>);</div><div class="line">    <span class="built_in">console</span>.log();</div><div class="line">    <span class="built_in">console</span>.log(</div><div class="line">      <span class="string">`    A custom <span class="subst">$&#123;chalk.cyan(<span class="string">'--scripts-version'</span>)&#125;</span> can be one of:`</span></div><div class="line">    );</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`      - a specific npm version: <span class="subst">$&#123;chalk.green(<span class="string">'0.8.2'</span>)&#125;</span>`</span>);</div><div class="line">    <span class="built_in">console</span>.log(</div><div class="line">      <span class="string">`      - a custom fork published on npm: <span class="subst">$&#123;chalk.green(</span></span></div><div class="line">        <span class="string">'my-react-scripts'</span></div><div class="line">      )&#125;`</div><div class="line">    );</div><div class="line">    <span class="built_in">console</span>.log(</div><div class="line">      <span class="string">`      - a .tgz archive: <span class="subst">$&#123;chalk.green(</span></span></div><div class="line">        <span class="string">'https://mysite.com/my-react-scripts-0.8.2.tgz'</span></div><div class="line">      )&#125;`</div><div class="line">    );</div><div class="line">    <span class="built_in">console</span>.log(</div><div class="line">      <span class="string">`      - a .tar.gz archive: <span class="subst">$&#123;chalk.green(</span></span></div><div class="line">        <span class="string">'https://mysite.com/my-react-scripts-0.8.2.tar.gz'</span></div><div class="line">      )&#125;`</div><div class="line">    );</div><div class="line">    <span class="built_in">console</span>.log(</div><div class="line">      <span class="string">`    It is not needed unless you specifically want to use a fork.`</span></div><div class="line">    );</div><div class="line">    <span class="built_in">console</span>.log();</div><div class="line">    <span class="built_in">console</span>.log(</div><div class="line">      <span class="string">`    If you have any problems, do not hesitate to file an issue:`</span></div><div class="line">    );</div><div class="line">    <span class="built_in">console</span>.log(</div><div class="line">      <span class="string">`      <span class="subst">$&#123;chalk.cyan(</span></span></div><div class="line">        <span class="string">'https://github.com/facebookincubator/create-react-app/issues/new'</span></div><div class="line">      )&#125;`</div><div class="line">    );</div><div class="line">    <span class="built_in">console</span>.log();</div><div class="line">  &#125;)</div><div class="line">  .parse(process.argv); <span class="comment">// 解析传入的参数 可以不用理会</span></div></pre></td></tr></table></figure>
+<p>这里用到了一个 commander 的依赖，这时候我们就可以去npm 搜一下他的作用了。官网的描述是 <code>The complete solution for node.js command-line interfaces, inspired by Ruby&#39;s commander.API documentation</code> 翻译过来是 node.js 命令行接口的完整解决方案，基本的功能看注释即可，大概了解一下有这么一个东西，后面自己要做的时候有门路即可。<a href="https://github.com/tj/commander.js" target="_blank" rel="external">github传送门</a>。</p>
+<h3 id="判断是否有传projectName"><a href="#判断是否有传projectName" class="headerlink" title="判断是否有传projectName"></a><a href="#projectName">判断是否有传projectName</a></h3><figure class="highlight javascript"><figcaption><span>createReactApp.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> projectName === <span class="string">'undefined'</span>) &#123;</div><div class="line">  <span class="keyword">if</span> (program.info) &#123; <span class="comment">// 如果命令行有带 --info 参数，输出 react,react-dom,react-scripts版本 然后退出</span></div><div class="line">    envinfo.print(&#123;</div><div class="line">      <span class="attr">packages</span>: [<span class="string">'react'</span>, <span class="string">'react-dom'</span>, <span class="string">'react-scripts'</span>],</div><div class="line">      <span class="attr">noNativeIDE</span>: <span class="literal">true</span>,</div><div class="line">      <span class="attr">duplicates</span>: <span class="literal">true</span>,</div><div class="line">    &#125;);</div><div class="line">    process.exit(<span class="number">0</span>);</div><div class="line">  &#125;</div><div class="line">  ...</div><div class="line">  这里输出了一些错误提示信息</div><div class="line">  ...</div><div class="line">  process.exit(<span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>往下看是一个判断必须传入的参数 <code>projectName</code>，这里的 <code>projectName</code> 就是上面通过 <code>.action(name =&gt; { projectName = name;})</code> 获取的。<br>判断如果没有输入的话，直接做一些信息提示，然后终止程序。<br>这里参数如果传入了 <code>--info</code> 的话， 会执行到<code>envinfo.print</code>。 日常npm 搜一下 envinfo 这是一个用来输出当前环境系统的一些系统信息，比如系统版本，npm等等还有react,react-dom,react-scripts这些包的版本，非常好用。这个包现在的版本和create-react-app的版本差异比较大，但是不影响我们使用~ <a href="https://www.npmjs.com/package/envinfo" target="_blank" rel="external">envinfo npm传送门</a></p>
+<p>如果是用我上面提供的 vscode debug配置的话，到这里程序应该就运行结束了，因为我们在启动调试服务的时候，没有给脚本传入参数作为 <code>projectName</code>，所以我们修改一下 vscode <code>launch.json</code> 加多个字段 <code>&quot;args&quot;: [&quot;test-create-react-app&quot;]</code> <a href="#vscode_debug">忘记怎么设置的点这里</a>~ 传入了 <code>projectName</code> 参数 然后重新启动调试服务<br><figure class="highlight json"><figcaption><span>加入projectName 后的 launch.json</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</div><div class="line">  <span class="attr">"configurations"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="attr">"type"</span>: <span class="string">"node"</span>,</div><div class="line">      <span class="attr">"request"</span>: <span class="string">"launch"</span>,</div><div class="line">      <span class="attr">"name"</span>: <span class="string">"启动程序"</span>,</div><div class="line">      <span class="attr">"program"</span>: <span class="string">"$&#123;workspaceFolder&#125;/packages/create-react-app/index.js"</span>,</div><div class="line">      <span class="attr">"args"</span>: [</div><div class="line">        <span class="string">"test-create-react-app"</span></div><div class="line">      ]</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="隐藏的-commander-参数"><a href="#隐藏的-commander-参数" class="headerlink" title="隐藏的 commander 参数"></a><a href="#dev_commander">隐藏的 commander 参数</a></h3><p>接着走判断完 projectName 之后，来到 <a href="https://github.com/facebook/create-react-app/blob/v1.1.4/packages/create-react-app/createReactApp.js#L140" target="_blank" rel="external">Line140</a></p>
+<figure class="highlight javascript"><figcaption><span>createReactApp.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> hiddenProgram = <span class="keyword">new</span> commander.Command()</div><div class="line">  .option(</div><div class="line">    <span class="string">'--internal-testing-template &lt;path-to-template&gt;'</span>,</div><div class="line">    <span class="string">'(internal usage only, DO NOT RELY ON THIS) '</span> +</div><div class="line">      <span class="string">'use a non-standard application template'</span></div><div class="line">  )</div><div class="line">  .parse(process.argv);</div></pre></td></tr></table></figure>
+<p>可以看到这个是一个隐藏的调试选项，给出一个参数用于传入模版路径，给开发人员调试用的…没事不折腾他</p>
+<h3 id="createApp"><a href="#createApp" class="headerlink" title="createApp"></a><a href="#createApp">createApp</a></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">createApp(</div><div class="line">  projectName,</div><div class="line">  program.verbose,</div><div class="line">  program.scriptsVersion,</div><div class="line">  program.useNpm,</div><div class="line">  hiddenProgram.internalTestingTemplate</div><div class="line">);</div></pre></td></tr></table></figure>
+<p>接着往下就是调用了 <code>createApp</code>, 传入的参数对于的含义是：<code>项目名</code>，<code>是否输出额外信息</code>，<code>传入的脚本版本</code>，<code>是否使用npm</code>，<code>调试的模板路径</code>。接下来单步进入函数体看一下 <code>createApp</code> 到底做了什么事情。</p>
+<figure class="highlight javascript"><figcaption><span>createReactApp.js createApp</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createApp</span>(<span class="params">name, verbose, version, useNpm, template</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> root = path.resolve(name);</div><div class="line">  <span class="keyword">const</span> appName = path.basename(root);</div><div class="line"></div><div class="line">  checkAppName(appName); <span class="comment">// 检查传入的项目名合法性</span></div><div class="line">  fs.ensureDirSync(name); <span class="comment">// 这里的fs用的是 fs-extra， 对node的fs提供一些扩展方法</span></div><div class="line">  <span class="comment">// 判断新建这个文件夹是否是安全的 不安全直接退出</span></div><div class="line">  <span class="keyword">if</span> (!isSafeToCreateProjectIn(root, name)) &#123;</div><div class="line">    process.exit(<span class="number">1</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 在新建的文件夹下写入 package.json 文件</span></div><div class="line">  <span class="keyword">const</span> packageJson = &#123;</div><div class="line">    <span class="attr">name</span>: appName,</div><div class="line">    <span class="attr">version</span>: <span class="string">'0.1.0'</span>,</div><div class="line">    <span class="attr">private</span>: <span class="literal">true</span>,</div><div class="line">  &#125;;</div><div class="line">  fs.writeFileSync(</div><div class="line">    path.join(root, <span class="string">'package.json'</span>),</div><div class="line">    <span class="built_in">JSON</span>.stringify(packageJson, <span class="literal">null</span>, <span class="number">2</span>)</div><div class="line">  );</div><div class="line"></div><div class="line">  <span class="keyword">const</span> useYarn = useNpm ? <span class="literal">false</span> : shouldUseYarn();</div><div class="line">  <span class="keyword">const</span> originalDirectory = process.cwd();</div><div class="line">  process.chdir(root);</div><div class="line">  <span class="comment">// 如果是使用npm，检测npm是否在正确目录下执行</span></div><div class="line">  <span class="keyword">if</span> (!useYarn &amp;&amp; !checkThatNpmCanReadCwd()) &#123;</div><div class="line">    process.exit(<span class="number">1</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 判断node环境，输出一些提示信息, 并采用旧版本的 react-scripts</span></div><div class="line">  <span class="keyword">if</span> (!semver.satisfies(process.version, <span class="string">'&gt;=6.0.0'</span>)) &#123;</div><div class="line">    <span class="comment">// 输出一些提示更新信息</span></div><div class="line">    version = <span class="string">'react-scripts@0.9.x'</span>;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (!useYarn) &#123;</div><div class="line">    <span class="comment">// 检测npm版本 判断npm版本，如果低于3.x，使用旧版的 react-scripts旧版本</span></div><div class="line">    <span class="keyword">const</span> npmInfo = checkNpmVersion();</div><div class="line">    <span class="keyword">if</span> (!npmInfo.hasMinNpm) &#123;</div><div class="line">      version = <span class="string">'react-scripts@0.9.x'</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 判断结束之后，跑run 方法</span></div><div class="line">  <span class="comment">// 传入 项目路径，项目名， reactScripts版本， 是否输入额外信息， 运行的路径， 模板（开发调试用的）, 是否使用yarn</span></div><div class="line">  run(root, appName, version, verbose, originalDirectory, template, useYarn);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/facebook/create-react-app/blob/v1.1.4/packages/create-react-app/createReactApp.js#L156" target="_blank" rel="external">createReactApp.js createApp 传送门</a><br>这里我精简了一些东西，删除一些输出信息，加了一些注释<br><code>createApp</code> 主要做的事情就是做一些安全判断比如：检查项目名是否合法，检查新建的话是否安全，检查npm版本，处理<code>react-script</code>的版本兼容<br>具体的执行逻辑写在注释里了，一系列的检查处理之后，调用 run 方法，传入参数为 <code>项目路径</code>，<code>项目名</code>， <code>reactScripts版本</code>， <code>是否输入额外信息</code>， <code>运行的路径</code>， <code>模板（开发调试用的）</code>, <code>是否使用yarn</code>。<br>了解大概的流程之后，再一个函数一个函数进去看。</p>
+<blockquote>
+<p>checkAppName()  // 检查传入的项目名合法性<br>isSafeToCreateProjectIn(root, name) // 判断新建这个文件夹是否是安全的<br>shouldUseYarn() // 检查yarn<br>checkThatNpmCanReadCwd() // 检查npm<br>run() // 检查完之后调用run执行安装等操作</p>
+</blockquote>
+<h3 id="checkAppName-检查projectName是否合法"><a href="#checkAppName-检查projectName是否合法" class="headerlink" title="checkAppName  检查projectName是否合法"></a><a href="#checkAppName">checkAppName</a>  检查projectName是否合法</h3><figure class="highlight javascript"><figcaption><span>createReactApp.js checkAppName</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkAppName</span>(<span class="params">appName</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> validationResult = validateProjectName(appName);</div><div class="line">  <span class="keyword">if</span> (!validationResult.validForNewPackages) &#123;</div><div class="line">    <span class="comment">// 判断是否符合npm规范如果不符合，输出提示并结束任务</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">const</span> dependencies = [<span class="string">'react'</span>, <span class="string">'react-dom'</span>, <span class="string">'react-scripts'</span>].sort();</div><div class="line">  <span class="keyword">if</span> (dependencies.indexOf(appName) &gt;= <span class="number">0</span>) &#123;</div><div class="line">    <span class="comment">// 判断是否重名，如果重名则输出提示并结束任务</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>checkAppName</code> 用于判断当前的项目名是否符合npm规范，比如不能大写等，用的是一个<a href="validate-npm-package-name">validate-npm-package-name</a>的npm包。这里简化了大部分的错误提示代码，但是不影响口感。</p>
+<h3 id="shouldUseYarn-判断是否有装yarn-同理的有-checkThatNpmCanReadCwd-用来判断npm"><a href="#shouldUseYarn-判断是否有装yarn-同理的有-checkThatNpmCanReadCwd-用来判断npm" class="headerlink" title="shouldUseYarn 判断是否有装yarn 同理的有 checkThatNpmCanReadCwd 用来判断npm"></a><a href="#shouldUseYarn">shouldUseYarn</a> 判断是否有装yarn 同理的有 <code>checkThatNpmCanReadCwd</code> 用来判断npm</h3><figure class="highlight javascript"><figcaption><span>createReactApp.js shouldUseYarn</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">shouldUseYarn</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    execSync(<span class="string">'yarnpkg --version'</span>, &#123; <span class="attr">stdio</span>: <span class="string">'ignore'</span> &#125;);</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="run"><a href="#run" class="headerlink" title="run"></a><a href="#run">run</a></h3><p>前面的那些操作可以说都是处理一些判断与兼容逻辑，到<code>run</code>这里才是 真正的核心安装逻辑，<strong>开始安装依赖，拷贝模版</strong>等。</p>
+<figure class="highlight javascript"><figcaption><span>createReactApp.js run</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params">...</span>) </span>&#123;</div><div class="line">  <span class="comment">// 这里获取要安装的package，默认情况下是 `react-scripts`。 也可能是根据传参去拿对应的包</span></div><div class="line">  <span class="keyword">const</span> packageToInstall = getInstallPackage(version, originalDirectory);</div><div class="line">  <span class="comment">// 需要安装所有的依赖， react, react-dom, react-script</span></div><div class="line">  <span class="keyword">const</span> allDependencies = [<span class="string">'react'</span>, <span class="string">'react-dom'</span>, packageToInstall];</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>run</code> 做的事情主要有这么几个，先根据传入的版本<code>version</code> 和原始目录<code>originalDirectory</code> 去获取要安装的某个 package。<br>默认的 version 为空,获取到的 packageToInstall 值是 <code>react-scripts</code>, 然后将<code>packageToInstall</code>拼接到 <code>allDependencies</code>意为所有需要安装的依赖。<br>这里说一下<code>react-scripts</code>其实就是一系列的webpack配置与模版，属于 <code>create-react-app</code> 另一个核心的一个大模块。<a href="https://www.npmjs.com/package/react-scripts" target="_blank" rel="external">传送门</a></p>
+<figure class="highlight javascript"><figcaption><span>createReactApp.js run</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params">...</span>) </span>&#123;</div><div class="line">  ...</div><div class="line">  <span class="comment">// 获取包名，支持 taz|tar格式、git仓库、版本号、文件路径等等</span></div><div class="line">  getPackageName(packageToInstall)</div><div class="line">    .then(<span class="function"><span class="params">packageName</span> =&gt;</span></div><div class="line">      <span class="comment">// 如果是yarn,判断是否在线模式（对应的就是离线模式），处理完判断就返回给下一个then处理</span></div><div class="line">      checkIfOnline(useYarn).then(<span class="function"><span class="params">isOnline</span> =&gt;</span> (&#123;</div><div class="line">        <span class="attr">isOnline</span>: isOnline,</div><div class="line">        <span class="attr">packageName</span>: packageName,</div><div class="line">      &#125;))</div><div class="line">    )</div><div class="line">    .then(<span class="function"><span class="params">info</span> =&gt;</span> &#123;</div><div class="line">      <span class="keyword">const</span> isOnline = info.isOnline;</div><div class="line">      <span class="keyword">const</span> packageName = info.packageName;</div><div class="line">      <span class="comment">/** 开始核心的安装部分 传入`安装路径`，`是否使用yarn`,`所有依赖`，`是否输出额外信息`，`在线状态` **/</span></div><div class="line">      <span class="comment">/** 这里主要的操作是 根据传入的参数，开始跑 npm || yarn 安装react react-dom等依赖 **/</span></div><div class="line">      <span class="comment">/** 这里如果网络不好，可能会挂 **/</span></div><div class="line">      <span class="keyword">return</span> install(root, useYarn, allDependencies, verbose, isOnline).then(</div><div class="line">        <span class="function"><span class="params">()</span> =&gt;</span> packageName</div><div class="line">      );</div><div class="line">    &#125;)</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后如果当前是采用yarn安装方式的话，就判断是否处于离线状态。判断完连着前面的 <code>packageToInstall</code> 和 <code>allDependencies</code> 一起丢给 <code>install</code> 方法，再由<code>install</code>方法去跑安装。</p>
+<blockquote>
+<p>run方法<br>getInstallPackage(); // 获取要安装的模版包 默认是 react-scripts<br>install(); // 传参数给install 负责安装 allDependencies<br>init(); // 调用安装了的 react-scripts/script/init 去拷贝模版<br>.catch(); // 错误处理</p>
+</blockquote>
+<h3 id="install"><a href="#install" class="headerlink" title="install"></a><a href="#install">install</a></h3><figure class="highlight javascript"><figcaption><span>createReactApp.js install</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">install</span>(<span class="params">root, useYarn, dependencies, verbose, isOnline</span>) </span>&#123;</div><div class="line">  <span class="comment">// 主要根据参数拼装命令行，然后用node去跑安装脚本 如 `npm install react react-dom --save` 或者 `yarn add react react-dom`</span></div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">let</span> command;</div><div class="line">    <span class="keyword">let</span> args;</div><div class="line"></div><div class="line">    <span class="comment">// 开始拼装 yarn 命令行</span></div><div class="line">    <span class="keyword">if</span> (useYarn) &#123;</div><div class="line">      command = <span class="string">'yarnpkg'</span>;</div><div class="line">      args = [<span class="string">'add'</span>, <span class="string">'--exact'</span>]; <span class="comment">// 使用确切版本模式</span></div><div class="line">      <span class="comment">// 判断是否是离线状态 加个状态</span></div><div class="line">      <span class="keyword">if</span> (!isOnline) &#123;</div><div class="line">        args.push(<span class="string">'--offline'</span>);</div><div class="line">      &#125;</div><div class="line">      [].push.apply(args, dependencies);</div><div class="line">      <span class="comment">// 将cwd设置为我们要安装的目录路径</span></div><div class="line">      args.push(<span class="string">'--cwd'</span>);</div><div class="line">      args.push(root);</div><div class="line">      <span class="comment">// 如果是离线的话输出一些提示信息</span></div><div class="line"></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">      <span class="comment">// npm 安装模式，与yarn同理</span></div><div class="line">      command = <span class="string">'npm'</span>;</div><div class="line">      args = [</div><div class="line">        <span class="string">'install'</span>,</div><div class="line">        <span class="string">'--save'</span>,</div><div class="line">        <span class="string">'--save-exact'</span>,</div><div class="line">        <span class="string">'--loglevel'</span>,</div><div class="line">        <span class="string">'error'</span>,</div><div class="line">      ].concat(dependencies);</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 如果有传verbose， 则加该参数 输出额外的信息</span></div><div class="line">    <span class="keyword">if</span> (verbose) &#123;</div><div class="line">      args.push(<span class="string">'--verbose'</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 用 cross-spawn 跨平台执行命令行</span></div><div class="line">    <span class="keyword">const</span> child = spawn(command, args, &#123; <span class="attr">stdio</span>: <span class="string">'inherit'</span> &#125;);</div><div class="line"></div><div class="line">    <span class="comment">//  关闭的处理</span></div><div class="line">    child.on(<span class="string">'close'</span>, code =&gt; &#123;</div><div class="line">      <span class="keyword">if</span> (code !== <span class="number">0</span>) &#123;</div><div class="line">        <span class="keyword">return</span> reject(&#123; <span class="attr">command</span>: <span class="string">`<span class="subst">$&#123;command&#125;</span> <span class="subst">$&#123;args.join(<span class="string">' '</span>)&#125;</span>`</span>, &#125;);</div><div class="line">      &#125;</div><div class="line">      resolve();</div><div class="line">    &#125;);</div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们顺着断点从<code>run</code>跑到<code>install</code>方法，能看到代码里根据是否使用yarn分成两种处理方法。<br><code>if (useYarn) { yarn 安装逻辑 } else { npm 安装逻辑 }</code><br>处理方法都是同个逻辑，根据传入的 <code>dependencies</code> 去拼接需要安装的依赖，主要有 <code>react</code>,<code>react-dom</code>,<code>react-script</code> 。再判断<code>verbose</code>和<code>isOnline</code> 加一些命令行的参数。<br>最后再用node跑命令，平台差异的话是借助<a href="https://www.npmjs.com/package/cross-spawn" target="_blank" rel="external">cross-spawn</a>去处理的，这里不再赘述。<br>具体逻辑见上面代码，去掉不重要的信息输出，代码还是比较易懂。</p>
+<blockquote>
+<p>install<br>根据传进来的参数判断用yarn还是npm<br>拼装需要的依赖<br>用cross-spawn跑命令安装</p>
+</blockquote>
+<p>在<code>install</code>会返回一个<code>Promise</code>在安装完之后，断点又回到我们的<code>run</code>函数继续走接下来的逻辑。<br><figure class="highlight javascript"><figcaption><span>createReactApp.js run</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  ...</div><div class="line">  getPackageName()</div><div class="line">    .then(<span class="function"><span class="params">()</span>=&gt;</span> &#123;</div><div class="line">      <span class="keyword">return</span> install(root, useYarn, allDependencies, verbose, isOnline).then(</div><div class="line">            <span class="function"><span class="params">()</span> =&gt;</span> packageName</div><div class="line">      );</div><div class="line">    &#125;)</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>既然我们的<code>install</code>已经把开发需要的依赖安装完了，接下来我们可以开判断当前运行的<code>node</code>是否符合我们已经安装的<code>react-scripts</code>里面的<code>packages.json</code>要求的node版本。<br>这句话有点绕，简单来说就是判断当前运行的node版本是否<code>react-scripts</code>这个依赖所需。</p>
+<p>然后就把开始修改<code>package.json</code>我们已经安装的依赖(react, react-dom, react-scripts)版本从原本的精确版本eg(16.0.0)修改为高于等于版本eg(^16.0.0)。<br>这些处理做完之后，我们的目录是长这样子的，里面除了安装的依赖和<code>package.json</code>外没有任何东西。所以接下来的操作是生成一些webpack的配置和一个简单的可启动demo。<br><img src="./create-react-app1.png" alt=""></p>
+<p>那么他是怎么快速生成这些东西的呢？<br>还记得一开始说了有一个 隐藏的命令行参数 <code>--internal-testing-template</code> 用来给开发者调试用的吗，所以其实create-react-app生成这些的方法就是直接把某一个路径的模板拷贝到对应的地方。是不是很简单粗暴hhhhh</p>
+<figure class="highlight javascript"><figcaption><span>createReactApp.js run</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">run(...) &#123;</div><div class="line">  ...</div><div class="line">    getPackageName(packageToInstall)</div><div class="line">    .then(...)</div><div class="line">    .then(<span class="function"><span class="params">info</span> =&gt;</span> install(...).then(<span class="function"><span class="params">()</span>=&gt;</span> packageName))</div><div class="line">    <span class="comment">/** install 安装完之后的逻辑 **/</span></div><div class="line">    <span class="comment">/** 从这里开始拷贝模板逻辑 **/</span></div><div class="line">    .then(<span class="function"><span class="params">packageName</span> =&gt;</span> &#123;</div><div class="line">      <span class="comment">// 安装完 react, react-dom, react-scripts 之后检查当前环境运行的node版本是否符合要求</span></div><div class="line">      checkNodeVersion(packageName);</div><div class="line">      <span class="comment">// 该项package.json里react, react-dom的版本范围，eg: 16.0.0 =&gt; ^16.0.0</span></div><div class="line">      setCaretRangeForRuntimeDeps(packageName);</div><div class="line"></div><div class="line">      <span class="comment">// 加载script脚本，并执行init方法</span></div><div class="line">      <span class="keyword">const</span> scriptsPath = path.resolve(</div><div class="line">        process.cwd(),</div><div class="line">        <span class="string">'node_modules'</span>,</div><div class="line">        packageName,</div><div class="line">        <span class="string">'scripts'</span>,</div><div class="line">        <span class="string">'init.js'</span></div><div class="line">      );</div><div class="line">      <span class="keyword">const</span> init = <span class="built_in">require</span>(scriptsPath);</div><div class="line">      <span class="comment">// init 方法主要执行的操作是</span></div><div class="line">      <span class="comment">// 写入package.json 一些脚本。eg: script: &#123;start: 'react-scripts start'&#125;</span></div><div class="line">      <span class="comment">// 改写README.MD</span></div><div class="line">      <span class="comment">// 把预设的模版拷贝到项目下</span></div><div class="line">      <span class="comment">// 输出成功与后续操作的信息</span></div><div class="line">      init(root, appName, verbose, originalDirectory, template);</div><div class="line"></div><div class="line">      <span class="keyword">if</span> (version === <span class="string">'react-scripts@0.9.x'</span>) &#123;</div><div class="line">        <span class="comment">// 如果是旧版本的 react-scripts 输出提示</span></div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">    .catch(<span class="function"><span class="params">reason</span> =&gt;</span> &#123;</div><div class="line">      <span class="comment">// 出错的话，把安装了的文件全删了 并输出一些日志信息等</span></div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里安装完依赖之后，执行<code>checkNodeVersion</code>判断node版本是否与依赖相符。<br>之后拼接路径去跑<code>目录/node_modules/react-scripts/scripts/init.js</code>，传参让他去做一些初始化的事情。<br>然后对出错情况做一些相应的处理</p>
+<h2 id="node-modules-react-scripts-script-init-js"><a href="#node-modules-react-scripts-script-init-js" class="headerlink" title="/node_modules/react-scripts/script/init.js"></a><a href="#/node_modules/react-scripts/script/init.js">/node_modules/react-scripts/script/init.js</a></h2><figure class="highlight javascript"><figcaption><span>目标文件夹/node_modules/react-scripts/script/init.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params"></span></span></div><div class="line">  appPath,</div><div class="line">  appName,</div><div class="line">  verbose,</div><div class="line">  originalDirectory,</div><div class="line">  template</div><div class="line">) &#123;</div><div class="line">  <span class="keyword">const</span> ownPackageName = <span class="built_in">require</span>(path.join(__dirname, <span class="string">'..'</span>, <span class="string">'package.json'</span>))</div><div class="line">    .name;</div><div class="line">  <span class="keyword">const</span> ownPath = path.join(appPath, <span class="string">'node_modules'</span>, ownPackageName);</div><div class="line">  <span class="keyword">const</span> appPackage = <span class="built_in">require</span>(path.join(appPath, <span class="string">'package.json'</span>));</div><div class="line">  <span class="keyword">const</span> useYarn = fs.existsSync(path.join(appPath, <span class="string">'yarn.lock'</span>));</div><div class="line"></div><div class="line">  <span class="comment">// 1. 把启动脚本写入目标 package.json </span></div><div class="line">  appPackage.scripts = &#123;</div><div class="line">    <span class="attr">start</span>: <span class="string">'react-scripts start'</span>,</div><div class="line">    <span class="attr">build</span>: <span class="string">'react-scripts build'</span>,</div><div class="line">    <span class="attr">test</span>: <span class="string">'react-scripts test --env=jsdom'</span>,</div><div class="line">    <span class="attr">eject</span>: <span class="string">'react-scripts eject'</span>,</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  fs.writeFileSync(</div><div class="line">    path.join(appPath, <span class="string">'package.json'</span>),</div><div class="line">    <span class="built_in">JSON</span>.stringify(appPackage, <span class="literal">null</span>, <span class="number">2</span>)</div><div class="line">  );</div><div class="line"></div><div class="line">  <span class="comment">// 2. 改写README.MD，把一些帮助信息写进去</span></div><div class="line">  <span class="keyword">const</span> readmeExists = fs.existsSync(path.join(appPath, <span class="string">'README.md'</span>));</div><div class="line">  <span class="keyword">if</span> (readmeExists) &#123;</div><div class="line">    fs.renameSync(</div><div class="line">      path.join(appPath, <span class="string">'README.md'</span>),</div><div class="line">      path.join(appPath, <span class="string">'README.old.md'</span>)</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 3. 把预设的模版拷贝到项目下，主要有 public, src/[APP.css, APP.js, index.js,....], .gitignore</span></div><div class="line">  <span class="keyword">const</span> templatePath = template</div><div class="line">    ? path.resolve(originalDirectory, template)</div><div class="line">    : path.join(ownPath, <span class="string">'template'</span>);</div><div class="line">  <span class="keyword">if</span> (fs.existsSync(templatePath)) &#123;</div><div class="line">    fs.copySync(templatePath, appPath);</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">  &#125;</div><div class="line">  fs.move(</div><div class="line">    path.join(appPath, <span class="string">'gitignore'</span>),</div><div class="line">    path.join(appPath, <span class="string">'.gitignore'</span>),</div><div class="line">    [],</div><div class="line">    err =&gt; &#123; <span class="comment">/* 错误处理 */</span>  &#125;</div><div class="line">  );</div><div class="line"></div><div class="line">  <span class="comment">// 这里再次进行命令行的拼接，如果后面发现没有安装react和react-dom,重新安装一次</span></div><div class="line">  <span class="keyword">let</span> command;</div><div class="line">  <span class="keyword">let</span> args;</div><div class="line">  <span class="keyword">if</span> (useYarn) &#123;</div><div class="line">    command = <span class="string">'yarnpkg'</span>;</div><div class="line">    args = [<span class="string">'add'</span>];</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    command = <span class="string">'npm'</span>;</div><div class="line">    args = [<span class="string">'install'</span>, <span class="string">'--save'</span>, verbose &amp;&amp; <span class="string">'--verbose'</span>].filter(<span class="function"><span class="params">e</span> =&gt;</span> e);</div><div class="line">  &#125;</div><div class="line">  args.push(<span class="string">'react'</span>, <span class="string">'react-dom'</span>);</div><div class="line"></div><div class="line">  <span class="keyword">const</span> templateDependenciesPath = path.join(</div><div class="line">    appPath,</div><div class="line">    <span class="string">'.template.dependencies.json'</span></div><div class="line">  );</div><div class="line">  <span class="keyword">if</span> (fs.existsSync(templateDependenciesPath)) &#123;</div><div class="line">    <span class="keyword">const</span> templateDependencies = <span class="built_in">require</span>(templateDependenciesPath).dependencies;</div><div class="line">    args = args.concat(</div><div class="line">      <span class="built_in">Object</span>.keys(templateDependencies).map(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;key&#125;</span>@<span class="subst">$&#123;templateDependencies[key]&#125;</span>`</span>;</div><div class="line">      &#125;)</div><div class="line">    );</div><div class="line">    fs.unlinkSync(templateDependenciesPath);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (!isReactInstalled(appPackage) || template) &#123;</div><div class="line">    <span class="keyword">const</span> proc = spawn.sync(command, args, &#123; <span class="attr">stdio</span>: <span class="string">'inherit'</span> &#125;);</div><div class="line">    <span class="keyword">if</span> (proc.status !== <span class="number">0</span>) &#123;</div><div class="line">      <span class="built_in">console</span>.error(<span class="string">`\`<span class="subst">$&#123;command&#125;</span> <span class="subst">$&#123;args.join(<span class="string">' '</span>)&#125;</span>\` failed`</span>);</div><div class="line">      <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// 5. 输出成功的日志</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>init</code>文件又是一个大头，处理的逻辑主要有</p>
+<ol>
+<li>修改package.json，写入一些启动脚本，比如<code>script: {start: &#39;react-scripts start&#39;}</code>，用来启动开发项目</li>
+<li>改写README.MD，把一些帮助信息写进去</li>
+<li>把预设的模版拷贝到项目下，主要有 <code>public</code>, <code>src/[APP.css, APP.js, index.js,....]</code>, <code>.gitignore</code></li>
+<li>对旧版的node做一些兼容的处理，这里补一句，在选择 react-scripts 时就有根据node版本去判断选择比较老的 @0.9.x 版。</li>
+<li>如果完成输出对应的信息，如果失败，做一些输出日志等操作。</li>
+</ol>
+</blockquote>
+<p>这里代码有点多，所以删了一小部分，如果对初始的代码感兴趣可以跳转到这儿看<a href="https://github.com/facebook/create-react-app/blob/v1.1.4/packages/react-scripts/scripts/init.js" target="_blank" rel="external">react-scripts/scripts/init.js 传送门</a></p>
+<h1 id="END"><a href="#END" class="headerlink" title="END~"></a>END~</h1><p>到这里 <code>create-react-app</code> 项目构建的部分大流程已经走完了，我们来回顾一下：</p>
+<ol>
+<li>判断node版本如果小于4就退出，否则执行 <code>createReactApp.js</code> 文件</li>
+<li><code>createReactApp.js</code>先做一些命令行的处理响应处理，然后判断是否有传入 <code>projectName</code> 没有就提示并退出</li>
+<li>根据传入的 <code>projectName</code> 创建目录，并创建<code>package.json</code>。</li>
+<li>判断是否有特殊要求指定安装某个版本的<code>react-scripts</code>，然后用<code>cross-spawn</code>去处理跨平台的命令行问题，用<code>yarn</code>或<code>npm</code>安装<code>react</code>, <code>react-dom</code>, <code>react-scripts</code>。</li>
+<li>安装完之后跑 <code>react-scripts/script/init.js</code> 修改 <code>package.json</code> 的依赖版本，运行脚本，并拷贝对应的模板到目录里。</li>
+<li>处理完这些之后，输出提示给用户。</li>
+</ol>
+<p>本来想把整个 create-react-app 说完，但是发现说一个创建就写了这么多，所以后面如果有想继续看 <code>react-scripts</code>的话，会另外开一篇来讲。<br>大家也可以根据这个思路自己断点去看，不过 <code>react-scripts</code> 主要可能是webpack配置居多，断点帮助应该不大。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/github/" rel="tag"># github</a>
+          
+            <a href="/tags/learn/" rel="tag"># learn</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+         
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/async-await/" rel="next" title="async/await">
+                <i class="fa fa-chevron-left"></i> async/await
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/2018-04-29/" rel="prev" title="2018-04-29面试记A">
+                2018-04-29面试记A <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <!-- TODO <div class="post-spread">
+      
+    </div> -->
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpeg"
+               alt="Jsonz" />
+          <p class="site-author-name" itemprop="name">Jsonz</p>
+          <p class="site-description motion-element" itemprop="description">前端开发/Jsonz/租租车</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jsonz1993" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1638841204" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#快速了解"><span class="nav-number">1.</span> <span class="nav-text">快速了解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目初始化"><span class="nav-number">2.</span> <span class="nav-text">项目初始化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置断点调试"><span class="nav-number">3.</span> <span class="nav-text">配置断点调试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vscode-debug"><span class="nav-number">3.1.</span> <span class="nav-text">vscode debug</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node-调试"><span class="nav-number">3.2.</span> <span class="nav-text">node 调试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开始断点阅读源码"><span class="nav-number">4.</span> <span class="nav-text">开始断点阅读源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#packages-create-react-app-index-js-github文件传送门"><span class="nav-number">4.1.</span> <span class="nav-text">packages/create-react-app/index.js github文件传送门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#packages-create-react-app-createReactApp-js-github文件传送门"><span class="nav-number">4.2.</span> <span class="nav-text">packages/create-react-app/createReactApp.js github文件传送门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#commander-命令行处理程序"><span class="nav-number">4.2.1.</span> <span class="nav-text">commander 命令行处理程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断是否有传projectName"><span class="nav-number">4.2.2.</span> <span class="nav-text">判断是否有传projectName</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐藏的-commander-参数"><span class="nav-number">4.2.3.</span> <span class="nav-text">隐藏的 commander 参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#createApp"><span class="nav-number">4.2.4.</span> <span class="nav-text">createApp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#checkAppName-检查projectName是否合法"><span class="nav-number">4.2.5.</span> <span class="nav-text">checkAppName  检查projectName是否合法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shouldUseYarn-判断是否有装yarn-同理的有-checkThatNpmCanReadCwd-用来判断npm"><span class="nav-number">4.2.6.</span> <span class="nav-text">shouldUseYarn 判断是否有装yarn 同理的有 checkThatNpmCanReadCwd 用来判断npm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run"><span class="nav-number">4.2.7.</span> <span class="nav-text">run</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#install"><span class="nav-number">4.2.8.</span> <span class="nav-text">install</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node-modules-react-scripts-script-init-js"><span class="nav-number">4.3.</span> <span class="nav-text">/node_modules/react-scripts/script/init.js</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#END"><span class="nav-number">5.</span> <span class="nav-text">END~</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("RAbLFHzWBvLUKbFdTC89bMkN-gzGzoHsz", "3Ahh3qzrwB9FavCLmXSneqVk");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
