@@ -1,0 +1,1059 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=monaco:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="github," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="上一篇我们已经讲了 create-react-app里面创建package.json安装依赖并且拷贝可运行的demo等步骤。传送门 这一篇我们来讲一下 create-react-app里面的启动服务等部分，就是平时我们安装完依赖之后，启动开发服务:npm start。这一块涉及到太多关于webpack与配置的东西，加上第一篇觉得描述的太过冗余~所以这篇不会讲得很细，只是大概把他运转的逻辑思路写出来">
+<meta name="keywords" content="github">
+<meta property="og:type" content="article">
+<meta property="og:title" content="create-react-app 源码解析之react-scripts">
+<meta property="og:url" content="https://jsonz1993.github.io/2018/05/create-react-app-t/index.html">
+<meta property="og:site_name" content="Jsonz">
+<meta property="og:description" content="上一篇我们已经讲了 create-react-app里面创建package.json安装依赖并且拷贝可运行的demo等步骤。传送门 这一篇我们来讲一下 create-react-app里面的启动服务等部分，就是平时我们安装完依赖之后，启动开发服务:npm start。这一块涉及到太多关于webpack与配置的东西，加上第一篇觉得描述的太过冗余~所以这篇不会讲得很细，只是大概把他运转的逻辑思路写出来">
+<meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-t/tty_choose_port.png">
+<meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-t/webpackDevServer_error.png">
+<meta property="og:updated_time" content="2018-05-14T13:05:51.617Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="create-react-app 源码解析之react-scripts">
+<meta name="twitter:description" content="上一篇我们已经讲了 create-react-app里面创建package.json安装依赖并且拷贝可运行的demo等步骤。传送门 这一篇我们来讲一下 create-react-app里面的启动服务等部分，就是平时我们安装完依赖之后，启动开发服务:npm start。这一块涉及到太多关于webpack与配置的东西，加上第一篇觉得描述的太过冗余~所以这篇不会讲得很细，只是大概把他运转的逻辑思路写出来">
+<meta name="twitter:image" content="https://jsonz1993.github.io/2018/05/create-react-app-t/tty_choose_port.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jsonz1993.github.io/2018/05/create-react-app-t/"/>
+
+
+
+
+
+  <title> create-react-app 源码解析之react-scripts | Jsonz </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jsonz</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <h1 class="site-subtitle" itemprop="description"></h1>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://jsonz1993.github.io/2018/05/create-react-app-t/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Jsonz">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpeg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jsonz">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jsonz" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                create-react-app 源码解析之react-scripts
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T15:27:23+08:00">
+                2018-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index">
+                    <span itemprop="name">technology</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/05/create-react-app-t/" class="leancloud_visitors" data-flag-title="create-react-app 源码解析之react-scripts">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+ 
+        
+
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>上一篇我们已经讲了 <code>create-react-app</code>里面创建<code>package.json</code>安装依赖并且拷贝可运行的demo等步骤。<a href="https://jsonz1993.github.io/2018/05/create-react-app-o/">传送门</a></p>
+<p>这一篇我们来讲一下 <code>create-react-app</code>里面的启动服务等部分，就是平时我们安装完依赖之后，启动开发服务:<code>npm start</code>。这一块涉及到太多关于webpack与配置的东西，加上第一篇觉得描述的太过冗余~所以这篇不会讲得很细，只是大概把他运转的逻辑思路写出来，具体源码会提供传送门。</p>
+<p>推荐大家看第一篇的 <strong>项目初始化</strong> 和 <strong>断点调试</strong> 部分，这里就不在赘述。<a href="https://jsonz1993.github.io/2018/05/create-react-app-o/#%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96">传送门 项目初始化断点调试部分</a></p>
+<h1 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a><a href="#准备阶段">准备阶段</a></h1><p><strong>这里我们讨论的create-react-app版本依旧是<code>v1.1.4</code></strong></p>
+<p>既然这篇我们主要讲的是 <code>create-react-app</code>里面的webpack服务，那我们肯定要先新建一个项目。</p>
+<ul>
+<li><code>npm install create-react-app -g</code> 全局安装create-react-app</li>
+<li><code>create-react-app my-react-project</code> 用create-react-app新建一个项目</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cd my-react-project</div><div class="line">yarn start</div></pre></td></tr></table></figure>
+<p>新建完之后，终端提示了我们直接进入项目，跑 yarn(npm) start 就可以开发了。我们打开 <code>package.json</code>就可以看到 yarn start 跑的命令是 <code>&quot;react-scripts start&quot;</code></p>
+<p>那么这个 react-scripts 命令到底是哪一个呢？</p>
+<p>一般写在 <code>package.json=&gt; scripts</code> 的命令，都会先去 <code>project_path(项目目录）/node_modules/.bin</code> 查找，找不到再找全局安装的包。</p>
+<p>那么 node_modules/.bin 里面的文件又是怎么来的呢？<br>我们如果在包的 package.json 加上 <code>bin</code> 字段，npm就会自动帮我们映射到 node_modules/.bin 里面 <a href="https://docs.npmjs.com/files/package.json#bin" target="_blank" rel="external">npm bin文档传送门</a></p>
+<p>我们直接打开 <code>node_modules/react-scripts/package.json</code> 能看到这么一行<code>&quot;react-scripts&quot;: &quot;./bin/react-scripts.js&quot;</code>,直接把命令指向<code>node_modules/react-scripts/.bin/react-scripts.js</code>，也验证了我们的观点。</p>
+<p>还记得上一篇，我们在 <code>create-react-app/packages</code> 里面发现了有一个 <code>react-scripts</code>。其实是同一个东西来的，那么接下来的步骤就很明确了，直接用老办法，改下配置，然后用vscode跑断点调试阅读<code>project_path/node_modules/react-scripts/.bin/react-scripts.js</code>的源码 一探究竟。</p>
+<h3 id="vscode-launch-json"><a href="#vscode-launch-json" class="headerlink" title="vscode launch.json"></a><a href="#vscode_launch.json">vscode launch.json</a></h3><p>这里我们传入 start 作为参数,模拟在项目里跑 <code>yarn start</code> 的效果。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  "version": "0.2.0",</div><div class="line">  "configurations": [</div><div class="line">    &#123;</div><div class="line">      "type": "node",</div><div class="line">      "request": "launch",</div><div class="line">      "name": "启动程序",</div><div class="line">      "program": "$&#123;workspaceFolder&#125;/node_modules/react-scripts/bin/react-scripts.js", //调试的文件路径</div><div class="line">      "args": [</div><div class="line">        "start" // 传入 start 做为参数</div><div class="line">      ]</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><em><strong>ps:下面的<code>react-scripts</code>没有特殊说明，都代表<code>project_path/node_modules/react-scripts</code>目录方便阅读</strong></em></p>
+<h1 id="react-scripts-bin-react-scripts-js"><a href="#react-scripts-bin-react-scripts-js" class="headerlink" title="react-scripts/.bin/react-scripts.js"></a><a href="#react-scripts-bin-react-scripts-js">react-scripts/.bin/react-scripts.js</a></h1><p><a href="https://github.com/facebook/create-react-app/blob/v1.1.4/packages/react-scripts/bin/react-scripts.js" target="_blank" rel="external">文件传送门</a><br>这里我们还是老办法，先不看依赖 看主流程理解先，我们能看到这个文件也是一个入口文件，非常简短。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> args = process.argv.slice(<span class="number">2</span>);</div><div class="line"></div><div class="line"><span class="keyword">const</span> scriptIndex = args.findIndex(</div><div class="line">  <span class="function"><span class="params">x</span> =&gt;</span> x === <span class="string">'build'</span> || x === <span class="string">'eject'</span> || x === <span class="string">'start'</span> || x === <span class="string">'test'</span></div><div class="line">);</div><div class="line"><span class="keyword">const</span> script = scriptIndex === <span class="number">-1</span> ? args[<span class="number">0</span>] : args[scriptIndex];</div><div class="line"><span class="keyword">const</span> nodeArgs = scriptIndex &gt; <span class="number">0</span> ? args.slice(<span class="number">0</span>, scriptIndex) : [];</div></pre></td></tr></table></figure>
+<p>首先处理传进来的参数，用<code>script</code>变量来获取我们跑的命令是哪一个，有[‘build’, ‘eject’, ‘start’, ‘test’]这么几种，分别对应 构建、暴露配置、开发、测试命令。<br>然后再获取一起传入的其他的参数，比如<code>npm test</code>命令就会带一个额外的参数<code>--env=jsdom</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">switch</span> (script) &#123;</div><div class="line">  <span class="keyword">case</span> <span class="string">'build'</span>:</div><div class="line">  <span class="keyword">case</span> <span class="string">'eject'</span>:</div><div class="line">  <span class="keyword">case</span> <span class="string">'start'</span>:</div><div class="line">  <span class="keyword">case</span> <span class="string">'test'</span>: &#123;</div><div class="line">    <span class="comment">// 用 cross-spawn 去跑一个同步的命令</span></div><div class="line">    <span class="comment">// 根据传入的命令来拼接对应的路径 用node去跑</span></div><div class="line">    <span class="keyword">const</span> result = spawn.sync(</div><div class="line">      <span class="string">'node'</span>,</div><div class="line">      nodeArgs</div><div class="line">        .concat(<span class="built_in">require</span>.resolve(<span class="string">'../scripts/'</span> + script))</div><div class="line">        .concat(args.slice(scriptIndex + <span class="number">1</span>)),</div><div class="line">      &#123; <span class="attr">stdio</span>: <span class="string">'inherit'</span> &#125;</div><div class="line">    );</div><div class="line">    <span class="keyword">if</span> (result.signal) &#123;</div><div class="line">      <span class="keyword">if</span> (result.signal === <span class="string">'SIGKILL'</span>) &#123;</div><div class="line">        <span class="comment">// 输出错误提醒日志</span></div><div class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (result.signal === <span class="string">'SIGTERM'</span>) &#123;</div><div class="line">        <span class="comment">// 输出错误提醒日志</span></div><div class="line">      &#125;</div><div class="line">      process.exit(<span class="number">1</span>); <span class="comment">// 退出进程， 传1代表有错误</span></div><div class="line">    &#125;</div><div class="line">    process.exit(result.status);</div><div class="line">    <span class="keyword">break</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">default</span>:</div><div class="line">    <span class="comment">// 这里输出匹配不到对应的命令</span></div><div class="line">    <span class="keyword">break</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后根据获取到的命令，对应到<code>react-scripts/scripts</code>下面的文件去跑，比如 <code>react-scripts start</code> 就会去跑 <code>react-scripts/scripts/start.js</code>。</p>
+<p>这里插几句讲一下一个项目上比较常见的类库解耦方式，我们可以看到这里的 <code>spawn</code>引用的是<code>react-dev-utils/crossSpawn</code>。而在<code>react-dev-utils/corssSpawn</code>里面也只是简简单单的几句，引入<code>cross-spawn</code>再把<code>cross-spawn</code>暴露出去。<br>但是这么写就可以起到类库解耦的作用，比如以后这个库被爆出有重大的bug或者停止维护了，直接修改这个文件引入其他的类库，其他引用该文件的代码就不需要改动。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// react-dev-utils/corssSpawn</span></div><div class="line"><span class="meta">'use strict'</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> crossSpawn = <span class="built_in">require</span>(<span class="string">'cross-spawn'</span>);</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = crossSpawn;</div></pre></td></tr></table></figure>
+<h1 id="react-scripts-scripts-start-js"><a href="#react-scripts-scripts-start-js" class="headerlink" title="react-scripts/scripts/start.js"></a><a href="#react-scripts-scripts-start-js">react-scripts/scripts/start.js</a></h1><p><a href="https://github.com/facebook/create-react-app/blob/v1.1.4/packages/react-scripts/scripts/start.js" target="_blank" rel="external">文件传送门</a></p>
+<p>看过第一篇的人对这个文件夹应该不陌生，<code>create-react-app</code> 在安装完 <code>react</code> 等依赖之后，就会跑这个文件夹下面的<code>init.js</code>来拷贝模版文件，修改<code>package.json</code>等操作。</p>
+<p>既然我们已经知道他要执行 start.js, 接下来我们把vscode调试文件修改为 start.js 文件<code>&quot;program&quot;: &quot;${workspaceFolder}/node_modules/react-scripts/scripts/start.js&quot;,</code> 之所以要修改是因为他这里不是引用js文件来运行，而是用终端来跑，所以不属于我们的项目调试范围~</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">process.env.BABEL_ENV = <span class="string">'development'</span>;</div><div class="line">process.env.NODE_ENV = <span class="string">'development'</span>;</div><div class="line"></div><div class="line"><span class="comment">// Makes the script crash on unhandled rejections instead of silently</span></div><div class="line"><span class="comment">// ignoring them. In the future, promise rejections that are not handled will</span></div><div class="line"><span class="comment">// terminate the Node.js process with a non-zero exit code.</span></div><div class="line">process.on(<span class="string">'unhandledRejection'</span>, err =&gt; &#123;</div><div class="line">  <span class="keyword">throw</span> err;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>文件的最开头设置了两个环境变量，因为 start 是用来跑开发的，所以这里的环境变量都是 <code>development</code>，然后再给 <code>process</code> 绑定一个错误监听函数，这个错误监听实质上是用来监听 <em>一些没有被.catch的Promise</em>。 <a href="https://nodejs.org/dist/latest-v8.x/docs/api/process.html#process_event_unhandledrejection" target="_blank" rel="external">具体可以看node的文档</a>, 关于 Promise可以看一下之前写过的一篇<a href="https://jsonz1993.github.io/2017/12/%E6%B5%85%E6%9E%90Promise/">介绍Promise的文章从用法和实现原理都有所涉及</a></p>
+<p>接着引进一个 <code>../config/env</code>， 看文件名猜应该是做一些关于环境配置的事情，找到文件断点进来</p>
+<h1 id="react-scripts-config-env-js"><a href="#react-scripts-config-env-js" class="headerlink" title="react-scripts/config/env.js"></a><a href="#react-scripts-config-env-js">react-scripts/config/env.js</a></h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"><span class="keyword">const</span> paths = <span class="built_in">require</span>(<span class="string">'./paths'</span>);</div><div class="line"><span class="comment">// Make sure that including paths.js after env.js will read .env variables.</span></div><div class="line"><span class="keyword">delete</span> <span class="built_in">require</span>.cache[<span class="built_in">require</span>.resolve(<span class="string">'./paths'</span>)];</div></pre></td></tr></table></figure>
+<p><code>env.js</code> 文件在引入 <code>./paths.js</code> 之后，立即把他从cache中删除掉，这样下次如果有其他的模块引入<code>paths.js</code>，就不会从缓存里面去获取，保证了<code>paths.js</code>里面执行逻辑都会用到最新的环境变量。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> dotenvFiles = [</div><div class="line">  <span class="comment">// 举个例子：第一个元素在我的电脑路径是这样的 Users/jsonz/Documents/my-react-project/.env.development.local.js</span></div><div class="line">  <span class="string">`<span class="subst">$&#123;paths.dotenv&#125;</span>.<span class="subst">$&#123;NODE_ENV&#125;</span>.local`</span>,</div><div class="line">  <span class="string">`<span class="subst">$&#123;paths.dotenv&#125;</span>.<span class="subst">$&#123;NODE_ENV&#125;</span>`</span>,</div><div class="line">  NODE_ENV !== <span class="string">'test'</span> &amp;&amp; <span class="string">`<span class="subst">$&#123;paths.dotenv&#125;</span>.local`</span>,</div><div class="line">  paths.dotenv,</div><div class="line">].filter(<span class="built_in">Boolean</span>);</div></pre></td></tr></table></figure>
+<p>然后再根据paths给出的地址去拿其他的环境变量，这里<code>paths.js</code>会根据不同的情况给出不同的路径，我们讨论的是正常的创建项目情况。<br>其他的几种情况有：</p>
+<ol>
+<li>我们在已经创建的项目跑了 <code>npm(yarn) eject</code>，这时候 <code>react-scripts</code>会把配置都暴露到 <code>project_path/config</code> 方便我们去根据项目修改配置，这个操作是不可逆的。</li>
+<li>我们正常创建项目，直接跑项目，这时候配置就存放在<code>project/node_modules/react-scripts</code>。</li>
+<li>开发人员自己调试用的，这时候配置存放在<code>create-react/packages/react-scripts/config</code>。</li>
+</ol>
+<p>拼装完路径之后，用<a href="https://www.npmjs.com/package/dotenv-expand" target="_blank" rel="external">dotenv-expand</a>和<a href="https://www.npmjs.com/package/dotenv" target="_blank" rel="external">dotenv</a>来把文件里面的环境变量加载进来，这一块一般场景用不上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getClientEnvironment</span>(<span class="params">publicUrl</span>) </span>&#123;</div><div class="line">  <span class="keyword">const</span> raw = <span class="built_in">Object</span>.keys(process.env)</div><div class="line">    .filter(<span class="function"><span class="params">key</span> =&gt;</span> REACT_APP.test(key))</div><div class="line">    .reduce(</div><div class="line">      <span class="function">(<span class="params">env, key</span>) =&gt;</span> &#123;</div><div class="line">        env[key] = process.env[key];</div><div class="line">        <span class="keyword">return</span> env;</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        <span class="attr">NODE_ENV</span>: process.env.NODE_ENV || <span class="string">'development'</span>,</div><div class="line">      &#125;</div><div class="line">    );</div><div class="line">  <span class="keyword">const</span> stringified = &#123;</div><div class="line">    <span class="string">'process.env'</span>: <span class="built_in">Object</span>.keys(raw).reduce(<span class="function">(<span class="params">env, key</span>) =&gt;</span> &#123;</div><div class="line">      env[key] = <span class="built_in">JSON</span>.stringify(raw[key]);</div><div class="line">      <span class="keyword">return</span> env;</div><div class="line">    &#125;, &#123;&#125;),</div><div class="line">  &#125;;</div><div class="line">  <span class="keyword">return</span> &#123; raw, stringified &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后返回一个 <code>getClientEnvironment</code>函数，这个函数执行后会返回客户端的环境变量。</p>
+<h1 id="react-scripts-scripts-start-js-2"><a href="#react-scripts-scripts-start-js-2" class="headerlink" title="react-scripts/scripts/start.js(2)"></a><a href="#react-scripts-scripts-start-js-2">react-scripts/scripts/start.js(2)</a></h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">const</span> chalk = <span class="built_in">require</span>(<span class="string">'chalk'</span>);</div><div class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>);</div><div class="line"><span class="keyword">const</span> WebpackDevServer = <span class="built_in">require</span>(<span class="string">'webpack-dev-server'</span>);</div><div class="line"><span class="keyword">const</span> clearConsole = <span class="built_in">require</span>(<span class="string">'react-dev-utils/clearConsole'</span>);</div><div class="line"><span class="keyword">const</span> checkRequiredFiles = <span class="built_in">require</span>(<span class="string">'react-dev-utils/checkRequiredFiles'</span>);</div><div class="line"><span class="keyword">const</span> &#123;</div><div class="line">  choosePort,</div><div class="line">  createCompiler,</div><div class="line">  prepareProxy,</div><div class="line">  prepareUrls,</div><div class="line">&#125; = <span class="built_in">require</span>(<span class="string">'react-dev-utils/WebpackDevServerUtils'</span>);</div><div class="line"><span class="keyword">const</span> openBrowser = <span class="built_in">require</span>(<span class="string">'react-dev-utils/openBrowser'</span>);</div><div class="line"><span class="keyword">const</span> paths = <span class="built_in">require</span>(<span class="string">'../config/paths'</span>);</div><div class="line"><span class="keyword">const</span> config = <span class="built_in">require</span>(<span class="string">'../config/webpack.config.dev'</span>);</div><div class="line"><span class="keyword">const</span> createDevServerConfig = <span class="built_in">require</span>(<span class="string">'../config/webpackDevServer.config'</span>);</div><div class="line"></div><div class="line"><span class="keyword">const</span> useYarn = fs.existsSync(paths.yarnLockFile);</div><div class="line"><span class="keyword">const</span> isInteractive = process.stdout.isTTY;</div></pre></td></tr></table></figure>
+<p>加载完各种环境变量之后，我们回到<code>react-scripts/scripts/start.js</code>，老规矩，一系列的依赖先跳过不看，后面用到再来看。<br>还记得我们在<code>env.js</code>里面delet掉node.catch吗，这里<code>conts paths = require(&#39;../config/paths)</code>就不会从缓存里面去拿而是重新去加载。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) &#123;</div><div class="line">  process.exit(<span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>先判断一下我们两个入口文件有没有存在，分别是<code>project_path/public/index.html</code>和<code>project_path/src/index.js</code>，如果不存在给出提示结束程序。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> DEFAULT_PORT = <span class="built_in">parseInt</span>(process.env.PORT, <span class="number">10</span>) || <span class="number">3000</span>;</div><div class="line"><span class="keyword">const</span> HOST = process.env.HOST || <span class="string">'0.0.0.0'</span>;</div></pre></td></tr></table></figure>
+<p>然后设置默认的端口和host，如果有特殊的需求，可以从环境变量传进去改变，没有就会用默认的<code>3000</code>端口。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">choosePort(HOST, DEFAULT_PORT).then(...) <span class="comment">// @return Promise</span></div></pre></td></tr></table></figure>
+<p>设置完默认的端口与host之后，开始判断这个端口有没有被其他的进程占用，有的话会提供下一个可用的端口，我们顺着<code>choosePort</code>去文件头找依赖，找到该方法位于依赖<code>react-dev-utils/WebpackDevServerUtils</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">choosePort</span>(<span class="params">host, defaultPort</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> detect(defaultPort, host).then(</div><div class="line">    <span class="function"><span class="params">port</span> =&gt;</span></div><div class="line">      <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</div><div class="line">        <span class="keyword">if</span> (port === defaultPort) &#123;</div><div class="line">          <span class="keyword">return</span> resolve(port);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">const</span> message =</div><div class="line">          process.platform !== <span class="string">'win32'</span> &amp;&amp; defaultPort &lt; <span class="number">1024</span> &amp;&amp; !isRoot()</div><div class="line">            ? <span class="string">`Admin permissions are required to run a server on a port below 1024.`</span></div><div class="line">            : <span class="string">`Something is already running on port <span class="subst">$&#123;defaultPort&#125;</span>.`</span>;</div><div class="line">        <span class="keyword">if</span> (isInteractive) &#123;</div><div class="line">          clearConsole();</div><div class="line">          <span class="keyword">const</span> existingProcess = getProcessForPort(defaultPort);</div><div class="line">          <span class="keyword">const</span> question = &#123;</div><div class="line">            <span class="attr">type</span>: <span class="string">'confirm'</span>,</div><div class="line">            <span class="attr">name</span>: <span class="string">'shouldChangePort'</span>,</div><div class="line">            <span class="attr">message</span>:</div><div class="line">              chalk.yellow(</div><div class="line">                message +</div><div class="line">                  <span class="string">`<span class="subst">$&#123;existingProcess ? <span class="string">` Probably:\n  <span class="subst">$&#123;existingProcess&#125;</span>`</span> : <span class="string">''</span>&#125;</span>`</span></div><div class="line">              ) + <span class="string">'\n\nWould you like to run the app on another port instead?'</span>,</div><div class="line">            <span class="attr">default</span>: <span class="literal">true</span>,</div><div class="line">          &#125;;</div><div class="line">          inquirer.prompt(question).then(<span class="function"><span class="params">answer</span> =&gt;</span> &#123;</div><div class="line">            <span class="keyword">if</span> (answer.shouldChangePort) &#123;</div><div class="line">              resolve(port);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">              resolve(<span class="literal">null</span>);</div><div class="line">            &#125;</div><div class="line">          &#125;);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">          <span class="built_in">console</span>.log(chalk.red(message));</div><div class="line">          resolve(<span class="literal">null</span>);</div><div class="line">        &#125;</div><div class="line">      &#125;),</div><div class="line">    err =&gt; &#123;</div><div class="line">      <span class="comment">// 输出错误日志</span></div><div class="line">    &#125;</div><div class="line">  );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>choosePort</code> 里面用到<a href="https://www.npmjs.com/package/detect-port-alt" target="_blank" rel="external">detect-port-alt</a>去检测端口占用，如果被占用了返回一个最接近的递增方向可用的端口，比如3000端口被占用,3001没被占用就返回回来。<br>如果发现返回的可用端口不是默认的端口，给出一个交互式的命令询问用户是否要换一个端口去访问，交互式命令用的是<a href="https://www.npmjs.com/package/inquirer" target="_blank" rel="external">inquirer</a>这个包。<br>这里如果用vsCode来调试，<code>process.stdout.isTTY</code> 返回的值是<code>undefined</code>。所以如果要测试这一块交互式命令，只能切回系统的终端去调试~</p>
+<p><img src="./tty_choose_port.png" alt="交互式命令询问是否切换端口" title="交互式命令询问是否切换端口"></p>
+<p><a href="https://github.com/facebook/create-react-app/blob/v1.1.4/packages/react-scripts/scripts/start.js#L71" target="_blank" rel="external">文件传送门</a><br>检测完可用端口之后，回到<code>start.js</code>。</p>
+<p>前端处理一堆环境变量，还有加载一堆配置，全都用在这一块。这里主要做的就是把环境变量和配置组装起来，开个webpack本地调试服务。主要做的事情有:</p>
+<ol>
+<li>如果没有找到可用的端口直接返回不继续执行下去</li>
+<li>根据环境变量判断是否启用<code>https</code>，默认是<code>http</code>。</li>
+<li>根据 host, protocol, port 拼装一系列的url，包括<code>Browser</code>的url与<code>Terminal</code>的url。</li>
+<li>调用<code>createCompiler</code> 传入webpack，webpack配置，appName，第三步获取的url，还有是否使用Yarn等参数，生成一个 webpackCompiler。createCompiler负责的东西有:<br>4.1 根据环境变量判断是否有冒烟测试的需求，如果有加一个 <code>handleCompile</code>，一有错误就中断程序。<br>4.2 用传进来的配置和handleCompile生成一个webpackCompiler<br>4.2 增加<code>invalid</code>钩子，一检测到更改文件，而且是交互式终端的话，先清空控制台，再输出日志<br>4.3 增加<code>done</code>钩子，对webpack的输出日志整理统一输出</li>
+<li>创建开发服务配置 具体的配置代码放在<code>webpackDevServer.config.js</code></li>
+<li>把4和5丢给 <code>WebpackDevServer</code>，生成一个 webpack 本地开发服务</li>
+<li>大功告成，清除屏幕，打开调试连接</li>
+</ol>
+<p>相关的代码执行写到注释里面去了，没办法每个方法配置都拎出来讲…不然篇幅会很长，这里面很多点一讲都可以是一个知识点。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">choosePort(HOST, DEFAULT_PORT)</div><div class="line">  .then(<span class="function"><span class="params">port</span> =&gt;</span> &#123;</div><div class="line">    <span class="comment">// 没有找到可用端口，直接return</span></div><div class="line">    <span class="keyword">if</span> (port == <span class="literal">null</span>) &#123;</div><div class="line">      <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 根据环境变量判断是否要用https</span></div><div class="line">    <span class="keyword">const</span> protocol = process.env.HTTPS === <span class="string">'true'</span> ? <span class="string">'https'</span> : <span class="string">'http'</span>;</div><div class="line">    <span class="keyword">const</span> appName = <span class="built_in">require</span>(paths.appPackageJson).name;</div><div class="line">    <span class="comment">// 获取当前的 host, port, protocol 生成一系列url</span></div><div class="line">    <span class="keyword">const</span> urls = prepareUrls(protocol, HOST, port);</div><div class="line">    <span class="comment">// 创建一个webpack compiler</span></div><div class="line">    <span class="keyword">const</span> compiler = createCompiler(webpack, config, appName, urls, useYarn);</div><div class="line">    <span class="comment">// 加载代理的配置，在 project_path/package.json 里面加载配置</span></div><div class="line">    <span class="keyword">const</span> proxySetting = <span class="built_in">require</span>(paths.appPackageJson).proxy;</div><div class="line">    <span class="keyword">const</span> proxyConfig = prepareProxy(proxySetting, paths.appPublic);</div><div class="line">    <span class="comment">// 生成 webpack dev server 的配置</span></div><div class="line">    <span class="keyword">const</span> serverConfig = createDevServerConfig(</div><div class="line">      proxyConfig,</div><div class="line">      urls.lanUrlForConfig</div><div class="line">    );</div><div class="line">    <span class="keyword">const</span> devServer = <span class="keyword">new</span> WebpackDevServer(compiler, serverConfig);</div><div class="line">    <span class="comment">// 监听 devServer</span></div><div class="line">    devServer.listen(port, HOST, err =&gt; &#123;</div><div class="line">      <span class="comment">// 一些日志输出</span></div><div class="line">      <span class="comment">// 自动用默认浏览器打开调试链接</span></div><div class="line">      openBrowser(urls.localUrlForBrowser);</div><div class="line">    &#125;);</div><div class="line">  &#125;)</div><div class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</div><div class="line">    <span class="comment">// 错误处理</span></div><div class="line">  &#125;);</div></pre></td></tr></table></figure></p>
+<p><code>react-dev-utils/WebpackDevServerUtils.js</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCompiler</span>(<span class="params">webpack, config, appName, urls, useYarn</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> compiler;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    compiler = webpack(config, handleCompile); <span class="comment">// handleCompile为冒烟测试的对应处理</span></div><div class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</div><div class="line">    <span class="comment">// 错误提示</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  compiler.plugin(<span class="string">'invalid'</span>, () =&gt; &#123;</div><div class="line">    <span class="comment">// invalid 钩子，如果当前处于TTY终端，那么先清除控制台再输出 Compiling...</span></div><div class="line">    <span class="keyword">if</span> (isInteractive) &#123;</div><div class="line">      clearConsole();</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'Compiling...'</span>);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  <span class="keyword">let</span> isFirstCompile = <span class="literal">true</span>;</div><div class="line"></div><div class="line">  compiler.plugin(<span class="string">'done'</span>, stats =&gt; &#123;</div><div class="line">    <span class="comment">// 监听了 done 事件，对输出的日志做了格式化输出</span></div><div class="line">    <span class="comment">// 正常情况下会直接输出 `Compiled successfully!`</span></div><div class="line">    <span class="comment">// 如果有错误则输出错误信息，这里对错误信息做一些处理，让其输出比较友好</span></div><div class="line">  &#125;);</div><div class="line">  <span class="keyword">return</span> compiler;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="./webpackDevServer_error.png" alt="输出日志格式化处理" title="输出日志统一格式化处理"></p>
+<h1 id="最后讲两句"><a href="#最后讲两句" class="headerlink" title="最后讲两句"></a>最后讲两句</h1><p>之前就一直好奇，这些脚手架是怎么清空我们的终端屏幕的。在看<code>create-react-app</code>的时候，瞄到有这么一个文件<a href="https://github.com/facebook/create-react-app/blob/v1.1.4/packages/react-dev-utils/clearConsole.js" target="_blank" rel="external">react-dev-utils/clearConsole.js</a>。这个文件十分剪短，核心代码就那么一句:</p>
+<h2 id="react-dev-utils-clearConsole-js"><a href="#react-dev-utils-clearConsole-js" class="headerlink" title="react-dev-utils/clearConsole.js"></a><a href="#react-dev-utils-clearConsole-js">react-dev-utils/clearConsole.js</a></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">process.stdout.write(process.platform === <span class="string">'win32'</span> ? <span class="string">'\x1B[2J\x1B[0f'</span> : <span class="string">'\x1B[2J\x1B[3J\x1B[H'</span>);</div></pre></td></tr></table></figure>
+<p>然后好奇心特别重，不知道后面两串是什么意思，一直搜没有找到想要的答案。问了身边的同事，说是十六进制，而在我狭隘的认知里面一直以为十六进制只能转成数字….但是定睛一看，这有个<code>J</code> 明显不是十六进制。一个女装大佬和我说这是ASCII码，百度了一下ASCII码，看了 <code>\x1B</code> ASCII对应到 <code>ESC</code>。 但是后面的 <code>[2J</code> <code>[3J</code> <code>[H</code> 是什么意思还是不清楚…<br>后面大佬又和我说找到可能是 <strong>Linux ANSI 控制码</strong> 找来找去折腾了挺久的后面才揭开神秘面纱~<br>这几个命令大概的意思是:<br><code>[2J</code> 清除控制台<br><code>[H</code> 将光标移至最顶部<br><code>[3J</code>还是没有找到，应该是更高级的系统层级的清除控制台<br>给出几个 Linux ANSI 控制码资料网站<br><a href="http://manpages.ubuntu.com/manpages/bionic/zh_CN/man4/console_codes.4.html" target="_blank" rel="external">Ubuntu Manpage: 控制终端代码 - Linux 控制终端转义和控制序列</a><br><a href="www.cnblogs.com/mugua/archive/2009/11/25/1610118.html">控制终端代码 - Linux 控制终端转义和控制序列(转) - 木瓜脑袋 - 博客园</a></p>
+<p>最后前端的小伙伴很多和我一样不是科班出身的，真的得加把劲补补一些计算机比较原理性或比较接近系统层级的知识~</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+  
+        <div class="post-tags">
+          
+            <a href="/tags/github/" rel="tag"># github</a>
+          
+        </div>
+      
+
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+         
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/2018-05-08/" rel="prev" title="2018-05-08面试记B">
+                2018-05-08面试记B <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <!-- TODO <div class="post-spread">
+      
+    </div> -->
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpeg"
+               alt="Jsonz" />
+          <p class="site-author-name" itemprop="name">Jsonz</p>
+          <p class="site-description motion-element" itemprop="description">前端开发/Jsonz/租租车</p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jsonz1993" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  Github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1638841204" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://juejin.im/user/58dbb0b844d904006954ca8e" target="_blank" title="掘金">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  掘金
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#准备阶段"><span class="nav-number">1.</span> <span class="nav-text">准备阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vscode-launch-json"><span class="nav-number">1.0.1.</span> <span class="nav-text">vscode launch.json</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react-scripts-bin-react-scripts-js"><span class="nav-number">2.</span> <span class="nav-text">react-scripts/.bin/react-scripts.js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react-scripts-scripts-start-js"><span class="nav-number">3.</span> <span class="nav-text">react-scripts/scripts/start.js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react-scripts-config-env-js"><span class="nav-number">4.</span> <span class="nav-text">react-scripts/config/env.js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react-scripts-scripts-start-js-2"><span class="nav-number">5.</span> <span class="nav-text">react-scripts/scripts/start.js(2)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后讲两句"><span class="nav-number">6.</span> <span class="nav-text">最后讲两句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#react-dev-utils-clearConsole-js"><span class="nav-number">6.1.</span> <span class="nav-text">react-dev-utils/clearConsole.js</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io" rel="external nofollow">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("RAbLFHzWBvLUKbFdTC89bMkN-gzGzoHsz", "3Ahh3qzrwB9FavCLmXSneqVk");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>

@@ -88,13 +88,13 @@
 
 
 
-<meta name="description" content="最近工作开始稳定下来，没有那么多加班，加上说投简历找面试一直没拿到面试机会…所以开始有空闲的时间 之前公司有个大佬写了个类似 create-react-app 的脚手架，用来创建公司的项目。一直不知道里面实现的原理，借此机会一探 create-react-app 源码，了解下里面运行的机制。 大家不要一看到源码就害怕不敢去看，现在这么优秀项目都开源了，加上各种IDE支持很好，直接打个断点进去调试，">
+<meta name="description" content="最近工作开始稳定下来，没有那么多加班，加上说投简历找面试一直没拿到面试机会…所以开始有空闲的时间 之前公司有个大佬写了个类似 create-react-app 的脚手架，用来创建公司的项目。一直不知道里面实现的原理，借此机会一探 create-react-app 源码，了解下里面运行的机制。 授人以鱼不如授人以渔，希望通过这篇文章之后，对大家以后看源码可以有所帮助。大家也不要一看到源码就害怕不敢去">
 <meta name="keywords" content="github,learn,JavaScript,React">
 <meta property="og:type" content="article">
 <meta property="og:title" content="create-react-app 源码解析">
 <meta property="og:url" content="https://jsonz1993.github.io/2018/05/create-react-app-o/index.html">
 <meta property="og:site_name" content="Jsonz">
-<meta property="og:description" content="最近工作开始稳定下来，没有那么多加班，加上说投简历找面试一直没拿到面试机会…所以开始有空闲的时间 之前公司有个大佬写了个类似 create-react-app 的脚手架，用来创建公司的项目。一直不知道里面实现的原理，借此机会一探 create-react-app 源码，了解下里面运行的机制。 大家不要一看到源码就害怕不敢去看，现在这么优秀项目都开源了，加上各种IDE支持很好，直接打个断点进去调试，">
+<meta property="og:description" content="最近工作开始稳定下来，没有那么多加班，加上说投简历找面试一直没拿到面试机会…所以开始有空闲的时间 之前公司有个大佬写了个类似 create-react-app 的脚手架，用来创建公司的项目。一直不知道里面实现的原理，借此机会一探 create-react-app 源码，了解下里面运行的机制。 授人以鱼不如授人以渔，希望通过这篇文章之后，对大家以后看源码可以有所帮助。大家也不要一看到源码就害怕不敢去">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/create-react-app-file.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/debug1.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/debug2.png">
@@ -103,10 +103,10 @@
 <meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/debug5.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/create-react-app_index.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/create-react-app1.png">
-<meta property="og:updated_time" content="2018-05-09T17:59:31.830Z">
+<meta property="og:updated_time" content="2018-05-11T16:15:05.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="create-react-app 源码解析">
-<meta name="twitter:description" content="最近工作开始稳定下来，没有那么多加班，加上说投简历找面试一直没拿到面试机会…所以开始有空闲的时间 之前公司有个大佬写了个类似 create-react-app 的脚手架，用来创建公司的项目。一直不知道里面实现的原理，借此机会一探 create-react-app 源码，了解下里面运行的机制。 大家不要一看到源码就害怕不敢去看，现在这么优秀项目都开源了，加上各种IDE支持很好，直接打个断点进去调试，">
+<meta name="twitter:description" content="最近工作开始稳定下来，没有那么多加班，加上说投简历找面试一直没拿到面试机会…所以开始有空闲的时间 之前公司有个大佬写了个类似 create-react-app 的脚手架，用来创建公司的项目。一直不知道里面实现的原理，借此机会一探 create-react-app 源码，了解下里面运行的机制。 授人以鱼不如授人以渔，希望通过这篇文章之后，对大家以后看源码可以有所帮助。大家也不要一看到源码就害怕不敢去">
 <meta name="twitter:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/create-react-app-file.png">
 
 
@@ -116,7 +116,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"right","display":"hide","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -410,7 +410,7 @@
       
         <p>最近工作开始稳定下来，没有那么多加班，加上说投简历找面试一直没拿到面试机会…所以开始有空闲的时间</p>
 <p>之前公司有个大佬写了个类似 create-react-app 的脚手架，用来创建公司的项目。一直不知道里面实现的原理，借此机会一探 <code>create-react-app</code> 源码，了解下里面运行的机制。</p>
-<p>大家不要一看到源码就害怕不敢去看，现在这么优秀项目都开源了，加上各种IDE支持很好，直接打个断点进去调试，很容易看出个大概。<br>也可以用这种思路去了解其他的开源项目</p>
+<p>授人以鱼不如授人以渔，希望通过这篇文章之后，对大家以后看源码可以有所帮助。<br>大家也不要一看到源码就害怕不敢去看，现在这么优秀项目都开源了，加上各种IDE支持很好，直接打个断点进去调试，很容易看出个大概。<br>也可以用这种思路去了解其他的开源项目</p>
 <h1 id="快速了解"><a href="#快速了解" class="headerlink" title="快速了解"></a><a href="#快速了解">快速了解</a></h1><p>对于想快速了解的直接浏览这一块即可<br>create-react-app 其实就是用node去跑一些包安装流程，并且把文件模板demo考到对于的目录下。<br>可以简单分为以下几个步骤:</p>
 <ul>
 <li>判断Node版本</li>
@@ -630,7 +630,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
