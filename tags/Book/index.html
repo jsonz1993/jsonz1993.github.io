@@ -91,7 +91,7 @@
 <meta name="description" content="前端开发/Jsonz/租租车">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Jsonz">
-<meta property="og:url" content="https://jsonz1993.github.io/tags/book/index.html">
+<meta property="og:url" content="https://jsonz1993.github.io/tags/Book/index.html">
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="前端开发/Jsonz/租租车">
 <meta name="twitter:card" content="summary">
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="https://jsonz1993.github.io/tags/book/"/>
+  <link rel="canonical" href="https://jsonz1993.github.io/tags/Book/"/>
 
 
 
 
 
-  <title> 标签: book | Jsonz </title>
+  <title> 标签: Book | Jsonz </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -279,7 +279,7 @@
   <div id="posts" class="posts-collapse">
     <div class="collection-title">
       <h2 >
-        book
+        Book
         <small>标签</small>
       </h2>
     </div>
@@ -292,9 +292,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2018/02/划水/" itemprop="url">
+            <a class="post-title-link" href="/2018/05/http-mini-book/" itemprop="url">
               
-                <span itemprop="name">划水</span>
+                <span itemprop="name">HTTP常用知识点总结</span>
               
             </a>
         
@@ -302,9 +302,37 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-22T09:24:59+08:00"
-              content="2018-02-22" >
-          02-22
+              datetime="2018-05-23T12:17:42+08:00"
+              content="2018-05-23" >
+          05-23
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2018/05/css-world/" itemprop="url">
+              
+                <span itemprop="name">《css世界》常用技巧 —— 读书笔记</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-05-19T14:41:33+08:00"
+              content="2018-05-19" >
+          05-19
         </time>
       </div>
 
@@ -775,40 +803,6 @@
             newcounter.save(null, {
               success: function(newcounter) {
                 var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
-
-  
-
-
-</body>
-</html>
-t.getElementById(url));
                 $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
               },
               error: function(newcounter, error) {
