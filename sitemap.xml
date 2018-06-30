@@ -457,13 +457,6 @@
   </url>
   
   <url>
-    <loc>https://jsonz1993.github.io/about/index.html</loc>
-    
-    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jsonz1993.github.io/categories/index.html</loc>
     
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
@@ -472,6 +465,13 @@
   
   <url>
     <loc>https://jsonz1993.github.io/tags/index.html</loc>
+    
+    <lastmod>2017-04-12T13:05:21.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jsonz1993.github.io/about/index.html</loc>
     
     <lastmod>2017-04-12T13:05:21.000Z</lastmod>
     
