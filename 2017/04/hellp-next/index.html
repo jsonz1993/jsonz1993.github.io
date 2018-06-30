@@ -78,6 +78,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Jsonz" type="application/atom+xml" />
+
 
 
 
@@ -95,7 +97,8 @@
 <meta property="og:url" content="https://jsonz1993.github.io/2017/04/hellp-next/index.html">
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="next 入门配置 主题安装下面Next下的_config称主题配置， 根目录Hexo的_config称站点配置 安装next 到目录 themes/next:注意安装完themes下应该有一个 next 文件夹1$ git clone https://github.com/iissnan/hexo-theme-next themes/next 启动主题修改 站点配置:1theme: next 验">
-<meta property="og:updated_time" content="2017-04-12T13:05:21.000Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-30T08:11:01.446Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hello next">
 <meta name="twitter:description" content="next 入门配置 主题安装下面Next下的_config称主题配置， 根目录Hexo的_config称站点配置 安装next 到目录 themes/next:注意安装完themes下应该有一个 next 文件夹1$ git clone https://github.com/iissnan/hexo-theme-next themes/next 启动主题修改 站点配置:1theme: next 验">
@@ -327,7 +330,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-02T22:23:05+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-02T22:23:05+00:00">
                 2017-04-02
               </time>
             
@@ -412,9 +415,9 @@
       
         <p>next 入门配置</p>
 <h3 id="主题安装"><a href="#主题安装" class="headerlink" title="主题安装"></a>主题安装</h3><p><strong>下面Next下的<code>_config</code>称<code>主题配置</code>， 根目录Hexo的<code>_config</code>称<code>站点配置</code></strong></p>
-<h4 id="安装next-到目录-themes-next"><a href="#安装next-到目录-themes-next" class="headerlink" title="安装next 到目录 themes/next:"></a>安装next 到目录 <code>themes/next</code>:</h4><p>注意安装完themes下应该有一个 <code>next</code> 文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git clone https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure></p>
-<h4 id="启动主题"><a href="#启动主题" class="headerlink" title="启动主题"></a>启动主题</h4><p>修改 <code>站点配置</code>:<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">theme:</span> <span class="string">next</span></div></pre></td></tr></table></figure></p>
-<h4 id="验证主题"><a href="#验证主题" class="headerlink" title="验证主题"></a>验证主题</h4><p>先清除缓存再启动服务，启动完成后打开 <code>http://localhost:4000/</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo clean &amp;&amp; hexo s</div></pre></td></tr></table></figure></p>
+<h4 id="安装next-到目录-themes-next"><a href="#安装next-到目录-themes-next" class="headerlink" title="安装next 到目录 themes/next:"></a>安装next 到目录 <code>themes/next</code>:</h4><p>注意安装完themes下应该有一个 <code>next</code> 文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></p>
+<h4 id="启动主题"><a href="#启动主题" class="headerlink" title="启动主题"></a>启动主题</h4><p>修改 <code>站点配置</code>:<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="验证主题"><a href="#验证主题" class="headerlink" title="验证主题"></a>验证主题</h4><p>先清除缓存再启动服务，启动完成后打开 <code>http://localhost:4000/</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean &amp;&amp; hexo s</span><br></pre></td></tr></table></figure></p>
 <h3 id="主题设定"><a href="#主题设定" class="headerlink" title="主题设定"></a>主题设定</h3><h4 id="选择Scheme"><a href="#选择Scheme" class="headerlink" title="选择Scheme"></a>选择Scheme</h4><p>Scheme 是 NexT 提供的一种特性，借助于 Scheme，NexT 为你提供多种不同的外观。同时，几乎所有的配置都可以 在 Scheme 之间共用。在<code>主题配置</code>配置中的<code>Scheme</code>选项。目前提供三种方案：</p>
 <ul>
 <li>Muse - 默认 Scheme，这是 NexT 最初的版本，黑白主调，大量留白</li>
@@ -423,8 +426,8 @@
 </ul>
 <p>目前使用的是 <code>scheme: Mist</code>方案</p>
 <h4 id="设置语言"><a href="#设置语言" class="headerlink" title="设置语言"></a>设置语言</h4><p>在<code>站点配置</code> <code>language</code> 中设置 <code>zh-Hans</code> (简体中文)。<br>支持的语言可在 <code>themes/next/languages</code> 中查看</p>
-<h4 id="设置菜单"><a href="#设置菜单" class="headerlink" title="设置菜单"></a>设置菜单</h4><p>菜单格式为 <code>item name: link</code><br>此处只是将 url映射到对应 菜单上，若要具体显示文案需要到语言配置文件修改<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="attr">menu:</span></div><div class="line"><span class="attr">  home:</span> <span class="string">/</span> <span class="comment"># 主页</span></div><div class="line"><span class="attr">  categories:</span> <span class="string">/categories</span> <span class="comment"># 分类</span></div><div class="line"><span class="attr">  archives:</span> <span class="string">/archives</span> <span class="comment"># 归档</span></div><div class="line"><span class="attr">  tags:</span> <span class="string">/tags</span> <span class="comment"># 标签</span></div><div class="line"><span class="attr">  about:</span> <span class="string">/about</span> <span class="comment"># 关于我</span></div></pre></td></tr></table></figure></p>
-<p>设置菜单图标<br>图标可从<a href="http://fontawesome.io/" target="_blank" rel="external">http://fontawesome.io/</a>选择<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="attr">menu_icons:</span></div><div class="line"><span class="attr">  enable:</span> <span class="literal">true</span> <span class="comment"># 是否显示图标</span></div><div class="line">  <span class="comment"># Icon Mapping.</span></div><div class="line"><span class="attr">  home:</span> <span class="string">home</span></div><div class="line"><span class="attr">  about:</span> <span class="string">user</span></div><div class="line"><span class="attr">  categories:</span> <span class="string">th</span></div><div class="line"><span class="attr">  tags:</span> <span class="string">tags</span></div><div class="line"><span class="attr">  archives:</span> <span class="string">archive</span></div><div class="line"><span class="attr">  commonweal:</span> <span class="string">heartbeat</span></div></pre></td></tr></table></figure></p>
+<h4 id="设置菜单"><a href="#设置菜单" class="headerlink" title="设置菜单"></a>设置菜单</h4><p>菜单格式为 <code>item name: link</code><br>此处只是将 url映射到对应 菜单上，若要具体显示文案需要到语言配置文件修改<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line"><span class="attr">  home:</span> <span class="string">/</span> <span class="comment"># 主页</span></span><br><span class="line"><span class="attr">  categories:</span> <span class="string">/categories</span> <span class="comment"># 分类</span></span><br><span class="line"><span class="attr">  archives:</span> <span class="string">/archives</span> <span class="comment"># 归档</span></span><br><span class="line"><span class="attr">  tags:</span> <span class="string">/tags</span> <span class="comment"># 标签</span></span><br><span class="line"><span class="attr">  about:</span> <span class="string">/about</span> <span class="comment"># 关于我</span></span><br></pre></td></tr></table></figure></p>
+<p>设置菜单图标<br>图标可从<a href="http://fontawesome.io/" target="_blank" rel="noopener">http://fontawesome.io/</a>选择<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu_icons:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span> <span class="comment"># 是否显示图标</span></span><br><span class="line">  <span class="comment"># Icon Mapping.</span></span><br><span class="line"><span class="attr">  home:</span> <span class="string">home</span></span><br><span class="line"><span class="attr">  about:</span> <span class="string">user</span></span><br><span class="line"><span class="attr">  categories:</span> <span class="string">th</span></span><br><span class="line"><span class="attr">  tags:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">  archives:</span> <span class="string">archive</span></span><br><span class="line"><span class="attr">  commonweal:</span> <span class="string">heartbeat</span></span><br></pre></td></tr></table></figure></p>
 <h4 id="设置侧栏"><a href="#设置侧栏" class="headerlink" title="设置侧栏"></a>设置侧栏</h4><ol>
 <li><p>设置侧栏位置：<br><code>主题配置</code> 修改 <code>sidebar.position</code> 的值，支持 <code>left</code> &amp; <code>right</code><br>但目前只有<code>Pisces Scheme</code>支持该设置</p>
 </li>
@@ -440,12 +443,12 @@
 </li>
 </ol>
 <h3 id="集成第三方服务"><a href="#集成第三方服务" class="headerlink" title="集成第三方服务"></a>集成第三方服务</h3><h4 id="百度统计"><a href="#百度统计" class="headerlink" title="百度统计"></a>百度统计</h4><ol>
-<li>登录<a href="http://tongji.baidu.com/" target="_blank" rel="external">百度统计</a>， 定位到站点的代码获取页面</li>
+<li>登录<a href="http://tongji.baidu.com/" target="_blank" rel="noopener">百度统计</a>， 定位到站点的代码获取页面</li>
 <li>复制 hm.js? 后面那串统计脚本 id，如:<br><code>hm.src = &quot;https://hm.baidu.com/hm.js?dksjklsajdlkasjkl&quot;;</code><br>则id = <code>dksjklsajdlkasjkl</code></li>
 <li>修改<code>主题配置</code> <code>baidu_analytics</code> 字段，改为上述id</li>
-<li>骚等一段时间后可以自行登录<a href="http://tongji.baidu.com/" target="_blank" rel="external">百度统计</a>查看<code>PV</code>,<code>UV</code>等数据。</li>
+<li>骚等一段时间后可以自行登录<a href="http://tongji.baidu.com/" target="_blank" rel="noopener">百度统计</a>查看<code>PV</code>,<code>UV</code>等数据。</li>
 </ol>
-<h4 id="文章阅读量统计"><a href="#文章阅读量统计" class="headerlink" title="文章阅读量统计"></a>文章阅读量统计</h4><p><a href="https://notes.wanghao.work/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html#%E9%85%8D%E7%BD%AELeanCloud" target="_blank" rel="external">为Next主题添加文章阅读量</a></p>
+<h4 id="文章阅读量统计"><a href="#文章阅读量统计" class="headerlink" title="文章阅读量统计"></a>文章阅读量统计</h4><p><a href="https://notes.wanghao.work/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html#%E9%85%8D%E7%BD%AELeanCloud" target="_blank" rel="noopener">为Next主题添加文章阅读量</a></p>
 
       
     </div>
@@ -479,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/next-主题设置/" rel="next" title="next-主题设置">
-                <i class="fa fa-chevron-left"></i> next-主题设置
+              <a href="/2017/04/hexo-辅助函数/" rel="next" title="hexo-辅助函数">
+                <i class="fa fa-chevron-left"></i> hexo-辅助函数
               </a>
             
           </div>
@@ -489,8 +492,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/hexo-辅助函数/" rel="prev" title="hexo-辅助函数">
-                hexo-辅助函数 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/next-主题设置/" rel="prev" title="next-主题设置">
+                next-主题设置 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -587,6 +590,13 @@
 
         </nav>
 
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         <div class="links-of-author motion-element">

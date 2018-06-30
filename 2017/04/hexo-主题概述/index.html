@@ -78,6 +78,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Jsonz" type="application/atom+xml" />
+
 
 
 
@@ -95,7 +97,8 @@
 <meta property="og:url" content="https://jsonz1993.github.io/2017/04/hexo-主题概述/index.html">
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="了解一款主题的文件结构可以让你在有自定义需求的时候，快速定位到目标文件，也为后面的定制化主题做铺垫。 创建 Hexo 主题非常容易，您只要在 themes 文件夹内，新增一个任意名称的文件夹，并修改 _config.yml 内的 theme 设定，即可切换主题。一个主题可能会有以下的结构： 123456.├── _config.yml├── languages├── layout├── scrip">
-<meta property="og:updated_time" content="2017-04-12T13:05:21.000Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-30T08:11:01.446Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo-主题概述">
 <meta name="twitter:description" content="了解一款主题的文件结构可以让你在有自定义需求的时候，快速定位到目标文件，也为后面的定制化主题做铺垫。 创建 Hexo 主题非常容易，您只要在 themes 文件夹内，新增一个任意名称的文件夹，并修改 _config.yml 内的 theme 设定，即可切换主题。一个主题可能会有以下的结构： 123456.├── _config.yml├── languages├── layout├── scrip">
@@ -327,7 +330,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-02T15:04:12+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-02T15:04:12+00:00">
                 2017-04-02
               </time>
             
@@ -412,12 +415,12 @@
       
         <p>了解一款主题的文件结构可以让你在有自定义需求的时候，快速定位到目标文件，也为后面的定制化主题做铺垫。</p>
 <p>创建 Hexo 主题非常容易，您只要在 themes 文件夹内，新增一个任意名称的文件夹，并修改 _config.yml 内的 theme 设定，即可切换主题。一个主题可能会有以下的结构：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="string">.</span></div><div class="line"><span class="string">├──</span> <span class="string">_config.yml</span></div><div class="line"><span class="string">├──</span> <span class="string">languages</span></div><div class="line"><span class="string">├──</span> <span class="string">layout</span></div><div class="line"><span class="string">├──</span> <span class="string">scripts</span></div><div class="line"><span class="string">└──</span> <span class="string">source</span></div></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">.</span></span><br><span class="line"><span class="string">├──</span> <span class="string">_config.yml</span></span><br><span class="line"><span class="string">├──</span> <span class="string">languages</span></span><br><span class="line"><span class="string">├──</span> <span class="string">layout</span></span><br><span class="line"><span class="string">├──</span> <span class="string">scripts</span></span><br><span class="line"><span class="string">└──</span> <span class="string">source</span></span><br></pre></td></tr></table></figure>
 <h4 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h4><p>主题的配置文件。修改时会自动更新，无需重启服务器。</p>
-<h4 id="languages"><a href="#languages" class="headerlink" title="languages"></a>languages</h4><p>语言文件夹。请参见 <a href="https://hexo.io/zh-cn/docs/internationalization.html" target="_blank" rel="external">国际化 (i18n)</a>。</p>
-<h4 id="layout"><a href="#layout" class="headerlink" title="layout"></a>layout</h4><p>布局文件夹。用于存放主题的模板文件，决定了网站内容的呈现方式，Hexo 内建 <code>Swig</code> 模板引擎，您可以另外安装插件来获得 <code>EJS</code>、<code>Haml</code> 或 <code>Jade</code> 支持，Hexo 根据模板文件的扩展名来决定所使用的模板引擎，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">layout.ejs   - 使用 EJS</div><div class="line">layout.swig  - 使用 Swig</div></pre></td></tr></table></figure></p>
-<p>详细见 <a href="https://hexo.io/zh-cn/docs/templates.html" target="_blank" rel="external">模板</a></p>
-<h4 id="scripts"><a href="#scripts" class="headerlink" title="scripts"></a>scripts</h4><p>脚本文件夹。在启动时，Hexo 会载入此文件夹内的 JavaScript 文件，详细见 <a href="https://hexo.io/zh-cn/docs/plugins.html" target="_blank" rel="external">插件</a> 。</p>
+<h4 id="languages"><a href="#languages" class="headerlink" title="languages"></a>languages</h4><p>语言文件夹。请参见 <a href="https://hexo.io/zh-cn/docs/internationalization.html" target="_blank" rel="noopener">国际化 (i18n)</a>。</p>
+<h4 id="layout"><a href="#layout" class="headerlink" title="layout"></a>layout</h4><p>布局文件夹。用于存放主题的模板文件，决定了网站内容的呈现方式，Hexo 内建 <code>Swig</code> 模板引擎，您可以另外安装插件来获得 <code>EJS</code>、<code>Haml</code> 或 <code>Jade</code> 支持，Hexo 根据模板文件的扩展名来决定所使用的模板引擎，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">layout.ejs   - 使用 EJS</span><br><span class="line">layout.swig  - 使用 Swig</span><br></pre></td></tr></table></figure></p>
+<p>详细见 <a href="https://hexo.io/zh-cn/docs/templates.html" target="_blank" rel="noopener">模板</a></p>
+<h4 id="scripts"><a href="#scripts" class="headerlink" title="scripts"></a>scripts</h4><p>脚本文件夹。在启动时，Hexo 会载入此文件夹内的 JavaScript 文件，详细见 <a href="https://hexo.io/zh-cn/docs/plugins.html" target="_blank" rel="noopener">插件</a> 。</p>
 <h4 id="source"><a href="#source" class="headerlink" title="source"></a>source</h4><p>资源文件夹，除了模板以外的 Asset，例如 CSS、JavaScript 文件等，都应该放在这个文件夹中。文件或文件夹开头名称为 <code>_</code>（下划线线）或隐藏的文件会被忽略。</p>
 <p>如果文件可以被渲染的话，会经过解析然后储存到 <code>public</code> 文件夹，否则会直接拷贝到 <code>public</code> 文件夹</p>
 <h4 id="发布（略）"><a href="#发布（略）" class="headerlink" title="发布（略）"></a>发布（略）</h4>
@@ -453,8 +456,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/hexo-模板/" rel="next" title="hexo-模板">
-                <i class="fa fa-chevron-left"></i> hexo-模板
+              <a href="/2017/04/hexo-永久链接/" rel="next" title="hexo-永久链接">
+                <i class="fa fa-chevron-left"></i> hexo-永久链接
               </a>
             
           </div>
@@ -463,8 +466,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/hexo-永久链接/" rel="prev" title="hexo-永久链接">
-                hexo-永久链接 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/hexo-模板/" rel="prev" title="hexo-模板">
+                hexo-模板 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -561,6 +564,13 @@
 
         </nav>
 
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         <div class="links-of-author motion-element">

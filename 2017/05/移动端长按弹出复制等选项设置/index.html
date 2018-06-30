@@ -78,6 +78,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Jsonz" type="application/atom+xml" />
+
 
 
 
@@ -95,7 +97,8 @@
 <meta property="og:url" content="https://jsonz1993.github.io/2017/05/移动端长按弹出复制等选项设置/index.html">
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="今儿产品大佬吐槽一句:  在手机端chrome 浏览器下 点一个文字老是要弹出一个让我划词 好烦。能不能让他不要弹出那些东西来  其实现在很多的 app 内嵌 h5 页面都是喜欢把手机默认的长按弹出菜单[选择， 复制， 剪切] 等禁掉。 1234567// 给所有样式都加上进制弹出长按菜单属性。* &amp;#123;	-webkit-user-select: none;	user-select: non">
-<meta property="og:updated_time" content="2017-08-10T13:37:15.000Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-30T08:11:01.494Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="移动端长按弹出复制等选项设置">
 <meta name="twitter:description" content="今儿产品大佬吐槽一句:  在手机端chrome 浏览器下 点一个文字老是要弹出一个让我划词 好烦。能不能让他不要弹出那些东西来  其实现在很多的 app 内嵌 h5 页面都是喜欢把手机默认的长按弹出菜单[选择， 复制， 剪切] 等禁掉。 1234567// 给所有样式都加上进制弹出长按菜单属性。* &amp;#123;	-webkit-user-select: none;	user-select: non">
@@ -327,7 +330,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-18T14:18:23+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-18T14:18:23+00:00">
                 2017-05-18
               </time>
             
@@ -404,7 +407,7 @@
 <p>在手机端<code>chrome</code> 浏览器下 点一个文字老是要弹出一个让我划词 好烦。能不能让他不要弹出那些东西来</p>
 </blockquote>
 <p>其实现在很多的 app 内嵌 h5 页面都是喜欢把手机默认的长按弹出菜单[选择， 复制， 剪切] 等禁掉。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">// 给所有样式都加上进制弹出长按菜单属性。</div><div class="line">* &#123;</div><div class="line">	-webkit-user-select: none;</div><div class="line">	user-select: none;	</div><div class="line">&#125;</div><div class="line">// 记得要给表单排除，一般表单都有复制黏贴的需求</div><div class="line">input,textarea &#123;-webkit-user-select: text;user-select: text;&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 给所有样式都加上进制弹出长按菜单属性。</span><br><span class="line">* &#123;</span><br><span class="line">	<span class="attribute">-webkit-user-select</span>: none;</span><br><span class="line">	<span class="attribute">user-select</span>: none;	</span><br><span class="line">&#125;</span><br><span class="line">// 记得要给表单排除，一般表单都有复制黏贴的需求</span><br><span class="line"><span class="selector-tag">input</span>,<span class="selector-tag">textarea</span> &#123;<span class="attribute">-webkit-user-select</span>: text;<span class="attribute">user-select</span>: text;&#125;</span><br></pre></td></tr></table></figure>
 <p>兼容问题 移动端基本兼容</p>
 <iframe height="498" width="100%" src="http://caniuse.com/#search=user-select" frameborder="0" allowfullscreen></iframe>
 
@@ -442,8 +445,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/获取滚动条宽度/" rel="next" title="获取滚动条宽度">
-                <i class="fa fa-chevron-left"></i> 获取滚动条宽度
+              <a href="/2017/05/React-Native-错误总结/" rel="next" title="React-Native 错误总结">
+                <i class="fa fa-chevron-left"></i> React-Native 错误总结
               </a>
             
           </div>
@@ -452,8 +455,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/React-Native-错误总结/" rel="prev" title="React-Native 错误总结">
-                React-Native 错误总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/获取滚动条宽度/" rel="prev" title="获取滚动条宽度">
+                获取滚动条宽度 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -541,6 +544,13 @@
 
         </nav>
 
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         <div class="links-of-author motion-element">

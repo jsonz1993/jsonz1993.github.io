@@ -78,6 +78,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Jsonz" type="application/atom+xml" />
+
 
 
 
@@ -95,7 +97,8 @@
 <meta property="og:url" content="https://jsonz1993.github.io/2017/04/hexo-模板/index.html">
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="模板决定了网站内容的呈现方式，每个主题至少都应包含一个 index 模板，以下是各页面相对应的模板名称：    模板 用途 回调     index 首页    post 文章 index   page 分页 index   archive 归档 index   category 分类归档 archive   tag 标签归档 archive    布局 Layout布局这块可参考 next 主题">
-<meta property="og:updated_time" content="2017-04-12T13:05:21.000Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-30T08:11:01.446Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo-模板">
 <meta name="twitter:description" content="模板决定了网站内容的呈现方式，每个主题至少都应包含一个 index 模板，以下是各页面相对应的模板名称：    模板 用途 回调     index 首页    post 文章 index   page 分页 index   archive 归档 index   category 分类归档 archive   tag 标签归档 archive    布局 Layout布局这块可参考 next 主题">
@@ -327,7 +330,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-02T18:39:38+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-02T18:39:38+00:00">
                 2017-04-02
               </time>
             
@@ -452,11 +455,11 @@
 </tr>
 </tbody>
 </table>
-<h4 id="布局-Layout"><a href="#布局-Layout" class="headerlink" title="布局 Layout"></a>布局 Layout</h4><p>布局这块可参考 <code>next</code> 主题看, Hexo 默认的引擎模板为<a href="http://www.iqianduan.net/blog/how_to_use_swig" target="_blank" rel="external">swig</a></p>
+<h4 id="布局-Layout"><a href="#布局-Layout" class="headerlink" title="布局 Layout"></a>布局 Layout</h4><p>布局这块可参考 <code>next</code> 主题看, Hexo 默认的引擎模板为<a href="http://www.iqianduan.net/blog/how_to_use_swig" target="_blank" rel="noopener">swig</a></p>
 <p>如果页面结构类似，例如两个模板都有页首（Header）和页脚（Footer），您可考虑通过「布局」让两个模板共享相同的结构。一个布局文件必须要能显示 <code>body</code> 变量的内容，如此一来模板的内容才会被显示，举例来说：</p>
-<figure class="highlight plain"><figcaption><span>index.ejs</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">index</div></pre></td></tr></table></figure>
-<figure class="highlight html"><figcaption><span>layout.ejs</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;<span class="name">%-</span> <span class="attr">body</span> %&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>生成<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span>index<span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><figcaption><span>index.ejs</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><figcaption><span>layout.ejs</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span><span class="tag">&lt;<span class="name">%-</span> <span class="attr">body</span> %&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>生成<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span>index<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>每个模板都默认使用 <code>layout</code> 布局，您可在 front-matter 指定其他布局，或是设为 <code>false</code> 来关闭布局功能，您甚至可在布局中再使用其他布局来建立嵌套布局。</p>
 <h4 id="局部模板-Partial"><a href="#局部模板-Partial" class="headerlink" title="局部模板 Partial"></a>局部模板 Partial</h4><p>局部模板让您在不同模板之间共享相同的组件，例如页首（Header）、页脚（Footer）或侧边栏（Sidebar）等，可利用局部模板功能分割为个别文件，让维护更加便利。</p>
 <p>官网说的都是<code>ejs</code>语法， 目前next采用的是<code>swig</code> 语法。</p>
@@ -494,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/hexo-变量/" rel="next" title="hexo-变量">
-                <i class="fa fa-chevron-left"></i> hexo-变量
+              <a href="/2017/04/hexo-主题概述/" rel="next" title="hexo-主题概述">
+                <i class="fa fa-chevron-left"></i> hexo-主题概述
               </a>
             
           </div>
@@ -504,8 +507,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/hexo-主题概述/" rel="prev" title="hexo-主题概述">
-                hexo-主题概述 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/hexo-变量/" rel="prev" title="hexo-变量">
+                hexo-变量 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -602,6 +605,13 @@
 
         </nav>
 
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         <div class="links-of-author motion-element">

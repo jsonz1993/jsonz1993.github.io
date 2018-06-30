@@ -78,6 +78,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Jsonz" type="application/atom+xml" />
+
 
 
 
@@ -95,8 +97,9 @@
 <meta property="og:url" content="https://jsonz1993.github.io/2018/05/history-scroll-restoration/index.html">
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="直入主题。之前做移动端的需求时，经常遇到一种常见，就是:a页面是一个长列表，我们滑动到某个地方假设为 100px ，点击之后进入到b页面再从b页面回到a页面，这时候浏览器的滚动条会自动回到我们跳转前的位置，也就是 100px 的位置。 这种体贴的行为我是很喜欢的~ 但是有时候产品就非要抬杠，说 我就不想要这种行为，你给我回到顶部去(╯‵□′)╯︵┻━┻ 以前没办法就经常用什么 setTimeout">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/05/history-scroll-restoration/history-scroll-restoration.gif">
-<meta property="og:updated_time" content="2018-05-17T03:55:21.075Z">
+<meta property="og:updated_time" content="2018-06-30T08:11:01.554Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器恢复滚动行为 —— history.scrollRestoration">
 <meta name="twitter:description" content="直入主题。之前做移动端的需求时，经常遇到一种常见，就是:a页面是一个长列表，我们滑动到某个地方假设为 100px ，点击之后进入到b页面再从b页面回到a页面，这时候浏览器的滚动条会自动回到我们跳转前的位置，也就是 100px 的位置。 这种体贴的行为我是很喜欢的~ 但是有时候产品就非要抬杠，说 我就不想要这种行为，你给我回到顶部去(╯‵□′)╯︵┻━┻ 以前没办法就经常用什么 setTimeout">
@@ -329,7 +332,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-17T11:27:02+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-17T11:27:02+00:00">
                 2018-05-17
               </time>
             
@@ -406,9 +409,9 @@
 <p>以前没办法就经常用什么 setTimeout 大法去手动处理这些东西</p>
 <p>氮素!!! 如果只是说setTimeout大法的话，就没我什么事了。<br>今天要说的是 <strong>history.scrollRestoration</strong> ，这个属性是实验性的属性，他的作用是: <strong>允许Web应用程序在历史导航上显式地设置默认滚动恢复行为。此属性可以是自动的（auto）或者手动的（manual）。</strong></p>
 <p>说的很明白了，如果浏览器支持 <code>history.scrollRestoration</code>并且值为<code>auto</code>则会默认恢复滚动行为。如果设置为 <code>manual</code>则可以取消，这个行为不用去考虑兼容性的问题，如果有这个功能才会有恢复滚动，所以直接判断一下就可以了。无需多考虑</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.history.scrollRestoration &amp;&amp; (<span class="built_in">window</span>.history.scrollRestoration = <span class="string">'auto'</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.history.scrollRestoration &amp;&amp; (<span class="built_in">window</span>.history.scrollRestoration = <span class="string">'auto'</span>);</span><br></pre></td></tr></table></figure>
 <p>以后妈妈再也不用担心我被产品怼了 O(∩_∩)O~~</p>
-<p><a href="https://developers.google.com/web/updates/2015/09/history-api-scroll-restoration" target="_blank" rel="external">google-developers 资料</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History" target="_blank" rel="external">mozilla-developer 资料</a></p>
+<p><a href="https://developers.google.com/web/updates/2015/09/history-api-scroll-restoration" target="_blank" rel="noopener">google-developers 资料</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/History" target="_blank" rel="noopener">mozilla-developer 资料</a></p>
 
       
     </div>
@@ -446,8 +449,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/css-world/" rel="next" title="《css世界》常用技巧 —— 读书笔记">
-                <i class="fa fa-chevron-left"></i> 《css世界》常用技巧 —— 读书笔记
+              <a href="/2018/05/2018-05-08/" rel="next" title="2018-05-08面试记B">
+                <i class="fa fa-chevron-left"></i> 2018-05-08面试记B
               </a>
             
           </div>
@@ -456,8 +459,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/create-react-app-t/" rel="prev" title="create-react-app 源码解析之react-scripts">
-                create-react-app 源码解析之react-scripts <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/css-world/" rel="prev" title="《css世界》常用技巧 —— 读书笔记">
+                《css世界》常用技巧 —— 读书笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -545,6 +548,13 @@
 
         </nav>
 
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         <div class="links-of-author motion-element">

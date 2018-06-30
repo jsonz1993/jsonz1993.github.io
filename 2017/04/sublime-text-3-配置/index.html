@@ -78,6 +78,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Jsonz" type="application/atom+xml" />
+
 
 
 
@@ -88,21 +90,22 @@
 
 
 
-<meta name="description" content="这篇博客主要讲怎么配置自己的sublime text， 安装可以去官网下载自行安装。 Package Control之后我们要安装Package Control, 既sublime的包管理工具 后面我们的包下载安装都用他。 按快捷键ctrl + `  调出或者菜单view&amp;gt; show Control 调出control 复制下面代码到control sublime Text 31import">
+<meta name="description" content="这篇博客主要讲怎么配置自己的sublime text， 安装可以去官网下载自行安装。 Package Control之后我们要安装Package Control, 既sublime的包管理工具 后面我们的包下载安装都用他。 按快捷键ctrl + ` 调出或者菜单view&amp;gt; show Control 调出control 复制下面代码到control sublime Text 31import">
 <meta name="keywords" content="github,editor">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sublime text 3 配置">
 <meta property="og:url" content="https://jsonz1993.github.io/2017/04/sublime-text-3-配置/index.html">
 <meta property="og:site_name" content="Jsonz">
-<meta property="og:description" content="这篇博客主要讲怎么配置自己的sublime text， 安装可以去官网下载自行安装。 Package Control之后我们要安装Package Control, 既sublime的包管理工具 后面我们的包下载安装都用他。 按快捷键ctrl + `  调出或者菜单view&amp;gt; show Control 调出control 复制下面代码到control sublime Text 31import">
+<meta property="og:description" content="这篇博客主要讲怎么配置自己的sublime text， 安装可以去官网下载自行安装。 Package Control之后我们要安装Package Control, 既sublime的包管理工具 后面我们的包下载安装都用他。 按快捷键ctrl + ` 调出或者菜单view&amp;gt; show Control 调出control 复制下面代码到control sublime Text 31import">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/04/sublime-text-3-配置/package.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/04/sublime-text-3-配置/material.gif">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/04/sublime-text-3-配置/ayu.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/04/sublime-text-3-配置/agila.png">
-<meta property="og:updated_time" content="2017-04-12T13:05:21.000Z">
+<meta property="og:updated_time" content="2018-06-30T08:11:01.454Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sublime text 3 配置">
-<meta name="twitter:description" content="这篇博客主要讲怎么配置自己的sublime text， 安装可以去官网下载自行安装。 Package Control之后我们要安装Package Control, 既sublime的包管理工具 后面我们的包下载安装都用他。 按快捷键ctrl + `  调出或者菜单view&amp;gt; show Control 调出control 复制下面代码到control sublime Text 31import">
+<meta name="twitter:description" content="这篇博客主要讲怎么配置自己的sublime text， 安装可以去官网下载自行安装。 Package Control之后我们要安装Package Control, 既sublime的包管理工具 后面我们的包下载安装都用他。 按快捷键ctrl + ` 调出或者菜单view&amp;gt; show Control 调出control 复制下面代码到control sublime Text 31import">
 <meta name="twitter:image" content="https://jsonz1993.github.io/2017/04/sublime-text-3-配置/package.png">
 
 
@@ -332,7 +335,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-07T23:00:23+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-07T23:00:23+00:00">
                 2017-04-07
               </time>
             
@@ -404,33 +407,33 @@
       
 
       
-        <p>这篇博客主要讲怎么配置自己的<code>sublime text</code>， 安装可以去<a href="http://www.sublimetext.com/" target="_blank" rel="external">官网</a>下载自行安装。</p>
+        <p>这篇博客主要讲怎么配置自己的<code>sublime text</code>， 安装可以去<a href="http://www.sublimetext.com/" target="_blank" rel="noopener">官网</a>下载自行安装。</p>
 <h2 id="Package-Control"><a href="#Package-Control" class="headerlink" title="Package Control"></a>Package Control</h2><p>之后我们要安装<code>Package Control</code>, 既sublime的包管理工具 后面我们的包下载安装都用他。</p>
-<p>按快捷键<code>ctrl + ` </code> 调出或者菜单<code>view&gt; show Control</code> 调出control</p>
+<p>按快捷键<code>ctrl + `</code> 调出或者菜单<code>view&gt; show Control</code> 调出control</p>
 <p>复制下面代码到control</p>
-<p>sublime Text 3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import urllib.request,os,hashlib; h = &apos;2915d1851351e5ee549c20394736b442&apos; + &apos;8bc59f460fa1548d1514676163dafc88&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &apos;wb&apos; ).write(by)</div></pre></td></tr></table></figure></p>
-<p>sublime Text 2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import urllib2,os,hashlib; h = &apos;df21e130d211cfc94d9b0905775a7c0f&apos; + &apos;1e3d39e33b79698005270310898eea76&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), &apos;wb&apos; ).write(by) if dh == h else None; print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h) if dh != h else &apos;Please restart Sublime Text to finish installation&apos;)</div></pre></td></tr></table></figure></p>
+<p>sublime Text 3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import urllib.request,os,hashlib; h = &apos;2915d1851351e5ee549c20394736b442&apos; + &apos;8bc59f460fa1548d1514676163dafc88&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &apos;wb&apos; ).write(by)</span><br></pre></td></tr></table></figure></p>
+<p>sublime Text 2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import urllib2,os,hashlib; h = &apos;df21e130d211cfc94d9b0905775a7c0f&apos; + &apos;1e3d39e33b79698005270310898eea76&apos;; pf = &apos;Package Control.sublime-package&apos;; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler()) ); by = urllib2.urlopen( &apos;http://packagecontrol.io/&apos; + pf.replace(&apos; &apos;, &apos;%20&apos;)).read(); dh = hashlib.sha256(by).hexdigest(); open( os.path.join( ipp, pf), &apos;wb&apos; ).write(by) if dh == h else None; print(&apos;Error validating download (got %s instead of %s), please try manual install&apos; % (dh, h) if dh != h else &apos;Please restart Sublime Text to finish installation&apos;)</span><br></pre></td></tr></table></figure></p>
 <p>复制完敲回车就可以安装，稍等片刻出现即可，安装完成后在 <code>Preferences</code>菜单下会出现 <code>Package Control</code> 选项</p>
-<p>详细安装可看<a href="https://packagecontrol.io/installation" target="_blank" rel="external">Package Control</a></p>
+<p>详细安装可看<a href="https://packagecontrol.io/installation" target="_blank" rel="noopener">Package Control</a></p>
 <h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>打开 <code>Package Control</code>或按快捷键<code>cmd/ctrl + shift + p</code>， 输入 <code>install package</code> 选中第一个选项既进入安装插件的列表。</p>
 <p>这时候可能需要等一会加载远程仓库，具体在左下角会有一个loading标识， 加载完在弹窗输入要安装的插件即可。</p>
 <p><img src="./package.png" alt="package list"></p>
-<p>所有的插件都可以在<a href="https://packagecontrol.io/" target="_blank" rel="external">https://packagecontrol.io/</a> 找到，下面列出比较常用的几个插件</p>
-<h3 id="Theme"><a href="#Theme" class="headerlink" title="Theme"></a>Theme</h3><p>sublime 编辑器虽然轻巧强大，但是默认的主题实在有点看不下去。<br>主题可以在<a href="https://packagecontrol.io/browse/labels/theme" target="_blank" rel="external">https://packagecontrol.io/browse/labels/theme</a> 找自己喜欢的。<br>目前个人使用的是 <code>Material Theme</code> 。</p>
+<p>所有的插件都可以在<a href="https://packagecontrol.io/" target="_blank" rel="noopener">https://packagecontrol.io/</a> 找到，下面列出比较常用的几个插件</p>
+<h3 id="Theme"><a href="#Theme" class="headerlink" title="Theme"></a>Theme</h3><p>sublime 编辑器虽然轻巧强大，但是默认的主题实在有点看不下去。<br>主题可以在<a href="https://packagecontrol.io/browse/labels/theme" target="_blank" rel="noopener">https://packagecontrol.io/browse/labels/theme</a> 找自己喜欢的。<br>目前个人使用的是 <code>Material Theme</code> 。</p>
 <p>直接在<code>install package</code> 弹窗输入 <code>Material Theme</code> 选第一个即可（后面安装方法类似）。</p>
-<p>安装完成后会弹出一个README，根据提示修改一下配置。<br>打开<code>Preferences &gt; settings &gt; User</code><br>添加以下配置，保存即可生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&quot;color_scheme&quot;: &quot;Packages/Material Theme/schemes/Material-Theme.tmTheme&quot;,</div><div class="line">&quot;theme&quot;: &quot;Material-Theme.sublime-theme&quot;,</div></pre></td></tr></table></figure></p>
+<p>安装完成后会弹出一个README，根据提示修改一下配置。<br>打开<code>Preferences &gt; settings &gt; User</code><br>添加以下配置，保存即可生效<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;color_scheme&quot;: &quot;Packages/Material Theme/schemes/Material-Theme.tmTheme&quot;,</span><br><span class="line">&quot;theme&quot;: &quot;Material-Theme.sublime-theme&quot;,</span><br></pre></td></tr></table></figure></p>
 <h4 id="Material-Theme"><a href="#Material-Theme" class="headerlink" title="Material Theme"></a>Material Theme</h4><p><img src="./material.gif" alt="material"></p>
 <p>个人比较喜欢的主题还有</p>
 <h4 id="ayu"><a href="#ayu" class="headerlink" title="ayu"></a>ayu</h4><p><img src="./ayu.png" alt="ayu"></p>
 <h4 id="Agila-Theme"><a href="#Agila-Theme" class="headerlink" title="Agila Theme"></a>Agila Theme</h4><p><img src="./agila.png" alt="Agila"></p>
-<h3 id="Emmet"><a href="#Emmet" class="headerlink" title="Emmet"></a>Emmet</h3><p>前端工程师使用sublime编辑的必备插件，可以极大提高开发效率。<br>最简单的应用就是在空白的<code>.html</code>页面输入<code>!</code>再按 <code>tab</code>键会自动生成html5基本页面解构。<br>还有基本如 <code>#div1&gt;span.child{这是子级}*2+button.name[disabled]{按钮}</code>快捷语法等<br>具体看<a href="https://www.emmet.io/" target="_blank" rel="external">emmet</a>, <a href="https://packagecontrol.io/packages/Emmet" target="_blank" rel="external">Emmet-package</a></p>
-<h3 id="SideBarEnhancements"><a href="#SideBarEnhancements" class="headerlink" title="SideBarEnhancements"></a>SideBarEnhancements</h3><p>sublime 自带的侧边栏文件（夹）功能特别少，这个插件可以为其添加很多其他功能。<a href="https://packagecontrol.io/packages/SideBarEnhancements" target="_blank" rel="external">docs</a></p>
-<h3 id="BracketHighlighter"><a href="#BracketHighlighter" class="headerlink" title="BracketHighlighter"></a>BracketHighlighter</h3><p>前后标签高亮的插件，如<code>[], (), {}, &quot;&quot;, &#39;&#39;, &lt;tag&gt;&lt;/tag&gt;</code>等，可以比较方便看清代码块的起始点。<a href="https://packagecontrol.io/packages/BracketHighlighter" target="_blank" rel="external">docs</a></p>
+<h3 id="Emmet"><a href="#Emmet" class="headerlink" title="Emmet"></a>Emmet</h3><p>前端工程师使用sublime编辑的必备插件，可以极大提高开发效率。<br>最简单的应用就是在空白的<code>.html</code>页面输入<code>!</code>再按 <code>tab</code>键会自动生成html5基本页面解构。<br>还有基本如 <code>#div1&gt;span.child{这是子级}*2+button.name[disabled]{按钮}</code>快捷语法等<br>具体看<a href="https://www.emmet.io/" target="_blank" rel="noopener">emmet</a>, <a href="https://packagecontrol.io/packages/Emmet" target="_blank" rel="noopener">Emmet-package</a></p>
+<h3 id="SideBarEnhancements"><a href="#SideBarEnhancements" class="headerlink" title="SideBarEnhancements"></a>SideBarEnhancements</h3><p>sublime 自带的侧边栏文件（夹）功能特别少，这个插件可以为其添加很多其他功能。<a href="https://packagecontrol.io/packages/SideBarEnhancements" target="_blank" rel="noopener">docs</a></p>
+<h3 id="BracketHighlighter"><a href="#BracketHighlighter" class="headerlink" title="BracketHighlighter"></a>BracketHighlighter</h3><p>前后标签高亮的插件，如<code>[], (), {}, &quot;&quot;, &#39;&#39;, &lt;tag&gt;&lt;/tag&gt;</code>等，可以比较方便看清代码块的起始点。<a href="https://packagecontrol.io/packages/BracketHighlighter" target="_blank" rel="noopener">docs</a></p>
 <h3 id="AutoFileName"><a href="#AutoFileName" class="headerlink" title="AutoFileName"></a>AutoFileName</h3><p>按照路径提示该路径目录下的文件名，对于引入文件资源等很有帮助</p>
 <h3 id="All-AutoComplete"><a href="#All-AutoComplete" class="headerlink" title="All AutoComplete"></a>All AutoComplete</h3><p>让代码自动完成的匹配从所有打开的文件里去匹配，而不是只在当前文件里匹配。</p>
 <h3 id="HTML-CSS-JS-Prettify"><a href="#HTML-CSS-JS-Prettify" class="headerlink" title="HTML-CSS-JS Prettify"></a>HTML-CSS-JS Prettify</h3><p>html, css, js &amp;&amp; Json 的格式化插件。需要本地安装了node。<br>默认格式化快捷键为<code>ctrl+shift+h</code></p>
-<h2 id="END"><a href="#END" class="headerlink" title="END"></a>END</h2><p>基本上比较通用的插件就这些，可以发现这些插件基本上都在<code>package Control</code>前十位。<br>学会举一反三，工作中用到的另一些插件再上<a href="https://packagecontrol.io/" target="_blank" rel="external">https://packagecontrol.io/</a> 搜索关键字安装<br>如 <code>git</code>, <code>less</code>, <code>vuejs</code>等等。</p>
-<p>最后附上自己的配置<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"color_scheme"</span>: <span class="string">"Packages/Material Theme/schemes/Material-Theme-Lighter.tmTheme"</span>,</div><div class="line">	<span class="attr">"ignored_packages"</span>:</div><div class="line">	[</div><div class="line">		<span class="string">"Vintage"</span></div><div class="line">	],</div><div class="line">	<span class="attr">"always_show_minimap_viewport"</span>: <span class="literal">true</span>,</div><div class="line">	<span class="attr">"theme"</span>: <span class="string">"Material-Theme-Lighter.sublime-theme"</span>,</div><div class="line">	<span class="attr">"word_wrap"</span>:<span class="literal">true</span>,</div><div class="line">	<span class="attr">"wrap_width"</span>: <span class="number">120</span>,</div><div class="line">	<span class="attr">"font_size"</span>: <span class="number">10</span>,</div><div class="line">	<span class="attr">"line_padding_bottom"</span>: <span class="number">2</span>,</div><div class="line">	<span class="attr">"line_padding_top"</span>: <span class="number">2</span>,</div><div class="line">	<span class="attr">"highlight_line"</span>:<span class="literal">true</span>,</div><div class="line">	<span class="attr">"font_face"</span>: <span class="string">"Monaco"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="END"><a href="#END" class="headerlink" title="END"></a>END</h2><p>基本上比较通用的插件就这些，可以发现这些插件基本上都在<code>package Control</code>前十位。<br>学会举一反三，工作中用到的另一些插件再上<a href="https://packagecontrol.io/" target="_blank" rel="noopener">https://packagecontrol.io/</a> 搜索关键字安装<br>如 <code>git</code>, <code>less</code>, <code>vuejs</code>等等。</p>
+<p>最后附上自己的配置<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"color_scheme"</span>: <span class="string">"Packages/Material Theme/schemes/Material-Theme-Lighter.tmTheme"</span>,</span><br><span class="line">	<span class="attr">"ignored_packages"</span>:</span><br><span class="line">	[</span><br><span class="line">		<span class="string">"Vintage"</span></span><br><span class="line">	],</span><br><span class="line">	<span class="attr">"always_show_minimap_viewport"</span>: <span class="literal">true</span>,</span><br><span class="line">	<span class="attr">"theme"</span>: <span class="string">"Material-Theme-Lighter.sublime-theme"</span>,</span><br><span class="line">	<span class="attr">"word_wrap"</span>:<span class="literal">true</span>,</span><br><span class="line">	<span class="attr">"wrap_width"</span>: <span class="number">120</span>,</span><br><span class="line">	<span class="attr">"font_size"</span>: <span class="number">10</span>,</span><br><span class="line">	<span class="attr">"line_padding_bottom"</span>: <span class="number">2</span>,</span><br><span class="line">	<span class="attr">"line_padding_top"</span>: <span class="number">2</span>,</span><br><span class="line">	<span class="attr">"highlight_line"</span>:<span class="literal">true</span>,</span><br><span class="line">	<span class="attr">"font_face"</span>: <span class="string">"Monaco"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -466,8 +469,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/复制黏贴板插件-CopyText/" rel="next" title="复制黏贴板插件-CopyText">
-                <i class="fa fa-chevron-left"></i> 复制黏贴板插件-CopyText
+              <a href="/2017/04/chrome插件开发/" rel="next" title="chrome插件开发">
+                <i class="fa fa-chevron-left"></i> chrome插件开发
               </a>
             
           </div>
@@ -476,8 +479,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/chrome插件开发/" rel="prev" title="chrome插件开发">
-                chrome插件开发 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/复制黏贴板插件-CopyText/" rel="prev" title="复制黏贴板插件-CopyText">
+                复制黏贴板插件-CopyText <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -574,6 +577,13 @@
 
         </nav>
 
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         <div class="links-of-author motion-element">

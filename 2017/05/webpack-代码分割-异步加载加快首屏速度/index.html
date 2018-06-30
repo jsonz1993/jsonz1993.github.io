@@ -78,6 +78,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Jsonz" type="application/atom+xml" />
+
 
 
 
@@ -95,7 +97,8 @@
 <meta property="og:url" content="https://jsonz1993.github.io/2017/05/webpack-代码分割-异步加载加快首屏速度/index.html">
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="概述对于单页应用，将所有代码打包成一个文件，可以减少网络请求，并且后面页面不需要再去加载js 可以减少白页时间。 但是对于首页需要快速加载的情况，我们可能需要重新考虑一下， 是否可以把一些不需要第一时间执行的代码异步加载进来。 Webpack有一个功能可以将您的代码库分解成按需加载的“块”，这个功能叫 代码分割。 Webpack的对于块的执行是， 异步创建&amp;lt;script&amp;gt;标签，把需要加">
-<meta property="og:updated_time" content="2017-05-23T04:00:36.000Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-30T08:11:01.494Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack 代码分割(异步加载加快首屏速度)">
 <meta name="twitter:description" content="概述对于单页应用，将所有代码打包成一个文件，可以减少网络请求，并且后面页面不需要再去加载js 可以减少白页时间。 但是对于首页需要快速加载的情况，我们可能需要重新考虑一下， 是否可以把一些不需要第一时间执行的代码异步加载进来。 Webpack有一个功能可以将您的代码库分解成按需加载的“块”，这个功能叫 代码分割。 Webpack的对于块的执行是， 异步创建&amp;lt;script&amp;gt;标签，把需要加">
@@ -327,7 +330,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-22T17:51:26+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-22T17:51:26+00:00">
                 2017-05-22
               </time>
             
@@ -407,19 +410,19 @@
 <li><code>CommonJs: require.ensure</code></li>
 <li><code>AMD: require</code><br><code>ES6 Modules</code> 暂不支持</li>
 </ul>
-<h1 id="AMD-require"><a href="#AMD-require" class="headerlink" title="AMD: require"></a>AMD: require</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>(dependencies, callback)</div><div class="line"></div><div class="line"><span class="built_in">require</span>([<span class="string">"module-a"</span>, <span class="string">"module-b"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h1 id="AMD-require"><a href="#AMD-require" class="headerlink" title="AMD: require"></a>AMD: require</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(dependencies, callback)</span><br><span class="line"></span><br><span class="line"><span class="built_in">require</span>([<span class="string">"module-a"</span>, <span class="string">"module-b"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <ul>
 <li>dependencies: 模块依赖数组</li>
 <li>callback: 回调函数</li>
 </ul>
-<h1 id="CommonJs-require-ensure"><a href="#CommonJs-require-ensure" class="headerlink" title="CommonJs: require.ensure"></a>CommonJs: require.ensure</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>.ensure(dependencies, callback, chunkName);</div><div class="line"><span class="built_in">require</span>.ensure([<span class="string">"module-a"</span>, <span class="string">"module-b"</span>], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">"module-a"</span>);</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h1 id="CommonJs-require-ensure"><a href="#CommonJs-require-ensure" class="headerlink" title="CommonJs: require.ensure"></a>CommonJs: require.ensure</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>.ensure(dependencies, callback, chunkName);</span><br><span class="line"><span class="built_in">require</span>.ensure([<span class="string">"module-a"</span>, <span class="string">"module-b"</span>], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">"module-a"</span>);</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <ul>
 <li>dependencies: 依赖的模块数组</li>
 <li>callback: 回调函数，该函数调用时会传一个require参数</li>
 <li>chunkName: 模块名，用于构建时生成文件时命名使用</li>
 </ul>
 <p>对于 <code>CommonJs</code> 方法， 个人在项目中都是这么用的</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>.ensure([],<span class="built_in">require</span>=&gt;&#123;</div><div class="line">	<span class="keyword">const</span> menuBar = <span class="built_in">require</span>(<span class="string">'./menuBar'</span>);</div><div class="line">	<span class="keyword">const</span> upcomingTrips = <span class="built_in">require</span>(<span class="string">'./upcomingTrips'</span>);</div><div class="line">	<span class="built_in">require</span>(<span class="string">'./c'</span>);</div><div class="line"></div><div class="line">	menuBar.init();</div><div class="line">	upcomingTrips.init();</div><div class="line">&#125;,<span class="string">'index_later'</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>.ensure([],<span class="built_in">require</span>=&gt;&#123;</span><br><span class="line">	<span class="keyword">const</span> menuBar = <span class="built_in">require</span>(<span class="string">'./menuBar'</span>);</span><br><span class="line">	<span class="keyword">const</span> upcomingTrips = <span class="built_in">require</span>(<span class="string">'./upcomingTrips'</span>);</span><br><span class="line">	<span class="built_in">require</span>(<span class="string">'./c'</span>);</span><br><span class="line"></span><br><span class="line">	menuBar.init();</span><br><span class="line">	upcomingTrips.init();</span><br><span class="line">&#125;,<span class="string">'index_later'</span>);</span><br></pre></td></tr></table></figure>
 <p>依赖不写<code>dependencies</code> 而是直接写在 回调里面。 因为<code>webpack</code>会去递归拿依赖模块，所以就算我 <code>menuBar</code>里面依赖到其他模块，也会被下载下来 所以问题不大。 但是如果对于多模块互相依赖的情况，建议按照官方demo写法 防止重复嵌套打包。</p>
 
       
@@ -454,8 +457,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/ios9-下-domArray-forEach-报错/" rel="next" title="ios9 下 domArray forEach 报错">
-                <i class="fa fa-chevron-left"></i> ios9 下 domArray forEach 报错
+              <a href="/2017/05/cookie-js-简单的cookie操作插件/" rel="next" title="cookie.js 简单的cookie操作插件">
+                <i class="fa fa-chevron-left"></i> cookie.js 简单的cookie操作插件
               </a>
             
           </div>
@@ -464,8 +467,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/cookie-js-简单的cookie操作插件/" rel="prev" title="cookie.js 简单的cookie操作插件">
-                cookie.js 简单的cookie操作插件 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/ios9-下-domArray-forEach-报错/" rel="prev" title="ios9 下 domArray forEach 报错">
+                ios9 下 domArray forEach 报错 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -562,6 +565,13 @@
 
         </nav>
 
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         <div class="links-of-author motion-element">

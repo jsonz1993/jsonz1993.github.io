@@ -78,6 +78,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Jsonz" type="application/atom+xml" />
+
 
 
 
@@ -89,13 +91,13 @@
 
 
 <meta name="description" content="欧啦啦啦啦啦啦啦啦啦  记录下最近的面试等情况~~~  简历投递情况2简历投递情况传送门据不完全统计:投 荔枝 技术面投 100教育 待沟通投 尚德教育 没面试机会 最最最最最开心的事情可能就是面了荔枝~ 虽然最后没有过 不过还是挺不错的一次体验 记录一下 首先流程是： 笔试 =&amp;gt; 机试 =&amp;gt; 两个人的技术面 笔试比较基础的问题，但是面试官会根据写的题问思路，而且会各种变形问，可以比较">
-<meta name="keywords">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2018-05-08面试记B">
 <meta property="og:url" content="https://jsonz1993.github.io/2018/05/2018-05-08/index.html">
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="欧啦啦啦啦啦啦啦啦啦  记录下最近的面试等情况~~~  简历投递情况2简历投递情况传送门据不完全统计:投 荔枝 技术面投 100教育 待沟通投 尚德教育 没面试机会 最最最最最开心的事情可能就是面了荔枝~ 虽然最后没有过 不过还是挺不错的一次体验 记录一下 首先流程是： 笔试 =&amp;gt; 机试 =&amp;gt; 两个人的技术面 笔试比较基础的问题，但是面试官会根据写的题问思路，而且会各种变形问，可以比较">
-<meta property="og:updated_time" content="2018-05-10T13:54:01.540Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-30T08:11:01.534Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2018-05-08面试记B">
 <meta name="twitter:description" content="欧啦啦啦啦啦啦啦啦啦  记录下最近的面试等情况~~~  简历投递情况2简历投递情况传送门据不完全统计:投 荔枝 技术面投 100教育 待沟通投 尚德教育 没面试机会 最最最最最开心的事情可能就是面了荔枝~ 虽然最后没有过 不过还是挺不错的一次体验 记录一下 首先流程是： 笔试 =&amp;gt; 机试 =&amp;gt; 两个人的技术面 笔试比较基础的问题，但是面试官会根据写的题问思路，而且会各种变形问，可以比较">
@@ -327,7 +329,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-08T23:29:16+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-08T23:29:16+00:00">
                 2018-05-08
               </time>
             
@@ -408,25 +410,25 @@
 <p>以下只是个人的面试记录，如果发现有不妥的联系即删。</p>
 <h2 id="荔枝笔试"><a href="#荔枝笔试" class="headerlink" title="荔枝笔试"></a>荔枝笔试</h2><ol>
 <li><p>作用域的问题</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> t;</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">t</span>(<span class="params"></span>)</span>&#123;&#125;</div><div class="line">  <span class="keyword">var</span> t;</div><div class="line">  t = <span class="number">20</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">typeof</span> a();</div><div class="line"></div><div class="line"><span class="comment">// 还有各种变形</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">t</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">  <span class="keyword">var</span> t;</div><div class="line">  <span class="keyword">return</span> t;</div><div class="line">  t = <span class="number">20</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">t</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">  <span class="keyword">var</span> t;</div><div class="line">  <span class="keyword">return</span> t;</div><div class="line">  t = <span class="number">20</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">t</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">  <span class="keyword">var</span> t;</div><div class="line">  <span class="keyword">return</span> t;</div><div class="line">  t = <span class="number">20</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> t;</div><div class="line">  <span class="keyword">var</span> t;</div><div class="line">  t = <span class="number">20</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> t;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">t</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">  <span class="keyword">var</span> t;</span><br><span class="line">  t = <span class="number">20</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">typeof</span> a();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 还有各种变形</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">t</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  <span class="keyword">var</span> t;</span><br><span class="line">  <span class="keyword">return</span> t;</span><br><span class="line">  t = <span class="number">20</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">t</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  <span class="keyword">var</span> t;</span><br><span class="line">  <span class="keyword">return</span> t;</span><br><span class="line">  t = <span class="number">20</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">t</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  <span class="keyword">var</span> t;</span><br><span class="line">  <span class="keyword">return</span> t;</span><br><span class="line">  t = <span class="number">20</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> t;</span><br><span class="line">  <span class="keyword">var</span> t;</span><br><span class="line">  t = <span class="number">20</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>兼容低版本浏览器模拟 Function.prototype.bind</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">直接用 call || allpy 模拟，返回一个闭包，参数用 <span class="built_in">Array</span>.prototype.slice.apple 去取即可~</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">直接用 call || allpy 模拟，返回一个闭包，参数用 <span class="built_in">Array</span>.prototype.slice.apple 去取即可~</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>关于正则的比较简单~ 不写出来了</p>
 </li>
-<li><p>关于zIndex的，推荐直接看张鑫旭大佬的文章，超不过那个范围<a href="http://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/" target="_blank" rel="external">张鑫旭大佬传送门</a></p>
+<li><p>关于zIndex的，推荐直接看张鑫旭大佬的文章，超不过那个范围<a href="http://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/" target="_blank" rel="noopener">张鑫旭大佬传送门</a></p>
 </li>
 <li><p>实现一个宽高都是浏览器 40%的正方形</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. 用vw方案</div><div class="line">2. 用padding ( emmm 这个面试大佬提示了才想起 padding 是根据父级宽度的)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 用vw方案</span><br><span class="line">2. 用padding ( emmm 这个面试大佬提示了才想起 padding 是根据父级宽度的)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>a,b,c,d 四个接口，求最快 || 最慢的响应时间</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">直接用 <span class="built_in">Promise</span>.all || <span class="built_in">Promise</span>.race 即可</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">直接用 <span class="built_in">Promise</span>.all || <span class="built_in">Promise</span>.race 即可</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>笔试题还好，作用域那一题有点混 其他没什么问题，算是有惊无险</p>
 <h2 id="机试"><a href="#机试" class="headerlink" title="机试"></a>机试</h2><p>机试题二选一 一个是实现一个<code>dialog</code> 一个是实现一个验证表单<br>选了 dialog 做的时候没有看题…有个功能点没有实现完全就跑去做验证题，验证题没有做完<br>dialog 应该算是实现的不够及格线</p>
-<p>引出了挺多优化方案的，比如 dom 处理，比如动画处理，里面有一个面试官暗示了好多次，但是没有想起来的一个api <a href="https://developer.mozilla.org/zh-CN/docs/Web/Events/animationend" target="_blank" rel="external">animationend</a><br><a href="http://www.runoob.com/jsref/event-animationend.html" target="_blank" rel="external">animationend demo</a></p>
+<p>引出了挺多优化方案的，比如 dom 处理，比如动画处理，里面有一个面试官暗示了好多次，但是没有想起来的一个api <a href="https://developer.mozilla.org/zh-CN/docs/Web/Events/animationend" target="_blank" rel="noopener">animationend</a><br><a href="http://www.runoob.com/jsref/event-animationend.html" target="_blank" rel="noopener">animationend demo</a></p>
 <h2 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h2><p>面试就根据前面做的两份题扩展去问思路等等</p>
 <p>问题的套路是比较喜欢的，举个例子：</p>
 <p>Q: 左边自适应，右边固定有什么布局?<br>A: flex布局, flex: 1 &amp;&amp; width: …<br>Q: 浏览器这时候缩小会有什么情况？<br>A: flex: 1 慢慢缩小，另一个不变（这个回答我模棱两可犹豫了，虽然知道是不变，但是好像项目中有遇过变的…扣分了)<br>Q: 还有其他的吗?<br>A: 浮动 float:left; overflow: auto<br>Q: 清除浮动有哪些<br>A: 委元素清除 &amp;&amp; BFC<br>Q: BFC是什么，有什么作用，怎么设置BFC<br>A: 块级格式化上下文，清除浮动或者消除master合并，可以用overflow(hidden,auto,scroll) || float(left,right) || display(inline-block) || position(absolute, fixed)</p>
@@ -465,8 +467,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/create-react-app-t/" rel="next" title="create-react-app 源码解析之react-scripts">
-                <i class="fa fa-chevron-left"></i> create-react-app 源码解析之react-scripts
+              <a href="/2018/05/create-react-app-o/" rel="next" title="create-react-app 源码解析">
+                <i class="fa fa-chevron-left"></i> create-react-app 源码解析
               </a>
             
           </div>
@@ -475,8 +477,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/create-react-app-o/" rel="prev" title="create-react-app 源码解析">
-                create-react-app 源码解析 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/history-scroll-restoration/" rel="prev" title="浏览器恢复滚动行为 —— history.scrollRestoration">
+                浏览器恢复滚动行为 —— history.scrollRestoration <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -573,6 +575,13 @@
 
         </nav>
 
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         <div class="links-of-author motion-element">

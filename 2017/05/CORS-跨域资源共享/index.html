@@ -78,6 +78,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Jsonz" type="application/atom+xml" />
+
 
 
 
@@ -95,8 +97,9 @@
 <meta property="og:url" content="https://jsonz1993.github.io/2017/05/CORS-跨域资源共享/index.html">
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）  出于安全考虑，浏览器会限制某些跨域请求。  而 cors 允许浏览器想跨源服务器发起 XMLHttpRequest 和 Fetch 接口请求。 同源策略同源策略限制从一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的关键的安全机制。 那么浏览器是根据">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/05/CORS-跨域资源共享/options请求.png">
-<meta property="og:updated_time" content="2017-05-20T08:13:12.000Z">
+<meta property="og:updated_time" content="2018-06-30T08:11:01.486Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CORS 跨域资源共享">
 <meta name="twitter:description" content="CORS是一个W3C标准，全称是”跨域资源共享”（Cross-origin resource sharing）  出于安全考虑，浏览器会限制某些跨域请求。  而 cors 允许浏览器想跨源服务器发起 XMLHttpRequest 和 Fetch 接口请求。 同源策略同源策略限制从一个源加载的文档或脚本如何与来自另一个源的资源进行交互。这是一个用于隔离潜在恶意文件的关键的安全机制。 那么浏览器是根据">
@@ -329,7 +332,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-20T15:13:08+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-20T15:13:08+00:00">
                 2017-05-20
               </time>
             
@@ -412,10 +415,10 @@
 <ul>
 <li>协议: http</li>
 <li>端口: 80 (默认为80 如果没写 浏览器会帮我们做这些工作)</li>
-<li>域名 www.zuzuche.com</li>
+<li>域名 <a href="http://www.zuzuche.com" target="_blank" rel="noopener">www.zuzuche.com</a></li>
 </ul>
 <p>如果协议， 端口， 域名一致，那么浏览器就会认定我们是在同个源下面。否则就会出现跨域问题。</p>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy" target="_blank" rel="external">具体文档等可见</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/Same-origin_policy" target="_blank" rel="noopener">具体文档等可见</a></p>
 <h3 id="简单请求与非简单请求"><a href="#简单请求与非简单请求" class="headerlink" title="简单请求与非简单请求"></a>简单请求与非简单请求</h3><p>简单请求指的是</p>
 <ul>
 <li>请求方法是以下方法之一<ul>
@@ -473,18 +476,18 @@
 </ul>
 </li>
 </ul>
-<h4 id="发起一个简单的请求"><a href="#发起一个简单的请求" class="headerlink" title="发起一个简单的请求"></a>发起一个简单的请求</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fetch(<span class="string">''</span>);</div></pre></td></tr></table></figure>
+<h4 id="发起一个简单的请求"><a href="#发起一个简单的请求" class="headerlink" title="发起一个简单的请求"></a>发起一个简单的请求</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fetch(<span class="string">''</span>);</span><br></pre></td></tr></table></figure>
 <p>此时会发起一个简单请求，和我们平时写的<code>ajax</code>没多大区别</p>
-<h4 id="发起一个非简单请求"><a href="#发起一个非简单请求" class="headerlink" title="发起一个非简单请求"></a>发起一个非简单请求</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">var invocation = new XMLHttpRequest();</div><div class="line">var url = &apos;http://bar.other/resources/post-here/&apos;;</div><div class="line">var body = &apos;&lt;?xml version=&quot;1.0&quot;?&gt;&lt;person&gt;&lt;name&gt;Arun&lt;/name&gt;&lt;/person&gt;&apos;;</div><div class="line">    </div><div class="line">function callOtherDomain()&#123;</div><div class="line">  if(invocation)</div><div class="line">    &#123;</div><div class="line">      invocation.open(&apos;POST&apos;, url, true);</div><div class="line">      invocation.setRequestHeader(&apos;X-PINGOTHER&apos;, &apos;pingpong&apos;);</div><div class="line">      invocation.setRequestHeader(&apos;Content-Type&apos;, &apos;application/xml&apos;);</div><div class="line">      invocation.onreadystatechange = function()&#123;&#125;;</div><div class="line">      invocation.send(body); </div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">callOtherDomain();</div></pre></td></tr></table></figure>
+<h4 id="发起一个非简单请求"><a href="#发起一个非简单请求" class="headerlink" title="发起一个非简单请求"></a>发起一个非简单请求</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var invocation = new XMLHttpRequest();</span><br><span class="line">var url = &apos;http://bar.other/resources/post-here/&apos;;</span><br><span class="line">var body = &apos;&lt;?xml version=&quot;1.0&quot;?&gt;&lt;person&gt;&lt;name&gt;Arun&lt;/name&gt;&lt;/person&gt;&apos;;</span><br><span class="line">    </span><br><span class="line">function callOtherDomain()&#123;</span><br><span class="line">  if(invocation)</span><br><span class="line">    &#123;</span><br><span class="line">      invocation.open(&apos;POST&apos;, url, true);</span><br><span class="line">      invocation.setRequestHeader(&apos;X-PINGOTHER&apos;, &apos;pingpong&apos;);</span><br><span class="line">      invocation.setRequestHeader(&apos;Content-Type&apos;, &apos;application/xml&apos;);</span><br><span class="line">      invocation.onreadystatechange = function()&#123;&#125;;</span><br><span class="line">      invocation.send(body); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">callOtherDomain();</span><br></pre></td></tr></table></figure>
 <p>此时发起的是一个非简单请求，所以浏览器会先发一个<code>options</code>请求服务器，以获知浏览器是否允许实际请求，如果允许再会发多一个真实请求。<br><img src="./options请求.png" alt="options"></p>
 <h4 id="cors"><a href="#cors" class="headerlink" title="cors"></a>cors</h4><p>我们要跨域获取资源，主要要后台人员配合。</p>
 <p>一般情况我们只需要把报错信息给后台人员看就知道怎么做了，比如我直接调用 报了一个跨域问题</p>
 <blockquote>
-<p>Fetch API cannot load <a href="https://www.baidu.com/" target="_blank" rel="external">https://www.baidu.com/</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘<a href="https://developer.mozilla.org" target="_blank" rel="external">https://developer.mozilla.org</a>‘ is therefore not allowed access. If an opaque response serves your needs, set the request’s mode to ‘no-cors’ to fetch the resource with CORS disabled.</p>
+<p>Fetch API cannot load <a href="https://www.baidu.com/" target="_blank" rel="noopener">https://www.baidu.com/</a>. No ‘Access-Control-Allow-Origin’ header is present on the requested resource. Origin ‘<a href="https://developer.mozilla.org&#39;" target="_blank" rel="noopener">https://developer.mozilla.org&#39;</a> is therefore not allowed access. If an opaque response serves your needs, set the request’s mode to ‘no-cors’ to fetch the resource with CORS disabled.</p>
 </blockquote>
 <p>直接把错误丢给后台人员，他们就知道设置一个属性 <code>Access-Control-Allow-Origi</code> 一般设置为 <code>*</code> 谁都可以访问 也可以根据情景设定特定的域名。</p>
 <h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><blockquote>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS</a></p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS</a></p>
 </blockquote>
 
       
@@ -523,8 +526,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/cookie-js-简单的cookie操作插件/" rel="next" title="cookie.js 简单的cookie操作插件">
-                <i class="fa fa-chevron-left"></i> cookie.js 简单的cookie操作插件
+              <a href="/2017/05/获取滚动条宽度/" rel="next" title="获取滚动条宽度">
+                <i class="fa fa-chevron-left"></i> 获取滚动条宽度
               </a>
             
           </div>
@@ -533,8 +536,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/获取滚动条宽度/" rel="prev" title="获取滚动条宽度">
-                获取滚动条宽度 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/cookie-js-简单的cookie操作插件/" rel="prev" title="cookie.js 简单的cookie操作插件">
+                cookie.js 简单的cookie操作插件 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -631,6 +634,13 @@
 
         </nav>
 
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         <div class="links-of-author motion-element">

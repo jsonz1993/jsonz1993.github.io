@@ -78,6 +78,8 @@
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Jsonz" type="application/atom+xml" />
+
 
 
 
@@ -95,8 +97,9 @@
 <meta property="og:url" content="https://jsonz1993.github.io/2017/04/animate-text/index.html">
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="animate-text文字动画和数字动画 animate text查看DEMO git仓库 轻巧的文字动画库, 使用简单, 文件大小4k可以给文字添加出现动画, 支持字符串打字效果和数字变化效果, 支持监听动画结束事件 项原项目地址, 这里对其代码改造优化。  使用方法12345678910111213141516import AnimateText from &apos;./animate-text&apos;/">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/04/animate-text/demo.gif">
-<meta property="og:updated_time" content="2017-05-09T15:18:18.000Z">
+<meta property="og:updated_time" content="2018-06-30T08:11:01.446Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="animate-text">
 <meta name="twitter:description" content="animate-text文字动画和数字动画 animate text查看DEMO git仓库 轻巧的文字动画库, 使用简单, 文件大小4k可以给文字添加出现动画, 支持字符串打字效果和数字变化效果, 支持监听动画结束事件 项原项目地址, 这里对其代码改造优化。  使用方法12345678910111213141516import AnimateText from &apos;./animate-text&apos;/">
@@ -329,7 +332,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-07T13:57:25+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-07T13:57:25+00:00">
                 2017-04-07
               </time>
             
@@ -401,11 +404,11 @@
       
 
       
-        <h2 id="animate-text"><a href="#animate-text" class="headerlink" title="animate-text"></a>animate-text</h2><h3 id="文字动画和数字动画-animate-text"><a href="#文字动画和数字动画-animate-text" class="headerlink" title="文字动画和数字动画 animate text"></a>文字动画和数字动画 animate text</h3><p><a href="https://jsonz1993.github.io/demo/animate-text/index.html">查看DEMO</a> <a href="https://github.com/jsonz1993/learn/tree/master/finish/animate-text" target="_blank" rel="external">git仓库</a></p>
+        <h2 id="animate-text"><a href="#animate-text" class="headerlink" title="animate-text"></a>animate-text</h2><h3 id="文字动画和数字动画-animate-text"><a href="#文字动画和数字动画-animate-text" class="headerlink" title="文字动画和数字动画 animate text"></a>文字动画和数字动画 animate text</h3><p><a href="https://jsonz1993.github.io/demo/animate-text/index.html">查看DEMO</a> <a href="https://github.com/jsonz1993/learn/tree/master/finish/animate-text" target="_blank" rel="noopener">git仓库</a></p>
 <p>轻巧的文字动画库, 使用简单, 文件大小4k<br>可以给文字添加出现动画, 支持字符串打字效果和数字变化效果, 支持监听动画结束事件</p>
-<p><strong><a href="https://github.com/qgh810/animate-text" target="_blank" rel="external">项原项目地址</a>, 这里对其代码改造优化。</strong></p>
+<p><strong><a href="https://github.com/qgh810/animate-text" target="_blank" rel="noopener">项原项目地址</a>, 这里对其代码改造优化。</strong></p>
 <p><img src="./demo.gif"></p>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> AnimateText <span class="keyword">from</span> <span class="string">'./animate-text'</span></div><div class="line"></div><div class="line"><span class="comment">// 最简单的使用方法</span></div><div class="line"><span class="keyword">new</span> AnimateText(<span class="string">'.text'</span>)</div><div class="line"></div><div class="line"><span class="comment">// 如果需要定义动画时间可以这样初始化</span></div><div class="line"><span class="keyword">new</span> AnimateText(<span class="string">'.text'</span>, <span class="number">1000</span>)</div><div class="line"></div><div class="line"><span class="comment">// 如果还有其它设置 请这样写</span></div><div class="line"><span class="keyword">new</span> AnimateText(<span class="string">'.text'</span>, &#123;</div><div class="line">  <span class="attr">time</span>: <span class="number">1000</span>, <span class="comment">// 动画时长</span></div><div class="line">  isNumber: <span class="literal">true</span>, <span class="comment">// 是否渲染为数字动画</span></div><div class="line">  startNumber: <span class="number">0</span>, <span class="comment">// 渲染为数字动画时 动画的开始数字</span></div><div class="line">  changeCount: <span class="number">32</span>, <span class="comment">// 数字动画数字变化次数</span></div><div class="line">  onAnimated: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="built_in">console</span>.log(<span class="string">'动画结束'</span>)&#125; <span class="comment">// 动画结束事件回调</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> AnimateText <span class="keyword">from</span> <span class="string">'./animate-text'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 最简单的使用方法</span></span><br><span class="line"><span class="keyword">new</span> AnimateText(<span class="string">'.text'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果需要定义动画时间可以这样初始化</span></span><br><span class="line"><span class="keyword">new</span> AnimateText(<span class="string">'.text'</span>, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果还有其它设置 请这样写</span></span><br><span class="line"><span class="keyword">new</span> AnimateText(<span class="string">'.text'</span>, &#123;</span><br><span class="line">  time: <span class="number">1000</span>, <span class="comment">// 动画时长</span></span><br><span class="line">  isNumber: <span class="literal">true</span>, <span class="comment">// 是否渲染为数字动画</span></span><br><span class="line">  startNumber: <span class="number">0</span>, <span class="comment">// 渲染为数字动画时 动画的开始数字</span></span><br><span class="line">  changeCount: <span class="number">32</span>, <span class="comment">// 数字动画数字变化次数</span></span><br><span class="line">  onAnimated: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;<span class="built_in">console</span>.log(<span class="string">'动画结束'</span>)&#125; <span class="comment">// 动画结束事件回调</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p><br></p>
 <h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><p>AnimateText接收两个参数, 例如: new AnimateText(element, options)</p>
 <table>
@@ -483,7 +486,7 @@
 </tbody>
 </table>
 <p><br></p>
-<h3 id="实例对象方法说明"><a href="#实例对象方法说明" class="headerlink" title="实例对象方法说明"></a>实例对象方法说明</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 实例化</span></div><div class="line"><span class="keyword">var</span> animateText = <span class="keyword">new</span> AnimateText(<span class="string">'.text'</span>)</div><div class="line"></div><div class="line"><span class="comment">// 实例化对象后 对象提供play方法重新播放动画</span></div><div class="line"><span class="comment">// 接受参数作为动画时间</span></div><div class="line"><span class="comment">// 不传递参数则使用实例化的时间</span></div><div class="line">animateText.play(<span class="number">1000</span>)</div></pre></td></tr></table></figure>
+<h3 id="实例对象方法说明"><a href="#实例对象方法说明" class="headerlink" title="实例对象方法说明"></a>实例对象方法说明</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例化</span></span><br><span class="line"><span class="keyword">var</span> animateText = <span class="keyword">new</span> AnimateText(<span class="string">'.text'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化对象后 对象提供play方法重新播放动画</span></span><br><span class="line"><span class="comment">// 接受参数作为动画时间</span></span><br><span class="line"><span class="comment">// 不传递参数则使用实例化的时间</span></span><br><span class="line">animateText.play(<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -520,8 +523,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/chrome插件开发/" rel="next" title="chrome插件开发">
-                <i class="fa fa-chevron-left"></i> chrome插件开发
+              <a href="/2017/04/第三方服务集成/" rel="next" title="Hexo-第三方服务集成">
+                <i class="fa fa-chevron-left"></i> Hexo-第三方服务集成
               </a>
             
           </div>
@@ -530,8 +533,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/第三方服务集成/" rel="prev" title="Hexo-第三方服务集成">
-                Hexo-第三方服务集成 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/chrome插件开发/" rel="prev" title="chrome插件开发">
+                chrome插件开发 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -628,6 +631,13 @@
 
         </nav>
 
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         <div class="links-of-author motion-element">
