@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="定时器大家平时做js开发都不陌生了 最常见的应用应该就是验证码的倒计时 或 某段函数的异步执行了。 概述js的定时器主要有 setTimeout 和 setInterval. 这两个函数执行后，都会返回一个整数，表示定时器的编号，后面可以通过clearTimeout 或 clearInterval来清除该定时器。 setTimeout和setInterval的运行机制都是 将代码移除本次执行，等待">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-30T12:45:36.043Z">
+<meta property="og:updated_time" content="2018-07-01T03:43:21.774Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="setTimeout &amp;&amp; setInterval 学习">
 <meta name="twitter:description" content="定时器大家平时做js开发都不陌生了 最常见的应用应该就是验证码的倒计时 或 某段函数的异步执行了。 概述js的定时器主要有 setTimeout 和 setInterval. 这两个函数执行后，都会返回一个整数，表示定时器的编号，后面可以通过clearTimeout 或 clearInterval来清除该定时器。 setTimeout和setInterval的运行机制都是 将代码移除本次执行，等待">
@@ -366,6 +366,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/setTimeout-setInterval-学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/05/setTimeout-setInterval-学习/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -496,6 +506,13 @@
 
           
   <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -756,22 +773,39 @@
 
   
 
+    <script type="text/javascript">
+      var disqus_shortname = 'jsonz1993';
+      var disqus_identifier = '2017/05/setTimeout-setInterval-学习/';
+
+      var disqus_title = "setTimeout && setInterval 学习";
 
 
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
 
-	
+      run_disqus_script('count.js');
 
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
 
-
-
-
+    </script>
   
 
 
 
 
 
-  
 
 
 

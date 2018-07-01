@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="同样是因为面试的过程中，发现自己对http的一些概念和知识点和零碎，借此机会看了《HTTP小书》，顺手写了篇记录总结一些常见的http知识点。 http 简介请求:客户端软件打开到服务器的连接，发起请求如下：12345GET /hello.htm HTTP/1.1User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWeb">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-30T12:45:36.099Z">
+<meta property="og:updated_time" content="2018-07-01T03:43:21.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP常用知识点总结">
 <meta name="twitter:description" content="同样是因为面试的过程中，发现自己对http的一些概念和知识点和零碎，借此机会看了《HTTP小书》，顺手写了篇记录总结一些常见的http知识点。 http 简介请求:客户端软件打开到服务器的连接，发起请求如下：12345GET /hello.htm HTTP/1.1User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWeb">
@@ -366,6 +366,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/http-mini-book/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/http-mini-book/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -591,6 +601,13 @@
 
           
   <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -851,22 +868,39 @@
 
   
 
+    <script type="text/javascript">
+      var disqus_shortname = 'jsonz1993';
+      var disqus_identifier = '2018/05/http-mini-book/';
+
+      var disqus_title = "HTTP常用知识点总结";
 
 
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
 
-	
+      run_disqus_script('count.js');
 
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
 
-
-
-
+    </script>
   
 
 
 
 
 
-  
 
 
 

@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="前几天做全屏fixed布局弹窗的时候，去参考了一下淘宝的布局。 无意中发现里面用到一个没见过的css属性 -webkit-overflow-scrolling 该属性控制元素在移动设备上是否使用滚动回弹效果,会有种拟原生的效果 是属于Safari自己实现的css属性 兼容性支持 iOS 5.0 以上。 123-webkit-overflow-scrolling: touch; /* 当手指从触摸屏">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-30T12:45:36.051Z">
+<meta property="og:updated_time" content="2018-07-01T03:43:21.778Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器css滚动回弹效果 overflow-scrolling">
 <meta name="twitter:description" content="前几天做全屏fixed布局弹窗的时候，去参考了一下淘宝的布局。 无意中发现里面用到一个没见过的css属性 -webkit-overflow-scrolling 该属性控制元素在移动设备上是否使用滚动回弹效果,会有种拟原生的效果 是属于Safari自己实现的css属性 兼容性支持 iOS 5.0 以上。 123-webkit-overflow-scrolling: touch; /* 当手指从触摸屏">
@@ -366,6 +366,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/浏览器css滚动回弹效果-overflow-scrolling/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/08/浏览器css滚动回弹效果-overflow-scrolling/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -487,6 +497,13 @@
 
           
   <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -722,22 +739,39 @@
 
   
 
+    <script type="text/javascript">
+      var disqus_shortname = 'jsonz1993';
+      var disqus_identifier = '2017/08/浏览器css滚动回弹效果-overflow-scrolling/';
+
+      var disqus_title = "浏览器css滚动回弹效果 overflow-scrolling";
 
 
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
 
-	
+      run_disqus_script('count.js');
 
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
 
-
-
-
+    </script>
   
 
 
 
 
 
-  
 
 
 

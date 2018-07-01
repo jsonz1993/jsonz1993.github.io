@@ -100,7 +100,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/05/ios-body事件委托的坑/body_100.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/05/ios-body事件委托的坑/body_bug.PNG">
-<meta property="og:updated_time" content="2018-06-30T12:45:36.039Z">
+<meta property="og:updated_time" content="2018-07-01T03:43:21.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ios body事件委托的坑">
 <meta name="twitter:description" content="部门老大: 这个套餐怎么超出一屏之后点击没反应的… 起因有一个套餐列表是靠接口异步渲染的，所以事件我直接绑定在body上，通过事件委托去触发。这原本没什么问题， 要命的是 reset.css 中把 body, html 高度设置为 100%。 这就可能出现下面的情况  页面过长，拉上去的时候 body 只有 100% 高度，没有覆盖到下面， 所以这时候点击下面的套餐，不算是点击到body上 委托也">
@@ -369,6 +369,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/05/ios-body事件委托的坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/05/ios-body事件委托的坑/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -482,6 +492,13 @@
 
           
   <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -742,22 +759,39 @@
 
   
 
+    <script type="text/javascript">
+      var disqus_shortname = 'jsonz1993';
+      var disqus_identifier = '2017/05/ios-body事件委托的坑/';
+
+      var disqus_title = "ios body事件委托的坑";
 
 
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
 
-	
+      run_disqus_script('count.js');
 
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
 
-
-
-
+    </script>
   
 
 
 
 
 
-  
 
 
 

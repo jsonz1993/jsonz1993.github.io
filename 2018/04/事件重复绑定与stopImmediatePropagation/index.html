@@ -99,7 +99,7 @@
 <meta property="og:description" content="在旧项目中，我们一般绑定事件都是用 $(&amp;#39;selector&amp;#39;).on(&amp;#39;event&amp;#39;, fn) || document.querySelector(&amp;#39;selector&amp;#39;).addEventListener(&amp;#39;event&amp;#39;, fn); 如果平时代码规范，这样写完全ojbk 点击.p 之后输出 test1demo1123456789&amp;lt">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/04/事件重复绑定与stopImmediatePropagation/repetition.png">
-<meta property="og:updated_time" content="2018-06-30T12:45:36.079Z">
+<meta property="og:updated_time" content="2018-07-01T03:43:21.806Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="事件重复绑定与stopImmediatePropagation">
 <meta name="twitter:description" content="在旧项目中，我们一般绑定事件都是用 $(&amp;#39;selector&amp;#39;).on(&amp;#39;event&amp;#39;, fn) || document.querySelector(&amp;#39;selector&amp;#39;).addEventListener(&amp;#39;event&amp;#39;, fn); 如果平时代码规范，这样写完全ojbk 点击.p 之后输出 test1demo1123456789&amp;lt">
@@ -368,6 +368,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/04/事件重复绑定与stopImmediatePropagation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/04/事件重复绑定与stopImmediatePropagation/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -491,6 +501,13 @@
 
           
   <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -726,22 +743,39 @@
 
   
 
+    <script type="text/javascript">
+      var disqus_shortname = 'jsonz1993';
+      var disqus_identifier = '2018/04/事件重复绑定与stopImmediatePropagation/';
+
+      var disqus_title = "事件重复绑定与stopImmediatePropagation";
 
 
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
 
-	
+      run_disqus_script('count.js');
 
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
 
-
-
-
+    </script>
   
 
 
 
 
 
-  
 
 
 
