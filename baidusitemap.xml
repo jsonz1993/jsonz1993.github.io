@@ -7,17 +7,44 @@
     
     
     
+    
   <url>
-    <loc>https://jsonz1993.github.io/2018/06/window-print%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%93%E5%8D%B0/</loc>
-    <lastmod>2018-07-28T13:41:44.122Z</lastmod>
+    <loc>https://jsonz1993.github.io/2018/07/video-to-chat/</loc>
+    <lastmod>2018-07-30T07:25:40.808Z</lastmod>
     <data>
         <display>
-        <title>window.print——关于浏览器打印</title>
-        <pubTime>2018-06-28T15:26:14.000Z</pubTime>
+        <title>视频转字符画</title>
+        <pubTime>2018-07-30T10:36:35.000Z</pubTime>
         
+        <tag>learn</tag>
+         
         <tag>github</tag>
          
-        <tag>work</tag>
+        <tag>JavaScript</tag>
+         
+        <tag>Canvas</tag>
+         
+        <tag>HTML</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2018/07/2018-07-27/</loc>
+    <lastmod>2018-07-30T07:25:40.796Z</lastmod>
+    <data>
+        <display>
+        <title>2018-07-27 小记</title>
+        <pubTime>2018-07-27T17:10:46.000Z</pubTime>
+        
+        <tag>blog</tag>
          
          
            
@@ -31,7 +58,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2018/02/%E5%88%92%E6%B0%B4/</loc>
-    <lastmod>2018-07-28T13:41:44.122Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.796Z</lastmod>
     <data>
         <display>
         <title>划水</title>
@@ -51,7 +78,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2018/05/http-mini-book/</loc>
-    <lastmod>2018-07-28T13:41:44.122Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.796Z</lastmod>
     <data>
         <display>
         <title>HTTP常用知识点总结</title>
@@ -74,14 +101,16 @@
 
     
   <url>
-    <loc>https://jsonz1993.github.io/2018/07/2018-07-27/</loc>
-    <lastmod>2018-07-28T13:41:44.122Z</lastmod>
+    <loc>https://jsonz1993.github.io/2018/06/window-print%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%93%E5%8D%B0/</loc>
+    <lastmod>2018-07-30T07:25:40.796Z</lastmod>
     <data>
         <display>
-        <title>2018-07-27 小记</title>
-        <pubTime>2018-07-27T17:10:46.000Z</pubTime>
+        <title>window.print——关于浏览器打印</title>
+        <pubTime>2018-06-28T15:26:14.000Z</pubTime>
         
-        <tag>blog</tag>
+        <tag>github</tag>
+         
+        <tag>work</tag>
          
          
            
@@ -95,7 +124,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2018/05/history-scroll-restoration/</loc>
-    <lastmod>2018-07-28T13:41:44.122Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.792Z</lastmod>
     <data>
         <display>
         <title>浏览器恢复滚动行为 —— history.scrollRestoration</title>
@@ -118,32 +147,8 @@
 
     
   <url>
-    <loc>https://jsonz1993.github.io/2018/05/css-world/</loc>
-    <lastmod>2018-07-28T13:41:44.118Z</lastmod>
-    <data>
-        <display>
-        <title>《css世界》常用技巧 —— 读书笔记</title>
-        <pubTime>2018-05-19T14:41:33.000Z</pubTime>
-        
-        <tag>learn</tag>
-         
-        <tag>CSS</tag>
-         
-        <tag>Book</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://jsonz1993.github.io/2018/05/create-react-app-t/</loc>
-    <lastmod>2018-07-28T13:41:44.118Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.788Z</lastmod>
     <data>
         <display>
         <title>create-react-app 源码解析之react-scripts</title>
@@ -168,8 +173,32 @@
 
     
   <url>
+    <loc>https://jsonz1993.github.io/2018/05/css-world/</loc>
+    <lastmod>2018-07-30T07:25:40.788Z</lastmod>
+    <data>
+        <display>
+        <title>《css世界》常用技巧 —— 读书笔记</title>
+        <pubTime>2018-05-19T14:41:33.000Z</pubTime>
+        
+        <tag>learn</tag>
+         
+        <tag>CSS</tag>
+         
+        <tag>Book</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://jsonz1993.github.io/2018/05/create-react-app-o/</loc>
-    <lastmod>2018-07-28T13:41:44.110Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.784Z</lastmod>
     <data>
         <display>
         <title>create-react-app 源码解析</title>
@@ -195,7 +224,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2018/05/2018-05-21/</loc>
-    <lastmod>2018-07-28T13:41:44.110Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.784Z</lastmod>
     <data>
         <display>
         <title>2018-05-21 小记</title>
@@ -212,7 +241,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2018/05/2018-05-08/</loc>
-    <lastmod>2018-07-28T13:41:44.110Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.784Z</lastmod>
     <data>
         <display>
         <title>2018-05-08面试记B</title>
@@ -230,7 +259,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2018/04/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/</loc>
-    <lastmod>2018-07-28T13:41:44.106Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.780Z</lastmod>
     <data>
         <display>
         <title>自动化功能测试流程方案</title>
@@ -260,7 +289,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2018/04/%E4%BA%8B%E4%BB%B6%E9%87%8D%E5%A4%8D%E7%BB%91%E5%AE%9A%E4%B8%8EstopImmediatePropagation/</loc>
-    <lastmod>2018-07-28T13:41:44.106Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.780Z</lastmod>
     <data>
         <display>
         <title>事件重复绑定与stopImmediatePropagation</title>
@@ -282,7 +311,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2018/04/2018-04-29/</loc>
-    <lastmod>2018-07-28T13:41:44.106Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.780Z</lastmod>
     <data>
         <display>
         <title>2018-04-29面试记A</title>
@@ -300,7 +329,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2018/03/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/</loc>
-    <lastmod>2018-07-28T13:41:44.106Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.780Z</lastmod>
     <data>
         <display>
         <title>项目代码规范工作流——editor、prettier、eslint、git-check</title>
@@ -320,7 +349,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2018/03/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95puppeteer-%E4%B8%8Eqq%E7%A9%BA%E9%97%B4/</loc>
-    <lastmod>2018-07-28T13:41:44.082Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.752Z</lastmod>
     <data>
         <display>
         <title>自动化测试 puppeteer 与qq空间</title>
@@ -343,28 +372,8 @@
 
     
   <url>
-    <loc>https://jsonz1993.github.io/2018/02/react%E5%85%A8%E5%AE%B6%E6%A1%B6-dva-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2018-07-28T13:41:44.082Z</lastmod>
-    <data>
-        <display>
-        <title>react全家桶 + dva 实践整理总结</title>
-        <pubTime>2018-02-28T16:07:43.000Z</pubTime>
-        
-        <tag>github</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://jsonz1993.github.io/2018/01/%E4%B8%80%E6%AD%A5%E6%AD%A5%E5%AE%9E%E7%8E%B0%E6%9E%81%E7%AE%80%E7%BC%96%E8%AF%91%E5%99%A8-%E2%80%94%E2%80%94-%E4%BA%86%E8%A7%A3%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86/</loc>
-    <lastmod>2018-07-28T13:41:44.078Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.752Z</lastmod>
     <data>
         <display>
         <title>一步步实现极简编译器 —— 了解编译器原理</title>
@@ -388,7 +397,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/12/%E6%B5%85%E6%9E%90Promise/</loc>
-    <lastmod>2018-07-28T13:41:44.078Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.752Z</lastmod>
     <data>
         <display>
         <title>浅析Promise (一)</title>
@@ -410,7 +419,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/12/http%E4%B8%8Ehttps%E6%9D%82%E8%B0%88/</loc>
-    <lastmod>2018-07-28T13:41:44.078Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.752Z</lastmod>
     <data>
         <display>
         <title>http与https杂谈</title>
@@ -430,7 +439,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/08/%E6%B5%8F%E8%A7%88%E5%99%A8css%E6%BB%9A%E5%8A%A8%E5%9B%9E%E5%BC%B9%E6%95%88%E6%9E%9C-overflow-scrolling/</loc>
-    <lastmod>2018-07-28T13:41:44.078Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.752Z</lastmod>
     <data>
         <display>
         <title>浏览器css滚动回弹效果 overflow-scrolling</title>
@@ -451,8 +460,138 @@
 
     
   <url>
+    <loc>https://jsonz1993.github.io/2018/02/react%E5%85%A8%E5%AE%B6%E6%A1%B6-dva-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2018-07-30T07:25:40.752Z</lastmod>
+    <data>
+        <display>
+        <title>react全家桶 + dva 实践整理总结</title>
+        <pubTime>2018-02-28T16:07:43.000Z</pubTime>
+        
+        <tag>github</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/06/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%B5%8F%E8%A7%88%E5%99%A8%E9%BB%98%E8%AE%A4%E8%AF%B7%E6%B1%82-apple-touch-icon-png-%E9%97%AE%E9%A2%98/</loc>
+    <lastmod>2018-07-30T07:25:40.748Z</lastmod>
+    <data>
+        <display>
+        <title>移动端浏览器默认请求 apple-touch-icon.png 问题</title>
+        <pubTime>2017-06-01T17:48:46.000Z</pubTime>
+        
+        <tag>web</tag>
+         
+        <tag>work</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/08/flex-1%E5%9C%A8iOS10-2%E5%AF%BC%E8%87%B4flex-wrap%E4%B8%8D%E8%B5%B7%E4%BD%9C%E7%94%A8bug/</loc>
+    <lastmod>2018-07-30T07:25:40.748Z</lastmod>
+    <data>
+        <display>
+        <title>flex:1在iOS10.2导致flex-wrap 不起作用</title>
+        <pubTime>2017-08-28T12:01:43.000Z</pubTime>
+        
+        <tag>work</tag>
+         
+        <tag>CSS</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/08/8%E6%9C%88%E7%AC%AC%E4%B8%80%E5%91%A8%E7%9A%84%E7%89%A2%E9%AA%9A/</loc>
+    <lastmod>2018-07-30T07:25:40.748Z</lastmod>
+    <data>
+        <display>
+        <title>8月伊始牢骚</title>
+        <pubTime>2017-08-10T22:31:45.000Z</pubTime>
+        
+        <tag>work</tag>
+         
+         
+           
+             
+              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/blog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/07/%E5%85%BC%E5%AE%B9%E5%A4%9A%E7%A7%8D%E6%A8%A1%E5%BC%8F%E8%A7%84%E8%8C%83/</loc>
+    <lastmod>2018-07-30T07:25:40.748Z</lastmod>
+    <data>
+        <display>
+        <title>兼容多种模式规范</title>
+        <pubTime>2017-07-10T20:18:35.000Z</pubTime>
+        
+        <tag>github</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/06/%E6%8D%A3%E9%BC%93%E7%9B%AE%E5%BD%95/</loc>
+    <lastmod>2018-07-30T07:25:40.748Z</lastmod>
+    <data>
+        <display>
+        <title>[置顶]捣鼓目录</title>
+        <pubTime>2017-06-06T20:44:48.000Z</pubTime>
+        
+        <tag>learn</tag>
+         
+        <tag>github</tag>
+         
+        <tag>web</tag>
+         
+        <tag>work</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://jsonz1993.github.io/2017/08/postMessage-%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92/</loc>
-    <lastmod>2018-07-28T13:41:44.078Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.748Z</lastmod>
     <data>
         <display>
         <title>postMessage 消息传递</title>
@@ -475,162 +614,8 @@
 
     
   <url>
-    <loc>https://jsonz1993.github.io/2017/08/flex-1%E5%9C%A8iOS10-2%E5%AF%BC%E8%87%B4flex-wrap%E4%B8%8D%E8%B5%B7%E4%BD%9C%E7%94%A8bug/</loc>
-    <lastmod>2018-07-28T13:41:44.078Z</lastmod>
-    <data>
-        <display>
-        <title>flex:1在iOS10.2导致flex-wrap 不起作用</title>
-        <pubTime>2017-08-28T12:01:43.000Z</pubTime>
-        
-        <tag>work</tag>
-         
-        <tag>CSS</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/08/8%E6%9C%88%E7%AC%AC%E4%B8%80%E5%91%A8%E7%9A%84%E7%89%A2%E9%AA%9A/</loc>
-    <lastmod>2018-07-28T13:41:44.078Z</lastmod>
-    <data>
-        <display>
-        <title>8月伊始牢骚</title>
-        <pubTime>2017-08-10T22:31:45.000Z</pubTime>
-        
-        <tag>work</tag>
-         
-         
-           
-             
-              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/blog/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/07/%E5%85%BC%E5%AE%B9%E5%A4%9A%E7%A7%8D%E6%A8%A1%E5%BC%8F%E8%A7%84%E8%8C%83/</loc>
-    <lastmod>2018-07-28T13:41:44.078Z</lastmod>
-    <data>
-        <display>
-        <title>兼容多种模式规范</title>
-        <pubTime>2017-07-10T20:18:35.000Z</pubTime>
-        
-        <tag>github</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/05/%E7%AE%80%E5%8D%95%E7%9A%84%E7%BD%91%E9%A1%B5%E7%82%B9%E5%87%BB%E7%83%AD%E5%8A%9B%E5%9B%BE/</loc>
-    <lastmod>2018-07-28T13:41:44.074Z</lastmod>
-    <data>
-        <display>
-        <title>简单的网页点击热力图</title>
-        <pubTime>2017-05-12T16:09:25.000Z</pubTime>
-        
-        <tag>learn</tag>
-         
-        <tag>github</tag>
-         
-        <tag>JavaScript</tag>
-         
-        <tag>work</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/06/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%B5%8F%E8%A7%88%E5%99%A8%E9%BB%98%E8%AE%A4%E8%AF%B7%E6%B1%82-apple-touch-icon-png-%E9%97%AE%E9%A2%98/</loc>
-    <lastmod>2018-07-28T13:41:44.074Z</lastmod>
-    <data>
-        <display>
-        <title>移动端浏览器默认请求 apple-touch-icon.png 问题</title>
-        <pubTime>2017-06-01T17:48:46.000Z</pubTime>
-        
-        <tag>web</tag>
-         
-        <tag>work</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/05/setTimeout-setInterval-%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2018-07-28T13:41:44.074Z</lastmod>
-    <data>
-        <display>
-        <title>setTimeout && setInterval 学习</title>
-        <pubTime>2017-05-16T23:06:32.000Z</pubTime>
-        
-        <tag>learn</tag>
-         
-        <tag>github</tag>
-         
-        <tag>JavaScript</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/05/webpack-%E4%BB%A3%E7%A0%81%E5%88%86%E5%89%B2-%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%8A%A0%E5%BF%AB%E9%A6%96%E5%B1%8F%E9%80%9F%E5%BA%A6/</loc>
-    <lastmod>2018-07-28T13:41:44.074Z</lastmod>
-    <data>
-        <display>
-        <title>webpack 代码分割(异步加载加快首屏速度)</title>
-        <pubTime>2017-05-22T17:51:26.000Z</pubTime>
-        
-        <tag>github</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://jsonz1993.github.io/2017/05/webstorm/</loc>
-    <lastmod>2018-07-28T13:41:44.074Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.744Z</lastmod>
     <data>
         <display>
         <title>webstorm 快捷键整理</title>
@@ -650,7 +635,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/05/%E5%B7%A5%E4%BD%9C%E6%97%A5%E5%B8%B8-%E5%90%B8%E9%A1%B6%E6%95%88%E6%9E%9C/</loc>
-    <lastmod>2018-07-28T13:41:44.074Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.744Z</lastmod>
     <data>
         <display>
         <title>工作日常 吸顶效果</title>
@@ -676,7 +661,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/05/%E7%A7%BB%E5%8A%A8%E7%AB%AF%E9%95%BF%E6%8C%89%E5%BC%B9%E5%87%BA%E5%A4%8D%E5%88%B6%E7%AD%89%E9%80%89%E9%A1%B9%E8%AE%BE%E7%BD%AE/</loc>
-    <lastmod>2018-07-28T13:41:44.074Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.744Z</lastmod>
     <data>
         <display>
         <title>移动端长按弹出复制等选项设置</title>
@@ -697,18 +682,18 @@
 
     
   <url>
-    <loc>https://jsonz1993.github.io/2017/06/%E6%8D%A3%E9%BC%93%E7%9B%AE%E5%BD%95/</loc>
-    <lastmod>2018-07-28T13:41:44.074Z</lastmod>
+    <loc>https://jsonz1993.github.io/2017/05/%E7%AE%80%E5%8D%95%E7%9A%84%E7%BD%91%E9%A1%B5%E7%82%B9%E5%87%BB%E7%83%AD%E5%8A%9B%E5%9B%BE/</loc>
+    <lastmod>2018-07-30T07:25:40.744Z</lastmod>
     <data>
         <display>
-        <title>[置顶]捣鼓目录</title>
-        <pubTime>2017-06-06T20:44:48.000Z</pubTime>
+        <title>简单的网页点击热力图</title>
+        <pubTime>2017-05-12T16:09:25.000Z</pubTime>
         
         <tag>learn</tag>
          
         <tag>github</tag>
          
-        <tag>web</tag>
+        <tag>JavaScript</tag>
          
         <tag>work</tag>
          
@@ -724,7 +709,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/05/%E8%8E%B7%E5%8F%96%E6%BB%9A%E5%8A%A8%E6%9D%A1%E5%AE%BD%E5%BA%A6/</loc>
-    <lastmod>2018-07-28T13:41:44.074Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.744Z</lastmod>
     <data>
         <display>
         <title>获取滚动条宽度</title>
@@ -748,7 +733,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/06/nodeJs-%E5%AD%A6%E4%B9%A0%E5%AF%BC%E8%88%AA/</loc>
-    <lastmod>2018-07-28T13:41:44.074Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.744Z</lastmod>
     <data>
         <display>
         <title>nodeJs 学习导航</title>
@@ -770,7 +755,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/06/react-native-countdown-RN%E7%9A%84%E5%80%92%E8%AE%A1%E6%97%B6%E7%BB%84%E4%BB%B6/</loc>
-    <lastmod>2018-07-28T13:41:44.074Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.744Z</lastmod>
     <data>
         <display>
         <title>react-native-countdown RN的倒计时组件</title>
@@ -796,7 +781,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/06/react-native-%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2018-07-28T13:41:44.074Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.744Z</lastmod>
     <data>
         <display>
         <title>react-native 学习总结</title>
@@ -821,8 +806,52 @@
 
     
   <url>
+    <loc>https://jsonz1993.github.io/2017/05/setTimeout-setInterval-%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2018-07-30T07:25:40.744Z</lastmod>
+    <data>
+        <display>
+        <title>setTimeout && setInterval 学习</title>
+        <pubTime>2017-05-16T23:06:32.000Z</pubTime>
+        
+        <tag>learn</tag>
+         
+        <tag>github</tag>
+         
+        <tag>JavaScript</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/05/webpack-%E4%BB%A3%E7%A0%81%E5%88%86%E5%89%B2-%E5%BC%82%E6%AD%A5%E5%8A%A0%E8%BD%BD%E5%8A%A0%E5%BF%AB%E9%A6%96%E5%B1%8F%E9%80%9F%E5%BA%A6/</loc>
+    <lastmod>2018-07-30T07:25:40.744Z</lastmod>
+    <data>
+        <display>
+        <title>webpack 代码分割(异步加载加快首屏速度)</title>
+        <pubTime>2017-05-22T17:51:26.000Z</pubTime>
+        
+        <tag>github</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://jsonz1993.github.io/2017/05/ios%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2018-07-28T13:41:44.070Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.740Z</lastmod>
     <data>
         <display>
         <title>ios网络操作基础教程</title>
@@ -847,30 +876,8 @@
 
     
   <url>
-    <loc>https://jsonz1993.github.io/2017/05/ios9-%E4%B8%8B-domArray-forEach-%E6%8A%A5%E9%94%99/</loc>
-    <lastmod>2018-07-28T13:41:44.070Z</lastmod>
-    <data>
-        <display>
-        <title>ios9 下 domArray forEach 报错</title>
-        <pubTime>2017-05-26T11:36:16.000Z</pubTime>
-        
-        <tag>JavaScript</tag>
-         
-        <tag>work</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://jsonz1993.github.io/2017/05/imooc-react-native%E5%AE%9E%E6%88%98-%E9%A1%B9%E7%9B%AE%E5%85%A5%E9%97%A8%E7%9F%A5%E8%AF%86%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2018-07-28T13:41:44.066Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.740Z</lastmod>
     <data>
         <display>
         <title>imooc-react-native实战 项目入门知识学习</title>
@@ -895,8 +902,143 @@
 
     
   <url>
+    <loc>https://jsonz1993.github.io/2017/05/ios-body%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%E7%9A%84%E5%9D%91/</loc>
+    <lastmod>2018-07-30T07:25:40.740Z</lastmod>
+    <data>
+        <display>
+        <title>ios body事件委托的坑</title>
+        <pubTime>2017-05-29T12:50:42.000Z</pubTime>
+        
+        <tag>JavaScript</tag>
+         
+        <tag>work</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/05/ios9-%E4%B8%8B-domArray-forEach-%E6%8A%A5%E9%94%99/</loc>
+    <lastmod>2018-07-30T07:25:40.740Z</lastmod>
+    <data>
+        <display>
+        <title>ios9 下 domArray forEach 报错</title>
+        <pubTime>2017-05-26T11:36:16.000Z</pubTime>
+        
+        <tag>JavaScript</tag>
+         
+        <tag>work</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/05/cookie-js-%E7%AE%80%E5%8D%95%E7%9A%84cookie%E6%93%8D%E4%BD%9C%E6%8F%92%E4%BB%B6/</loc>
+    <lastmod>2018-07-30T07:25:40.736Z</lastmod>
+    <data>
+        <display>
+        <title>cookie.js 简单的cookie操作插件</title>
+        <pubTime>2017-05-21T15:03:33.000Z</pubTime>
+        
+        <tag>learn</tag>
+         
+        <tag>github</tag>
+         
+        <tag>JavaScript</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/05/React-Native-%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2018-07-30T07:25:40.736Z</lastmod>
+    <data>
+        <display>
+        <title>React-Native 错误总结</title>
+        <pubTime>2017-05-18T06:42:36.000Z</pubTime>
+        
+        <tag>github</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/04/%E7%AE%80%E5%8D%95%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F/</loc>
+    <lastmod>2018-07-30T07:25:40.736Z</lastmod>
+    <data>
+        <display>
+        <title>简单事件系统</title>
+        <pubTime>2017-04-20T00:26:07.000Z</pubTime>
+        
+        <tag>learn</tag>
+         
+        <tag>github</tag>
+         
+        <tag>JavaScript</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://jsonz1993.github.io/2017/04/%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E5%A4%B9/</loc>
+    <lastmod>2018-07-30T07:25:40.736Z</lastmod>
+    <data>
+        <display>
+        <title>Hexo-资源文件夹与数据文件夹</title>
+        <pubTime>2017-04-02T13:48:31.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+             
+              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://jsonz1993.github.io/2017/05/imooc-React-Native-%E6%96%87%E5%AD%97%E5%B0%8F%E6%B8%B8%E6%88%8F/</loc>
-    <lastmod>2018-07-28T13:41:44.066Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.736Z</lastmod>
     <data>
         <display>
         <title>imooc React-Native 文字小游戏</title>
@@ -921,122 +1063,8 @@
 
     
   <url>
-    <loc>https://jsonz1993.github.io/2017/05/cookie-js-%E7%AE%80%E5%8D%95%E7%9A%84cookie%E6%93%8D%E4%BD%9C%E6%8F%92%E4%BB%B6/</loc>
-    <lastmod>2018-07-28T13:41:44.066Z</lastmod>
-    <data>
-        <display>
-        <title>cookie.js 简单的cookie操作插件</title>
-        <pubTime>2017-05-21T15:03:33.000Z</pubTime>
-        
-        <tag>learn</tag>
-         
-        <tag>github</tag>
-         
-        <tag>JavaScript</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/05/React-Native-%E9%94%99%E8%AF%AF%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2018-07-28T13:41:44.066Z</lastmod>
-    <data>
-        <display>
-        <title>React-Native 错误总结</title>
-        <pubTime>2017-05-18T06:42:36.000Z</pubTime>
-        
-        <tag>github</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/05/CORS-%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB/</loc>
-    <lastmod>2018-07-28T13:41:44.066Z</lastmod>
-    <data>
-        <display>
-        <title>CORS 跨域资源共享</title>
-        <pubTime>2017-05-20T15:13:08.000Z</pubTime>
-        
-        <tag>learn</tag>
-         
-        <tag>web</tag>
-         
-        <tag>work</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/05/ios-body%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%E7%9A%84%E5%9D%91/</loc>
-    <lastmod>2018-07-28T13:41:44.066Z</lastmod>
-    <data>
-        <display>
-        <title>ios body事件委托的坑</title>
-        <pubTime>2017-05-29T12:50:42.000Z</pubTime>
-        
-        <tag>JavaScript</tag>
-         
-        <tag>work</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/04/%E7%AE%80%E5%8D%95%E4%BA%8B%E4%BB%B6%E7%B3%BB%E7%BB%9F/</loc>
-    <lastmod>2018-07-28T13:41:44.066Z</lastmod>
-    <data>
-        <display>
-        <title>简单事件系统</title>
-        <pubTime>2017-04-20T00:26:07.000Z</pubTime>
-        
-        <tag>learn</tag>
-         
-        <tag>github</tag>
-         
-        <tag>JavaScript</tag>
-         
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://jsonz1993.github.io/2017/04/%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1%E9%9B%86%E6%88%90/</loc>
-    <lastmod>2018-07-28T13:41:44.066Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.736Z</lastmod>
     <data>
         <display>
         <title>Hexo-第三方服务集成</title>
@@ -1059,7 +1087,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/%E7%94%9F%E6%88%90%E6%96%87%E4%BB%B6%E4%B8%8E%E9%83%A8%E7%BD%B2/</loc>
-    <lastmod>2018-07-28T13:41:44.066Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.736Z</lastmod>
     <data>
         <display>
         <title>Hexo-生成文件与部署</title>
@@ -1082,7 +1110,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/%E6%9C%AC%E5%9C%B0%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2018-07-28T13:41:44.066Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.736Z</lastmod>
     <data>
         <display>
         <title>Hexo-本地服务器</title>
@@ -1104,22 +1132,23 @@
 
     
   <url>
-    <loc>https://jsonz1993.github.io/2017/04/%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6%E5%A4%B9/</loc>
-    <lastmod>2018-07-28T13:41:44.066Z</lastmod>
+    <loc>https://jsonz1993.github.io/2017/05/CORS-%E8%B7%A8%E5%9F%9F%E8%B5%84%E6%BA%90%E5%85%B1%E4%BA%AB/</loc>
+    <lastmod>2018-07-30T07:25:40.736Z</lastmod>
     <data>
         <display>
-        <title>Hexo-资源文件夹与数据文件夹</title>
-        <pubTime>2017-04-02T13:48:31.000Z</pubTime>
+        <title>CORS 跨域资源共享</title>
+        <pubTime>2017-05-20T15:13:08.000Z</pubTime>
         
-        <tag>hexo</tag>
+        <tag>learn</tag>
+         
+        <tag>web</tag>
+         
+        <tag>work</tag>
          
          
            
              
               <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-             
-              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
           
         </display>
     </data>
@@ -1128,7 +1157,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/%E5%BE%81%E6%88%98Objective-C/</loc>
-    <lastmod>2018-07-28T13:41:44.062Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.732Z</lastmod>
     <data>
         <display>
         <title>征战Objective-C</title>
@@ -1154,7 +1183,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/%E5%A4%8D%E5%88%B6%E9%BB%8F%E8%B4%B4%E6%9D%BF%E6%8F%92%E4%BB%B6-CopyText/</loc>
-    <lastmod>2018-07-28T13:41:44.062Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.732Z</lastmod>
     <data>
         <display>
         <title>复制黏贴板插件-CopyText</title>
@@ -1176,7 +1205,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/tag-plugins/</loc>
-    <lastmod>2018-07-28T13:41:44.062Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.732Z</lastmod>
     <data>
         <display>
         <title>tag plugins</title>
@@ -1199,7 +1228,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/sublime-text-3-%E9%85%8D%E7%BD%AE/</loc>
-    <lastmod>2018-07-28T13:41:44.046Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.716Z</lastmod>
     <data>
         <display>
         <title>sublime text 3 配置</title>
@@ -1221,7 +1250,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/next-%E4%B8%BB%E9%A2%98%E8%AE%BE%E7%BD%AE/</loc>
-    <lastmod>2018-07-28T13:41:44.046Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.716Z</lastmod>
     <data>
         <display>
         <title>next-主题设置</title>
@@ -1243,8 +1272,32 @@
 
     
   <url>
+    <loc>https://jsonz1993.github.io/2017/04/Objective-C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</loc>
+    <lastmod>2018-07-30T07:25:40.708Z</lastmod>
+    <data>
+        <display>
+        <title>Objective-C 面向对象初体验</title>
+        <pubTime>2017-04-22T23:56:46.000Z</pubTime>
+        
+        <tag>Objective-C</tag>
+         
+        <tag>imooc</tag>
+         
+        <tag>learn - ios</tag>
+         
+         
+           
+             
+              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://jsonz1993.github.io/2017/04/iOS%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B%E4%B9%8B%E7%95%8C%E9%9D%A2%E5%88%9D%E4%BD%93%E9%AA%8C/</loc>
-    <lastmod>2018-07-28T13:41:44.038Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.708Z</lastmod>
     <data>
         <display>
         <title>iOS基础教程之界面初体验</title>
@@ -1270,7 +1323,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/hexo-%E8%BE%85%E5%8A%A9%E5%87%BD%E6%95%B0/</loc>
-    <lastmod>2018-07-28T13:41:44.038Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.708Z</lastmod>
     <data>
         <display>
         <title>hexo-辅助函数</title>
@@ -1293,7 +1346,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/hexo-%E6%B0%B8%E4%B9%85%E9%93%BE%E6%8E%A5/</loc>
-    <lastmod>2018-07-28T13:41:44.038Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.708Z</lastmod>
     <data>
         <display>
         <title>hexo-永久链接</title>
@@ -1315,21 +1368,22 @@
 
     
   <url>
-    <loc>https://jsonz1993.github.io/2017/04/chrome%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2018-07-28T13:41:44.038Z</lastmod>
+    <loc>https://jsonz1993.github.io/2017/04/hexo-%E6%A8%A1%E6%9D%BF/</loc>
+    <lastmod>2018-07-30T07:25:40.708Z</lastmod>
     <data>
         <display>
-        <title>chrome插件开发</title>
-        <pubTime>2017-04-07T15:29:38.000Z</pubTime>
+        <title>hexo-模板</title>
+        <pubTime>2017-04-02T18:39:38.000Z</pubTime>
         
-        <tag>JavaScript</tag>
-         
-        <tag>chrome</tag>
+        <tag>hexo</tag>
          
          
            
              
               <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
+          
+             
+              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
           
         </display>
     </data>
@@ -1338,7 +1392,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/hexo-%E5%8F%98%E9%87%8F/</loc>
-    <lastmod>2018-07-28T13:41:44.038Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.708Z</lastmod>
     <data>
         <display>
         <title>hexo-变量</title>
@@ -1361,7 +1415,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/hexo-%E4%B8%BB%E9%A2%98%E6%A6%82%E8%BF%B0/</loc>
-    <lastmod>2018-07-28T13:41:44.038Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.708Z</lastmod>
     <data>
         <display>
         <title>hexo-主题概述</title>
@@ -1384,7 +1438,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/hellp-next/</loc>
-    <lastmod>2018-07-28T13:41:44.038Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.708Z</lastmod>
     <data>
         <display>
         <title>hello next</title>
@@ -1407,7 +1461,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/hello-hexo/</loc>
-    <lastmod>2018-07-28T13:41:44.038Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.708Z</lastmod>
     <data>
         <display>
         <title>hello Hexo</title>
@@ -1429,41 +1483,16 @@
 
     
   <url>
-    <loc>https://jsonz1993.github.io/2017/04/hexo-%E6%A8%A1%E6%9D%BF/</loc>
-    <lastmod>2018-07-28T13:41:44.038Z</lastmod>
+    <loc>https://jsonz1993.github.io/2017/04/chrome%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2018-07-30T07:25:40.708Z</lastmod>
     <data>
         <display>
-        <title>hexo-模板</title>
-        <pubTime>2017-04-02T18:39:38.000Z</pubTime>
+        <title>chrome插件开发</title>
+        <pubTime>2017-04-07T15:29:38.000Z</pubTime>
         
-        <tag>hexo</tag>
+        <tag>JavaScript</tag>
          
-         
-           
-             
-              <breadCrumb title="technology" url="https://jsonz1993.github.io/categories/technology/"/>
-          
-             
-              <breadCrumb title="blog" url="https://jsonz1993.github.io/categories/technology/blog/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://jsonz1993.github.io/2017/04/Objective-C-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%88%9D%E4%BD%93%E9%AA%8C/</loc>
-    <lastmod>2018-07-28T13:41:44.034Z</lastmod>
-    <data>
-        <display>
-        <title>Objective-C 面向对象初体验</title>
-        <pubTime>2017-04-22T23:56:46.000Z</pubTime>
-        
-        <tag>Objective-C</tag>
-         
-        <tag>imooc</tag>
-         
-        <tag>learn - ios</tag>
+        <tag>chrome</tag>
          
          
            
@@ -1477,7 +1506,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/animate-text/</loc>
-    <lastmod>2018-07-28T13:41:44.034Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.708Z</lastmod>
     <data>
         <display>
         <title>animate-text</title>
@@ -1501,7 +1530,7 @@
     
   <url>
     <loc>https://jsonz1993.github.io/2017/04/Foundation-%E5%85%A5%E9%97%A8/</loc>
-    <lastmod>2018-07-28T13:41:44.034Z</lastmod>
+    <lastmod>2018-07-30T07:25:40.704Z</lastmod>
     <data>
         <display>
         <title>Foundation 入门</title>
