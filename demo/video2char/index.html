@@ -16,13 +16,15 @@
   </style>
 </head>
 <body>
+  <h1>目前只支持pc端，且暂时没有适配移动端的计划...</h1>
   <div class="oh">
     <div>
       选择mp4文件
       <input type="file" id="inputFile" accept=".mp4" />
     </div>
     <canvas id="canvasShow"></canvas>
-    <video id="video"></video>
+    <!-- 可跨域 -->
+    <video id="video" crossorigin="anonymous"></video>
   </div>
 
   <script src="./index.js"></script>

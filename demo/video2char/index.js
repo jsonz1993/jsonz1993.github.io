@@ -42,7 +42,9 @@ const video = {
   }= {}) {
     const { ctxVideo, domVideo, canvasVideo, size: { w, h}} = this;
     domVideo.currentTime = timePoint;
-    await new Promise(res=> this.domVideo.addEventListener('canplay', res));
+    // safari 不兼容
+    // await new Promise(res=> this.domVideo.addEventListener('canplay', res))
+    await new Promise(res=> res());
     ctxVideo.drawImage(domVideo, 0, 0, w, h);
     this.drawOnce();
 
