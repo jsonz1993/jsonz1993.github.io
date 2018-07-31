@@ -2,10 +2,14 @@ TODO:
 
 ### ing
 
+项目去除日期
+
+dns服务器
+
 ### Next
 
-小程序项目——学习全栈： node， mysql， centos， vue， 小程序 
+捣鼓自己的小程序 && 服务器 && MySQL && Node。
 
-自动部署
+项目拆包
 
-公司项目拆包
+dns服务器
