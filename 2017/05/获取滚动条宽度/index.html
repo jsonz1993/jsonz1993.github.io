@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="平时工作的时候，我们经常会遇到需要全局 loading 加 遮罩层 的功能。这时候一般会设置 body { overflow: hidden } 防止页面滚动。 但是在 pc 端 如果一个页面有滚动条，突然给设置为没有的话， 可能会出现抖动的现象。 所以我们的解决思路是 在设置样式之后，给body(也可以是其他) 加多一个 padding-right来填充原本滚动条的宽度。 12345678910">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-31T12:16:14.526Z">
+<meta property="og:updated_time" content="2018-08-01T03:08:21.892Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="获取滚动条宽度">
 <meta name="twitter:description" content="平时工作的时候，我们经常会遇到需要全局 loading 加 遮罩层 的功能。这时候一般会设置 body { overflow: hidden } 防止页面滚动。 但是在 pc 端 如果一个页面有滚动条，突然给设置为没有的话， 可能会出现抖动的现象。 所以我们的解决思路是 在设置样式之后，给body(也可以是其他) 加多一个 padding-right来填充原本滚动条的宽度。 12345678910">
@@ -136,6 +136,7 @@
 
 
   <title> 获取滚动条宽度 | Jsonz </title>
+  <meta name="baidu-site-verification" content="nI3isKz2wC" />
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -181,7 +182,7 @@
     </a>
   </div>
     
-      <h1 class="site-subtitle" itemprop="description"></h1>
+      <h1 class="site-subtitle" itemprop="description">Jsonz,Jsonz1993,前端,Js,JavaScript</h1>
     
 </div>
 
@@ -397,11 +398,23 @@
           
 
           
- 
-        
+
+
 
 
         </div>
+
+
+        
+        
+        <div class="article-copyright">
+          本文作者为<a href="https://github.com/jsonz1993" target="_blank">Jsonz</a>。
+          链接为<a href="/2017/05/获取滚动条宽度/">《获取滚动条宽度》</a>。
+          转载请<a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=n-Xs8PHl3_7usfzw8g" style="text-decoration:none;">联系作者</a>
+        </div>
+        
+
+
       </header>
     
 
@@ -441,13 +454,34 @@
     <div>
       
         
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>打赏一个煎饼果子</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/ali_pay.jpeg" alt="Jsonz Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
     </div>
 
 
     <footer class="post-footer">
-         
+
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
@@ -482,7 +516,7 @@
     </div> -->
   </div>
 
-          
+
           </div>
           
 
@@ -750,7 +784,7 @@
 
       
         var disqus_config = function () {
-            this.page.url = disqus_url;
+            
             this.page.identifier = disqus_identifier;
             this.page.title = disqus_title;
         };

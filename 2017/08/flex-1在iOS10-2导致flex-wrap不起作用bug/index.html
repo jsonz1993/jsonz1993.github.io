@@ -101,7 +101,7 @@
 <meta property="og:image" content="https://jsonz1993.github.io/2017/08/flex-1在iOS10-2导致flex-wrap不起作用bug/demo1.jpg">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/08/flex-1在iOS10-2导致flex-wrap不起作用bug/bug.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/08/flex-1在iOS10-2导致flex-wrap不起作用bug/bugfix.png">
-<meta property="og:updated_time" content="2018-07-31T12:16:14.530Z">
+<meta property="og:updated_time" content="2018-08-01T03:08:21.896Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="flex:1在iOS10.2导致flex-wrap 不起作用">
 <meta name="twitter:description" content="实际上是 flex-basis 的默认值在 iOS10.2及以下为 0 而不是 auto 导致的。 背景项目上有一个列表要有这种效果：   只有一个的情况是一个占一排 有两个的情况是 各占50% 有三个或以上的情况是 每个占 1/3所以这时候用flex是最容易的。大于三个的直接补全至3的倍数即可代码大致思路：12345678910.demo &amp;#123;  display: flex;  flex">
@@ -140,6 +140,7 @@
 
 
   <title> flex:1在iOS10.2导致flex-wrap 不起作用 | Jsonz </title>
+  <meta name="baidu-site-verification" content="nI3isKz2wC" />
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -185,7 +186,7 @@
     </a>
   </div>
     
-      <h1 class="site-subtitle" itemprop="description"></h1>
+      <h1 class="site-subtitle" itemprop="description">Jsonz,Jsonz1993,前端,Js,JavaScript</h1>
     
 </div>
 
@@ -401,11 +402,23 @@
           
 
           
- 
-        
+
+
 
 
         </div>
+
+
+        
+        
+        <div class="article-copyright">
+          本文作者为<a href="https://github.com/jsonz1993" target="_blank">Jsonz</a>。
+          链接为<a href="/2017/08/flex-1在iOS10-2导致flex-wrap不起作用bug/">《flex:1在iOS10.2导致flex-wrap 不起作用》</a>。
+          转载请<a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=n-Xs8PHl3_7usfzw8g" style="text-decoration:none;">联系作者</a>
+        </div>
+        
+
+
       </header>
     
 
@@ -457,13 +470,34 @@
     <div>
       
         
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>打赏一个煎饼果子</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/ali_pay.jpeg" alt="Jsonz Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
     </div>
 
 
     <footer class="post-footer">
-         
+
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
@@ -498,7 +532,7 @@
     </div> -->
   </div>
 
-          
+
           </div>
           
 
@@ -791,7 +825,7 @@
 
       
         var disqus_config = function () {
-            this.page.url = disqus_url;
+            
             this.page.identifier = disqus_identifier;
             this.page.title = disqus_title;
         };

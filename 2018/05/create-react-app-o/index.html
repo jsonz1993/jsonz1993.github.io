@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/debug5.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/create-react-app_index.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/create-react-app1.png">
-<meta property="og:updated_time" content="2018-07-31T12:16:14.566Z">
+<meta property="og:updated_time" content="2018-08-01T03:08:21.928Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="create-react-app 源码解析">
 <meta name="twitter:description" content="最近工作开始稳定下来，没有那么多加班，加上说投简历找面试一直没拿到面试机会…所以开始有空闲的时间 之前公司有个大佬写了个类似 create-react-app 的脚手架，用来创建公司的项目。一直不知道里面实现的原理，借此机会一探 create-react-app 源码，了解下里面运行的机制。 授人以鱼不如授人以渔，希望通过这篇文章之后，对大家以后看源码可以有所帮助。大家也不要一看到源码就害怕不敢去">
@@ -145,6 +145,7 @@
 
 
   <title> create-react-app 源码解析 | Jsonz </title>
+  <meta name="baidu-site-verification" content="nI3isKz2wC" />
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -190,7 +191,7 @@
     </a>
   </div>
     
-      <h1 class="site-subtitle" itemprop="description"></h1>
+      <h1 class="site-subtitle" itemprop="description">Jsonz,Jsonz1993,前端,Js,JavaScript</h1>
     
 </div>
 
@@ -406,11 +407,23 @@
           
 
           
- 
-        
+
+
 
 
         </div>
+
+
+        
+        
+        <div class="article-copyright">
+          本文作者为<a href="https://github.com/jsonz1993" target="_blank">Jsonz</a>。
+          链接为<a href="/2018/05/create-react-app-o/">《create-react-app 源码解析》</a>。
+          转载请<a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=n-Xs8PHl3_7usfzw8g" style="text-decoration:none;">联系作者</a>
+        </div>
+        
+
+
       </header>
     
 
@@ -550,13 +563,34 @@
     <div>
       
         
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>打赏一个煎饼果子</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/ali_pay.jpeg" alt="Jsonz Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
     </div>
 
 
     <footer class="post-footer">
-         
+
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
@@ -591,7 +625,7 @@
     </div> -->
   </div>
 
-          
+
           </div>
           
 
@@ -884,7 +918,7 @@
 
       
         var disqus_config = function () {
-            this.page.url = disqus_url;
+            
             this.page.identifier = disqus_identifier;
             this.page.title = disqus_title;
         };

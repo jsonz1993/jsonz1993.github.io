@@ -99,7 +99,7 @@
 <meta property="og:description" content="在旧项目中，我们一般绑定事件都是用 $(&amp;#39;selector&amp;#39;).on(&amp;#39;event&amp;#39;, fn) || document.querySelector(&amp;#39;selector&amp;#39;).addEventListener(&amp;#39;event&amp;#39;, fn); 如果平时代码规范，这样写完全ojbk 点击.p 之后输出 test1demo1123456789&amp;lt">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/04/事件重复绑定与stopImmediatePropagation/repetition.png">
-<meta property="og:updated_time" content="2018-07-31T12:16:14.562Z">
+<meta property="og:updated_time" content="2018-08-01T03:08:21.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="事件重复绑定与stopImmediatePropagation">
 <meta name="twitter:description" content="在旧项目中，我们一般绑定事件都是用 $(&amp;#39;selector&amp;#39;).on(&amp;#39;event&amp;#39;, fn) || document.querySelector(&amp;#39;selector&amp;#39;).addEventListener(&amp;#39;event&amp;#39;, fn); 如果平时代码规范，这样写完全ojbk 点击.p 之后输出 test1demo1123456789&amp;lt">
@@ -138,6 +138,7 @@
 
 
   <title> 事件重复绑定与stopImmediatePropagation | Jsonz </title>
+  <meta name="baidu-site-verification" content="nI3isKz2wC" />
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -183,7 +184,7 @@
     </a>
   </div>
     
-      <h1 class="site-subtitle" itemprop="description"></h1>
+      <h1 class="site-subtitle" itemprop="description">Jsonz,Jsonz1993,前端,Js,JavaScript</h1>
     
 </div>
 
@@ -399,11 +400,23 @@
           
 
           
- 
-        
+
+
 
 
         </div>
+
+
+        
+        
+        <div class="article-copyright">
+          本文作者为<a href="https://github.com/jsonz1993" target="_blank">Jsonz</a>。
+          链接为<a href="/2018/04/事件重复绑定与stopImmediatePropagation/">《事件重复绑定与stopImmediatePropagation》</a>。
+          转载请<a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=n-Xs8PHl3_7usfzw8g" style="text-decoration:none;">联系作者</a>
+        </div>
+        
+
+
       </header>
     
 
@@ -453,13 +466,34 @@
     <div>
       
         
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>打赏一个煎饼果子</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赞赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/ali_pay.jpeg" alt="Jsonz Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
     </div>
 
 
     <footer class="post-footer">
-         
+
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
@@ -494,7 +528,7 @@
     </div> -->
   </div>
 
-          
+
           </div>
           
 
@@ -762,7 +796,7 @@
 
       
         var disqus_config = function () {
-            this.page.url = disqus_url;
+            
             this.page.identifier = disqus_identifier;
             this.page.title = disqus_title;
         };
