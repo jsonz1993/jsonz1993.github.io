@@ -1143,6 +1143,15 @@ pre .javascript .function {
   -o-transform: rotate(30deg);
   transform: rotate(30deg);
 }
+.article-copyright {
+  color: #aaa;
+  margin-top: -10px;
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+.article-copyright a {
+  color: #777;
+}
 .posts-expand {
   padding-top: 40px;
 }
@@ -1646,15 +1655,6 @@ pre .javascript .function {
     transform: rotateZ(-30deg);
   }
 }
-.article-copyright {
-  color: #aaa;
-  margin-top: -10px;
-  margin-bottom: 5px;
-  font-size: 12px;
-}
-.article-copyright a {
-  color: #777;
-}
 .sidebar {
   position: fixed;
   right: 0;
@@ -1919,7 +1919,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #79bad6;
+  background: #693cff;
 }
 .links-of-blogroll {
   font-size: 13px;
