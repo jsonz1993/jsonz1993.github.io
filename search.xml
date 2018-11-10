@@ -1,21 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[React源码系列(二): 从jsx到createElement]]></title>
-    <url>%2F2018%2F11%2Freact-source-createElements%2F</url>
-    <content type="text"><![CDATA[10s后跳转到 https://github.com/jsonz1993/react-source-learn/issues/1… var time = document.getElementById('time'); var timer = setInterval(function() { var t= Number(time.innerHTML); if (t === 0) { clearInterval(timer); location.href = 'https://github.com/jsonz1993/react-source-learn/issues/2'; } time.innerHTML = t - 1; }, 1000);]]></content>
-      <categories>
-        <category>technology</category>
-      </categories>
-      <tags>
-        <tag>github</tag>
-        <tag>React</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[React源码系列(一): 总结看源码心得及方法感受]]></title>
-    <url>%2F2018%2F11%2Freact-source-impression%2F</url>
-    <content type="text"><![CDATA[10s后跳转到 https://github.com/jsonz1993/react-source-learn/issues/1… var time = document.getElementById('time'); var timer = setInterval(function() { var t= Number(time.innerHTML); if (t === 0) { clearInterval(timer); location.href = 'https://github.com/jsonz1993/react-source-learn/issues/1'; } time.innerHTML = t - 1; }, 1000);]]></content>
+    <title><![CDATA[React源码系列]]></title>
+    <url>%2F2018%2F11%2Freact-source%2F</url>
+    <content type="text"><![CDATA[react16 源码阅读学习记录]]></content>
       <categories>
         <category>technology</category>
       </categories>
