@@ -134,8 +134,8 @@
       <tags>
         <tag>learn</tag>
         <tag>github</tag>
-        <tag>JavaScript</tag>
         <tag>React</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -159,8 +159,8 @@
       <tags>
         <tag>learn</tag>
         <tag>github</tag>
-        <tag>JavaScript</tag>
         <tag>React</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -372,7 +372,7 @@
   <entry>
     <title><![CDATA[[置顶]捣鼓目录]]></title>
     <url>%2F2017%2F06%2F%E6%8D%A3%E9%BC%93%E7%9B%AE%E5%BD%95%2F</url>
-    <content type="text"><![CDATA[记录平时工作学习的目录条目， 类似 Jsonz-learn、 Jsonz-wheel 的目录。部分比较大的轮子可能会独立成一个git项目 DoingReact NEXTSSR 目录 排名按时间顺序react源码学习系列函数式编程一道赋值面试题引发的思考 —— 对象引用问题视频转字符画window.print 浏览器打印扫盲《http小书》http知识扫盲《css世界》常用技巧 —— 读书笔记浏览器恢复滚动行为 —— history.scrollRestorationcreate-react-app 源码解析(一)create-react-app 源码解析(二)git查漏补缺 非常大好全的文章 慢慢适用一下控制台提交，熟悉之后再切客户端自动化功能测试流程方案项目代码规范工作流——editor、prettier、eslint、git-check自动化测试 puppeteer 与qq空间 源码 react全家桶 + dva 实践整理总结了解 babel 写个babel 插件 —— 了解编译器原理 实现了一个 极简的编译器 react/dva/antd/antd-pro/roadhog 全家桶 项目用ingpostMessage 简单的对系统自带的postMessage进行封装 支持事件类型监听 更多实现参考 arale/messenger/index.js react-native-dogs 学习react-native 比较全面的一个路径 虽然不完整，但包含了rn 常用的api 库 等 也涉及到 node koa 七牛云等 react-native-countdown ReactNative的倒计时组件 造这个轮子的原因是学习rn的时候，视频推荐额一个组件，但是这个组件已经停止维护 所以只能自己造一个 支持日期与秒数的倒计时 简单粗暴 fixedTop 吸顶效果 一个很小的常用效果 主要细节 在于改变dom为 fixed布局后在该dom后面生成一个占位的，防止兄弟节点的抖动 copyText 复制黏贴板插件 支持h5，PC success, error回调 判断浏览器是否支持该事件接口 heatmap 热力图 老大提的小需求 一两个小时完成 点击页面会间隔(10s)存到sessionLocation。 刷新后会把存在sessionLocation 绘制成热力图展示在页面上 validator 小型表单验证插件 移动端简单的验证插件 支持自己配置验证项 支持多重验证 cookie 封装了一些cookie常用的api get set remove clear getAll ObjectiveC ObjectiveC 基础 为了学 ReactNative 做一点ios基础铺垫 setTimeout &amp;&amp; setIntervalEvent 最简单的事件系统 handlebars 简单的模板引擎http://handlebarsjs.com quickskin 简单的PHP模板， 文档很不全 {value} if for sass 简单的入门语法，因为用过less 所以基本无障碍 chrome-extension 学习chrome插件开发入门 暂存finish，后面会重新学习 比较感兴趣 目前想法是做一个可以在页面比较方便加载js的插件 TODO animate-text 一个简单的文字 &amp;&amp; 数字 动画小插件。 demo 文档 backbone 历史悠久的MVC框架 https://github.com/jashkenas/backbone DesignPattern 后面会继续学习 《JavaScript设计模式》张容铭 亚马逊购买 ECMAScript_6_Primer ES6入门 阮一峰 亚马逊购买 gulp gulp中文 https://github.com/gulpjs/gulp imooc 慕课网上的相关学习 imooc.com 学习占幅越来越低，看视频的效率没有看书和博客来的快 markdown markdown语法学习 github markdown require JS模块化加载规范 AMD产物 AMD require+backbone backbone+require 练习 RiotJs 微型类React框架 http://riotjs.com/ 公司在用，有实战经验 v2兼容ie8 edit_config 常用的编辑器配置 Uncle Tom 汤姆大叔的博客Js教程 强烈推荐!!!! 深入浅出 讲了很多原理性的东西 入门与进阶必备 http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html vue vueJs入门部分demo vue+webpack vue+webpack demo jsonz_old 刚入门的时候写的一个在线简历 停止更新 zhangxinxu 腾讯一个大佬，主要重构方面。 css与html很多疑难杂症 基础知识等都可以在里面找到 http://www.zhangxinxu.com/ Done log: 历史日志，定时把doing更新下来，所以会越来越长…因为不想每次都忘了之前定的是什么，又懒得去找git记录 工作项目重新上验证等 √ 工作项目去除日期 √ css自定义属性 × 对象赋值循环引用探讨 √ 视频转字符画 √ 后面有时间整理出来 写个webpack插件，处理cookie生成markdown √ 写完发现这些要在运行时抓取才准确就没继续做下去 create-react-app √ 第一次尝试开心 vue全家桶 √ 过了一遍，等有小项目可以练手_ 《CSS世界》_ √ 好书— 《http小书》_√ 准能帮你省下不少时间 了解函数式编程 √]]></content>
+    <content type="text"><![CDATA[记录平时工作学习的目录条目， 类似 Jsonz-learn、 Jsonz-wheel 的目录。部分比较大的轮子可能会独立成一个git项目 DoingSSR 相关 egg Next NEXTReact 新特性 setState 新生命周期函数 新特性 Context、memo、lazy等 新特性 Hook 事件系统 diff 目录 排名按时间顺序react源码学习系列函数式编程一道赋值面试题引发的思考 —— 对象引用问题视频转字符画window.print 浏览器打印扫盲《http小书》http知识扫盲《css世界》常用技巧 —— 读书笔记浏览器恢复滚动行为 —— history.scrollRestorationcreate-react-app 源码解析(一)create-react-app 源码解析(二)git查漏补缺 非常大好全的文章 慢慢适用一下控制台提交，熟悉之后再切客户端自动化功能测试流程方案项目代码规范工作流——editor、prettier、eslint、git-check自动化测试 puppeteer 与qq空间 源码 react全家桶 + dva 实践整理总结了解 babel 写个babel 插件 —— 了解编译器原理 实现了一个 极简的编译器 react/dva/antd/antd-pro/roadhog 全家桶 项目用ingpostMessage 简单的对系统自带的postMessage进行封装 支持事件类型监听 更多实现参考 arale/messenger/index.js react-native-dogs 学习react-native 比较全面的一个路径 虽然不完整，但包含了rn 常用的api 库 等 也涉及到 node koa 七牛云等 react-native-countdown ReactNative的倒计时组件 造这个轮子的原因是学习rn的时候，视频推荐额一个组件，但是这个组件已经停止维护 所以只能自己造一个 支持日期与秒数的倒计时 简单粗暴 fixedTop 吸顶效果 一个很小的常用效果 主要细节 在于改变dom为 fixed布局后在该dom后面生成一个占位的，防止兄弟节点的抖动 copyText 复制黏贴板插件 支持h5，PC success, error回调 判断浏览器是否支持该事件接口 heatmap 热力图 老大提的小需求 一两个小时完成 点击页面会间隔(10s)存到sessionLocation。 刷新后会把存在sessionLocation 绘制成热力图展示在页面上 validator 小型表单验证插件 移动端简单的验证插件 支持自己配置验证项 支持多重验证 cookie 封装了一些cookie常用的api get set remove clear getAll ObjectiveC ObjectiveC 基础 为了学 ReactNative 做一点ios基础铺垫 setTimeout &amp;&amp; setIntervalEvent 最简单的事件系统 handlebars 简单的模板引擎http://handlebarsjs.com quickskin 简单的PHP模板， 文档很不全 {value} if for sass 简单的入门语法，因为用过less 所以基本无障碍 chrome-extension 学习chrome插件开发入门 暂存finish，后面会重新学习 比较感兴趣 目前想法是做一个可以在页面比较方便加载js的插件 TODO animate-text 一个简单的文字 &amp;&amp; 数字 动画小插件。 demo 文档 backbone 历史悠久的MVC框架 https://github.com/jashkenas/backbone DesignPattern 后面会继续学习 《JavaScript设计模式》张容铭 亚马逊购买 ECMAScript_6_Primer ES6入门 阮一峰 亚马逊购买 gulp gulp中文 https://github.com/gulpjs/gulp imooc 慕课网上的相关学习 imooc.com 学习占幅越来越低，看视频的效率没有看书和博客来的快 markdown markdown语法学习 github markdown require JS模块化加载规范 AMD产物 AMD require+backbone backbone+require 练习 RiotJs 微型类React框架 http://riotjs.com/ 公司在用，有实战经验 v2兼容ie8 edit_config 常用的编辑器配置 Uncle Tom 汤姆大叔的博客Js教程 强烈推荐!!!! 深入浅出 讲了很多原理性的东西 入门与进阶必备 http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html vue vueJs入门部分demo vue+webpack vue+webpack demo jsonz_old 刚入门的时候写的一个在线简历 停止更新 zhangxinxu 腾讯一个大佬，主要重构方面。 css与html很多疑难杂症 基础知识等都可以在里面找到 http://www.zhangxinxu.com/ Done log: 历史日志，定时把doing更新下来，所以会越来越长…因为不想每次都忘了之前定的是什么，又懒得去找git记录 工作项目重新上验证等 √ 工作项目去除日期 √ css自定义属性 × 对象赋值循环引用探讨 √ 视频转字符画 √ 后面有时间整理出来 写个webpack插件，处理cookie生成markdown √ 写完发现这些要在运行时抓取才准确就没继续做下去 create-react-app √ 第一次尝试开心 vue全家桶 √ 过了一遍，等有小项目可以练手_ 《CSS世界》_ √ 好书— 《http小书》_√ 准能帮你省下不少时间 了解函数式编程 √ React源码 √]]></content>
       <categories>
         <category>technology</category>
       </categories>
@@ -581,8 +581,8 @@
       </categories>
       <tags>
         <tag>github</tag>
-        <tag>imooc</tag>
         <tag>JavaScript</tag>
+        <tag>imooc</tag>
         <tag>React-Native</tag>
       </tags>
   </entry>
