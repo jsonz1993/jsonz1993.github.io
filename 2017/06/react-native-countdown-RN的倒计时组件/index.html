@@ -99,7 +99,7 @@
 <meta property="og:description" content="概述之所以会写这个小组件是因为学习RN的时候，跟着视频敲代码。 视频推荐了一款倒计时组件 因为长期没有维护（最后一次更新是一年前）， 在我的RN环境下报错。 报错的原因大概是 React 把一个功能独立出去，要重新引进就可以了。 不过想着既然我已经看了源码找到问题，那么我何不自己造一个小轮子呢~ 项目github 用法需要手动引入，没有传到npm 懒得再维护 1234567891011121314">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/06/react-native-countdown-RN的倒计时组件/demo.gif">
-<meta property="og:updated_time" content="2018-11-14T08:37:26.241Z">
+<meta property="og:updated_time" content="2018-11-22T15:44:39.560Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react-native-countdown RN的倒计时组件">
 <meta name="twitter:description" content="概述之所以会写这个小组件是因为学习RN的时候，跟着视频敲代码。 视频推荐了一款倒计时组件 因为长期没有维护（最后一次更新是一年前）， 在我的RN环境下报错。 报错的原因大概是 React 把一个功能独立出去，要重新引进就可以了。 不过想着既然我已经看了源码找到问题，那么我何不自己造一个小轮子呢~ 项目github 用法需要手动引入，没有传到npm 懒得再维护 1234567891011121314">
@@ -116,7 +116,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: '0',
+      userId: 'undefined',
       author: '博主'
     },
     algolia: {
@@ -369,16 +369,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/06/react-native-countdown-RN的倒计时组件/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/06/react-native-countdown-RN的倒计时组件/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -607,13 +597,6 @@
           
   <div class="comments" id="comments">
     
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
   </div>
 
 
@@ -656,7 +639,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">70</span>
+                <span class="site-state-item-count">71</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -871,39 +854,22 @@
 
   
 
-    <script type="text/javascript">
-      var disqus_shortname = 'jsonz1993';
-      var disqus_identifier = '2017/06/react-native-countdown-RN的倒计时组件/';
-
-      var disqus_title = "react-native-countdown RN的倒计时组件";
 
 
-      function run_disqus_script(disqus_script) {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
 
-      run_disqus_script('count.js');
+	
 
-      
-        var disqus_config = function () {
-            
-            this.page.identifier = disqus_identifier;
-            this.page.title = disqus_title;
-        };
-        run_disqus_script('embed.js');
-      
 
-    </script>
+
+
+
   
 
 
 
 
 
+  
 
 
 

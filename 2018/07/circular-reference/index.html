@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="本篇主要说一些基础知识点，关于多项赋值顺序，对象引用等，期间插入一点es6只是以及解决问题的思路。 开头先来做一道面试题 part112345var a=&amp;#123;n:1&amp;#125;;var b=a;a.x=a=&amp;#123;n:2&amp;#125;;console.log(a.x);console.log(b.x); 最后输出的是什么？ 先不说答案，我们来分析一下 L2(第二行) 我们把a赋值给b，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-14T08:37:26.317Z">
+<meta property="og:updated_time" content="2018-11-22T15:44:39.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一道赋值面试题引发的思考">
 <meta name="twitter:description" content="本篇主要说一些基础知识点，关于多项赋值顺序，对象引用等，期间插入一点es6只是以及解决问题的思路。 开头先来做一道面试题 part112345var a=&amp;#123;n:1&amp;#125;;var b=a;a.x=a=&amp;#123;n:2&amp;#125;;console.log(a.x);console.log(b.x); 最后输出的是什么？ 先不说答案，我们来分析一下 L2(第二行) 我们把a赋值给b，">
@@ -114,7 +114,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: '0',
+      userId: 'undefined',
       author: '博主'
     },
     algolia: {
@@ -367,16 +367,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/07/circular-reference/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/07/circular-reference/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -550,13 +540,6 @@
           
   <div class="comments" id="comments">
     
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
   </div>
 
 
@@ -599,7 +582,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">70</span>
+                <span class="site-state-item-count">71</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -814,39 +797,22 @@
 
   
 
-    <script type="text/javascript">
-      var disqus_shortname = 'jsonz1993';
-      var disqus_identifier = '2018/07/circular-reference/';
-
-      var disqus_title = "一道赋值面试题引发的思考";
 
 
-      function run_disqus_script(disqus_script) {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
 
-      run_disqus_script('count.js');
+	
 
-      
-        var disqus_config = function () {
-            
-            this.page.identifier = disqus_identifier;
-            this.page.title = disqus_title;
-        };
-        run_disqus_script('embed.js');
-      
 
-    </script>
+
+
+
   
 
 
 
 
 
+  
 
 
 

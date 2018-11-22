@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="静态站点拥有一定的局限性，因此我们需要借助于第三方服务来扩展站点的功能。 以下是 NexT 目前支持的第三方服务，你可以根据你的需求集成一些功能进来。 评论系统NexT 支持多款评论系统。如需取消某个 页面/文章 的评论，在 md 文件的 front-matter 中增加 comments: false 暂没开评论，多说准备下架。 站内搜索本站用 Hexo 提供的 Local Search， 原理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-14T08:37:26.233Z">
+<meta property="og:updated_time" content="2018-11-22T15:44:39.552Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo-第三方服务集成">
 <meta name="twitter:description" content="静态站点拥有一定的局限性，因此我们需要借助于第三方服务来扩展站点的功能。 以下是 NexT 目前支持的第三方服务，你可以根据你的需求集成一些功能进来。 评论系统NexT 支持多款评论系统。如需取消某个 页面/文章 的评论，在 md 文件的 front-matter 中增加 comments: false 暂没开评论，多说准备下架。 站内搜索本站用 Hexo 提供的 Local Search， 原理">
@@ -114,7 +114,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: '0',
+      userId: 'undefined',
       author: '博主'
     },
     algolia: {
@@ -367,16 +367,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/04/第三方服务集成/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/04/第三方服务集成/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -525,13 +515,6 @@
           
   <div class="comments" id="comments">
     
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
   </div>
 
 
@@ -574,7 +557,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">70</span>
+                <span class="site-state-item-count">71</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -789,39 +772,22 @@
 
   
 
-    <script type="text/javascript">
-      var disqus_shortname = 'jsonz1993';
-      var disqus_identifier = '2017/04/第三方服务集成/';
-
-      var disqus_title = "Hexo-第三方服务集成";
 
 
-      function run_disqus_script(disqus_script) {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
 
-      run_disqus_script('count.js');
+	
 
-      
-        var disqus_config = function () {
-            
-            this.page.identifier = disqus_identifier;
-            this.page.title = disqus_title;
-        };
-        run_disqus_script('embed.js');
-      
 
-    </script>
+
+
+
   
 
 
 
 
 
+  
 
 
 

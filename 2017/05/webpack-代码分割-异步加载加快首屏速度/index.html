@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Jsonz">
 <meta property="og:description" content="概述对于单页应用，将所有代码打包成一个文件，可以减少网络请求，并且后面页面不需要再去加载js 可以减少白页时间。 但是对于首页需要快速加载的情况，我们可能需要重新考虑一下， 是否可以把一些不需要第一时间执行的代码异步加载进来。 Webpack有一个功能可以将您的代码库分解成按需加载的“块”，这个功能叫 代码分割。 Webpack的对于块的执行是， 异步创建&amp;lt;script&amp;gt;标签，把需要加">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-14T08:37:26.237Z">
+<meta property="og:updated_time" content="2018-11-22T15:44:39.560Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack 代码分割(异步加载加快首屏速度)">
 <meta name="twitter:description" content="概述对于单页应用，将所有代码打包成一个文件，可以减少网络请求，并且后面页面不需要再去加载js 可以减少白页时间。 但是对于首页需要快速加载的情况，我们可能需要重新考虑一下， 是否可以把一些不需要第一时间执行的代码异步加载进来。 Webpack有一个功能可以将您的代码库分解成按需加载的“块”，这个功能叫 代码分割。 Webpack的对于块的执行是， 异步创建&amp;lt;script&amp;gt;标签，把需要加">
@@ -114,7 +114,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: '0',
+      userId: 'undefined',
       author: '博主'
     },
     algolia: {
@@ -367,16 +367,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/05/webpack-代码分割-异步加载加快首屏速度/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/05/webpack-代码分割-异步加载加快首屏速度/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -539,13 +529,6 @@
           
   <div class="comments" id="comments">
     
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
   </div>
 
 
@@ -588,7 +571,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">70</span>
+                <span class="site-state-item-count">71</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -803,39 +786,22 @@
 
   
 
-    <script type="text/javascript">
-      var disqus_shortname = 'jsonz1993';
-      var disqus_identifier = '2017/05/webpack-代码分割-异步加载加快首屏速度/';
-
-      var disqus_title = "webpack 代码分割(异步加载加快首屏速度)";
 
 
-      function run_disqus_script(disqus_script) {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
 
-      run_disqus_script('count.js');
+	
 
-      
-        var disqus_config = function () {
-            
-            this.page.identifier = disqus_identifier;
-            this.page.title = disqus_title;
-        };
-        run_disqus_script('embed.js');
-      
 
-    </script>
+
+
+
   
 
 
 
 
 
+  
 
 
 

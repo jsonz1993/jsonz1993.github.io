@@ -100,7 +100,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/12/浅析Promise/promise1.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/12/浅析Promise/promise2.png">
-<meta property="og:updated_time" content="2018-11-14T08:37:26.245Z">
+<meta property="og:updated_time" content="2018-11-22T15:44:39.568Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅析Promise (一)">
 <meta name="twitter:description" content="ppt在此源码 参照 lie 背景在ES6流行之前，我们处理异步的方法一般有 事件模式， 回调模式等。 事件模式用户点击按钮或按下键盘上的按钮会触发类似 onClick这样的事件，他会向任务队列添加一个新任务来响应用户的操作。直到事件触发时才执行事件处理程序，且正常执行时上下文与定义时相同demo11234let btn = document.getElementById(&apos;btn1&apos;);btn.">
@@ -117,7 +117,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: '0',
+      userId: 'undefined',
       author: '博主'
     },
     algolia: {
@@ -370,16 +370,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/12/浅析Promise/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2017/12/浅析Promise/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -595,13 +585,6 @@
           
   <div class="comments" id="comments">
     
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
   </div>
 
 
@@ -644,7 +627,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">70</span>
+                <span class="site-state-item-count">71</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -859,39 +842,22 @@
 
   
 
-    <script type="text/javascript">
-      var disqus_shortname = 'jsonz1993';
-      var disqus_identifier = '2017/12/浅析Promise/';
-
-      var disqus_title = "浅析Promise (一)";
 
 
-      function run_disqus_script(disqus_script) {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
 
-      run_disqus_script('count.js');
+	
 
-      
-        var disqus_config = function () {
-            
-            this.page.identifier = disqus_identifier;
-            this.page.title = disqus_title;
-        };
-        run_disqus_script('embed.js');
-      
 
-    </script>
+
+
+
   
 
 
 
 
 
+  
 
 
 

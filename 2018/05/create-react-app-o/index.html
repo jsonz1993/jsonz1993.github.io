@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/debug5.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/create-react-app_index.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-o/create-react-app1.png">
-<meta property="og:updated_time" content="2018-11-14T08:37:26.281Z">
+<meta property="og:updated_time" content="2018-11-22T15:44:39.604Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="create-react-app 源码解析">
 <meta name="twitter:description" content="最近工作开始稳定下来，没有那么多加班，加上说投简历找面试一直没拿到面试机会…所以开始有空闲的时间 之前公司有个大佬写了个类似 create-react-app 的脚手架，用来创建公司的项目。一直不知道里面实现的原理，借此机会一探 create-react-app 源码，了解下里面运行的机制。 授人以鱼不如授人以渔，希望通过这篇文章之后，对大家以后看源码可以有所帮助。大家也不要一看到源码就害怕不敢去">
@@ -123,7 +123,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: '0',
+      userId: 'undefined',
       author: '博主'
     },
     algolia: {
@@ -376,16 +376,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/create-react-app-o/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/create-react-app-o/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -633,13 +623,6 @@
           
   <div class="comments" id="comments">
     
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
   </div>
 
 
@@ -682,7 +665,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">70</span>
+                <span class="site-state-item-count">71</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -897,39 +880,22 @@
 
   
 
-    <script type="text/javascript">
-      var disqus_shortname = 'jsonz1993';
-      var disqus_identifier = '2018/05/create-react-app-o/';
-
-      var disqus_title = "create-react-app 源码解析";
 
 
-      function run_disqus_script(disqus_script) {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
 
-      run_disqus_script('count.js');
+	
 
-      
-        var disqus_config = function () {
-            
-            this.page.identifier = disqus_identifier;
-            this.page.title = disqus_title;
-        };
-        run_disqus_script('embed.js');
-      
 
-    </script>
+
+
+
   
 
 
 
 
 
+  
 
 
 

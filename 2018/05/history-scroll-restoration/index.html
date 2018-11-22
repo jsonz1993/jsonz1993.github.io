@@ -99,7 +99,7 @@
 <meta property="og:description" content="直入主题。之前做移动端的需求时，经常遇到一种常见，就是:a页面是一个长列表，我们滑动到某个地方假设为 100px ，点击之后进入到b页面再从b页面回到a页面，这时候浏览器的滚动条会自动回到我们跳转前的位置，也就是 100px 的位置。 这种体贴的行为我是很喜欢的~ 但是有时候产品就非要抬杠，说 我就不想要这种行为，你给我回到顶部去(╯‵□′)╯︵┻━┻ 以前没办法就经常用什么 setTimeout">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/05/history-scroll-restoration/history-scroll-restoration.gif">
-<meta property="og:updated_time" content="2018-11-14T08:37:26.293Z">
+<meta property="og:updated_time" content="2018-11-22T15:44:39.616Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浏览器恢复滚动行为 —— history.scrollRestoration">
 <meta name="twitter:description" content="直入主题。之前做移动端的需求时，经常遇到一种常见，就是:a页面是一个长列表，我们滑动到某个地方假设为 100px ，点击之后进入到b页面再从b页面回到a页面，这时候浏览器的滚动条会自动回到我们跳转前的位置，也就是 100px 的位置。 这种体贴的行为我是很喜欢的~ 但是有时候产品就非要抬杠，说 我就不想要这种行为，你给我回到顶部去(╯‵□′)╯︵┻━┻ 以前没办法就经常用什么 setTimeout">
@@ -116,7 +116,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: '0',
+      userId: 'undefined',
       author: '博主'
     },
     algolia: {
@@ -369,16 +369,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/history-scroll-restoration/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/05/history-scroll-restoration/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -531,13 +521,6 @@
           
   <div class="comments" id="comments">
     
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
-    
   </div>
 
 
@@ -571,7 +554,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">70</span>
+                <span class="site-state-item-count">71</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -770,39 +753,22 @@
 
   
 
-    <script type="text/javascript">
-      var disqus_shortname = 'jsonz1993';
-      var disqus_identifier = '2018/05/history-scroll-restoration/';
-
-      var disqus_title = "浏览器恢复滚动行为 —— history.scrollRestoration";
 
 
-      function run_disqus_script(disqus_script) {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
 
-      run_disqus_script('count.js');
+	
 
-      
-        var disqus_config = function () {
-            
-            this.page.identifier = disqus_identifier;
-            this.page.title = disqus_title;
-        };
-        run_disqus_script('embed.js');
-      
 
-    </script>
+
+
+
   
 
 
 
 
 
+  
 
 
 
