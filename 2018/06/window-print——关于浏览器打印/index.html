@@ -90,18 +90,18 @@
 
 
 
-<meta name="description" content="本文由Jsonz创作和发表，转载请与开头注明作者及出处，本文作者为[Jsonz]，本文标题为：本文链接为: ……. 原文地址 —— Jsonz 近日有个需求是做页面打印的，趁这个机会补一下比较冷门的浏览器打印知识。本文主要讨论 Chrome、Safari、Firefox浏览器的情况。 打印接口首先浏览器打印是一个很成熟的应用~ 至少是很早就已经有应用的功能，所以不会有什么兼容问题 最简单的打印就是">
+<meta name="description" content="近日有个需求是做页面打印的，趁这个机会补一下比较冷门的浏览器打印知识。本文主要讨论 Chrome、Safari、Firefox浏览器的情况。 打印接口首先浏览器打印是一个很成熟的应用~ 至少是很早就已经有应用的功能，所以不会有什么兼容问题 最简单的打印就是直接调用 window.print()，当然用 document.execCommand(&amp;#39;print&amp;#39;) 也可以达到同样的效果">
 <meta name="keywords" content="github,work">
 <meta property="og:type" content="article">
 <meta property="og:title" content="window.print——关于浏览器打印">
 <meta property="og:url" content="https://jsonz1993.github.io/2018/06/window-print——关于浏览器打印/index.html">
 <meta property="og:site_name" content="Jsonz">
-<meta property="og:description" content="本文由Jsonz创作和发表，转载请与开头注明作者及出处，本文作者为[Jsonz]，本文标题为：本文链接为: ……. 原文地址 —— Jsonz 近日有个需求是做页面打印的，趁这个机会补一下比较冷门的浏览器打印知识。本文主要讨论 Chrome、Safari、Firefox浏览器的情况。 打印接口首先浏览器打印是一个很成熟的应用~ 至少是很早就已经有应用的功能，所以不会有什么兼容问题 最简单的打印就是">
+<meta property="og:description" content="近日有个需求是做页面打印的，趁这个机会补一下比较冷门的浏览器打印知识。本文主要讨论 Chrome、Safari、Firefox浏览器的情况。 打印接口首先浏览器打印是一个很成熟的应用~ 至少是很早就已经有应用的功能，所以不会有什么兼容问题 最简单的打印就是直接调用 window.print()，当然用 document.execCommand(&amp;#39;print&amp;#39;) 也可以达到同样的效果">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-22T15:44:39.624Z">
+<meta property="og:updated_time" content="2018-11-22T15:59:27.058Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="window.print——关于浏览器打印">
-<meta name="twitter:description" content="本文由Jsonz创作和发表，转载请与开头注明作者及出处，本文作者为[Jsonz]，本文标题为：本文链接为: ……. 原文地址 —— Jsonz 近日有个需求是做页面打印的，趁这个机会补一下比较冷门的浏览器打印知识。本文主要讨论 Chrome、Safari、Firefox浏览器的情况。 打印接口首先浏览器打印是一个很成熟的应用~ 至少是很早就已经有应用的功能，所以不会有什么兼容问题 最简单的打印就是">
+<meta name="twitter:description" content="近日有个需求是做页面打印的，趁这个机会补一下比较冷门的浏览器打印知识。本文主要讨论 Chrome、Safari、Firefox浏览器的情况。 打印接口首先浏览器打印是一个很成熟的应用~ 至少是很早就已经有应用的功能，所以不会有什么兼容问题 最简单的打印就是直接调用 window.print()，当然用 document.execCommand(&amp;#39;print&amp;#39;) 也可以达到同样的效果">
 
 
 
@@ -415,9 +415,7 @@
       
 
       
-        <p>本文由<a href="">Jsonz</a>创作和发表，<br>转载请与开头注明作者及出处，<br>本文作者为[Jsonz]，本文标题为：<br>本文链接为: …….</p>
-<p><a href="https://jsonz1993.github.io/2018/06/window-print%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%93%E5%8D%B0/">原文地址 —— Jsonz</a></p>
-<p>近日有个需求是做页面打印的，趁这个机会补一下比较冷门的浏览器打印知识。本文主要讨论 Chrome、Safari、Firefox浏览器的情况。</p>
+        <p>近日有个需求是做页面打印的，趁这个机会补一下比较冷门的浏览器打印知识。本文主要讨论 Chrome、Safari、Firefox浏览器的情况。</p>
 <h2 id="打印接口"><a href="#打印接口" class="headerlink" title="打印接口"></a>打印接口</h2><p>首先浏览器打印是一个很成熟的应用~ 至少是很早就已经有应用的功能，所以不会有什么兼容问题</p>
 <p>最简单的打印就是直接调用 <code>window.print()</code>，当然用 <code>document.execCommand(&#39;print&#39;)</code> 也可以达到同样的效果。</p>
 <p>这时候在Safari和Chrome都会弹起打印预览的窗口,FireFox没有预览而是直接让你选择打印机，OSx下可以通过预览PDF来预览~</p>
@@ -457,7 +455,13 @@
 
       
     </div>
-  
+    
+      <div>
+        <iframe src="https://ghbtns.com/github-btn.html?user=jsonz1993&repo=jsonz1993.github.io&type=star" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+        <iframe src="https://ghbtns.com/github-btn.html?user=jsonz1993&repo=jsonz1993.github.io&type=watch&v=2" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+      </div>
+    
+      
         <div class="post-tags">
           
             <a href="/tags/github/" rel="tag"># github</a>
@@ -495,7 +499,6 @@
 
       
     </div>
-
 
     <footer class="post-footer">
 
