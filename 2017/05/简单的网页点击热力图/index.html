@@ -143,7 +143,7 @@
 <meta property="og:description" content="前两天老大突然喊我和一小伙子出去开会，说有个好玩的东西给你们玩。 想给网站做个简单的热力图， 记录用户点击了什么位置。要求是，怎么简单怎么实现 先做一版出来 后面再慢慢迭代优化， 定的工作量大概是两人一天。。。。 之前没接触过图表，虽然有接触过埋点统计/talkingData 不过对于这种都是一知半解。具体有两个步骤，一个是数据的记录（入库），一个是展示模式（读取）。 于是下班回到家后没事就先查了">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/05/简单的网页点击热力图/heatMap.png">
-<meta property="og:updated_time" content="2018-11-30T06:24:12.042Z">
+<meta property="og:updated_time" content="2018-11-30T06:35:48.087Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单的网页点击热力图">
 <meta name="twitter:description" content="前两天老大突然喊我和一小伙子出去开会，说有个好玩的东西给你们玩。 想给网站做个简单的热力图， 记录用户点击了什么位置。要求是，怎么简单怎么实现 先做一版出来 后面再慢慢迭代优化， 定的工作量大概是两人一天。。。。 之前没接触过图表，虽然有接触过埋点统计/talkingData 不过对于这种都是一知半解。具体有两个步骤，一个是数据的记录（入库），一个是展示模式（读取）。 于是下班回到家后没事就先查了">
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-11-30 06:24:12" itemprop="dateModified" datetime="2018-11-30T06:24:12+00:00">2018-11-30</time>
+                <time title="Modified: 2018-11-30 06:35:48" itemprop="dateModified" datetime="2018-11-30T06:35:48+00:00">2018-11-30</time>
               
             
           </span>
@@ -664,7 +664,8 @@
   
     <div class="comments" id="comments">
       
-        <div id="gitment-container"></div>
+        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
+        <div id="gitment-container" style="display:none"></div>
       
     </div>
 
@@ -1105,7 +1106,7 @@
         var gitment = new Gitmint({
             id: window.location.pathname,
             owner: 'jsonz1993',
-            repo: 'jsonz-blog-source',
+            repo: 'jsonz1993.github.io',
             
             lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
             
@@ -1120,7 +1121,11 @@
       }
 
       
-      renderGitment();
+      function showGitment(){
+        document.getElementById("gitment-display-button").style.display = "none";
+        document.getElementById("gitment-container").style.display = "block";
+        renderGitment();
+      }
       
       </script>
     

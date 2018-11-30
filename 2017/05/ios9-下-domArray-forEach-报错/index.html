@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="起因是这样的，产品需求需要输入框输入后，要根据内容高度自适应，最高不能超过3行， 于是写了一个小函数 123456789101112131415const textareaAutoHeight = (className, &amp;#123;multiple=3&amp;#125;=&amp;#123;&amp;#125;)=&amp;gt;&amp;#123;    let domList = document.querySelectorAl">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-30T06:24:12.038Z">
+<meta property="og:updated_time" content="2018-11-30T06:35:48.083Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ios9 下 domArray forEach 报错">
 <meta name="twitter:description" content="起因是这样的，产品需求需要输入框输入后，要根据内容高度自适应，最高不能超过3行， 于是写了一个小函数 123456789101112131415const textareaAutoHeight = (className, &amp;#123;multiple=3&amp;#125;=&amp;#123;&amp;#125;)=&amp;gt;&amp;#123;    let domList = document.querySelectorAl">
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-11-30 06:24:12" itemprop="dateModified" datetime="2018-11-30T06:24:12+00:00">2018-11-30</time>
+                <time title="Modified: 2018-11-30 06:35:48" itemprop="dateModified" datetime="2018-11-30T06:35:48+00:00">2018-11-30</time>
               
             
           </span>
@@ -637,7 +637,8 @@
   
     <div class="comments" id="comments">
       
-        <div id="gitment-container"></div>
+        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
+        <div id="gitment-container" style="display:none"></div>
       
     </div>
 
@@ -1053,7 +1054,7 @@
         var gitment = new Gitmint({
             id: window.location.pathname,
             owner: 'jsonz1993',
-            repo: 'jsonz-blog-source',
+            repo: 'jsonz1993.github.io',
             
             lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
             
@@ -1068,7 +1069,11 @@
       }
 
       
-      renderGitment();
+      function showGitment(){
+        document.getElementById("gitment-display-button").style.display = "none";
+        document.getElementById("gitment-container").style.display = "block";
+        renderGitment();
+      }
       
       </script>
     

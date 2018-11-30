@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="项目背景最近接手组内一个前端大牛的项目，大概理清了里面的总理逻辑与数据流向等， 写个总结 方便以后可以查阅参考。 在之前做的后台管理平台里面，就有用到 dva+antd， 到后面直接用 antd-pro 重新整合了一遍，不得不说 antd-pro 真的是开箱即用 优雅粗暴。 但是里面可能很多和我们平时使用习惯有所不同， 所以这次接触的项目是基于 dva 自己再重组了一下 model router">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-30T06:24:12.050Z">
+<meta property="og:updated_time" content="2018-11-30T06:35:48.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react全家桶 + dva 实践整理总结">
 <meta name="twitter:description" content="项目背景最近接手组内一个前端大牛的项目，大概理清了里面的总理逻辑与数据流向等， 写个总结 方便以后可以查阅参考。 在之前做的后台管理平台里面，就有用到 dva+antd， 到后面直接用 antd-pro 重新整合了一遍，不得不说 antd-pro 真的是开箱即用 优雅粗暴。 但是里面可能很多和我们平时使用习惯有所不同， 所以这次接触的项目是基于 dva 自己再重组了一下 model router">
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-11-30 06:24:12" itemprop="dateModified" datetime="2018-11-30T06:24:12+00:00">2018-11-30</time>
+                <time title="Modified: 2018-11-30 06:35:48" itemprop="dateModified" datetime="2018-11-30T06:35:48+00:00">2018-11-30</time>
               
             
           </span>
@@ -668,7 +668,8 @@
   
     <div class="comments" id="comments">
       
-        <div id="gitment-container"></div>
+        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
+        <div id="gitment-container" style="display:none"></div>
       
     </div>
 
@@ -1109,7 +1110,7 @@
         var gitment = new Gitmint({
             id: window.location.pathname,
             owner: 'jsonz1993',
-            repo: 'jsonz-blog-source',
+            repo: 'jsonz1993.github.io',
             
             lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
             
@@ -1124,7 +1125,11 @@
       }
 
       
-      renderGitment();
+      function showGitment(){
+        document.getElementById("gitment-display-button").style.display = "none";
+        document.getElementById("gitment-container").style.display = "block";
+        renderGitment();
+      }
       
       </script>
     

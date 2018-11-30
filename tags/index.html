@@ -141,7 +141,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="前端/努力成为工程师/租租车">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-30T06:24:12.146Z">
+<meta property="og:updated_time" content="2018-11-30T06:35:48.191Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tags">
 <meta name="twitter:description" content="前端/努力成为工程师/租租车">
@@ -606,7 +606,8 @@
   
     <div class="comments" id="comments">
       
-        <div id="gitment-container"></div>
+        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
+        <div id="gitment-container" style="display:none"></div>
       
     </div>
 
@@ -1022,7 +1023,7 @@
         var gitment = new Gitmint({
             id: window.location.pathname,
             owner: 'jsonz1993',
-            repo: 'jsonz-blog-source',
+            repo: 'jsonz1993.github.io',
             
             lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
             
@@ -1037,7 +1038,11 @@
       }
 
       
-      renderGitment();
+      function showGitment(){
+        document.getElementById("gitment-display-button").style.display = "none";
+        document.getElementById("gitment-container").style.display = "block";
+        renderGitment();
+      }
       
       </script>
     

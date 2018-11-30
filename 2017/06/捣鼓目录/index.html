@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="记录平时工作学习的目录条目， 类似 Jsonz-learn、 Jsonz-wheel 的目录。部分比较大的轮子可能会独立成一个git项目 DoingSSR 相关  Next  NEXT升级blog版本 React 新特性  setState 新生命周期函数 新特性 Context、memo、lazy等 新特性 Hook 事件系统 diff  目录 排名按时间顺序正则全局标志注意事项react源码学">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-30T06:24:12.046Z">
+<meta property="og:updated_time" content="2018-11-30T06:35:48.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="[置顶]捣鼓目录">
 <meta name="twitter:description" content="记录平时工作学习的目录条目， 类似 Jsonz-learn、 Jsonz-wheel 的目录。部分比较大的轮子可能会独立成一个git项目 DoingSSR 相关  Next  NEXT升级blog版本 React 新特性  setState 新生命周期函数 新特性 Context、memo、lazy等 新特性 Hook 事件系统 diff  目录 排名按时间顺序正则全局标志注意事项react源码学">
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-11-30 06:24:12" itemprop="dateModified" datetime="2018-11-30T06:24:12+00:00">2018-11-30</time>
+                <time title="Modified: 2018-11-30 06:35:48" itemprop="dateModified" datetime="2018-11-30T06:35:48+00:00">2018-11-30</time>
               
             
           </span>
@@ -799,7 +799,8 @@
   
     <div class="comments" id="comments">
       
-        <div id="gitment-container"></div>
+        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
+        <div id="gitment-container" style="display:none"></div>
       
     </div>
 
@@ -1240,7 +1241,7 @@
         var gitment = new Gitmint({
             id: window.location.pathname,
             owner: 'jsonz1993',
-            repo: 'jsonz-blog-source',
+            repo: 'jsonz1993.github.io',
             
             lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
             
@@ -1255,7 +1256,11 @@
       }
 
       
-      renderGitment();
+      function showGitment(){
+        document.getElementById("gitment-display-button").style.display = "none";
+        document.getElementById("gitment-container").style.display = "block";
+        renderGitment();
+      }
       
       </script>
     

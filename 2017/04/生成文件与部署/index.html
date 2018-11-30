@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="生成文件生成文件一般是用于生成静态资源文件部署服务器用的 12345$ hexo generate快捷方式为:$hexo g 也可以让Hexo在监视到文件变动后立即重新生成静态文件，在生成时会比对文件的 SHA1 checksum，只有变动的文件才会写入。1$ hexo generate --watch 一般会跑以下命令，方便在Hexo生成文件后直接部署到Github上123456789$ hex">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-30T06:24:12.034Z">
+<meta property="og:updated_time" content="2018-11-30T06:35:48.079Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo-生成文件与部署">
 <meta name="twitter:description" content="生成文件生成文件一般是用于生成静态资源文件部署服务器用的 12345$ hexo generate快捷方式为:$hexo g 也可以让Hexo在监视到文件变动后立即重新生成静态文件，在生成时会比对文件的 SHA1 checksum，只有变动的文件才会写入。1$ hexo generate --watch 一般会跑以下命令，方便在Hexo生成文件后直接部署到Github上123456789$ hex">
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-11-30 06:24:12" itemprop="dateModified" datetime="2018-11-30T06:24:12+00:00">2018-11-30</time>
+                <time title="Modified: 2018-11-30 06:35:48" itemprop="dateModified" datetime="2018-11-30T06:35:48+00:00">2018-11-30</time>
               
             
           </span>
@@ -636,7 +636,8 @@
   
     <div class="comments" id="comments">
       
-        <div id="gitment-container"></div>
+        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
+        <div id="gitment-container" style="display:none"></div>
       
     </div>
 
@@ -1077,7 +1078,7 @@
         var gitment = new Gitmint({
             id: window.location.pathname,
             owner: 'jsonz1993',
-            repo: 'jsonz-blog-source',
+            repo: 'jsonz1993.github.io',
             
             lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
             
@@ -1092,7 +1093,11 @@
       }
 
       
-      renderGitment();
+      function showGitment(){
+        document.getElementById("gitment-display-button").style.display = "none";
+        document.getElementById("gitment-container").style.display = "block";
+        renderGitment();
+      }
       
       </script>
     

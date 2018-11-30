@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="静态站点拥有一定的局限性，因此我们需要借助于第三方服务来扩展站点的功能。 以下是 NexT 目前支持的第三方服务，你可以根据你的需求集成一些功能进来。 评论系统NexT 支持多款评论系统。如需取消某个 页面/文章 的评论，在 md 文件的 front-matter 中增加 comments: false 暂没开评论，多说准备下架。 站内搜索本站用 Hexo 提供的 Local Search， 原理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-30T06:24:12.034Z">
+<meta property="og:updated_time" content="2018-11-30T06:35:48.083Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo-第三方服务集成">
 <meta name="twitter:description" content="静态站点拥有一定的局限性，因此我们需要借助于第三方服务来扩展站点的功能。 以下是 NexT 目前支持的第三方服务，你可以根据你的需求集成一些功能进来。 评论系统NexT 支持多款评论系统。如需取消某个 页面/文章 的评论，在 md 文件的 front-matter 中增加 comments: false 暂没开评论，多说准备下架。 站内搜索本站用 Hexo 提供的 Local Search， 原理">
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-11-30 06:24:12" itemprop="dateModified" datetime="2018-11-30T06:24:12+00:00">2018-11-30</time>
+                <time title="Modified: 2018-11-30 06:35:48" itemprop="dateModified" datetime="2018-11-30T06:35:48+00:00">2018-11-30</time>
               
             
           </span>
@@ -635,7 +635,8 @@
   
     <div class="comments" id="comments">
       
-        <div id="gitment-container"></div>
+        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
+        <div id="gitment-container" style="display:none"></div>
       
     </div>
 
@@ -1076,7 +1077,7 @@
         var gitment = new Gitmint({
             id: window.location.pathname,
             owner: 'jsonz1993',
-            repo: 'jsonz-blog-source',
+            repo: 'jsonz1993.github.io',
             
             lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
             
@@ -1091,7 +1092,11 @@
       }
 
       
-      renderGitment();
+      function showGitment(){
+        document.getElementById("gitment-display-button").style.display = "none";
+        document.getElementById("gitment-container").style.display = "block";
+        renderGitment();
+      }
       
       </script>
     

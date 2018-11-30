@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="本篇主要说一些基础知识点，关于多项赋值顺序，对象引用等，期间插入一点es6只是以及解决问题的思路。 开头先来做一道面试题 part112345var a=&amp;#123;n:1&amp;#125;;var b=a;a.x=a=&amp;#123;n:2&amp;#125;;console.log(a.x);console.log(b.x); 最后输出的是什么？ 先不说答案，我们来分析一下 L2(第二行) 我们把a赋值给b，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-30T06:24:12.118Z">
+<meta property="og:updated_time" content="2018-11-30T06:35:48.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一道赋值面试题引发的思考">
 <meta name="twitter:description" content="本篇主要说一些基础知识点，关于多项赋值顺序，对象引用等，期间插入一点es6只是以及解决问题的思路。 开头先来做一道面试题 part112345var a=&amp;#123;n:1&amp;#125;;var b=a;a.x=a=&amp;#123;n:2&amp;#125;;console.log(a.x);console.log(b.x); 最后输出的是什么？ 先不说答案，我们来分析一下 L2(第二行) 我们把a赋值给b，">
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-11-30 06:24:12" itemprop="dateModified" datetime="2018-11-30T06:24:12+00:00">2018-11-30</time>
+                <time title="Modified: 2018-11-30 06:35:48" itemprop="dateModified" datetime="2018-11-30T06:35:48+00:00">2018-11-30</time>
               
             
           </span>
@@ -660,7 +660,8 @@
   
     <div class="comments" id="comments">
       
-        <div id="gitment-container"></div>
+        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
+        <div id="gitment-container" style="display:none"></div>
       
     </div>
 
@@ -1101,7 +1102,7 @@
         var gitment = new Gitmint({
             id: window.location.pathname,
             owner: 'jsonz1993',
-            repo: 'jsonz-blog-source',
+            repo: 'jsonz1993.github.io',
             
             lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
             
@@ -1116,7 +1117,11 @@
       }
 
       
-      renderGitment();
+      function showGitment(){
+        document.getElementById("gitment-display-button").style.display = "none";
+        document.getElementById("gitment-container").style.display = "block";
+        renderGitment();
+      }
       
       </script>
     
