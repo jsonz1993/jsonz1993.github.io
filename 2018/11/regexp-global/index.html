@@ -144,7 +144,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/11/regexp-global/a.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/11/regexp-global/b.png">
-<meta property="og:updated_time" content="2018-11-30T07:49:57.895Z">
+<meta property="og:updated_time" content="2018-11-30T07:57:09.279Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式——刚才明明是好的">
 <meta name="twitter:description" content="今天测试提一个jira给我，说有一个很诡异的bug，表单验证有时候会成功，有时候会失败。   而且很有规律性的，两下成功，接着失败，再两下成功，再失败…看代码也没什么问题，\S匹配任何非空字符，g全局查找，这么简单的一个正则怎么可能会出错。123456const r = /\S/g;$input.addEventListener(&apos;blur&apos;, (e)=&amp;gt; &amp;#123;  // ...	co">
@@ -485,7 +485,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-11-30 07:49:57" itemprop="dateModified" datetime="2018-11-30T07:49:57+00:00">2018-11-30</time>
+                <time title="Modified: 2018-11-30 07:57:09" itemprop="dateModified" datetime="2018-11-30T07:57:09+00:00">2018-11-30</time>
               
             
           </span>
@@ -640,14 +640,6 @@
 
           </div>
           
-
-  
-    <div class="comments" id="comments">
-      
-        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
-        <div id="gitment-container" style="display:none"></div>
-      
-    </div>
 
   
 
@@ -1038,52 +1030,6 @@
 
 
 
-
-
-<!-- LOCAL: You can save these files to your site and update links -->
-    
-        
-        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
-        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
-    
-<!-- END LOCAL -->
-
-    
-      <style>
-        a.gitment-editor-footer-tip { display: none; }
-        .gitment-container.gitment-footer-container { display: none; }
-      </style>
-    
-
-    
-      <script type="text/javascript">
-      function renderGitment(){
-        var gitment = new Gitmint({
-            id: window.location.pathname,
-            owner: 'jsonz1993',
-            repo: 'jsonz1993.github.io',
-            
-            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
-            
-            oauth: {
-            
-            
-                proxy_gateway: 'https://github.com/login/oauth/access_token',
-            
-                client_id: '5766dad04abc51689a6e'
-            }});
-        gitment.render('gitment-container');
-      }
-
-      
-      function showGitment(){
-        document.getElementById("gitment-display-button").style.display = "none";
-        document.getElementById("gitment-container").style.display = "block";
-        renderGitment();
-      }
-      
-      </script>
-    
 
 
 
