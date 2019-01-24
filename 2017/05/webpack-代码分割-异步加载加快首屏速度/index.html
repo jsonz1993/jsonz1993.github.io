@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="概述对于单页应用，将所有代码打包成一个文件，可以减少网络请求，并且后面页面不需要再去加载js 可以减少白页时间。 但是对于首页需要快速加载的情况，我们可能需要重新考虑一下， 是否可以把一些不需要第一时间执行的代码异步加载进来。 Webpack有一个功能可以将您的代码库分解成按需加载的“块”，这个功能叫 代码分割。 Webpack的对于块的执行是， 异步创建&amp;lt;script&amp;gt;标签，把需要加">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-24T13:41:45.409Z">
+<meta property="og:updated_time" content="2019-01-24T13:45:51.291Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack 代码分割(异步加载加快首屏速度)">
 <meta name="twitter:description" content="概述对于单页应用，将所有代码打包成一个文件，可以减少网络请求，并且后面页面不需要再去加载js 可以减少白页时间。 但是对于首页需要快速加载的情况，我们可能需要重新考虑一下， 是否可以把一些不需要第一时间执行的代码异步加载进来。 Webpack有一个功能可以将您的代码库分解成按需加载的“块”，这个功能叫 代码分割。 Webpack的对于块的执行是， 异步创建&amp;lt;script&amp;gt;标签，把需要加">
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-24 13:41:45" itemprop="dateModified" datetime="2019-01-24T13:41:45+00:00">2019-01-24</time>
+                <time title="Modified: 2019-01-24 13:45:51" itemprop="dateModified" datetime="2019-01-24T13:45:51+00:00">2019-01-24</time>
               
             
           </span>
@@ -1474,9 +1474,14 @@
             })
           } else {
             
-              var $element = $(document.getElementById(url));
-              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
-              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
             
           }
         })

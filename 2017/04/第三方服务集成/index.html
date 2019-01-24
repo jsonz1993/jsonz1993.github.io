@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="静态站点拥有一定的局限性，因此我们需要借助于第三方服务来扩展站点的功能。 以下是 NexT 目前支持的第三方服务，你可以根据你的需求集成一些功能进来。 评论系统NexT 支持多款评论系统。如需取消某个 页面/文章 的评论，在 md 文件的 front-matter 中增加 comments: false 暂没开评论，多说准备下架。 站内搜索本站用 Hexo 提供的 Local Search， 原理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-24T13:41:45.405Z">
+<meta property="og:updated_time" content="2019-01-24T13:45:51.283Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo-第三方服务集成">
 <meta name="twitter:description" content="静态站点拥有一定的局限性，因此我们需要借助于第三方服务来扩展站点的功能。 以下是 NexT 目前支持的第三方服务，你可以根据你的需求集成一些功能进来。 评论系统NexT 支持多款评论系统。如需取消某个 页面/文章 的评论，在 md 文件的 front-matter 中增加 comments: false 暂没开评论，多说准备下架。 站内搜索本站用 Hexo 提供的 Local Search， 原理">
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-24 13:41:45" itemprop="dateModified" datetime="2019-01-24T13:41:45+00:00">2019-01-24</time>
+                <time title="Modified: 2019-01-24 13:45:51" itemprop="dateModified" datetime="2019-01-24T13:45:51+00:00">2019-01-24</time>
               
             
           </span>
@@ -1460,9 +1460,14 @@
             })
           } else {
             
-              var $element = $(document.getElementById(url));
-              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
-              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
             
           }
         })

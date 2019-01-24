@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="定时器大家平时做js开发都不陌生了 最常见的应用应该就是验证码的倒计时 或 某段函数的异步执行了。 概述js的定时器主要有 setTimeout 和 setInterval. 这两个函数执行后，都会返回一个整数，表示定时器的编号，后面可以通过clearTimeout 或 clearInterval来清除该定时器。 setTimeout和setInterval的运行机制都是 将代码移除本次执行，等待">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-24T13:41:45.409Z">
+<meta property="og:updated_time" content="2019-01-24T13:45:51.291Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="setTimeout &amp;&amp; setInterval 学习">
 <meta name="twitter:description" content="定时器大家平时做js开发都不陌生了 最常见的应用应该就是验证码的倒计时 或 某段函数的异步执行了。 概述js的定时器主要有 setTimeout 和 setInterval. 这两个函数执行后，都会返回一个整数，表示定时器的编号，后面可以通过clearTimeout 或 clearInterval来清除该定时器。 setTimeout和setInterval的运行机制都是 将代码移除本次执行，等待">
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-24 13:41:45" itemprop="dateModified" datetime="2019-01-24T13:41:45+00:00">2019-01-24</time>
+                <time title="Modified: 2019-01-24 13:45:51" itemprop="dateModified" datetime="2019-01-24T13:45:51+00:00">2019-01-24</time>
               
             
           </span>
@@ -1476,9 +1476,14 @@
             })
           } else {
             
-              var $element = $(document.getElementById(url));
-              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
-              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
             
           }
         })
