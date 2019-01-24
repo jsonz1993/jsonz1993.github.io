@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="选用的版本的 v0.22.2 组件生命周期初始化开始 =&amp;gt; getDefaultProps =&amp;gt; getInitialState =&amp;gt; componentWillMount =&amp;gt; render =&amp;gt; componentDidMount =&amp;gt; 组件运行中， state状态改变 =&amp;gt; shouldComponentUpdate 判断是否要更新 return t">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-24T13:45:51.283Z">
+<meta property="og:updated_time" content="2019-01-24T13:52:22.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="imooc-react-native实战 项目入门知识学习">
 <meta name="twitter:description" content="选用的版本的 v0.22.2 组件生命周期初始化开始 =&amp;gt; getDefaultProps =&amp;gt; getInitialState =&amp;gt; componentWillMount =&amp;gt; render =&amp;gt; componentDidMount =&amp;gt; 组件运行中， state状态改变 =&amp;gt; shouldComponentUpdate 判断是否要更新 return t">
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-24 13:45:51" itemprop="dateModified" datetime="2019-01-24T13:45:51+00:00">2019-01-24</time>
+                <time title="Modified: 2019-01-24 13:52:22" itemprop="dateModified" datetime="2019-01-24T13:52:22+00:00">2019-01-24</time>
               
             
           </span>
@@ -1423,12 +1423,10 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
             
             .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);

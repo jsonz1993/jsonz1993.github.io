@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="你可以在_config.yml &amp;gt; permalink配置网站的永久链接或者每篇文章的Front-matter自定义该文章的永久链接, 如: :year/:month/:title/ 对应 2017/04/hexo-永久链接/ 变量除了下列变量外，您还可使用 Front-matter 中的所有属性。    变量 描述     :year 文章的发表年份（4 位数）   :month 文章的发">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-24T13:45:51.251Z">
+<meta property="og:updated_time" content="2019-01-24T13:52:22.783Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo-永久链接">
 <meta name="twitter:description" content="你可以在_config.yml &amp;gt; permalink配置网站的永久链接或者每篇文章的Front-matter自定义该文章的永久链接, 如: :year/:month/:title/ 对应 2017/04/hexo-永久链接/ 变量除了下列变量外，您还可使用 Front-matter 中的所有属性。    变量 描述     :year 文章的发表年份（4 位数）   :month 文章的发">
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-24 13:45:51" itemprop="dateModified" datetime="2019-01-24T13:45:51+00:00">2019-01-24</time>
+                <time title="Modified: 2019-01-24 13:52:22" itemprop="dateModified" datetime="2019-01-24T13:52:22+00:00">2019-01-24</time>
               
             
           </span>
@@ -1485,12 +1485,10 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
             
             .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);

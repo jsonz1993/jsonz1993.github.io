@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="本篇主要说一些基础知识点，关于多项赋值顺序，对象引用等，期间插入一点es6只是以及解决问题的思路。 开头先来做一道面试题 part112345var a=&amp;#123;n:1&amp;#125;;var b=a;a.x=a=&amp;#123;n:2&amp;#125;;console.log(a.x);console.log(b.x); 最后输出的是什么？ 先不说答案，我们来分析一下 L2(第二行) 我们把a赋值给b，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-24T13:45:51.375Z">
+<meta property="og:updated_time" content="2019-01-24T13:52:22.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一道赋值面试题引发的思考">
 <meta name="twitter:description" content="本篇主要说一些基础知识点，关于多项赋值顺序，对象引用等，期间插入一点es6只是以及解决问题的思路。 开头先来做一道面试题 part112345var a=&amp;#123;n:1&amp;#125;;var b=a;a.x=a=&amp;#123;n:2&amp;#125;;console.log(a.x);console.log(b.x); 最后输出的是什么？ 先不说答案，我们来分析一下 L2(第二行) 我们把a赋值给b，">
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-24 13:45:51" itemprop="dateModified" datetime="2019-01-24T13:45:51+00:00">2019-01-24</time>
+                <time title="Modified: 2019-01-24 13:52:22" itemprop="dateModified" datetime="2019-01-24T13:52:22+00:00">2019-01-24</time>
               
             
           </span>
@@ -1473,12 +1473,10 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
             
             .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);

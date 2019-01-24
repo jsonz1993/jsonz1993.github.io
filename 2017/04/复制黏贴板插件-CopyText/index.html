@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="最近公司有个需求是要在移动端实现操作黏贴板功能，简单来说就是点击一个一个评论弹出菜单，其中有一个就是复制的选项。其中安卓和ios中的app还好，有原生提供接口，web端就要自己去实现了。 公司原本有一个copy的插件，但是亲测没效，找到github上面一些copy的插件用的start最高的是clipboard 截止此文有16k个start。 官方说明是   Modern copy to clipb">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-24T13:45:51.279Z">
+<meta property="og:updated_time" content="2019-01-24T13:52:22.811Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="复制黏贴板插件-CopyText">
 <meta name="twitter:description" content="最近公司有个需求是要在移动端实现操作黏贴板功能，简单来说就是点击一个一个评论弹出菜单，其中有一个就是复制的选项。其中安卓和ios中的app还好，有原生提供接口，web端就要自己去实现了。 公司原本有一个copy的插件，但是亲测没效，找到github上面一些copy的插件用的start最高的是clipboard 截止此文有16k个start。 官方说明是   Modern copy to clipb">
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-24 13:45:51" itemprop="dateModified" datetime="2019-01-24T13:45:51+00:00">2019-01-24</time>
+                <time title="Modified: 2019-01-24 13:52:22" itemprop="dateModified" datetime="2019-01-24T13:52:22+00:00">2019-01-24</time>
               
             
           </span>
@@ -1454,12 +1454,10 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
             
             .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);

@@ -147,7 +147,7 @@
 <meta property="og:image" content="https://jsonz1993.github.io/2017/05/ios网络操作基础教程/project-folder.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/05/ios网络操作基础教程/first-run.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/05/ios网络操作基础教程/view-debugging.png">
-<meta property="og:updated_time" content="2019-01-24T13:45:51.287Z">
+<meta property="og:updated_time" content="2019-01-24T13:52:22.819Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ios网络操作基础教程">
 <meta name="twitter:description" content="demo源码 网络解析与网络请求有关的类 NSURL: 客户端访问哪台服务器的制定资源 NSURLRequest: 客户端发起的网络请求内容 : 客户端服务器建立的网络连接 NSURLResponse: 服务端给予客户端的响应结果  发起第一个网络请求AppDelegate.m123456789101112131415161718192021- (BOOL)application:(UIAppli">
@@ -488,7 +488,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-24 13:45:51" itemprop="dateModified" datetime="2019-01-24T13:45:51+00:00">2019-01-24</time>
+                <time title="Modified: 2019-01-24 13:52:22" itemprop="dateModified" datetime="2019-01-24T13:52:22+00:00">2019-01-24</time>
               
             
           </span>
@@ -1474,12 +1474,10 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
             
             .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);

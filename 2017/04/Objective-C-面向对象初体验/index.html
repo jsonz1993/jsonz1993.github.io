@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="面向对象简介语言的面向对象都是换汤不换药 来来去去那几个概念  OOP（Object Oriented Programming) 基本概念 对象 （男人，女人，程序员） 抽象 - 类（人）  类和对象的关系 创建类(人)、得到对象（程序员） 成员变量： 内部使用，比如 大脑 眼睛 嘴 属性： 给外部使用 比如 职业 类的实例为对象  创建demo 同征战Objective-C一样 创建一个Comm">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-24T13:45:51.247Z">
+<meta property="og:updated_time" content="2019-01-24T13:52:22.783Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Objective-C 面向对象初体验">
 <meta name="twitter:description" content="面向对象简介语言的面向对象都是换汤不换药 来来去去那几个概念  OOP（Object Oriented Programming) 基本概念 对象 （男人，女人，程序员） 抽象 - 类（人）  类和对象的关系 创建类(人)、得到对象（程序员） 成员变量： 内部使用，比如 大脑 眼睛 嘴 属性： 给外部使用 比如 职业 类的实例为对象  创建demo 同征战Objective-C一样 创建一个Comm">
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-24 13:45:51" itemprop="dateModified" datetime="2019-01-24T13:45:51+00:00">2019-01-24</time>
+                <time title="Modified: 2019-01-24 13:52:22" itemprop="dateModified" datetime="2019-01-24T13:52:22+00:00">2019-01-24</time>
               
             
           </span>
@@ -1503,12 +1503,10 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
             
             .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);

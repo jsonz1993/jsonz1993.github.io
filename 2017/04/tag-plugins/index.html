@@ -143,7 +143,7 @@
 <meta property="og:description" content="tag plugins 用于在文章中快速插入特定内容的插件,下面列出常用几种 具体参见https://hexo.io/zh-cn/docs/tag-plugins.html 引用快在文章中插入引言，可包含作者、来源和标题。123&amp;#123;% blockquote @Jsonz http://weibo.com/u/1638841204 %&amp;#125;引用内容&amp;#123;% endblockquo">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://imgsa.baidu.com/baike/c0%3Dbaike60%2C5%2C5%2C60%2C20/sign=e1f5e7b9dcc451dae2fb04b9d7943903/7acb0a46f21fbe099143bcf36a600c338744ad3c.jpg">
-<meta property="og:updated_time" content="2019-01-24T13:45:51.279Z">
+<meta property="og:updated_time" content="2019-01-24T13:52:22.811Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tag plugins">
 <meta name="twitter:description" content="tag plugins 用于在文章中快速插入特定内容的插件,下面列出常用几种 具体参见https://hexo.io/zh-cn/docs/tag-plugins.html 引用快在文章中插入引言，可包含作者、来源和标题。123&amp;#123;% blockquote @Jsonz http://weibo.com/u/1638841204 %&amp;#125;引用内容&amp;#123;% endblockquo">
@@ -484,7 +484,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-24 13:45:51" itemprop="dateModified" datetime="2019-01-24T13:45:51+00:00">2019-01-24</time>
+                <time title="Modified: 2019-01-24 13:52:22" itemprop="dateModified" datetime="2019-01-24T13:52:22+00:00">2019-01-24</time>
               
             
           </span>
@@ -1451,12 +1451,10 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
             
             .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);

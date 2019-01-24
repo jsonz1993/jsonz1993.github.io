@@ -142,7 +142,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="文字小游戏需求： 老子 &amp;amp;&amp;amp; 儿子 -老子打儿子： - 可以打一次 记仇次数+1 - 可以打三次 记仇次数+3 - 可以给个糖 记仇次数清零  儿子反驳老子： 儿子不服 老子打一次 儿子骂老子 老子打三次 儿子买啤酒给老子 记仇次数清零">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-24T13:45:51.283Z">
+<meta property="og:updated_time" content="2019-01-24T13:52:22.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="imooc React-Native 文字小游戏">
 <meta name="twitter:description" content="文字小游戏需求： 老子 &amp;amp;&amp;amp; 儿子 -老子打儿子： - 可以打一次 记仇次数+1 - 可以打三次 记仇次数+3 - 可以给个糖 记仇次数清零  儿子反驳老子： 儿子不服 老子打一次 儿子骂老子 老子打三次 儿子买啤酒给老子 记仇次数清零">
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-24 13:45:51" itemprop="dateModified" datetime="2019-01-24T13:45:51+00:00">2019-01-24</time>
+                <time title="Modified: 2019-01-24 13:52:22" itemprop="dateModified" datetime="2019-01-24T13:52:22+00:00">2019-01-24</time>
               
             
           </span>
@@ -1435,12 +1435,10 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
             
             .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);

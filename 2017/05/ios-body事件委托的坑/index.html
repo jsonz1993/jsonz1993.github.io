@@ -144,7 +144,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/05/ios-body事件委托的坑/body_100.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/05/ios-body事件委托的坑/body_bug.PNG">
-<meta property="og:updated_time" content="2019-01-24T13:45:51.283Z">
+<meta property="og:updated_time" content="2019-01-24T13:52:22.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ios body事件委托的坑">
 <meta name="twitter:description" content="部门老大: 这个套餐怎么超出一屏之后点击没反应的… 起因有一个套餐列表是靠接口异步渲染的，所以事件我直接绑定在body上，通过事件委托去触发。这原本没什么问题， 要命的是 reset.css 中把 body, html 高度设置为 100%。 这就可能出现下面的情况  页面过长，拉上去的时候 body 只有 100% 高度，没有覆盖到下面， 所以这时候点击下面的套餐，不算是点击到body上 委托也">
@@ -485,7 +485,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-24 13:45:51" itemprop="dateModified" datetime="2019-01-24T13:45:51+00:00">2019-01-24</time>
+                <time title="Modified: 2019-01-24 13:52:22" itemprop="dateModified" datetime="2019-01-24T13:52:22+00:00">2019-01-24</time>
               
             
           </span>
@@ -1450,12 +1450,10 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
             
             .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);

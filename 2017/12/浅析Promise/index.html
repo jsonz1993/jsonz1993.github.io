@@ -144,7 +144,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/12/浅析Promise/promise1.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/12/浅析Promise/promise2.png">
-<meta property="og:updated_time" content="2019-01-24T13:45:51.299Z">
+<meta property="og:updated_time" content="2019-01-24T13:52:22.827Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅析Promise (一)">
 <meta name="twitter:description" content="ppt在此源码 参照 lie 背景在ES6流行之前，我们处理异步的方法一般有 事件模式， 回调模式等。 事件模式用户点击按钮或按下键盘上的按钮会触发类似 onClick这样的事件，他会向任务队列添加一个新任务来响应用户的操作。直到事件触发时才执行事件处理程序，且正常执行时上下文与定义时相同demo11234let btn = document.getElementById(&apos;btn1&apos;);btn.">
@@ -485,7 +485,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-01-24 13:45:51" itemprop="dateModified" datetime="2019-01-24T13:45:51+00:00">2019-01-24</time>
+                <time title="Modified: 2019-01-24 13:52:22" itemprop="dateModified" datetime="2019-01-24T13:52:22+00:00">2019-01-24</time>
               
             
           </span>
@@ -1518,12 +1518,10 @@
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
             
             .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
