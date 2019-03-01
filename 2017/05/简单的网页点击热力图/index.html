@@ -26,6 +26,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -134,6 +141,9 @@
 
 
 
+
+ <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script>
+
   <meta name="description" content="前两天老大突然喊我和一小伙子出去开会，说有个好玩的东西给你们玩。 想给网站做个简单的热力图， 记录用户点击了什么位置。要求是，怎么简单怎么实现 先做一版出来 后面再慢慢迭代优化， 定的工作量大概是两人一天。。。。 之前没接触过图表，虽然有接触过埋点统计/talkingData 不过对于这种都是一知半解。具体有两个步骤，一个是数据的记录（入库），一个是展示模式（读取）。 于是下班回到家后没事就先查了">
 <meta name="keywords" content="learn,work,github,JavaScript">
 <meta property="og:type" content="article">
@@ -143,7 +153,7 @@
 <meta property="og:description" content="前两天老大突然喊我和一小伙子出去开会，说有个好玩的东西给你们玩。 想给网站做个简单的热力图， 记录用户点击了什么位置。要求是，怎么简单怎么实现 先做一版出来 后面再慢慢迭代优化， 定的工作量大概是两人一天。。。。 之前没接触过图表，虽然有接触过埋点统计/talkingData 不过对于这种都是一知半解。具体有两个步骤，一个是数据的记录（入库），一个是展示模式（读取）。 于是下班回到家后没事就先查了">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/05/简单的网页点击热力图/heatMap.png">
-<meta property="og:updated_time" content="2019-03-01T02:42:39.773Z">
+<meta property="og:updated_time" content="2019-03-01T16:21:02.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单的网页点击热力图">
 <meta name="twitter:description" content="前两天老大突然喊我和一小伙子出去开会，说有个好玩的东西给你们玩。 想给网站做个简单的热力图， 记录用户点击了什么位置。要求是，怎么简单怎么实现 先做一版出来 后面再慢慢迭代优化， 定的工作量大概是两人一天。。。。 之前没接触过图表，虽然有接触过埋点统计/talkingData 不过对于这种都是一知半解。具体有两个步骤，一个是数据的记录（入库），一个是展示模式（读取）。 于是下班回到家后没事就先查了">
@@ -484,7 +494,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-01 02:42:39" itemprop="dateModified" datetime="2019-03-01T02:42:39+00:00">2019-03-01</time>
+                <time title="Modified: 2019-03-01 16:21:02" itemprop="dateModified" datetime="2019-03-01T16:21:02+00:00">2019-03-01</time>
               
             
           </span>
@@ -1057,6 +1067,20 @@
 
   <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
 
+
+
+
+
+
+  <script type="text/javascript" src="/js/src/quicklink.umd.js?v=6.5.0"></script>
+
+
+
+<script>
+  setTimeout(function() {
+    quicklink();
+  }, 2000);
+</script>
 
 
   
