@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -103,12 +103,12 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Gemini',
     version: '6.5.0',
     sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
-    lazyload: false,
+    lazyload: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="welcome今天在看 babel 的时候，无意中被引到一个外链  关于编译器的优秀/简单的教程，请查看 the-super-tiny-compiler ，同时它也从宏观角度上解释了 Babel 本身是如何工作的。  觉得挺感兴趣的，加上代码也不多，就跟着思路自己理解敲了一遍。 本文主要是帮助理解编译器的原理 不做过多的其他扩展 编译器的基本组成一般简单的编译器可以由以下几部分组成:  token">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-30T08:28:48.940Z">
+<meta property="og:updated_time" content="2019-03-30T08:44:45.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一步步实现极简编译器 —— 了解编译器原理">
 <meta name="twitter:description" content="welcome今天在看 babel 的时候，无意中被引到一个外链  关于编译器的优秀/简单的教程，请查看 the-super-tiny-compiler ，同时它也从宏观角度上解释了 Babel 本身是如何工作的。  觉得挺感兴趣的，加上代码也不多，就跟着思路自己理解敲了一遍。 本文主要是帮助理解编译器的原理 不做过多的其他扩展 编译器的基本组成一般简单的编译器可以由以下几部分组成:  token">
@@ -478,7 +478,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-30 08:28:48" itemprop="dateModified" datetime="2019-03-30T08:28:48+00:00">2019-03-30</time>
+                <time title="Modified: 2019-03-30 08:44:45" itemprop="dateModified" datetime="2019-03-30T08:44:45+00:00">2019-03-30</time>
               
             
           </span>
@@ -641,7 +641,7 @@
     
       <div>
         <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>1024好人一生平安</div>
+  <div></div>
   <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
     <span>Donate</span>
   </button>
@@ -1088,6 +1088,8 @@
 
 
 
+  
+
 
 
 
@@ -1110,6 +1112,11 @@
   
   
     <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
   
 
   

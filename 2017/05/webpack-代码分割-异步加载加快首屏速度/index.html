@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -103,12 +103,12 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Gemini',
     version: '6.5.0',
     sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
-    lazyload: false,
+    lazyload: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="概述对于单页应用，将所有代码打包成一个文件，可以减少网络请求，并且后面页面不需要再去加载js 可以减少白页时间。 但是对于首页需要快速加载的情况，我们可能需要重新考虑一下， 是否可以把一些不需要第一时间执行的代码异步加载进来。 Webpack有一个功能可以将您的代码库分解成按需加载的“块”，这个功能叫 代码分割。 Webpack的对于块的执行是， 异步创建&amp;lt;script&amp;gt;标签，把需要加">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-30T08:28:48.932Z">
+<meta property="og:updated_time" content="2019-03-30T08:44:45.168Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="webpack 代码分割(异步加载加快首屏速度)">
 <meta name="twitter:description" content="概述对于单页应用，将所有代码打包成一个文件，可以减少网络请求，并且后面页面不需要再去加载js 可以减少白页时间。 但是对于首页需要快速加载的情况，我们可能需要重新考虑一下， 是否可以把一些不需要第一时间执行的代码异步加载进来。 Webpack有一个功能可以将您的代码库分解成按需加载的“块”，这个功能叫 代码分割。 Webpack的对于块的执行是， 异步创建&amp;lt;script&amp;gt;标签，把需要加">
@@ -478,7 +478,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-30 08:28:48" itemprop="dateModified" datetime="2019-03-30T08:28:48+00:00">2019-03-30</time>
+                <time title="Modified: 2019-03-30 08:44:45" itemprop="dateModified" datetime="2019-03-30T08:44:45+00:00">2019-03-30</time>
               
             
           </span>
@@ -572,7 +572,7 @@
     
       <div>
         <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>1024好人一生平安</div>
+  <div></div>
   <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
     <span>Donate</span>
   </button>
@@ -1015,6 +1015,8 @@
 
 
 
+  
+
 
 
 
@@ -1037,6 +1039,11 @@
   
   
     <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
   
 
   
