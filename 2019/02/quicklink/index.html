@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="介绍谷歌团队在几个月前开源了一个项目，叫quicklink。官方给出的介绍是  Faster subsequent page-loads by prefetching in-viewport links during idle time  这里简单的介绍一下这个项目，并且说明一下为什么我需要fork这个项目~ quicklink的源码很简洁，作用可以用一句话总结: 利用空闲时间来缓存界面上看到的链">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-30T08:18:08.654Z">
+<meta property="og:updated_time" content="2019-03-30T08:28:49.040Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="quicklink学习以及结合React">
 <meta name="twitter:description" content="介绍谷歌团队在几个月前开源了一个项目，叫quicklink。官方给出的介绍是  Faster subsequent page-loads by prefetching in-viewport links during idle time  这里简单的介绍一下这个项目，并且说明一下为什么我需要fork这个项目~ quicklink的源码很简洁，作用可以用一句话总结: 利用空闲时间来缓存界面上看到的链">
@@ -478,7 +478,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-30 08:18:08" itemprop="dateModified" datetime="2019-03-30T08:18:08+00:00">2019-03-30</time>
+                <time title="Modified: 2019-03-30 08:28:49" itemprop="dateModified" datetime="2019-03-30T08:28:49+00:00">2019-03-30</time>
               
             
           </span>
@@ -538,7 +538,7 @@
 </blockquote>
 <p>这里简单的介绍一下这个项目，并且说明一下为什么我需要fork这个项目~</p>
 <p>quicklink的源码很简洁，作用可以用一句话总结: <strong>利用空闲时间来缓存界面上看到的链接，加快这些链接的访问速度。</strong></p>
-<p><strong>所以quicklink的作用是在下一个链接快速打开，而不是当前链接，这一点和很多其他优化都不一样。</strong></p>
+<p><strong>所以quicklink的作用是在下一个链接快速打开，而不是当前链接，这一点和很多其他优化都不一样。</strong></p>
 <p>原理很简单:</p>
 <ul>
 <li>获取页面上所有的A标签（注意，这里的a标签指的是调用函数的时候document下的a标签）</li>
@@ -1451,7 +1451,7 @@
             }
           }
 
-          if ('auto' === 'manual') {
+          if ('auto' === 'auto') {
             input.addEventListener('input', inputEventFunction);
           } else {
             $('.search-icon').click(inputEventFunction);
