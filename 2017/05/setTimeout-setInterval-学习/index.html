@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="定时器大家平时做js开发都不陌生了 最常见的应用应该就是验证码的倒计时 或 某段函数的异步执行了。 概述js的定时器主要有 setTimeout 和 setInterval. 这两个函数执行后，都会返回一个整数，表示定时器的编号，后面可以通过clearTimeout 或 clearInterval来清除该定时器。 setTimeout和setInterval的运行机制都是 将代码移除本次执行，等待">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-30T07:54:29.246Z">
+<meta property="og:updated_time" content="2019-03-30T08:18:08.550Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="setTimeout &amp;&amp; setInterval 学习">
 <meta name="twitter:description" content="定时器大家平时做js开发都不陌生了 最常见的应用应该就是验证码的倒计时 或 某段函数的异步执行了。 概述js的定时器主要有 setTimeout 和 setInterval. 这两个函数执行后，都会返回一个整数，表示定时器的编号，后面可以通过clearTimeout 或 clearInterval来清除该定时器。 setTimeout和setInterval的运行机制都是 将代码移除本次执行，等待">
@@ -478,7 +478,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-30 07:54:29" itemprop="dateModified" datetime="2019-03-30T07:54:29+00:00">2019-03-30</time>
+                <time title="Modified: 2019-03-30 08:18:08" itemprop="dateModified" datetime="2019-03-30T08:18:08+00:00">2019-03-30</time>
               
             
           </span>
@@ -1192,6 +1192,19 @@
       $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
 
       
+        // ref: https://github.com/ForbesLindesay/unescape-html
+        var unescapeHtml = function(html) {
+          return String(html)
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, '\'')
+            .replace(/&#x3A;/g, ':')
+            // replace all the other &#x; chars
+            .replace(/&#(\d+);/g, function (m, p) { return String.fromCharCode(p); })
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+        };
+      
 
       $.ajax({
         url: path,
@@ -1226,6 +1239,8 @@
                 var title = data.title.trim();
                 var titleInLowerCase = title.toLowerCase();
                 var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                content = unescapeHtml(content);
                 
                 var contentInLowerCase = content.toLowerCase();
                 var articleUrl = decodeURIComponent(data.url);
@@ -1419,7 +1434,7 @@
             }
           }
 
-          if ('auto' === 'auto') {
+          if ('auto' === 'manual') {
             input.addEventListener('input', inputEventFunction);
           } else {
             $('.search-icon').click(inputEventFunction);

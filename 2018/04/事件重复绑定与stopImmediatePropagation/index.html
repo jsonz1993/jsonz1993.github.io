@@ -139,7 +139,7 @@
 <meta property="og:description" content="在旧项目中，我们一般绑定事件都是用 $(&amp;#39;selector&amp;#39;).on(&amp;#39;event&amp;#39;, fn) || document.querySelector(&amp;#39;selector&amp;#39;).addEventListener(&amp;#39;event&amp;#39;, fn); 如果平时代码规范，这样写完全ojbk 点击.p 之后输出 test1demo1123456789&amp;lt">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/04/事件重复绑定与stopImmediatePropagation/repetition.png">
-<meta property="og:updated_time" content="2019-03-30T07:54:29.290Z">
+<meta property="og:updated_time" content="2019-03-30T08:18:08.590Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="事件重复绑定与stopImmediatePropagation">
 <meta name="twitter:description" content="在旧项目中，我们一般绑定事件都是用 $(&amp;#39;selector&amp;#39;).on(&amp;#39;event&amp;#39;, fn) || document.querySelector(&amp;#39;selector&amp;#39;).addEventListener(&amp;#39;event&amp;#39;, fn); 如果平时代码规范，这样写完全ojbk 点击.p 之后输出 test1demo1123456789&amp;lt">
@@ -480,7 +480,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-30 07:54:29" itemprop="dateModified" datetime="2019-03-30T07:54:29+00:00">2019-03-30</time>
+                <time title="Modified: 2019-03-30 08:18:08" itemprop="dateModified" datetime="2019-03-30T08:18:08+00:00">2019-03-30</time>
               
             
           </span>
@@ -1162,6 +1162,19 @@
       $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
 
       
+        // ref: https://github.com/ForbesLindesay/unescape-html
+        var unescapeHtml = function(html) {
+          return String(html)
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, '\'')
+            .replace(/&#x3A;/g, ':')
+            // replace all the other &#x; chars
+            .replace(/&#(\d+);/g, function (m, p) { return String.fromCharCode(p); })
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+        };
+      
 
       $.ajax({
         url: path,
@@ -1196,6 +1209,8 @@
                 var title = data.title.trim();
                 var titleInLowerCase = title.toLowerCase();
                 var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                content = unescapeHtml(content);
                 
                 var contentInLowerCase = content.toLowerCase();
                 var articleUrl = decodeURIComponent(data.url);
@@ -1389,7 +1404,7 @@
             }
           }
 
-          if ('auto' === 'auto') {
+          if ('auto' === 'manual') {
             input.addEventListener('input', inputEventFunction);
           } else {
             $('.search-icon').click(inputEventFunction);

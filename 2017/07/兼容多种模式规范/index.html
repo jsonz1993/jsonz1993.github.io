@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="1234567891011121314151617181920;(function(name, definition) &amp;#123;	// 检测上下文环境是否为 ADM 或 CMD	var hasDefine = typeof define === &apos;function&apos;;	// 检查上下文是否为 node 	var hasExports = typeof module !== &apos;undefined">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-30T07:54:29.254Z">
+<meta property="og:updated_time" content="2019-03-30T08:18:08.554Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="兼容多种模式规范">
 <meta name="twitter:description" content="1234567891011121314151617181920;(function(name, definition) &amp;#123;	// 检测上下文环境是否为 ADM 或 CMD	var hasDefine = typeof define === &apos;function&apos;;	// 检查上下文是否为 node 	var hasExports = typeof module !== &apos;undefined">
@@ -478,7 +478,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-30 07:54:29" itemprop="dateModified" datetime="2019-03-30T07:54:29+00:00">2019-03-30</time>
+                <time title="Modified: 2019-03-30 08:18:08" itemprop="dateModified" datetime="2019-03-30T08:18:08+00:00">2019-03-30</time>
               
             
           </span>
@@ -1143,6 +1143,19 @@
       $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
 
       
+        // ref: https://github.com/ForbesLindesay/unescape-html
+        var unescapeHtml = function(html) {
+          return String(html)
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, '\'')
+            .replace(/&#x3A;/g, ':')
+            // replace all the other &#x; chars
+            .replace(/&#(\d+);/g, function (m, p) { return String.fromCharCode(p); })
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+        };
+      
 
       $.ajax({
         url: path,
@@ -1177,6 +1190,8 @@
                 var title = data.title.trim();
                 var titleInLowerCase = title.toLowerCase();
                 var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                content = unescapeHtml(content);
                 
                 var contentInLowerCase = content.toLowerCase();
                 var articleUrl = decodeURIComponent(data.url);
@@ -1370,7 +1385,7 @@
             }
           }
 
-          if ('auto' === 'auto') {
+          if ('auto' === 'manual') {
             input.addEventListener('input', inputEventFunction);
           } else {
             $('.search-icon').click(inputEventFunction);

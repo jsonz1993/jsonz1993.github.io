@@ -141,7 +141,7 @@
 <meta property="og:image" content="https://jsonz1993.github.io/2017/08/flex-1在iOS10-2导致flex-wrap不起作用bug/demo1.jpg">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/08/flex-1在iOS10-2导致flex-wrap不起作用bug/bug.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2017/08/flex-1在iOS10-2导致flex-wrap不起作用bug/bugfix.png">
-<meta property="og:updated_time" content="2019-03-30T07:54:29.254Z">
+<meta property="og:updated_time" content="2019-03-30T08:18:08.554Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="flex:1在iOS10.2导致flex-wrap 不起作用">
 <meta name="twitter:description" content="实际上是 flex-basis 的默认值在 iOS10.2及以下为 0 而不是 auto 导致的。 背景项目上有一个列表要有这种效果：   只有一个的情况是一个占一排 有两个的情况是 各占50% 有三个或以上的情况是 每个占 1/3所以这时候用flex是最容易的。大于三个的直接补全至3的倍数即可代码大致思路：12345678910.demo &amp;#123;  display: flex;  flex">
@@ -482,7 +482,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-30 07:54:29" itemprop="dateModified" datetime="2019-03-30T07:54:29+00:00">2019-03-30</time>
+                <time title="Modified: 2019-03-30 08:18:08" itemprop="dateModified" datetime="2019-03-30T08:18:08+00:00">2019-03-30</time>
               
             
           </span>
@@ -1191,6 +1191,19 @@
       $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
 
       
+        // ref: https://github.com/ForbesLindesay/unescape-html
+        var unescapeHtml = function(html) {
+          return String(html)
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, '\'')
+            .replace(/&#x3A;/g, ':')
+            // replace all the other &#x; chars
+            .replace(/&#(\d+);/g, function (m, p) { return String.fromCharCode(p); })
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+        };
+      
 
       $.ajax({
         url: path,
@@ -1225,6 +1238,8 @@
                 var title = data.title.trim();
                 var titleInLowerCase = title.toLowerCase();
                 var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                content = unescapeHtml(content);
                 
                 var contentInLowerCase = content.toLowerCase();
                 var articleUrl = decodeURIComponent(data.url);
@@ -1418,7 +1433,7 @@
             }
           }
 
-          if ('auto' === 'auto') {
+          if ('auto' === 'manual') {
             input.addEventListener('input', inputEventFunction);
           } else {
             $('.search-icon').click(inputEventFunction);

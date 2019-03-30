@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="welcome今天在看 babel 的时候，无意中被引到一个外链  关于编译器的优秀/简单的教程，请查看 the-super-tiny-compiler ，同时它也从宏观角度上解释了 Babel 本身是如何工作的。  觉得挺感兴趣的，加上代码也不多，就跟着思路自己理解敲了一遍。 本文主要是帮助理解编译器的原理 不做过多的其他扩展 编译器的基本组成一般简单的编译器可以由以下几部分组成:  token">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-30T07:54:29.254Z">
+<meta property="og:updated_time" content="2019-03-30T08:18:08.558Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一步步实现极简编译器 —— 了解编译器原理">
 <meta name="twitter:description" content="welcome今天在看 babel 的时候，无意中被引到一个外链  关于编译器的优秀/简单的教程，请查看 the-super-tiny-compiler ，同时它也从宏观角度上解释了 Babel 本身是如何工作的。  觉得挺感兴趣的，加上代码也不多，就跟着思路自己理解敲了一遍。 本文主要是帮助理解编译器的原理 不做过多的其他扩展 编译器的基本组成一般简单的编译器可以由以下几部分组成:  token">
@@ -478,7 +478,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-03-30 07:54:29" itemprop="dateModified" datetime="2019-03-30T07:54:29+00:00">2019-03-30</time>
+                <time title="Modified: 2019-03-30 08:18:08" itemprop="dateModified" datetime="2019-03-30T08:18:08+00:00">2019-03-30</time>
               
             
           </span>
@@ -1263,6 +1263,19 @@
       $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
 
       
+        // ref: https://github.com/ForbesLindesay/unescape-html
+        var unescapeHtml = function(html) {
+          return String(html)
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, '\'')
+            .replace(/&#x3A;/g, ':')
+            // replace all the other &#x; chars
+            .replace(/&#(\d+);/g, function (m, p) { return String.fromCharCode(p); })
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+        };
+      
 
       $.ajax({
         url: path,
@@ -1297,6 +1310,8 @@
                 var title = data.title.trim();
                 var titleInLowerCase = title.toLowerCase();
                 var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                content = unescapeHtml(content);
                 
                 var contentInLowerCase = content.toLowerCase();
                 var articleUrl = decodeURIComponent(data.url);
@@ -1490,7 +1505,7 @@
             }
           }
 
-          if ('auto' === 'auto') {
+          if ('auto' === 'manual') {
             input.addEventListener('input', inputEventFunction);
           } else {
             $('.search-icon').click(inputEventFunction);
