@@ -15,7 +15,7 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="静态站点拥有一定的局限性，因此我们需要借助于第三方服务来扩展站点的功能。 以下是 NexT 目前支持的第三方服务，你可以根据你的需求集成一些功能进来。 评论系统NexT 支持多款评论系统。如需取消某个 页面/文章 的评论，在 md 文件的 front-matter 中增加 comments: false 暂没开评论，多说准备下架。 站内搜索本站用 Hexo 提供的 Local Search， 原理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-21T04:47:16.055Z">
+<meta property="og:updated_time" content="2019-12-21T05:14:59.251Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo-第三方服务集成">
 <meta name="twitter:description" content="静态站点拥有一定的局限性，因此我们需要借助于第三方服务来扩展站点的功能。 以下是 NexT 目前支持的第三方服务，你可以根据你的需求集成一些功能进来。 评论系统NexT 支持多款评论系统。如需取消某个 页面/文章 的评论，在 md 文件的 front-matter 中增加 comments: false 暂没开评论，多说准备下架。 站内搜索本站用 Hexo 提供的 Local Search， 原理">
@@ -478,7 +478,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-12-21 04:47:16" itemprop="dateModified" datetime="2019-12-21T04:47:16+00:00">2019-12-21</time>
+                <time title="Modified: 2019-12-21 05:14:59" itemprop="dateModified" datetime="2019-12-21T05:14:59+00:00">2019-12-21</time>
               
             
           </span>
@@ -538,7 +538,7 @@
 <h3 id="站内搜索"><a href="#站内搜索" class="headerlink" title="站内搜索"></a>站内搜索</h3><p>本站用 Hexo 提供的 Local Search， 原理是通过hexo-generator-search插件在本地生成一个search.xml文件，搜索的时候从这个文件中根据关键字检索出相应的链接。</p>
 <h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><h5 id="安装-hexo-generator-search"><a href="#安装-hexo-generator-search" class="headerlink" title="安装 hexo-generator-search"></a>安装 hexo-generator-search</h5><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-<span class="built_in">search</span></span><br></pre></td></tr></table></figure>
 <h5 id="安装-hexo-generator-searchdb"><a href="#安装-hexo-generator-searchdb" class="headerlink" title="安装 hexo-generator-searchdb"></a>安装 hexo-generator-searchdb</h5><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
-<h4 id="修改站点配置"><a href="#修改站点配置" class="headerlink" title="修改站点配置"></a>修改站点配置</h4><p>编辑 <code>站点配置</code>  根目录下的<code>_config.yml</code>.<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line"><span class="attr">  path:</span> <span class="string">search.xml</span></span><br><span class="line"><span class="attr">  field:</span> <span class="string">post</span></span><br><span class="line"><span class="attr">  format:</span> <span class="string">html</span></span><br><span class="line"><span class="attr">  limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="修改站点配置"><a href="#修改站点配置" class="headerlink" title="修改站点配置"></a>修改站点配置</h4><p>编辑 <code>站点配置</code>  根目录下的<code>_config.yml</code>.<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line">  <span class="attr">field:</span> <span class="string">post</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">html</span></span><br><span class="line">  <span class="attr">limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure></p>
 <p><a href="http://www.ezlippi.com/blog/2017/02/hexo-search.html" target="_blank" rel="noopener">站内搜索原文教程-EZLippi-浮生志</a></p>
 
       
@@ -912,11 +912,6 @@
       <div class="footer-inner">
         <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
   <a target="_blank" href="http://beian.miit.gov.cn">粤ICP备18066881号</a>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-
-  <span class="author" itemprop="copyrightHolder">Jsonz</span>
 
   
 

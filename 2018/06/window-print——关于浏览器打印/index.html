@@ -15,7 +15,7 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="近日有个需求是做页面打印的，趁这个机会补一下比较冷门的浏览器打印知识。本文主要讨论 Chrome、Safari、Firefox浏览器的情况。 打印接口首先浏览器打印是一个很成熟的应用~ 至少是很早就已经有应用的功能，所以不会有什么兼容问题 最简单的打印就是直接调用 window.print()，当然用 document.execCommand(&amp;#39;print&amp;#39;) 也可以达到同样的效果">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-21T04:47:16.123Z">
+<meta property="og:updated_time" content="2019-12-21T05:14:59.323Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="window.print——关于浏览器打印">
 <meta name="twitter:description" content="近日有个需求是做页面打印的，趁这个机会补一下比较冷门的浏览器打印知识。本文主要讨论 Chrome、Safari、Firefox浏览器的情况。 打印接口首先浏览器打印是一个很成熟的应用~ 至少是很早就已经有应用的功能，所以不会有什么兼容问题 最简单的打印就是直接调用 window.print()，当然用 document.execCommand(&amp;#39;print&amp;#39;) 也可以达到同样的效果">
@@ -478,7 +478,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-12-21 04:47:16" itemprop="dateModified" datetime="2019-12-21T04:47:16+00:00">2019-12-21</time>
+                <time title="Modified: 2019-12-21 05:14:59" itemprop="dateModified" datetime="2019-12-21T05:14:59+00:00">2019-12-21</time>
               
             
           </span>
@@ -548,7 +548,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"/example.css"</span> <span class="attr">media</span>=<span class="string">"print"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 <p>这样打印的时候，就会默认将该样式表应用到文档中</p>
 <h2 id="使用媒介查询"><a href="#使用媒介查询" class="headerlink" title="使用媒介查询"></a>使用媒介查询</h2><p>兼容性: IE9+ 其他主流浏览器都支持<br>当我们要修改的样式没有那么多的时候，其实完全不需要重新写个样式表，只要写上一个媒介查询也可以达到同样的效果，如:</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">media</span> print &#123;</span><br><span class="line">  <span class="selector-tag">h1</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@media</span> print &#123;</span><br><span class="line">  <span class="selector-tag">h1</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="事件监听"><a href="#事件监听" class="headerlink" title="事件监听"></a>事件监听</h2><h3 id="beforeprint-amp-amp-afterprint"><a href="#beforeprint-amp-amp-afterprint" class="headerlink" title="beforeprint &amp;&amp; afterprint"></a>beforeprint &amp;&amp; afterprint</h3><p>有两个事件可以监听到到打印事件，一个是<code>beforeprint</code>,一个是<code>afterprint</code>，分别表示打印事件触发前后。<br>这个事件在 IE6 就已经支持了，不过一点都不惊讶~ 毕竟IE很早就支持很多接口调用，之前好像做过IE打开Excel的需求~<br>兼容大概是 Firefox、IE全支持, Chrome63+支持, Safari暂不支持，算是一半一半吧。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'beforeprint'</span>, ()=&gt; &#123;</span><br><span class="line">  <span class="built_in">document</span>.body.innerHTML = <span class="string">'正在打印...'</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'afterprint'</span>, ()=&gt; &#123;</span><br><span class="line">  <span class="built_in">document</span>.body.innerHTML = <span class="string">'打印完成...'</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 <h3 id="window-matchMedia-测试媒体查询接口"><a href="#window-matchMedia-测试媒体查询接口" class="headerlink" title="window.matchMedia 测试媒体查询接口"></a>window.matchMedia 测试媒体查询接口</h3><p>如果你想要兼容Safari或许可以试一下 <code>window.matchMedia</code><br>兼容是 IE10+，其他主流浏览器完全没问题。</p>
 <p>这个的用法稍微有点不一样，首先创建一个MediaQueryList对象，再通过他监听变化，如:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> printMedia = <span class="built_in">window</span>.matchMedia(<span class="string">'print'</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printChange</span>(<span class="params">&#123; matches, &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">document</span>.body.innerHTML = matches? <span class="string">'正在打印...'</span>: <span class="string">'打印完成/取消'</span>;</span><br><span class="line">&#125;</span><br><span class="line">printMedia.addListener(printChange);</span><br></pre></td></tr></table></figure></p>
@@ -936,11 +936,6 @@
       <div class="footer-inner">
         <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
   <a target="_blank" href="http://beian.miit.gov.cn">粤ICP备18066881号</a>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-
-  <span class="author" itemprop="copyrightHolder">Jsonz</span>
 
   
 

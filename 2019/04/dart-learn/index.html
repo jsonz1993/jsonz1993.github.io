@@ -15,7 +15,7 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="一个最基础的Dart程序1234567891011// 定义一个函数printInterger(int aNumber, int bNumber) &amp;#123;  print(&apos;the number is $aNumber and $&amp;#123;bNumber&amp;#125;&apos;); // $aNumber or $&amp;#123;bNumber&amp;#125; 都可以在字符串中使用变量&amp;#125;// 程序初">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-21T04:47:16.167Z">
+<meta property="og:updated_time" content="2019-12-21T05:14:59.371Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dart基础语法（一）">
 <meta name="twitter:description" content="一个最基础的Dart程序1234567891011// 定义一个函数printInterger(int aNumber, int bNumber) &amp;#123;  print(&apos;the number is $aNumber and $&amp;#123;bNumber&amp;#125;&apos;); // $aNumber or $&amp;#123;bNumber&amp;#125; 都可以在字符串中使用变量&amp;#125;// 程序初">
@@ -478,7 +478,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-12-21 04:47:16" itemprop="dateModified" datetime="2019-12-21T04:47:16+00:00">2019-12-21</time>
+                <time title="Modified: 2019-12-21 05:14:59" itemprop="dateModified" datetime="2019-12-21T05:14:59+00:00">2019-12-21</time>
               
             
           </span>
@@ -539,7 +539,7 @@
 <li>Dart是强类型语言，累心注释是可选的，因为Dart可以推断类型，如果想要定义一个没有类型的可以使用<code>dynamic</code>类型。如<code>- Dart是强类型语言，累心注释是可选的，因为Dart可以推断类型，如果想要定义一个没有类型的可以使用`dynamic`类型。如</code>- Dart是强类型语言，累心注释是可选的，因为Dart可以推断类型，如果想要定义一个没有类型的可以使用<code>dynamic</code>类型。如<code></code>- Dart是强类型语言，累心注释是可选的，因为Dart可以推断类型，如果想要定义一个没有类型的可以使用<code>dynamic</code>类型。如<code>var list= &lt;dynamic&gt;[1]</code></li>
 <li>Dart的私有方法，都是以<code>_</code>下划线开头的，不像java直接写关键字<code>private</code>.</li>
 </ul>
-<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><h2 id="声明变量"><a href="#声明变量" class="headerlink" title="声明变量"></a>声明变量</h2><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明与初始化一个String类型的变量</span></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'Bob'</span>;</span><br><span class="line"><span class="comment">// 如果想要任意类型，可以用 dynamic</span></span><br><span class="line"><span class="keyword">dynamic</span> name2 = <span class="string">'Bob'</span>;</span><br><span class="line"><span class="comment">// 显式声明字符串类型</span></span><br><span class="line"><span class="built_in">String</span> name3 = <span class="string">'Bob'</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><h2 id="声明变量"><a href="#声明变量" class="headerlink" title="声明变量"></a>声明变量</h2><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 声明与初始化一个String类型的变量</span></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'Bob'</span>;</span><br><span class="line"><span class="comment">// 如果想要任意类型，可以用 dynamic</span></span><br><span class="line"><span class="built_in">dynamic</span> name2 = <span class="string">'Bob'</span>;</span><br><span class="line"><span class="comment">// 显式声明字符串类型</span></span><br><span class="line"><span class="built_in">String</span> name3 = <span class="string">'Bob'</span>;</span><br></pre></td></tr></table></figure>
 <h2 id="变量默认值"><a href="#变量默认值" class="headerlink" title="变量默认值"></a>变量默认值</h2><p>和<code>js</code>不一样的是，如果在<code>Dart</code>里面声明一个变量，但是不赋值的话，他的默认值是<code>null</code>而不是<code>undefined</code>.</p>
 <p>这也从另一个角度说明在<code>Dart</code>中，万物皆对象.<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> lineCount;</span><br><span class="line"><span class="keyword">var</span> line;</span><br><span class="line"><span class="keyword">assert</span>(lineCount == <span class="keyword">null</span>);</span><br><span class="line"><span class="keyword">assert</span>(line == <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure></p>
 <h2 id="final-amp-amp-const"><a href="#final-amp-amp-const" class="headerlink" title="final &amp;&amp; const"></a>final &amp;&amp; const</h2><p><code>Dart</code>里面的常量用 <code>final</code>和<code>const</code>声明。</p>
@@ -605,7 +605,7 @@
 <h2 id="Switch-amp-amp-case"><a href="#Switch-amp-amp-case" class="headerlink" title="Switch &amp;&amp; case"></a>Switch &amp;&amp; case</h2><p>switch 可以对比 <code>string</code>、<code>number</code>、<code>bool</code>但是不能混着用。</p>
 <h2 id="Assert-断言"><a href="#Assert-断言" class="headerlink" title="Assert(断言)"></a>Assert(断言)</h2><p>写过单元测试的应该对<code>assert</code>不陌生，如果布尔条件为<code>false</code>则<code>assert</code>会中断执行。<br>不过只会在开发模式起作用，生产环境不会执行。</p>
 <h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="Throw-抛错"><a href="#Throw-抛错" class="headerlink" title="Throw 抛错"></a>Throw 抛错</h2><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">throw</span> FormatException(<span class="string">'expected at least 1 section'</span>);</span><br><span class="line"><span class="keyword">throw</span> <span class="string">'out of llamas!'</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="catch"><a href="#catch" class="headerlink" title="catch"></a>catch</h2><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  breedMoreLlamas();</span><br><span class="line">&#125; on OutOfLlamasException &#123;</span><br><span class="line">  <span class="comment">// A specific exception</span></span><br><span class="line">  buyMoreLlamas();</span><br><span class="line">&#125; on Exception <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="comment">// Anything else that is an exception</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">'Unknown exception: <span class="subst">$e</span>'</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (e, s) &#123;</span><br><span class="line">  <span class="comment">// No specified type, handles all</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">'Something really unknown: <span class="subst">$e</span>'</span>);</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">'Stack trace: \n <span class="subst">$s</span>'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="catch"><a href="#catch" class="headerlink" title="catch"></a>catch</h2><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  breedMoreLlamas();</span><br><span class="line">&#125; <span class="keyword">on</span> OutOfLlamasException &#123;</span><br><span class="line">  <span class="comment">// A specific exception</span></span><br><span class="line">  buyMoreLlamas();</span><br><span class="line">&#125; <span class="keyword">on</span> Exception <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="comment">// Anything else that is an exception</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">'Unknown exception: <span class="subst">$e</span>'</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (e, s) &#123;</span><br><span class="line">  <span class="comment">// No specified type, handles all</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">'Something really unknown: <span class="subst">$e</span>'</span>);</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">'Stack trace: \n <span class="subst">$s</span>'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h2><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  someThing()</span><br><span class="line">&#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">'Error: <span class="subst">$e</span>'</span>);</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">  clean();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
@@ -981,11 +981,6 @@
       <div class="footer-inner">
         <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
   <a target="_blank" href="http://beian.miit.gov.cn">粤ICP备18066881号</a>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-
-  <span class="author" itemprop="copyrightHolder">Jsonz</span>
 
   
 

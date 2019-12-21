@@ -15,7 +15,7 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -140,7 +140,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-t/tty_choose_port.png">
 <meta property="og:image" content="https://jsonz1993.github.io/2018/05/create-react-app-t/webpackDevServer_error.png">
-<meta property="og:updated_time" content="2019-12-21T04:47:16.115Z">
+<meta property="og:updated_time" content="2019-12-21T05:14:59.311Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="create-react-app 源码解析之react-scripts">
 <meta name="twitter:description" content="上一篇我们已经讲了 create-react-app里面创建package.json安装依赖并且拷贝可运行的demo等步骤。传送门 这一篇我们来讲一下 create-react-app里面的启动服务等部分，就是平时我们安装完依赖之后，启动开发服务:npm start。这一块涉及到太多关于webpack与配置的东西，加上第一篇觉得描述的太过冗余~所以这篇不会讲得很细，只是大概把他运转的逻辑思路写出来">
@@ -481,7 +481,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-12-21 04:47:16" itemprop="dateModified" datetime="2019-12-21T04:47:16+00:00">2019-12-21</time>
+                <time title="Modified: 2019-12-21 05:14:59" itemprop="dateModified" datetime="2019-12-21T05:14:59+00:00">2019-12-21</time>
               
             
           </span>
@@ -551,7 +551,7 @@
 <p>那么 node_modules/.bin 里面的文件又是怎么来的呢？<br>我们如果在包的 package.json 加上 <code>bin</code> 字段，npm就会自动帮我们映射到 node_modules/.bin 里面 <a href="https://docs.npmjs.com/files/package.json#bin" target="_blank" rel="noopener">npm bin文档传送门</a></p>
 <p>我们直接打开 <code>node_modules/react-scripts/package.json</code> 能看到这么一行<code>&quot;react-scripts&quot;: &quot;./bin/react-scripts.js&quot;</code>,直接把命令指向<code>node_modules/react-scripts/.bin/react-scripts.js</code>，也验证了我们的观点。</p>
 <p>还记得上一篇，我们在 <code>create-react-app/packages</code> 里面发现了有一个 <code>react-scripts</code>。其实是同一个东西来的，那么接下来的步骤就很明确了，直接用老办法，改下配置，然后用vscode跑断点调试阅读<code>project_path/node_modules/react-scripts/.bin/react-scripts.js</code>的源码 一探究竟。</p>
-<h3 id="vscode-launch-json"><a href="#vscode-launch-json" class="headerlink" title="vscode launch.json"></a><a href="#vscode_launch.json">vscode launch.json</a></h3><p>这里我们传入 start 作为参数,模拟在项目里跑 <code>yarn start</code> 的效果。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">  <span class="attr">"configurations"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"node"</span>,</span><br><span class="line">      <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"启动程序"</span>,</span><br><span class="line">      "program": "$&#123;workspaceFolder&#125;/node_modules/react-scripts/bin/react-scripts.js", //调试的文件路径</span><br><span class="line">      "args": [</span><br><span class="line">        "start" // 传入 start 做为参数</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="vscode-launch-json"><a href="#vscode-launch-json" class="headerlink" title="vscode launch.json"></a><a href="#vscode_launch.json">vscode launch.json</a></h3><p>这里我们传入 start 作为参数,模拟在项目里跑 <code>yarn start</code> 的效果。<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">  <span class="attr">"configurations"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"node"</span>,</span><br><span class="line">      <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"启动程序"</span>,</span><br><span class="line">      <span class="attr">"program"</span>: <span class="string">"$&#123;workspaceFolder&#125;/node_modules/react-scripts/bin/react-scripts.js"</span>, <span class="comment">//调试的文件路径</span></span><br><span class="line">      <span class="attr">"args"</span>: [</span><br><span class="line">        <span class="string">"start"</span> <span class="comment">// 传入 start 做为参数</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><em><strong>ps:下面的<code>react-scripts</code>没有特殊说明，都代表<code>project_path/node_modules/react-scripts</code>目录方便阅读</strong></em></p>
 <h1 id="react-scripts-bin-react-scripts-js"><a href="#react-scripts-bin-react-scripts-js" class="headerlink" title="react-scripts/.bin/react-scripts.js"></a><a href="#react-scripts-bin-react-scripts-js">react-scripts/.bin/react-scripts.js</a></h1><p><a href="https://github.com/facebook/create-react-app/blob/v1.1.4/packages/react-scripts/bin/react-scripts.js" target="_blank" rel="noopener">文件传送门</a><br>这里我们还是老办法，先不看依赖 看主流程理解先，我们能看到这个文件也是一个入口文件，非常简短。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> args = process.argv.slice(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> scriptIndex = args.findIndex(</span><br><span class="line">  x =&gt; x === <span class="string">'build'</span> || x === <span class="string">'eject'</span> || x === <span class="string">'start'</span> || x === <span class="string">'test'</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">const</span> script = scriptIndex === <span class="number">-1</span> ? args[<span class="number">0</span>] : args[scriptIndex];</span><br><span class="line"><span class="keyword">const</span> nodeArgs = scriptIndex &gt; <span class="number">0</span> ? args.slice(<span class="number">0</span>, scriptIndex) : [];</span><br></pre></td></tr></table></figure>
@@ -985,11 +985,6 @@
       <div class="footer-inner">
         <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
   <a target="_blank" href="http://beian.miit.gov.cn">粤ICP备18066881号</a>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-
-  <span class="author" itemprop="copyrightHolder">Jsonz</span>
 
   
 

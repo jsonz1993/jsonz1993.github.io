@@ -15,7 +15,7 @@
 
 
 <html class="theme-next gemini use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="项目背景最近接手组内一个前端大牛的项目，大概理清了里面的总理逻辑与数据流向等， 写个总结 方便以后可以查阅参考。 在之前做的后台管理平台里面，就有用到 dva+antd， 到后面直接用 antd-pro 重新整合了一遍，不得不说 antd-pro 真的是开箱即用 优雅粗暴。 但是里面可能很多和我们平时使用习惯有所不同， 所以这次接触的项目是基于 dva 自己再重组了一下 model router">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-21T04:47:16.071Z">
+<meta property="og:updated_time" content="2019-12-21T05:14:59.267Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react全家桶 + dva 实践整理总结">
 <meta name="twitter:description" content="项目背景最近接手组内一个前端大牛的项目，大概理清了里面的总理逻辑与数据流向等， 写个总结 方便以后可以查阅参考。 在之前做的后台管理平台里面，就有用到 dva+antd， 到后面直接用 antd-pro 重新整合了一遍，不得不说 antd-pro 真的是开箱即用 优雅粗暴。 但是里面可能很多和我们平时使用习惯有所不同， 所以这次接触的项目是基于 dva 自己再重组了一下 model router">
@@ -478,7 +478,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-12-21 04:47:16" itemprop="dateModified" datetime="2019-12-21T04:47:16+00:00">2019-12-21</time>
+                <time title="Modified: 2019-12-21 05:14:59" itemprop="dateModified" datetime="2019-12-21T05:14:59+00:00">2019-12-21</time>
               
             
           </span>
@@ -547,7 +547,7 @@
 <p>这里就引出两个分支， model &amp;&amp; router 前端架构中比较关心的两个。</p>
 <h2 id="router-管理"><a href="#router-管理" class="headerlink" title="router 管理"></a>router 管理</h2><p>在 <code>router.js</code> 里面 定义了主 <code>Component</code> 与默认 url</p>
 <p>router.childRoutes 也是使用模块的方式，只引用了几个大模块，如 <code>require(&#39;modules/activity&#39;)(app),</code></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Routers = <span class="function"><span class="keyword">function</span> (<span class="params">&#123; history, app &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> routes = getRoutes(app);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Router</span> <span class="attr">history</span>=<span class="string">&#123;history&#125;</span> <span class="attr">routes</span>=<span class="string">&#123;routes&#125;</span> <span class="attr">render</span>=<span class="string">&#123;applyRouterMiddleware(useScroll())&#125;</span> /&gt;</span>;</span></span><br><span class="line"><span class="xml">&#125;;</span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml">function getRoutes(app) &#123;</span></span><br><span class="line"><span class="xml">  return [</span></span><br><span class="line"><span class="xml">    &#123;</span></span><br><span class="line"><span class="xml">      path: '/',</span></span><br><span class="line"><span class="xml">      component: App,</span></span><br><span class="line"><span class="xml">      childRoutes: [</span></span><br><span class="line"><span class="xml">        require('modules/activity')(app),</span></span><br><span class="line"><span class="xml">      ],</span></span><br><span class="line"><span class="xml">    &#125;,</span></span><br><span class="line"><span class="xml">  ];</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Routers = <span class="function"><span class="keyword">function</span> (<span class="params">&#123; history, app &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> routes = getRoutes(app);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Router</span> <span class="attr">history</span>=<span class="string">&#123;history&#125;</span> <span class="attr">routes</span>=<span class="string">&#123;routes&#125;</span> <span class="attr">render</span>=<span class="string">&#123;applyRouterMiddleware(useScroll())&#125;</span> /&gt;</span>;</span></span><br><span class="line"><span class="xml">&#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">function getRoutes(app) &#123;</span></span><br><span class="line"><span class="xml">  return [</span></span><br><span class="line"><span class="xml">    &#123;</span></span><br><span class="line"><span class="xml">      path: '/',</span></span><br><span class="line"><span class="xml">      component: App,</span></span><br><span class="line"><span class="xml">      childRoutes: [</span></span><br><span class="line"><span class="xml">        require('modules/activity')(app),</span></span><br><span class="line"><span class="xml">      ],</span></span><br><span class="line"><span class="xml">    &#125;,</span></span><br><span class="line"><span class="xml">  ];</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>在 <code>modules/activity/index.js</code> 再去加载构建他的子级路由</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> app=&gt;(&#123;</span><br><span class="line">    path: <span class="string">'url'</span>,</span><br><span class="line">    getComponent (nextState, cb) &#123;</span><br><span class="line">        <span class="built_in">require</span>.ensure([], (<span class="built_in">require</span>) =&gt; &#123;</span><br><span class="line">            app.model(<span class="built_in">require</span>(<span class="string">'./model'</span>)); <span class="comment">// 加载当前模块的model</span></span><br><span class="line">            cb(<span class="literal">null</span>, <span class="built_in">require</span>(<span class="string">'./view'</span>)); <span class="comment">// 记载当前模块的view</span></span><br><span class="line">        &#125;, <span class="string">'模块名'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    childRoutes:[</span><br><span class="line">      <span class="built_in">require</span>(<span class="string">'modules/child1'</span>)(app), </span><br><span class="line">      <span class="built_in">require</span>(<span class="string">'modules/child2'</span>)(app)</span><br><span class="line">    ],</span><br><span class="line">    ...其他配置</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>就这样一层一层的构建自己的路由， 根据页面去配置也可以更加的细腻可控。不会写成长长的一坨。</p>
@@ -945,11 +945,6 @@
       <div class="footer-inner">
         <div class="copyright">&copy; 2017 – <span itemprop="copyrightYear">2019</span>
   <a target="_blank" href="http://beian.miit.gov.cn">粤ICP备18066881号</a>
-  <span class="with-love" id="animate">
-    <i class="fa fa-user"></i>
-  </span>
-
-  <span class="author" itemprop="copyrightHolder">Jsonz</span>
 
   
 
