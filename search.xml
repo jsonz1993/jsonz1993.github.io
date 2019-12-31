@@ -130,6 +130,16 @@
 <p><a href="https://www.ruanyifeng.com/blog/2011/12/ssh_remote_login.html" target="_blank" rel="noopener">SSH原理与运用（一）：远程登录</a><br><a href="https://help.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh" target="_blank" rel="noopener">github关于ssh</a><br><a href="https://shanyue.tech/op/init.html" target="_blank" rel="noopener">服务器登录相关</a></p>
 <p><a href="https://shanyue.tech/op/" target="_blank" rel="noopener">服务器基础教程</a> 这是个好教程，基本上都是一些入门级的东西 对新手很友好</p>
 <hr>
+<h1 id="nginx-amp-amp-ssl"><a href="#nginx-amp-amp-ssl" class="headerlink" title="nginx &amp;&amp; ssl"></a>nginx &amp;&amp; ssl</h1><p>Centos7系统</p>
+<ul>
+<li>安装 <code>yum install nginx</code></li>
+<li>启动直接 命令行键入<code>nginx</code>就好</li>
+<li>要查看是否启动可以看最简单直接查看有没有Nginx进程。 <code>ps -ef | grep nginx</code></li>
+<li>常用的命令，测试配置文件 <code>nginx -t</code>，<code>nginx -s [signal]</code></li>
+</ul>
+<p>配置基本看这几篇就够用了 <a href="https://zhuanlan.zhihu.com/p/34943332" target="_blank" rel="noopener">8分钟带你深入浅出搞懂Nginx</a>, <a href="https://juejin.im/post/5d81906c518825300a3ec7ca#heading-12" target="_blank" rel="noopener">nginx 这一篇就够了</a></p>
+<p>ssl 推荐直接用 <a href="https://certbot.eff.org/" target="_blank" rel="noopener">certbot</a> 简单易用好操作</p>
+<p>centos的可以直接进这个网址，傻瓜式才做即可 <a href="https://certbot.eff.org/lets-encrypt/centos6-nginx" target="_blank" rel="noopener">https://certbot.eff.org/lets-encrypt/centos6-nginx</a></p>
 ]]></content>
       <categories>
         <category>technology</category>
