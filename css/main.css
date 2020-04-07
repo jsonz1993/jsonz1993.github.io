@@ -1400,6 +1400,15 @@ pre .javascript .function {
 .article-copyright a {
   color: #777;
 }
+.self-read {
+  font-size: 20px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  color: #bbb;
+  font-weight: 900;
+  font-style: italic;
+  text-decoration: underline double #aaa;
+}
 .posts-expand {
   padding-top: 40px;
 }
@@ -2095,7 +2104,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff4eff;
+  background: #6ac6ff;
 }
 .links-of-blogroll {
   font-size: 13px;
