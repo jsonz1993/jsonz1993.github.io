@@ -1,6 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>[置顶]捣鼓目录</title>
+    <url>/2017/06/%E6%8D%A3%E9%BC%93%E7%9B%AE%E5%BD%95/</url>
+    <content><![CDATA[<p>记录平时工作学习的目录条目， 类似 <a href="https://github.com/jsonz1993/learn" target="_blank" rel="noopener">Jsonz-learn</a>、 <a href="https://github.com/jsonz1993/wheel" target="_blank" rel="noopener">Jsonz-wheel</a> 的目录。<br>部分比较大的轮子可能会独立成一个git项目</p>
+<h1 id="Doing"><a href="#Doing" class="headerlink" title="Doing"></a>Doing</h1><h1 id="NEXT"><a href="#NEXT" class="headerlink" title="NEXT"></a>NEXT</h1><h1 id="目录-排名按时间顺序"><a href="#目录-排名按时间顺序" class="headerlink" title="目录 排名按时间顺序"></a>目录 排名按时间顺序</h1><h2 id="React-Hooks-食用指南"><a href="#React-Hooks-食用指南" class="headerlink" title="React Hooks 食用指南"></a><a href="https://github.com/jsonz1993/react-hooks" target="_blank" rel="noopener">React Hooks 食用指南</a></h2><h2 id="项目接入quicklink，尝试看效果如何"><a href="#项目接入quicklink，尝试看效果如何" class="headerlink" title="项目接入quicklink，尝试看效果如何"></a><a href="https://jsonz1993.github.io/2019/02/quicklink/">项目接入quicklink，尝试看效果如何</a></h2><h2 id="利用AST解决webpack-alias泛滥的问题"><a href="#利用AST解决webpack-alias泛滥的问题" class="headerlink" title="利用AST解决webpack alias泛滥的问题"></a><a href="https://jsonz1993.github.io/2019/01/AST-practice/">利用AST解决webpack alias泛滥的问题</a></h2><h2 id="react源码学习-ContextAPI"><a href="#react源码学习-ContextAPI" class="headerlink" title="react源码学习 ContextAPI"></a><a href="https://github.com/jsonz1993/react-source-learn/issues/5" target="_blank" rel="noopener">react源码学习 ContextAPI</a></h2><h2 id="正则全局标志注意事项"><a href="#正则全局标志注意事项" class="headerlink" title="正则全局标志注意事项"></a><a href="https://jsonz1993.github.io/2018/11/regexp-global/">正则全局标志注意事项</a></h2><h2 id="react源码学习系列"><a href="#react源码学习系列" class="headerlink" title="react源码学习系列"></a><a href="https://github.com/jsonz1993/react-source-learn" target="_blank" rel="noopener">react源码学习系列</a></h2><h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a><a href="https://jsonz1993.github.io/2018/08/fp/">函数式编程</a></h2><h2 id="一道赋值面试题引发的思考-——-对象引用问题"><a href="#一道赋值面试题引发的思考-——-对象引用问题" class="headerlink" title="一道赋值面试题引发的思考 —— 对象引用问题"></a><a href="https://jsonz1993.github.io/2018/07/circular-reference/">一道赋值面试题引发的思考 —— 对象引用问题</a></h2><h2 id="视频转字符画"><a href="#视频转字符画" class="headerlink" title="视频转字符画"></a><a href="https://jsonz1993.github.io/2018/07/video-to-chat/">视频转字符画</a></h2><h2 id="window-print-浏览器打印扫盲"><a href="#window-print-浏览器打印扫盲" class="headerlink" title="window.print 浏览器打印扫盲"></a><a href="https://jsonz1993.github.io/2018/06/window-print%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%93%E5%8D%B0/">window.print 浏览器打印扫盲</a></h2><h2 id="《http小书》http知识扫盲"><a href="#《http小书》http知识扫盲" class="headerlink" title="《http小书》http知识扫盲"></a><a href="https://jsonz1993.github.io/2018/05/http-mini-book/">《http小书》http知识扫盲</a></h2><h2 id="《css世界》常用技巧-——-读书笔记"><a href="#《css世界》常用技巧-——-读书笔记" class="headerlink" title="《css世界》常用技巧 —— 读书笔记"></a><a href="https://jsonz1993.github.io/2018/05/css-world/">《css世界》常用技巧 —— 读书笔记</a></h2><h2 id="浏览器恢复滚动行为-——-history-scrollRestoration"><a href="#浏览器恢复滚动行为-——-history-scrollRestoration" class="headerlink" title="浏览器恢复滚动行为 —— history.scrollRestoration"></a><a href="https://jsonz1993.github.io/2018/05/history-scroll-restoration/">浏览器恢复滚动行为 —— history.scrollRestoration</a></h2><h2 id="create-react-app-源码解析-一"><a href="#create-react-app-源码解析-一" class="headerlink" title="create-react-app 源码解析(一)"></a><a href="https://jsonz1993.github.io/2018/05/create-react-app-o/">create-react-app 源码解析(一)</a></h2><h2 id="create-react-app-源码解析-二"><a href="#create-react-app-源码解析-二" class="headerlink" title="create-react-app 源码解析(二)"></a><a href="https://jsonz1993.github.io/2018/05/create-react-app-t/">create-react-app 源码解析(二)</a></h2><h2 id="git查漏补缺-非常大好全的文章-慢慢适用一下控制台提交，熟悉之后再切客户端"><a href="#git查漏补缺-非常大好全的文章-慢慢适用一下控制台提交，熟悉之后再切客户端" class="headerlink" title="git查漏补缺 非常大好全的文章 慢慢适用一下控制台提交，熟悉之后再切客户端"></a><a href="https://mubu.com/doc/21wNPB_ZJp" target="_blank" rel="noopener">git查漏补缺 非常大好全的文章</a> 慢慢适用一下控制台提交，熟悉之后再切客户端</h2><h2 id="自动化功能测试流程方案"><a href="#自动化功能测试流程方案" class="headerlink" title="自动化功能测试流程方案"></a><a href="http://l.easyrentcars.com:4000/2018/04/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/" target="_blank" rel="noopener">自动化功能测试流程方案</a></h2><h2 id="项目代码规范工作流——editor、prettier、eslint、git-check"><a href="#项目代码规范工作流——editor、prettier、eslint、git-check" class="headerlink" title="项目代码规范工作流——editor、prettier、eslint、git-check"></a><a href="http://l.easyrentcars.com:4000/2018/03/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/" target="_blank" rel="noopener">项目代码规范工作流——editor、prettier、eslint、git-check</a></h2><h2 id="自动化测试-puppeteer-与qq空间"><a href="#自动化测试-puppeteer-与qq空间" class="headerlink" title="自动化测试 puppeteer 与qq空间"></a><a href="http://l.easyrentcars.com:4000/2018/03/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95puppeteer-%E4%B8%8Eqq%E7%A9%BA%E9%97%B4/" target="_blank" rel="noopener">自动化测试 puppeteer 与qq空间</a></h2><ul>
+<li><a href="https://github.com/jsonz1993/wheel/tree/master/qqZone" target="_blank" rel="noopener">源码</a></li>
+</ul>
+<h2 id="react全家桶-dva-实践整理总结"><a href="#react全家桶-dva-实践整理总结" class="headerlink" title="react全家桶 + dva 实践整理总结"></a><a href="http://l.easyrentcars.com:4000/2018/02/react%E5%85%A8%E5%AE%B6%E6%A1%B6-dva-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener">react全家桶 + dva 实践整理总结</a></h2><h2 id="了解-babel-写个babel-插件-——-了解编译器原理"><a href="#了解-babel-写个babel-插件-——-了解编译器原理" class="headerlink" title="了解 babel 写个babel 插件 —— 了解编译器原理"></a>了解 babel 写个babel 插件 —— 了解编译器原理</h2><ul>
+<li>实现了一个 <a href="https://jsonz1993.github.io/2018/01/%E4%B8%80%E6%AD%A5%E6%AD%A5%E5%AE%9E%E7%8E%B0%E6%9E%81%E7%AE%80%E7%BC%96%E8%AF%91%E5%99%A8-%E2%80%94%E2%80%94-%E4%BA%86%E8%A7%A3%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86/">极简的编译器</a></li>
+</ul>
+<h2 id="react-dva-antd-antd-pro-roadhog-全家桶-项目用ing"><a href="#react-dva-antd-antd-pro-roadhog-全家桶-项目用ing" class="headerlink" title="react/dva/antd/antd-pro/roadhog 全家桶 项目用ing"></a>react/dva/antd/antd-pro/roadhog 全家桶 项目用ing</h2><h2 id="postMessage"><a href="#postMessage" class="headerlink" title="postMessage"></a><a href="https://github.com/jsonz1993/wheel/tree/master/postMessage" target="_blank" rel="noopener">postMessage</a></h2><ul>
+<li>简单的对系统自带的postMessage进行封装</li>
+<li>支持事件类型监听</li>
+<li>更多实现参考 arale/messenger/index.js</li>
+</ul>
+<h2 id="react-native-dogs"><a href="#react-native-dogs" class="headerlink" title="react-native-dogs"></a><a href="https://github.com/jsonz1993/wheel/tree/master/react-native-dogs" target="_blank" rel="noopener">react-native-dogs</a></h2><ul>
+<li>学习react-native 比较全面的一个路径</li>
+<li>虽然不完整，但包含了rn 常用的api 库 等</li>
+<li>也涉及到 node koa 七牛云等</li>
+</ul>
+<h2 id="react-native-countdown-ReactNative的倒计时组件"><a href="#react-native-countdown-ReactNative的倒计时组件" class="headerlink" title="react-native-countdown ReactNative的倒计时组件"></a><a href="https://github.com/jsonz1993/wheel/tree/master/react-native-countdown" target="_blank" rel="noopener">react-native-countdown ReactNative的倒计时组件</a></h2><ul>
+<li>造这个轮子的原因是学习rn的时候，视频推荐额一个组件，但是这个组件已经停止维护 所以只能自己造一个</li>
+<li>支持日期与秒数的倒计时</li>
+<li>简单粗暴</li>
+</ul>
+<h2 id="fixedTop-吸顶效果"><a href="#fixedTop-吸顶效果" class="headerlink" title="fixedTop 吸顶效果"></a><a href="https://github.com/jsonz1993/wheel/tree/master/fixedTop" target="_blank" rel="noopener">fixedTop 吸顶效果</a></h2><ul>
+<li>一个很小的常用效果</li>
+<li>主要细节 在于改变dom为 fixed布局后在该dom后面生成一个占位的，防止兄弟节点的抖动</li>
+</ul>
+<h2 id="copyText-复制黏贴板插件"><a href="#copyText-复制黏贴板插件" class="headerlink" title="copyText 复制黏贴板插件"></a><a href="https://github.com/jsonz1993/wheel/tree/master/copyText" target="_blank" rel="noopener">copyText 复制黏贴板插件</a></h2><ul>
+<li>支持h5，PC</li>
+<li><code>success</code>, <code>error</code>回调</li>
+<li>判断浏览器是否支持该事件接口</li>
+</ul>
+<h2 id="heatmap-热力图"><a href="#heatmap-热力图" class="headerlink" title="heatmap 热力图"></a><a href="https://github.com/jsonz1993/wheel/tree/master/heatmap" target="_blank" rel="noopener">heatmap 热力图</a></h2><ul>
+<li>老大提的小需求 一两个小时完成</li>
+<li>点击页面会间隔(10s)存到<code>sessionLocation</code>。 刷新后会把存在<code>sessionLocation</code> 绘制成热力图展示在页面上</li>
+</ul>
+<h2 id="validator-小型表单验证插件"><a href="#validator-小型表单验证插件" class="headerlink" title="validator 小型表单验证插件"></a><a href="https://github.com/jsonz1993/wheel/tree/master/validator" target="_blank" rel="noopener">validator 小型表单验证插件</a></h2><ul>
+<li>移动端简单的验证插件</li>
+<li>支持自己配置验证项 支持多重验证</li>
+</ul>
+<h2 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/cookie" target="_blank" rel="noopener">cookie</a></h2><ul>
+<li>封装了一些cookie常用的api</li>
+<li><code>get</code> <code>set</code> <code>remove</code> <code>clear</code> <code>getAll</code></li>
+</ul>
+<h2 id="ObjectiveC"><a href="#ObjectiveC" class="headerlink" title="ObjectiveC"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/Objective-c" target="_blank" rel="noopener">ObjectiveC</a></h2><ul>
+<li>ObjectiveC 基础</li>
+<li>为了学 ReactNative 做一点ios基础铺垫</li>
+</ul>
+<h2 id="setTimeout-amp-amp-setInterval"><a href="#setTimeout-amp-amp-setInterval" class="headerlink" title="setTimeout &amp;&amp; setInterval"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/setTimeout-setInterval" target="_blank" rel="noopener">setTimeout &amp;&amp; setInterval</a></h2><h2 id="Event"><a href="#Event" class="headerlink" title="Event"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/Event" target="_blank" rel="noopener">Event</a></h2><ul>
+<li>最简单的事件系统</li>
+</ul>
+<h2 id="handlebars"><a href="#handlebars" class="headerlink" title="handlebars"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/handlebars" target="_blank" rel="noopener">handlebars</a></h2><ul>
+<li>简单的模板引擎<a href="http://handlebarsjs.com" target="_blank" rel="noopener">http://handlebarsjs.com</a></li>
+</ul>
+<h2 id="quickskin"><a href="#quickskin" class="headerlink" title="quickskin"></a>quickskin</h2><ul>
+<li>简单的PHP模板， 文档很不全 {value}</li>
+<li><!-- IF login_id --><!-- ENDIF login_id -->  <code>if</code></li>
+<li><!-- BEGIN question_tags_list --><!-- END question_tags_list --> <code>for</code></li>
+</ul>
+<h2 id="sass"><a href="#sass" class="headerlink" title="sass"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/sass" target="_blank" rel="noopener">sass</a></h2><ul>
+<li>简单的入门语法，因为用过less 所以基本无障碍</li>
+</ul>
+<h2 id="chrome-extension"><a href="#chrome-extension" class="headerlink" title="chrome-extension"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/chrome-extension" target="_blank" rel="noopener">chrome-extension</a></h2><ul>
+<li>学习chrome插件开发入门</li>
+<li>暂存finish，后面会重新学习 比较感兴趣</li>
+<li>目前想法是做一个可以在页面比较方便加载js的插件</li>
+<li>TODO</li>
+</ul>
+<h2 id="animate-text"><a href="#animate-text" class="headerlink" title="animate-text"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/animate-text" target="_blank" rel="noopener">animate-text</a></h2><ul>
+<li>一个简单的文字 &amp;&amp; 数字 动画小插件。</li>
+<li><a href="https://jsonz1993.github.io/demo/animate-text/index.html">demo</a></li>
+<li><a href="https://jsonz1993.github.io/2017/04/animate-text/">文档</a></li>
+</ul>
+<h2 id="backbone"><a href="#backbone" class="headerlink" title="backbone"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/backbone" target="_blank" rel="noopener">backbone</a></h2><ul>
+<li>历史悠久的MVC框架</li>
+<li><a href="https://github.com/jashkenas/backbone" target="_blank" rel="noopener">https://github.com/jashkenas/backbone</a></li>
+</ul>
+<h2 id="DesignPattern"><a href="#DesignPattern" class="headerlink" title="DesignPattern"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/DesignPattern" target="_blank" rel="noopener">DesignPattern</a></h2><ul>
+<li>后面会继续学习</li>
+<li>《JavaScript设计模式》张容铭</li>
+<li><a href="https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B013HO6DNS/ref=sr_1_1?ie=UTF8&amp;qid=1490937378&amp;sr=8-1&amp;keywords=javascript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener">亚马逊购买</a></li>
+</ul>
+<h2 id="ECMAScript-6-Primer"><a href="#ECMAScript-6-Primer" class="headerlink" title="ECMAScript_6_Primer"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/ECMAScript_6_Primer" target="_blank" rel="noopener">ECMAScript_6_Primer</a></h2><ul>
+<li>ES6入门</li>
+<li><a href="http://es6.ruanyifeng.com/#README" target="_blank" rel="noopener">阮一峰</a></li>
+<li><a href="https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B01A18WWAG/ref=sr_1_1?ie=UTF8&amp;qid=1490937483&amp;sr=8-1&amp;keywords=Es6" target="_blank" rel="noopener">亚马逊购买</a></li>
+</ul>
+<h2 id="gulp"><a href="#gulp" class="headerlink" title="gulp"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/gulp" target="_blank" rel="noopener">gulp</a></h2><ul>
+<li><a href="http://www.gulpjs.com.cn/" target="_blank" rel="noopener">gulp中文</a></li>
+<li><a href="https://github.com/gulpjs/gulp" target="_blank" rel="noopener">https://github.com/gulpjs/gulp</a></li>
+</ul>
+<h2 id="imooc"><a href="#imooc" class="headerlink" title="imooc"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/imooc" target="_blank" rel="noopener">imooc</a></h2><ul>
+<li>慕课网上的相关学习</li>
+<li><a href="imooc.com">imooc.com</a></li>
+<li>学习占幅越来越低，看视频的效率没有看书和博客来的快</li>
+</ul>
+<h2 id="markdown"><a href="#markdown" class="headerlink" title="markdown"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/markdown" target="_blank" rel="noopener">markdown</a></h2><ul>
+<li>markdown语法学习</li>
+<li><a href="https://guides.github.com/features/mastering-markdown/" target="_blank" rel="noopener">github markdown</a></li>
+</ul>
+<h2 id="require"><a href="#require" class="headerlink" title="require"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/require" target="_blank" rel="noopener">require</a></h2><ul>
+<li>JS模块化加载规范 AMD产物</li>
+<li><a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank" rel="noopener">AMD</a></li>
+</ul>
+<h2 id="require-backbone"><a href="#require-backbone" class="headerlink" title="require+backbone"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/require%2Bbackbone" target="_blank" rel="noopener">require+backbone</a></h2><ul>
+<li>backbone+require 练习</li>
+</ul>
+<h2 id="RiotJs"><a href="#RiotJs" class="headerlink" title="RiotJs"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/RiotJs" target="_blank" rel="noopener">RiotJs</a></h2><ul>
+<li>微型类React框架</li>
+<li><a href="http://riotjs.com/" target="_blank" rel="noopener">http://riotjs.com/</a></li>
+<li>公司在用，有实战经验</li>
+<li><p>v2兼容ie8</p>
+</li>
+<li><p>edit_config</p>
+</li>
+<li><p>常用的编辑器配置</p>
+</li>
+<li><p><strong>Uncle Tom</strong></p>
+</li>
+<li>汤姆大叔的博客Js教程</li>
+<li>强烈推荐!!!!</li>
+<li>深入浅出 讲了很多原理性的东西</li>
+<li>入门与进阶必备</li>
+<li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html" target="_blank" rel="noopener">http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html</a></li>
+</ul>
+<h2 id="vue"><a href="#vue" class="headerlink" title="vue"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/vue" target="_blank" rel="noopener">vue</a></h2><ul>
+<li>vueJs入门部分demo</li>
+</ul>
+<h2 id="vue-webpack"><a href="#vue-webpack" class="headerlink" title="vue+webpack"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/vue%2Bwebpack" target="_blank" rel="noopener">vue+webpack</a></h2><ul>
+<li><p>vue+webpack demo</p>
+</li>
+<li><p>jsonz_old</p>
+</li>
+<li><p>刚入门的时候写的一个在线简历 停止更新</p>
+</li>
+<li><p>zhangxinxu</p>
+</li>
+<li>腾讯一个大佬，主要重构方面。</li>
+<li>css与html很多疑难杂症 基础知识等都可以在里面找到</li>
+<li><a href="http://www.zhangxinxu.com/" target="_blank" rel="noopener">http://www.zhangxinxu.com/</a></li>
+</ul>
+<h1 id="Done-log-历史日志，定时把doing更新下来，所以会越来越长…因为不想每次都忘了之前定的是什么，又懒得去找git记录"><a href="#Done-log-历史日志，定时把doing更新下来，所以会越来越长…因为不想每次都忘了之前定的是什么，又懒得去找git记录" class="headerlink" title="Done log: 历史日志，定时把doing更新下来，所以会越来越长…因为不想每次都忘了之前定的是什么，又懒得去找git记录"></a>Done log: 历史日志，定时把doing更新下来，所以会越来越长…因为不想每次都忘了之前定的是什么，又懒得去找git记录</h1><ul>
+<li>工作项目重新上验证等 √</li>
+<li>工作项目去除日期 √</li>
+<li><del>css自定义属性</del> ×</li>
+<li>对象赋值循环引用探讨 √</li>
+<li>视频转字符画 √ 后面有时间整理出来</li>
+<li>写个webpack插件，处理cookie生成markdown √ 写完发现这些要在运行时抓取才准确就没继续做下去</li>
+<li><em>create-react-app</em> √ 第一次尝试开心</li>
+<li><em>vue全家桶</em> √ 过了一遍，等有小项目可以练手<br>_ 《CSS世界》_ √ 好书<br>— 《http小书》_√ 准能帮你省下不少时间</li>
+<li>了解函数式编程 √</li>
+<li>React源码 √</li>
+<li>升级blog版本 √</li>
+<li>React Context √</li>
+<li>pc项目的规范与eslint √</li>
+<li>《数据结构》  √</li>
+<li>Dart基础语法 √</li>
+<li>React Hooks学习 √</li>
+<li>《React食用指南》√</li>
+</ul>
+]]></content>
+      <categories>
+        <category>technology</category>
+      </categories>
+      <tags>
+        <tag>github</tag>
+        <tag>learn</tag>
+        <tag>web</tag>
+        <tag>work</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React源码系列</title>
+    <url>/2018/11/react-source/</url>
+    <content><![CDATA[<p><a href="https://github.com/jsonz1993/react-source-learn" target="_blank" rel="noopener">react16 源码阅读学习记录</a></p>
+]]></content>
+      <categories>
+        <category>technology</category>
+      </categories>
+      <tags>
+        <tag>github</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>linux shell常用通配符（wildcard)</title>
     <url>/2020/03/linux-wildcard/</url>
     <content><![CDATA[<p>shell常用的通配符就几个<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">* 匹配0至任意多个字符</span><br><span class="line">? 匹配x个任意字符</span><br><span class="line">[] 匹配[]内部的字符</span><br><span class="line">[-] 匹配范围</span><br><span class="line">&#123;&#125; 匹配组合</span><br></pre></td></tr></table></figure></p>
@@ -274,7 +460,7 @@
 <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">"FirstCtrl"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">ng-model</span>=<span class="string">"colorChoosen"</span> <span class="attr">ng-options</span>=<span class="string">"color.name for color in colors"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><code>ng-include</code>和<code>ng-template</code><br><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-include</span>=<span class="string">"views/part.html"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-include</span>=<span class="string">"template.url"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-include</span>=<span class="string">"getUrl()"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ng-include</span> <span class="attr">src</span>=<span class="string">"views/part.html"</span>&gt;</span><span class="tag">&lt;/<span class="name">ng-include</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p><a href="https://devdocs.io/angularjs~1.5/api/ng/directive/nginclude" target="_blank" rel="noopener">更多</a></p>
-<p>directive<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 名字命名用驼峰，使用用-</span></span><br><span class="line">App.directive(<span class="string">'people'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    restrict: <span class="string">'E'</span>, <span class="comment">// 类型 element A: attribute, C: class</span></span><br><span class="line">    replace: <span class="literal">true</span>, <span class="comment">// 是否直接代替顶级标签</span></span><br><span class="line">    template: <span class="string">'xxx'</span> <span class="comment">// `templateUrl`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.directive(<span class="string">'te'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    scope: &#123;</span><br><span class="line">      <span class="comment">// = 对象; @ 文本; &amp; 函数</span></span><br><span class="line">      info: <span class="string">'='</span> <span class="comment">// 从 attr 中获取 info 属性，存储到 scope.info中,, 双向数据绑定，改成@ 为只读.</span></span><br><span class="line">    &#125;,</span><br><span class="line">    link(scope, element, attrs) &#123;</span><br><span class="line">      <span class="comment">// scope 作用域</span></span><br><span class="line">      <span class="comment">// element 封装过的页面dom。 element.children('h1').addClass('text')</span></span><br><span class="line">      <span class="comment">// attrs 传入的所有 attrs</span></span><br><span class="line">    &#125;,</span><br><span class="line">    transclude: <span class="literal">true</span>, <span class="comment">// 把 directive 变成一个容器 这里有点像 React.children 的概念，或者vue里面的 slot</span></span><br><span class="line">    template: <span class="string">`xxxxx&lt;div ng-transclude&gt;&lt;/div&gt;`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里传入了 data</span></span><br><span class="line">&lt;div te=<span class="string">"data"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>directive<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 名字命名用驼峰，使用用-</span></span><br><span class="line">App.directive(<span class="string">'people'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    restrict: <span class="string">'E'</span>, <span class="comment">// 类型 element A: attribute, C: class</span></span><br><span class="line">    replace: <span class="literal">true</span>, <span class="comment">// 是否直接代替顶级标签</span></span><br><span class="line">    template: <span class="string">'xxx'</span> <span class="comment">// `templateUrl`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.directive(<span class="string">'te'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    scope: &#123;</span><br><span class="line">      <span class="comment">// = 对象; @ 文本; &amp; 函数</span></span><br><span class="line">      info: <span class="string">'='</span> <span class="comment">// 从 attr 中获取 info 属性，存储到 scope.info中,, 双向数据绑定，改成@ 为只读.</span></span><br><span class="line">    &#125;,</span><br><span class="line">    link(scope, element, attrs) &#123;</span><br><span class="line">      <span class="comment">// scope 作用域</span></span><br><span class="line">      <span class="comment">// element 封装过的页面dom。 element.children('h1').addClass('text')</span></span><br><span class="line">      <span class="comment">// attrs 传入的所有 attrs</span></span><br><span class="line">    &#125;,</span><br><span class="line">    transclude: <span class="literal">true</span>, <span class="comment">// 把 directive 变成一个容器 这里有点像 React.children 的概念，或者vue里面的 slot</span></span><br><span class="line">    template: <span class="string">`xxxxx&lt;div ng-transclude&gt;&lt;/div&gt;`</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这里传入了 data</span></span><br><span class="line">&lt;div te=<span class="string">"data"</span>&gt;&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>ng表单，验证等</p>
 <p>作用域广播<code>broadcasted</code>父级=&gt;子级；<code>emitted</code>子级=&gt; 父级</p>
 <p>filter 自定义筛选器<br>data binding 双向绑定<br>dependency injection 引来注入<br>ng-src directive 内置指令<br>event ng-click 事件系统指令</p>
@@ -687,19 +873,6 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>work</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>React源码系列</title>
-    <url>/2018/11/react-source/</url>
-    <content><![CDATA[<p><a href="https://github.com/jsonz1993/react-source-learn" target="_blank" rel="noopener">react16 源码阅读学习记录</a></p>
-]]></content>
-      <categories>
-        <category>technology</category>
-      </categories>
-      <tags>
-        <tag>github</tag>
-        <tag>React</tag>
       </tags>
   </entry>
   <entry>
@@ -1849,7 +2022,7 @@
 <p>这里就引出两个分支， model &amp;&amp; router 前端架构中比较关心的两个。</p>
 <h2 id="router-管理"><a href="#router-管理" class="headerlink" title="router 管理"></a>router 管理</h2><p>在 <code>router.js</code> 里面 定义了主 <code>Component</code> 与默认 url</p>
 <p>router.childRoutes 也是使用模块的方式，只引用了几个大模块，如 <code>require(&#39;modules/activity&#39;)(app),</code></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Routers = <span class="function"><span class="keyword">function</span> (<span class="params">&#123; history, app &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> routes = getRoutes(app);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Router</span> <span class="attr">history</span>=<span class="string">&#123;history&#125;</span> <span class="attr">routes</span>=<span class="string">&#123;routes&#125;</span> <span class="attr">render</span>=<span class="string">&#123;applyRouterMiddleware(useScroll())&#125;</span> /&gt;</span>;</span></span><br><span class="line"><span class="xml">&#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="xml">function getRoutes(app) &#123;</span></span><br><span class="line"><span class="xml">  return [</span></span><br><span class="line"><span class="xml">    &#123;</span></span><br><span class="line"><span class="xml">      path: '/',</span></span><br><span class="line"><span class="xml">      component: App,</span></span><br><span class="line"><span class="xml">      childRoutes: [</span></span><br><span class="line"><span class="xml">        require('modules/activity')(app),</span></span><br><span class="line"><span class="xml">      ],</span></span><br><span class="line"><span class="xml">    &#125;,</span></span><br><span class="line"><span class="xml">  ];</span></span><br><span class="line"><span class="xml">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> Routers = <span class="function"><span class="keyword">function</span> (<span class="params">&#123; history, app &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> routes = getRoutes(app);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Router</span> <span class="attr">history</span>=<span class="string">&#123;history&#125;</span> <span class="attr">routes</span>=<span class="string">&#123;routes&#125;</span> <span class="attr">render</span>=<span class="string">&#123;applyRouterMiddleware(useScroll())&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRoutes</span>(<span class="params">app</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/'</span>,</span><br><span class="line">      component: App,</span><br><span class="line">      childRoutes: [</span><br><span class="line">        <span class="built_in">require</span>(<span class="string">'modules/activity'</span>)(app),</span><br><span class="line">      ],</span><br><span class="line">    &#125;,</span><br><span class="line">  ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在 <code>modules/activity/index.js</code> 再去加载构建他的子级路由</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> app=&gt;(&#123;</span><br><span class="line">    path: <span class="string">'url'</span>,</span><br><span class="line">    getComponent (nextState, cb) &#123;</span><br><span class="line">        <span class="built_in">require</span>.ensure([], (<span class="built_in">require</span>) =&gt; &#123;</span><br><span class="line">            app.model(<span class="built_in">require</span>(<span class="string">'./model'</span>)); <span class="comment">// 加载当前模块的model</span></span><br><span class="line">            cb(<span class="literal">null</span>, <span class="built_in">require</span>(<span class="string">'./view'</span>)); <span class="comment">// 记载当前模块的view</span></span><br><span class="line">        &#125;, <span class="string">'模块名'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    childRoutes:[</span><br><span class="line">      <span class="built_in">require</span>(<span class="string">'modules/child1'</span>)(app), </span><br><span class="line">      <span class="built_in">require</span>(<span class="string">'modules/child2'</span>)(app)</span><br><span class="line">    ],</span><br><span class="line">    ...其他配置</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>就这样一层一层的构建自己的路由， 根据页面去配置也可以更加的细腻可控。不会写成长长的一坨。</p>
@@ -2285,179 +2458,6 @@
         <tag>learn</tag>
         <tag>imooc</tag>
         <tag>react-native</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>[置顶]捣鼓目录</title>
-    <url>/2017/06/%E6%8D%A3%E9%BC%93%E7%9B%AE%E5%BD%95/</url>
-    <content><![CDATA[<p>记录平时工作学习的目录条目， 类似 <a href="https://github.com/jsonz1993/learn" target="_blank" rel="noopener">Jsonz-learn</a>、 <a href="https://github.com/jsonz1993/wheel" target="_blank" rel="noopener">Jsonz-wheel</a> 的目录。<br>部分比较大的轮子可能会独立成一个git项目</p>
-<h1 id="Doing"><a href="#Doing" class="headerlink" title="Doing"></a>Doing</h1><h1 id="NEXT"><a href="#NEXT" class="headerlink" title="NEXT"></a>NEXT</h1><h1 id="目录-排名按时间顺序"><a href="#目录-排名按时间顺序" class="headerlink" title="目录 排名按时间顺序"></a>目录 排名按时间顺序</h1><h2 id="React-Hooks-食用指南"><a href="#React-Hooks-食用指南" class="headerlink" title="React Hooks 食用指南"></a><a href="https://github.com/jsonz1993/react-hooks" target="_blank" rel="noopener">React Hooks 食用指南</a></h2><h2 id="项目接入quicklink，尝试看效果如何"><a href="#项目接入quicklink，尝试看效果如何" class="headerlink" title="项目接入quicklink，尝试看效果如何"></a><a href="https://jsonz1993.github.io/2019/02/quicklink/">项目接入quicklink，尝试看效果如何</a></h2><h2 id="利用AST解决webpack-alias泛滥的问题"><a href="#利用AST解决webpack-alias泛滥的问题" class="headerlink" title="利用AST解决webpack alias泛滥的问题"></a><a href="https://jsonz1993.github.io/2019/01/AST-practice/">利用AST解决webpack alias泛滥的问题</a></h2><h2 id="react源码学习-ContextAPI"><a href="#react源码学习-ContextAPI" class="headerlink" title="react源码学习 ContextAPI"></a><a href="https://github.com/jsonz1993/react-source-learn/issues/5" target="_blank" rel="noopener">react源码学习 ContextAPI</a></h2><h2 id="正则全局标志注意事项"><a href="#正则全局标志注意事项" class="headerlink" title="正则全局标志注意事项"></a><a href="https://jsonz1993.github.io/2018/11/regexp-global/">正则全局标志注意事项</a></h2><h2 id="react源码学习系列"><a href="#react源码学习系列" class="headerlink" title="react源码学习系列"></a><a href="https://github.com/jsonz1993/react-source-learn" target="_blank" rel="noopener">react源码学习系列</a></h2><h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a><a href="https://jsonz1993.github.io/2018/08/fp/">函数式编程</a></h2><h2 id="一道赋值面试题引发的思考-——-对象引用问题"><a href="#一道赋值面试题引发的思考-——-对象引用问题" class="headerlink" title="一道赋值面试题引发的思考 —— 对象引用问题"></a><a href="https://jsonz1993.github.io/2018/07/circular-reference/">一道赋值面试题引发的思考 —— 对象引用问题</a></h2><h2 id="视频转字符画"><a href="#视频转字符画" class="headerlink" title="视频转字符画"></a><a href="https://jsonz1993.github.io/2018/07/video-to-chat/">视频转字符画</a></h2><h2 id="window-print-浏览器打印扫盲"><a href="#window-print-浏览器打印扫盲" class="headerlink" title="window.print 浏览器打印扫盲"></a><a href="https://jsonz1993.github.io/2018/06/window-print%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%93%E5%8D%B0/">window.print 浏览器打印扫盲</a></h2><h2 id="《http小书》http知识扫盲"><a href="#《http小书》http知识扫盲" class="headerlink" title="《http小书》http知识扫盲"></a><a href="https://jsonz1993.github.io/2018/05/http-mini-book/">《http小书》http知识扫盲</a></h2><h2 id="《css世界》常用技巧-——-读书笔记"><a href="#《css世界》常用技巧-——-读书笔记" class="headerlink" title="《css世界》常用技巧 —— 读书笔记"></a><a href="https://jsonz1993.github.io/2018/05/css-world/">《css世界》常用技巧 —— 读书笔记</a></h2><h2 id="浏览器恢复滚动行为-——-history-scrollRestoration"><a href="#浏览器恢复滚动行为-——-history-scrollRestoration" class="headerlink" title="浏览器恢复滚动行为 —— history.scrollRestoration"></a><a href="https://jsonz1993.github.io/2018/05/history-scroll-restoration/">浏览器恢复滚动行为 —— history.scrollRestoration</a></h2><h2 id="create-react-app-源码解析-一"><a href="#create-react-app-源码解析-一" class="headerlink" title="create-react-app 源码解析(一)"></a><a href="https://jsonz1993.github.io/2018/05/create-react-app-o/">create-react-app 源码解析(一)</a></h2><h2 id="create-react-app-源码解析-二"><a href="#create-react-app-源码解析-二" class="headerlink" title="create-react-app 源码解析(二)"></a><a href="https://jsonz1993.github.io/2018/05/create-react-app-t/">create-react-app 源码解析(二)</a></h2><h2 id="git查漏补缺-非常大好全的文章-慢慢适用一下控制台提交，熟悉之后再切客户端"><a href="#git查漏补缺-非常大好全的文章-慢慢适用一下控制台提交，熟悉之后再切客户端" class="headerlink" title="git查漏补缺 非常大好全的文章 慢慢适用一下控制台提交，熟悉之后再切客户端"></a><a href="https://mubu.com/doc/21wNPB_ZJp" target="_blank" rel="noopener">git查漏补缺 非常大好全的文章</a> 慢慢适用一下控制台提交，熟悉之后再切客户端</h2><h2 id="自动化功能测试流程方案"><a href="#自动化功能测试流程方案" class="headerlink" title="自动化功能测试流程方案"></a><a href="http://l.easyrentcars.com:4000/2018/04/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/" target="_blank" rel="noopener">自动化功能测试流程方案</a></h2><h2 id="项目代码规范工作流——editor、prettier、eslint、git-check"><a href="#项目代码规范工作流——editor、prettier、eslint、git-check" class="headerlink" title="项目代码规范工作流——editor、prettier、eslint、git-check"></a><a href="http://l.easyrentcars.com:4000/2018/03/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/" target="_blank" rel="noopener">项目代码规范工作流——editor、prettier、eslint、git-check</a></h2><h2 id="自动化测试-puppeteer-与qq空间"><a href="#自动化测试-puppeteer-与qq空间" class="headerlink" title="自动化测试 puppeteer 与qq空间"></a><a href="http://l.easyrentcars.com:4000/2018/03/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95puppeteer-%E4%B8%8Eqq%E7%A9%BA%E9%97%B4/" target="_blank" rel="noopener">自动化测试 puppeteer 与qq空间</a></h2><ul>
-<li><a href="https://github.com/jsonz1993/wheel/tree/master/qqZone" target="_blank" rel="noopener">源码</a></li>
-</ul>
-<h2 id="react全家桶-dva-实践整理总结"><a href="#react全家桶-dva-实践整理总结" class="headerlink" title="react全家桶 + dva 实践整理总结"></a><a href="http://l.easyrentcars.com:4000/2018/02/react%E5%85%A8%E5%AE%B6%E6%A1%B6-dva-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener">react全家桶 + dva 实践整理总结</a></h2><h2 id="了解-babel-写个babel-插件-——-了解编译器原理"><a href="#了解-babel-写个babel-插件-——-了解编译器原理" class="headerlink" title="了解 babel 写个babel 插件 —— 了解编译器原理"></a>了解 babel 写个babel 插件 —— 了解编译器原理</h2><ul>
-<li>实现了一个 <a href="https://jsonz1993.github.io/2018/01/%E4%B8%80%E6%AD%A5%E6%AD%A5%E5%AE%9E%E7%8E%B0%E6%9E%81%E7%AE%80%E7%BC%96%E8%AF%91%E5%99%A8-%E2%80%94%E2%80%94-%E4%BA%86%E8%A7%A3%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86/">极简的编译器</a></li>
-</ul>
-<h2 id="react-dva-antd-antd-pro-roadhog-全家桶-项目用ing"><a href="#react-dva-antd-antd-pro-roadhog-全家桶-项目用ing" class="headerlink" title="react/dva/antd/antd-pro/roadhog 全家桶 项目用ing"></a>react/dva/antd/antd-pro/roadhog 全家桶 项目用ing</h2><h2 id="postMessage"><a href="#postMessage" class="headerlink" title="postMessage"></a><a href="https://github.com/jsonz1993/wheel/tree/master/postMessage" target="_blank" rel="noopener">postMessage</a></h2><ul>
-<li>简单的对系统自带的postMessage进行封装</li>
-<li>支持事件类型监听</li>
-<li>更多实现参考 arale/messenger/index.js</li>
-</ul>
-<h2 id="react-native-dogs"><a href="#react-native-dogs" class="headerlink" title="react-native-dogs"></a><a href="https://github.com/jsonz1993/wheel/tree/master/react-native-dogs" target="_blank" rel="noopener">react-native-dogs</a></h2><ul>
-<li>学习react-native 比较全面的一个路径</li>
-<li>虽然不完整，但包含了rn 常用的api 库 等</li>
-<li>也涉及到 node koa 七牛云等</li>
-</ul>
-<h2 id="react-native-countdown-ReactNative的倒计时组件"><a href="#react-native-countdown-ReactNative的倒计时组件" class="headerlink" title="react-native-countdown ReactNative的倒计时组件"></a><a href="https://github.com/jsonz1993/wheel/tree/master/react-native-countdown" target="_blank" rel="noopener">react-native-countdown ReactNative的倒计时组件</a></h2><ul>
-<li>造这个轮子的原因是学习rn的时候，视频推荐额一个组件，但是这个组件已经停止维护 所以只能自己造一个</li>
-<li>支持日期与秒数的倒计时</li>
-<li>简单粗暴</li>
-</ul>
-<h2 id="fixedTop-吸顶效果"><a href="#fixedTop-吸顶效果" class="headerlink" title="fixedTop 吸顶效果"></a><a href="https://github.com/jsonz1993/wheel/tree/master/fixedTop" target="_blank" rel="noopener">fixedTop 吸顶效果</a></h2><ul>
-<li>一个很小的常用效果</li>
-<li>主要细节 在于改变dom为 fixed布局后在该dom后面生成一个占位的，防止兄弟节点的抖动</li>
-</ul>
-<h2 id="copyText-复制黏贴板插件"><a href="#copyText-复制黏贴板插件" class="headerlink" title="copyText 复制黏贴板插件"></a><a href="https://github.com/jsonz1993/wheel/tree/master/copyText" target="_blank" rel="noopener">copyText 复制黏贴板插件</a></h2><ul>
-<li>支持h5，PC</li>
-<li><code>success</code>, <code>error</code>回调</li>
-<li>判断浏览器是否支持该事件接口</li>
-</ul>
-<h2 id="heatmap-热力图"><a href="#heatmap-热力图" class="headerlink" title="heatmap 热力图"></a><a href="https://github.com/jsonz1993/wheel/tree/master/heatmap" target="_blank" rel="noopener">heatmap 热力图</a></h2><ul>
-<li>老大提的小需求 一两个小时完成</li>
-<li>点击页面会间隔(10s)存到<code>sessionLocation</code>。 刷新后会把存在<code>sessionLocation</code> 绘制成热力图展示在页面上</li>
-</ul>
-<h2 id="validator-小型表单验证插件"><a href="#validator-小型表单验证插件" class="headerlink" title="validator 小型表单验证插件"></a><a href="https://github.com/jsonz1993/wheel/tree/master/validator" target="_blank" rel="noopener">validator 小型表单验证插件</a></h2><ul>
-<li>移动端简单的验证插件</li>
-<li>支持自己配置验证项 支持多重验证</li>
-</ul>
-<h2 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/cookie" target="_blank" rel="noopener">cookie</a></h2><ul>
-<li>封装了一些cookie常用的api</li>
-<li><code>get</code> <code>set</code> <code>remove</code> <code>clear</code> <code>getAll</code></li>
-</ul>
-<h2 id="ObjectiveC"><a href="#ObjectiveC" class="headerlink" title="ObjectiveC"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/Objective-c" target="_blank" rel="noopener">ObjectiveC</a></h2><ul>
-<li>ObjectiveC 基础</li>
-<li>为了学 ReactNative 做一点ios基础铺垫</li>
-</ul>
-<h2 id="setTimeout-amp-amp-setInterval"><a href="#setTimeout-amp-amp-setInterval" class="headerlink" title="setTimeout &amp;&amp; setInterval"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/setTimeout-setInterval" target="_blank" rel="noopener">setTimeout &amp;&amp; setInterval</a></h2><h2 id="Event"><a href="#Event" class="headerlink" title="Event"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/Event" target="_blank" rel="noopener">Event</a></h2><ul>
-<li>最简单的事件系统</li>
-</ul>
-<h2 id="handlebars"><a href="#handlebars" class="headerlink" title="handlebars"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/handlebars" target="_blank" rel="noopener">handlebars</a></h2><ul>
-<li>简单的模板引擎<a href="http://handlebarsjs.com" target="_blank" rel="noopener">http://handlebarsjs.com</a></li>
-</ul>
-<h2 id="quickskin"><a href="#quickskin" class="headerlink" title="quickskin"></a>quickskin</h2><ul>
-<li>简单的PHP模板， 文档很不全 {value}</li>
-<li><!-- IF login_id --><!-- ENDIF login_id -->  <code>if</code></li>
-<li><!-- BEGIN question_tags_list --><!-- END question_tags_list --> <code>for</code></li>
-</ul>
-<h2 id="sass"><a href="#sass" class="headerlink" title="sass"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/sass" target="_blank" rel="noopener">sass</a></h2><ul>
-<li>简单的入门语法，因为用过less 所以基本无障碍</li>
-</ul>
-<h2 id="chrome-extension"><a href="#chrome-extension" class="headerlink" title="chrome-extension"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/chrome-extension" target="_blank" rel="noopener">chrome-extension</a></h2><ul>
-<li>学习chrome插件开发入门</li>
-<li>暂存finish，后面会重新学习 比较感兴趣</li>
-<li>目前想法是做一个可以在页面比较方便加载js的插件</li>
-<li>TODO</li>
-</ul>
-<h2 id="animate-text"><a href="#animate-text" class="headerlink" title="animate-text"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/animate-text" target="_blank" rel="noopener">animate-text</a></h2><ul>
-<li>一个简单的文字 &amp;&amp; 数字 动画小插件。</li>
-<li><a href="https://jsonz1993.github.io/demo/animate-text/index.html">demo</a></li>
-<li><a href="https://jsonz1993.github.io/2017/04/animate-text/">文档</a></li>
-</ul>
-<h2 id="backbone"><a href="#backbone" class="headerlink" title="backbone"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/backbone" target="_blank" rel="noopener">backbone</a></h2><ul>
-<li>历史悠久的MVC框架</li>
-<li><a href="https://github.com/jashkenas/backbone" target="_blank" rel="noopener">https://github.com/jashkenas/backbone</a></li>
-</ul>
-<h2 id="DesignPattern"><a href="#DesignPattern" class="headerlink" title="DesignPattern"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/DesignPattern" target="_blank" rel="noopener">DesignPattern</a></h2><ul>
-<li>后面会继续学习</li>
-<li>《JavaScript设计模式》张容铭</li>
-<li><a href="https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B013HO6DNS/ref=sr_1_1?ie=UTF8&amp;qid=1490937378&amp;sr=8-1&amp;keywords=javascript%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener">亚马逊购买</a></li>
-</ul>
-<h2 id="ECMAScript-6-Primer"><a href="#ECMAScript-6-Primer" class="headerlink" title="ECMAScript_6_Primer"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/ECMAScript_6_Primer" target="_blank" rel="noopener">ECMAScript_6_Primer</a></h2><ul>
-<li>ES6入门</li>
-<li><a href="http://es6.ruanyifeng.com/#README" target="_blank" rel="noopener">阮一峰</a></li>
-<li><a href="https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B01A18WWAG/ref=sr_1_1?ie=UTF8&amp;qid=1490937483&amp;sr=8-1&amp;keywords=Es6" target="_blank" rel="noopener">亚马逊购买</a></li>
-</ul>
-<h2 id="gulp"><a href="#gulp" class="headerlink" title="gulp"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/gulp" target="_blank" rel="noopener">gulp</a></h2><ul>
-<li><a href="http://www.gulpjs.com.cn/" target="_blank" rel="noopener">gulp中文</a></li>
-<li><a href="https://github.com/gulpjs/gulp" target="_blank" rel="noopener">https://github.com/gulpjs/gulp</a></li>
-</ul>
-<h2 id="imooc"><a href="#imooc" class="headerlink" title="imooc"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/imooc" target="_blank" rel="noopener">imooc</a></h2><ul>
-<li>慕课网上的相关学习</li>
-<li><a href="imooc.com">imooc.com</a></li>
-<li>学习占幅越来越低，看视频的效率没有看书和博客来的快</li>
-</ul>
-<h2 id="markdown"><a href="#markdown" class="headerlink" title="markdown"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/markdown" target="_blank" rel="noopener">markdown</a></h2><ul>
-<li>markdown语法学习</li>
-<li><a href="https://guides.github.com/features/mastering-markdown/" target="_blank" rel="noopener">github markdown</a></li>
-</ul>
-<h2 id="require"><a href="#require" class="headerlink" title="require"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/require" target="_blank" rel="noopener">require</a></h2><ul>
-<li>JS模块化加载规范 AMD产物</li>
-<li><a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank" rel="noopener">AMD</a></li>
-</ul>
-<h2 id="require-backbone"><a href="#require-backbone" class="headerlink" title="require+backbone"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/require%2Bbackbone" target="_blank" rel="noopener">require+backbone</a></h2><ul>
-<li>backbone+require 练习</li>
-</ul>
-<h2 id="RiotJs"><a href="#RiotJs" class="headerlink" title="RiotJs"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/RiotJs" target="_blank" rel="noopener">RiotJs</a></h2><ul>
-<li>微型类React框架</li>
-<li><a href="http://riotjs.com/" target="_blank" rel="noopener">http://riotjs.com/</a></li>
-<li>公司在用，有实战经验</li>
-<li><p>v2兼容ie8</p>
-</li>
-<li><p>edit_config</p>
-</li>
-<li><p>常用的编辑器配置</p>
-</li>
-<li><p><strong>Uncle Tom</strong></p>
-</li>
-<li>汤姆大叔的博客Js教程</li>
-<li>强烈推荐!!!!</li>
-<li>深入浅出 讲了很多原理性的东西</li>
-<li>入门与进阶必备</li>
-<li><a href="http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html" target="_blank" rel="noopener">http://www.cnblogs.com/TomXu/archive/2011/12/15/2288411.html</a></li>
-</ul>
-<h2 id="vue"><a href="#vue" class="headerlink" title="vue"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/vue" target="_blank" rel="noopener">vue</a></h2><ul>
-<li>vueJs入门部分demo</li>
-</ul>
-<h2 id="vue-webpack"><a href="#vue-webpack" class="headerlink" title="vue+webpack"></a><a href="https://github.com/jsonz1993/learn/tree/master/finish/vue%2Bwebpack" target="_blank" rel="noopener">vue+webpack</a></h2><ul>
-<li><p>vue+webpack demo</p>
-</li>
-<li><p>jsonz_old</p>
-</li>
-<li><p>刚入门的时候写的一个在线简历 停止更新</p>
-</li>
-<li><p>zhangxinxu</p>
-</li>
-<li>腾讯一个大佬，主要重构方面。</li>
-<li>css与html很多疑难杂症 基础知识等都可以在里面找到</li>
-<li><a href="http://www.zhangxinxu.com/" target="_blank" rel="noopener">http://www.zhangxinxu.com/</a></li>
-</ul>
-<h1 id="Done-log-历史日志，定时把doing更新下来，所以会越来越长…因为不想每次都忘了之前定的是什么，又懒得去找git记录"><a href="#Done-log-历史日志，定时把doing更新下来，所以会越来越长…因为不想每次都忘了之前定的是什么，又懒得去找git记录" class="headerlink" title="Done log: 历史日志，定时把doing更新下来，所以会越来越长…因为不想每次都忘了之前定的是什么，又懒得去找git记录"></a>Done log: 历史日志，定时把doing更新下来，所以会越来越长…因为不想每次都忘了之前定的是什么，又懒得去找git记录</h1><ul>
-<li>工作项目重新上验证等 √</li>
-<li>工作项目去除日期 √</li>
-<li><del>css自定义属性</del> ×</li>
-<li>对象赋值循环引用探讨 √</li>
-<li>视频转字符画 √ 后面有时间整理出来</li>
-<li>写个webpack插件，处理cookie生成markdown √ 写完发现这些要在运行时抓取才准确就没继续做下去</li>
-<li><em>create-react-app</em> √ 第一次尝试开心</li>
-<li><em>vue全家桶</em> √ 过了一遍，等有小项目可以练手<br>_ 《CSS世界》_ √ 好书<br>— 《http小书》_√ 准能帮你省下不少时间</li>
-<li>了解函数式编程 √</li>
-<li>React源码 √</li>
-<li>升级blog版本 √</li>
-<li>React Context √</li>
-<li>pc项目的规范与eslint √</li>
-<li>《数据结构》  √</li>
-<li>Dart基础语法 √</li>
-<li>React Hooks学习 √</li>
-<li>《React食用指南》√</li>
-</ul>
-]]></content>
-      <categories>
-        <category>technology</category>
-      </categories>
-      <tags>
-        <tag>github</tag>
-        <tag>learn</tag>
-        <tag>web</tag>
-        <tag>work</tag>
       </tags>
   </entry>
   <entry>
@@ -3362,7 +3362,7 @@
 <h3 id="off-事件解绑"><a href="#off-事件解绑" class="headerlink" title="off 事件解绑"></a>off 事件解绑</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">off: <span class="function"><span class="keyword">function</span>(<span class="params">name, cb, ctx</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> e = <span class="keyword">this</span>.e || (<span class="keyword">this</span>.e = &#123;&#125;);</span><br><span class="line">	<span class="keyword">var</span> evts = e[name];</span><br><span class="line">	<span class="keyword">var</span> liveEvents = [];</span><br><span class="line">	<span class="keyword">if</span> (evts &amp;&amp; cb) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">var</span> i= <span class="number">0</span>, len= evts.length; i&lt; len; i++) &#123;</span><br><span class="line">			<span class="keyword">if</span> (evts[i].fn !== cb &amp;&amp; evts[i].fn._ !== cb) liveEvents.push(evts[i]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	(liveEvents.length)</span><br><span class="line">		? e[name] = liveEvents</span><br><span class="line">		: <span class="keyword">delete</span> e[name];</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="once-绑定单次"><a href="#once-绑定单次" class="headerlink" title="once 绑定单次"></a>once 绑定单次</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">once: <span class="function"><span class="keyword">function</span>(<span class="params">name, cb, ctx</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">listener</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		self.off(name, listener);</span><br><span class="line">		cb.apply(ctx, <span class="built_in">arguments</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	listener._ = cb;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.on(name, listener, ctx);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="trigger-事件触发"><a href="#trigger-事件触发" class="headerlink" title="trigger 事件触发"></a>trigger 事件触发</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">trigger: <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> data = [].slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">var</span> evtArr = ((<span class="keyword">this</span>.e || (<span class="keyword">this</span>.e = &#123;&#125;))[name] || []).slice();</span><br><span class="line">	<span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">var</span> len = evtArr.length;</span><br><span class="line">	<span class="keyword">for</span> (i; i&lt; len; i++) &#123;</span><br><span class="line">		evtArr[i].fn.apply(evtArr[i].ctx, data);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="简单的调用"><a href="#简单的调用" class="headerlink" title="简单的调用"></a>简单的调用</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script src=<span class="string">"./e.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">var</span> e = <span class="keyword">new</span> E();</span><br><span class="line">e.on(<span class="string">'bilibili'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'on'</span>);</span><br><span class="line">&#125;).once(<span class="string">'once'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'once'</span>)</span><br><span class="line">&#125;).on(<span class="string">'off'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'off'</span>)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="built_in">document</span>.body.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">		e.trigger(<span class="string">'off'</span>)</span><br><span class="line">			.off(<span class="string">'off'</span>)</span><br><span class="line">			.trigger(<span class="string">'bilibili'</span>)</span><br><span class="line">			.trigger(<span class="string">'once'</span>);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="简单的调用"><a href="#简单的调用" class="headerlink" title="简单的调用"></a>简单的调用</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script src=<span class="string">"./e.js"</span>&gt;&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">var e = new E();</span></span><br><span class="line"><span class="regexp">e.on('bilibili', function() &#123;</span></span><br><span class="line"><span class="regexp">	console.log('on');</span></span><br><span class="line"><span class="regexp">&#125;).once('once', function() &#123;</span></span><br><span class="line"><span class="regexp">	console.log('once')</span></span><br><span class="line"><span class="regexp">&#125;).on('off', function() &#123;</span></span><br><span class="line"><span class="regexp">	console.log('off')</span></span><br><span class="line"><span class="regexp">&#125;);</span></span><br><span class="line"><span class="regexp">window.addEventListener('load', function() &#123;</span></span><br><span class="line"><span class="regexp">	document.body.addEventListener('click', function() &#123;</span></span><br><span class="line"><span class="regexp">		e.trigger('off')</span></span><br><span class="line"><span class="regexp">			.off('off')</span></span><br><span class="line"><span class="regexp">			.trigger('bilibili')</span></span><br><span class="line"><span class="regexp">			.trigger('once');</span></span><br><span class="line"><span class="regexp">	&#125;);</span></span><br><span class="line"><span class="regexp">&#125;)</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
 <p>最后附上<a href="https://github.com/jsonz1993/learn/tree/master/finish/Event" target="_blank" rel="noopener">源码</a></p>
 ]]></content>
       <categories>
