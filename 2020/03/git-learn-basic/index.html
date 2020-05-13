@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Jsonz1993">
 <meta property="og:description" content="Git Basic获取仓库git clone url &amp;lt;folder&amp;gt; 发现commit信息写错了 git commit --amend  记录每次更新git status 短模式git status -s --short暂存区状态 工作区状态 文件 .gitignore githubIgnore  所有空行或者以 # 开头的行都会被 Git 忽略。 可以使用标准的 glob 模式匹配">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-04-07T07:26:13.293Z">
+<meta property="og:updated_time" content="2020-05-13T06:54:41.205Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git基础">
 <meta name="twitter:description" content="Git Basic获取仓库git clone url &amp;lt;folder&amp;gt; 发现commit信息写错了 git commit --amend  记录每次更新git status 短模式git status -s --short暂存区状态 工作区状态 文件 .gitignore githubIgnore  所有空行或者以 # 开头的行都会被 Git 忽略。 可以使用标准的 glob 模式匹配">
@@ -329,7 +329,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">86</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives<span class="badge">88</span></a>
 
   </li>
 
@@ -478,7 +478,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-04-07 07:26:13" itemprop="dateModified" datetime="2020-04-07T07:26:13+00:00">2020-04-07</time>
+                <time title="Modified: 2020-05-13 06:54:41" itemprop="dateModified" datetime="2020-05-13T06:54:41+00:00">2020-05-13</time>
               
             
           </span>
@@ -554,7 +554,7 @@
 <p>查看每次commit改动的代码 <code>git log -p</code></p>
 <p>增加总结，commit时各个文件增删多少行以及汇总 <code>git log --stat</code></p>
 <p>一行输出 <code>git log --oneline</code></p>
-<p>自定义format <code>git log pretty=format:&quot;formation&quot;</code> 具体看链接文档</p>
+<p>自定义format <code>git log --pretty=format:&quot;formation&quot;</code> 具体看链接文档</p>
 <p>图形展示 <code>git log --graph</code></p>
 <p>限制时间 <code>git log --since=2.days</code> 具体看链接文档</p>
 <p>不展示merge节点 <code>git log --no-merges</code></p>
@@ -589,6 +589,7 @@
 <p><code>git reset --soft HEAD~2</code> 就会把前两个commit给撤回，并把修改都放在暂存区，这时候再一起commit</p>
 <h2 id="高级合并"><a href="#高级合并" class="headerlink" title="高级合并"></a>高级合并</h2><p>正常合并冲突直接在ied里面解决冲突会比命令行人性化很多</p>
 <h2 id="查看每行的修改信息"><a href="#查看每行的修改信息" class="headerlink" title="查看每行的修改信息"></a>查看每行的修改信息</h2><p>类似vscode的 <code>File Blame</code>功能<br><code>git blame [-L 1,200] index.jsx</code> 查看 index.jsx的第1~200行的修改信息，如果加<code>-C</code>参数还可以看到这几行最原始出现的地方，也就是说有可能是其他地方copy过来的</p>
+<h2 id="查看第一次出现在仓库是什么时候"><a href="#查看第一次出现在仓库是什么时候" class="headerlink" title="查看第一次出现在仓库是什么时候"></a>查看第一次出现在仓库是什么时候</h2><p><code>git log -S text</code> 可以知道仓库什么时候提交出现过这些 text</p>
 <h2 id="git-子模块（子git）"><a href="#git-子模块（子git）" class="headerlink" title="git 子模块（子git）"></a>git 子模块（子git）</h2><p>添加子模块 <code>git submodule add &lt;repo&gt; [&lt;dir&gt;]</code></p>
 <p>当仓库中有子模块时，需要用 <code>git submodule init &amp;&amp; git submit update</code>来初始化并检出父项目中列出的合适的提交<br>当然你也可以在克隆的时候直接加参数来处理<code>git clone &lt;repo&gt; --recurse-submodules</code></p>
 
@@ -747,7 +748,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">86</span>
+                    <span class="site-state-item-count">88</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -941,7 +942,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-Basic"><span class="nav-number">1.</span> <span class="nav-text">Git Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取仓库"><span class="nav-number">1.1.</span> <span class="nav-text">获取仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#记录每次更新"><span class="nav-number">1.2.</span> <span class="nav-text">记录每次更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除文件"><span class="nav-number">1.3.</span> <span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重命名-移动文件"><span class="nav-number">1.4.</span> <span class="nav-text">重命名/移动文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-log"><span class="nav-number">1.5.</span> <span class="nav-text">git log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤消操作"><span class="nav-number">1.6.</span> <span class="nav-text">撤消操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库的使用"><span class="nav-number">1.7.</span> <span class="nav-text">远程仓库的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打标签"><span class="nav-number">1.8.</span> <span class="nav-text">打标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git别名"><span class="nav-number">1.9.</span> <span class="nav-text">Git别名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-Branch"><span class="nav-number">2.</span> <span class="nav-text">Git Branch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建、合并与删除"><span class="nav-number">2.1.</span> <span class="nav-text">创建、合并与删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支管理"><span class="nav-number">2.2.</span> <span class="nav-text">分支管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变基"><span class="nav-number">2.3.</span> <span class="nav-text">变基</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-Utils"><span class="nav-number">3.</span> <span class="nav-text">Git Utils</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#贮藏与清理-git-stash"><span class="nav-number">3.1.</span> <span class="nav-text">贮藏与清理 git stash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索"><span class="nav-number">3.2.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重写历史"><span class="nav-number">3.3.</span> <span class="nav-text">重写历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重写大量提交-filter-branch"><span class="nav-number">3.4.</span> <span class="nav-text">重写大量提交 filter-branch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重置解密"><span class="nav-number">3.5.</span> <span class="nav-text">重置解密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reset-合并提交"><span class="nav-number">3.6.</span> <span class="nav-text">reset 合并提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级合并"><span class="nav-number">3.7.</span> <span class="nav-text">高级合并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看每行的修改信息"><span class="nav-number">3.8.</span> <span class="nav-text">查看每行的修改信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-子模块（子git）"><span class="nav-number">3.9.</span> <span class="nav-text">git 子模块（子git）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-Basic"><span class="nav-number">1.</span> <span class="nav-text">Git Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取仓库"><span class="nav-number">1.1.</span> <span class="nav-text">获取仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#记录每次更新"><span class="nav-number">1.2.</span> <span class="nav-text">记录每次更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除文件"><span class="nav-number">1.3.</span> <span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重命名-移动文件"><span class="nav-number">1.4.</span> <span class="nav-text">重命名/移动文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-log"><span class="nav-number">1.5.</span> <span class="nav-text">git log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撤消操作"><span class="nav-number">1.6.</span> <span class="nav-text">撤消操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库的使用"><span class="nav-number">1.7.</span> <span class="nav-text">远程仓库的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打标签"><span class="nav-number">1.8.</span> <span class="nav-text">打标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git别名"><span class="nav-number">1.9.</span> <span class="nav-text">Git别名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-Branch"><span class="nav-number">2.</span> <span class="nav-text">Git Branch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建、合并与删除"><span class="nav-number">2.1.</span> <span class="nav-text">创建、合并与删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支管理"><span class="nav-number">2.2.</span> <span class="nav-text">分支管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变基"><span class="nav-number">2.3.</span> <span class="nav-text">变基</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-Utils"><span class="nav-number">3.</span> <span class="nav-text">Git Utils</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#贮藏与清理-git-stash"><span class="nav-number">3.1.</span> <span class="nav-text">贮藏与清理 git stash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索"><span class="nav-number">3.2.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重写历史"><span class="nav-number">3.3.</span> <span class="nav-text">重写历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重写大量提交-filter-branch"><span class="nav-number">3.4.</span> <span class="nav-text">重写大量提交 filter-branch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重置解密"><span class="nav-number">3.5.</span> <span class="nav-text">重置解密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reset-合并提交"><span class="nav-number">3.6.</span> <span class="nav-text">reset 合并提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级合并"><span class="nav-number">3.7.</span> <span class="nav-text">高级合并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看每行的修改信息"><span class="nav-number">3.8.</span> <span class="nav-text">查看每行的修改信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看第一次出现在仓库是什么时候"><span class="nav-number">3.9.</span> <span class="nav-text">查看第一次出现在仓库是什么时候</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-子模块（子git）"><span class="nav-number">3.10.</span> <span class="nav-text">git 子模块（子git）</span></a></li></ol></li></ol></div>
             
 
           </div>

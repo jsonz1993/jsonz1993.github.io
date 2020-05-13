@@ -187,6 +187,48 @@
       </tags>
   </entry>
   <entry>
+    <title>vscode-alias</title>
+    <url>/2020/05/vscode-alias/</url>
+    <content><![CDATA[<p>一般我们在会在webpack配alias，比如 <code>{ &#39;@&#39;: path.resolve(__diranme, &#39;./src&#39;) }</code></p>
+<p>如果在项目上直接这么写，vscode是跳不到目标文件，比如<code>import router from &#39;@/router&#39;</code>。</p>
+<p>所以可以在vscode上加一个配置用来让vscode识别这些。</p>
+<p>如果项目上用的是 ts ，则配 <code>tsconfig.json</code>，js 则在项目根目录上新建 <code>jsconfig.json</code></p>
+<figure class="highlight javascript"><figcaption><span>jsconfig.json || tsconfig.json</span></figcaption><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"compilerOptions"</span>: &#123;</span><br><span class="line">    <span class="string">"baseUrl"</span>: <span class="string">"."</span>,</span><br><span class="line">    <span class="string">"paths"</span>: &#123;</span><br><span class="line">      <span class="string">"@/*"</span>: [<span class="string">"./src/*"</span>]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"exclude"</span>: [<span class="string">"node_modules"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://code.visualstudio.com/docs/languages/jsconfig" target="_blank" rel="noopener">更多配置看官网</a></p>
+]]></content>
+      <categories>
+        <category>technology</category>
+      </categories>
+      <tags>
+        <tag>github</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>学好Git 拒绝背锅</title>
+    <url>/2020/04/code-check/</url>
+    <content><![CDATA[<p><a href="https://github.com/jsonz1993/ac939016" target="_blank" rel="noopener">仓库demo</a></p>
+<p>今天下午同事找到我，说有个锅要我背一下，在vsc的<code>gitLens</code>看到某个文件里面的某行代码是我写的。</p>
+<p>但是我有印象这些代码是我复制过来的，大概的场景是这样：</p>
+<blockquote>
+<p>先有个a文件，写了某些代码，后面发现说a文件的某些代码应该归到b文件里面，所以就把这块代码移过去，这时候整个仓库就只有b文件出现这些代码，看文件历史的时候就会觉得这些代码是我写的…</p>
+</blockquote>
+<p>这时候我们就需要找一下这些代码是从哪里copy过来的</p>
+<p><a href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E4%BD%BF%E7%94%A8-Git-%E8%B0%83%E8%AF%95" target="_blank" rel="noopener">git blame</a><br><code>git blame [&lt;options&gt;] &lt;file&gt;</code> 可以查看某文件的每一行是什么时候谁修改的，类似 vsc的<code>gitLens FILE HISTORY</code><br>这个命令可以加个 -C 的选项，Git 会分析你正在标注的文件， 并且尝试找出文件中从别的地方复制过来的代码片段的原始出处。</p>
+<p>不过这个功能我没试过是有用的…比如这次就没有提示说这行代码是从哪里复制过来的</p>
+<p>这时候我们就要用git的另一个搜索工具 <code>git log</code></p>
+<p><code>git log -S Text</code>可以查看Text出现在哪些commit中，这就很有用了。</p>
+<p>直接 <code>git log -S &quot;userName = &#39;jsonz1993&#39;&quot;</code>查看发现在之前a同事提交过<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">log</span> -S <span class="string">"userName = 'jsonz1993'"</span></span><br><span class="line"></span><br><span class="line">commit ac9390164c24e4abc60f65a5604a3e2cb1f3ad66 (HEAD -&gt; master)</span><br><span class="line">Author: jsonz1993 &lt;jsonz@qq.com&gt;</span><br><span class="line">Date:   Thu Apr 9 17:08:16 2020 +0800</span><br><span class="line"></span><br><span class="line">    把user信息都归到一起</span><br><span class="line"></span><br><span class="line">commit ee7f357fa8a9b8eefc99e6f446bd983b7020ba34</span><br><span class="line">Author: a同事 &lt;jsonz@qq.com&gt;</span><br><span class="line">Date:   Thu Apr 9 17:06:08 2020 +0800</span><br><span class="line"></span><br><span class="line">    添加userName</span><br></pre></td></tr></table></figure></p>
+<p>切换到 <code>ee7f357f</code> 再查看文件历史，确保没有丢错锅<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git checkout ee7f357f; git blame a.js</span><br><span class="line"></span><br><span class="line">^ee7f357 (a同事 2020-04-09 17:06:08 +0800 1) <span class="built_in">export</span> const userName = <span class="string">'jsonz1993'</span></span><br></pre></td></tr></table></figure></p>
+<p>查看之后发现这个文件只有a同事改过…成功甩锅</p>
+]]></content>
+      <categories>
+        <category>technology</category>
+      </categories>
+      <tags>
+        <tag>github</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>linux shell常用通配符（wildcard)</title>
     <url>/2020/03/linux-wildcard/</url>
     <content><![CDATA[<p>shell常用的通配符就几个<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">* 匹配0至任意多个字符</span><br><span class="line">? 匹配x个任意字符</span><br><span class="line">[] 匹配[]内部的字符</span><br><span class="line">[-] 匹配范围</span><br><span class="line">&#123;&#125; 匹配组合</span><br></pre></td></tr></table></figure></p>
@@ -239,7 +281,7 @@
 <p>查看每次commit改动的代码 <code>git log -p</code></p>
 <p>增加总结，commit时各个文件增删多少行以及汇总 <code>git log --stat</code></p>
 <p>一行输出 <code>git log --oneline</code></p>
-<p>自定义format <code>git log pretty=format:&quot;formation&quot;</code> 具体看链接文档</p>
+<p>自定义format <code>git log --pretty=format:&quot;formation&quot;</code> 具体看链接文档</p>
 <p>图形展示 <code>git log --graph</code></p>
 <p>限制时间 <code>git log --since=2.days</code> 具体看链接文档</p>
 <p>不展示merge节点 <code>git log --no-merges</code></p>
@@ -274,6 +316,7 @@
 <p><code>git reset --soft HEAD~2</code> 就会把前两个commit给撤回，并把修改都放在暂存区，这时候再一起commit</p>
 <h2 id="高级合并"><a href="#高级合并" class="headerlink" title="高级合并"></a>高级合并</h2><p>正常合并冲突直接在ied里面解决冲突会比命令行人性化很多</p>
 <h2 id="查看每行的修改信息"><a href="#查看每行的修改信息" class="headerlink" title="查看每行的修改信息"></a>查看每行的修改信息</h2><p>类似vscode的 <code>File Blame</code>功能<br><code>git blame [-L 1,200] index.jsx</code> 查看 index.jsx的第1~200行的修改信息，如果加<code>-C</code>参数还可以看到这几行最原始出现的地方，也就是说有可能是其他地方copy过来的</p>
+<h2 id="查看第一次出现在仓库是什么时候"><a href="#查看第一次出现在仓库是什么时候" class="headerlink" title="查看第一次出现在仓库是什么时候"></a>查看第一次出现在仓库是什么时候</h2><p><code>git log -S text</code> 可以知道仓库什么时候提交出现过这些 text</p>
 <h2 id="git-子模块（子git）"><a href="#git-子模块（子git）" class="headerlink" title="git 子模块（子git）"></a>git 子模块（子git）</h2><p>添加子模块 <code>git submodule add &lt;repo&gt; [&lt;dir&gt;]</code></p>
 <p>当仓库中有子模块时，需要用 <code>git submodule init &amp;&amp; git submit update</code>来初始化并检出父项目中列出的合适的提交<br>当然你也可以在克隆的时候直接加参数来处理<code>git clone &lt;repo&gt; --recurse-submodules</code></p>
 ]]></content>
