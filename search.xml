@@ -3,8 +3,9 @@
   <entry>
     <title>[置顶]捣鼓目录</title>
     <url>/2017/06/%E6%8D%A3%E9%BC%93%E7%9B%AE%E5%BD%95/</url>
-    <content><![CDATA[<p>记录平时工作学习的目录条目， 类似 <a href="https://github.com/jsonz1993/learn" target="_blank" rel="noopener">Jsonz-learn</a>、 <a href="https://github.com/jsonz1993/wheel" target="_blank" rel="noopener">Jsonz-wheel</a> 的目录。<br>部分比较大的轮子可能会独立成一个git项目</p>
-<h1 id="Doing"><a href="#Doing" class="headerlink" title="Doing"></a>Doing</h1><h1 id="NEXT"><a href="#NEXT" class="headerlink" title="NEXT"></a>NEXT</h1><h1 id="目录-排名按时间顺序"><a href="#目录-排名按时间顺序" class="headerlink" title="目录 排名按时间顺序"></a>目录 排名按时间顺序</h1><h2 id="React-Hooks-食用指南"><a href="#React-Hooks-食用指南" class="headerlink" title="React Hooks 食用指南"></a><a href="https://github.com/jsonz1993/react-hooks" target="_blank" rel="noopener">React Hooks 食用指南</a></h2><h2 id="项目接入quicklink，尝试看效果如何"><a href="#项目接入quicklink，尝试看效果如何" class="headerlink" title="项目接入quicklink，尝试看效果如何"></a><a href="https://jsonz1993.github.io/2019/02/quicklink/">项目接入quicklink，尝试看效果如何</a></h2><h2 id="利用AST解决webpack-alias泛滥的问题"><a href="#利用AST解决webpack-alias泛滥的问题" class="headerlink" title="利用AST解决webpack alias泛滥的问题"></a><a href="https://jsonz1993.github.io/2019/01/AST-practice/">利用AST解决webpack alias泛滥的问题</a></h2><h2 id="react源码学习-ContextAPI"><a href="#react源码学习-ContextAPI" class="headerlink" title="react源码学习 ContextAPI"></a><a href="https://github.com/jsonz1993/react-source-learn/issues/5" target="_blank" rel="noopener">react源码学习 ContextAPI</a></h2><h2 id="正则全局标志注意事项"><a href="#正则全局标志注意事项" class="headerlink" title="正则全局标志注意事项"></a><a href="https://jsonz1993.github.io/2018/11/regexp-global/">正则全局标志注意事项</a></h2><h2 id="react源码学习系列"><a href="#react源码学习系列" class="headerlink" title="react源码学习系列"></a><a href="https://github.com/jsonz1993/react-source-learn" target="_blank" rel="noopener">react源码学习系列</a></h2><h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a><a href="https://jsonz1993.github.io/2018/08/fp/">函数式编程</a></h2><h2 id="一道赋值面试题引发的思考-——-对象引用问题"><a href="#一道赋值面试题引发的思考-——-对象引用问题" class="headerlink" title="一道赋值面试题引发的思考 —— 对象引用问题"></a><a href="https://jsonz1993.github.io/2018/07/circular-reference/">一道赋值面试题引发的思考 —— 对象引用问题</a></h2><h2 id="视频转字符画"><a href="#视频转字符画" class="headerlink" title="视频转字符画"></a><a href="https://jsonz1993.github.io/2018/07/video-to-chat/">视频转字符画</a></h2><h2 id="window-print-浏览器打印扫盲"><a href="#window-print-浏览器打印扫盲" class="headerlink" title="window.print 浏览器打印扫盲"></a><a href="https://jsonz1993.github.io/2018/06/window-print%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%93%E5%8D%B0/">window.print 浏览器打印扫盲</a></h2><h2 id="《http小书》http知识扫盲"><a href="#《http小书》http知识扫盲" class="headerlink" title="《http小书》http知识扫盲"></a><a href="https://jsonz1993.github.io/2018/05/http-mini-book/">《http小书》http知识扫盲</a></h2><h2 id="《css世界》常用技巧-——-读书笔记"><a href="#《css世界》常用技巧-——-读书笔记" class="headerlink" title="《css世界》常用技巧 —— 读书笔记"></a><a href="https://jsonz1993.github.io/2018/05/css-world/">《css世界》常用技巧 —— 读书笔记</a></h2><h2 id="浏览器恢复滚动行为-——-history-scrollRestoration"><a href="#浏览器恢复滚动行为-——-history-scrollRestoration" class="headerlink" title="浏览器恢复滚动行为 —— history.scrollRestoration"></a><a href="https://jsonz1993.github.io/2018/05/history-scroll-restoration/">浏览器恢复滚动行为 —— history.scrollRestoration</a></h2><h2 id="create-react-app-源码解析-一"><a href="#create-react-app-源码解析-一" class="headerlink" title="create-react-app 源码解析(一)"></a><a href="https://jsonz1993.github.io/2018/05/create-react-app-o/">create-react-app 源码解析(一)</a></h2><h2 id="create-react-app-源码解析-二"><a href="#create-react-app-源码解析-二" class="headerlink" title="create-react-app 源码解析(二)"></a><a href="https://jsonz1993.github.io/2018/05/create-react-app-t/">create-react-app 源码解析(二)</a></h2><h2 id="git查漏补缺-非常大好全的文章-慢慢适用一下控制台提交，熟悉之后再切客户端"><a href="#git查漏补缺-非常大好全的文章-慢慢适用一下控制台提交，熟悉之后再切客户端" class="headerlink" title="git查漏补缺 非常大好全的文章 慢慢适用一下控制台提交，熟悉之后再切客户端"></a><a href="https://mubu.com/doc/21wNPB_ZJp" target="_blank" rel="noopener">git查漏补缺 非常大好全的文章</a> 慢慢适用一下控制台提交，熟悉之后再切客户端</h2><h2 id="自动化功能测试流程方案"><a href="#自动化功能测试流程方案" class="headerlink" title="自动化功能测试流程方案"></a><a href="http://l.easyrentcars.com:4000/2018/04/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/" target="_blank" rel="noopener">自动化功能测试流程方案</a></h2><h2 id="项目代码规范工作流——editor、prettier、eslint、git-check"><a href="#项目代码规范工作流——editor、prettier、eslint、git-check" class="headerlink" title="项目代码规范工作流——editor、prettier、eslint、git-check"></a><a href="http://l.easyrentcars.com:4000/2018/03/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/" target="_blank" rel="noopener">项目代码规范工作流——editor、prettier、eslint、git-check</a></h2><h2 id="自动化测试-puppeteer-与qq空间"><a href="#自动化测试-puppeteer-与qq空间" class="headerlink" title="自动化测试 puppeteer 与qq空间"></a><a href="http://l.easyrentcars.com:4000/2018/03/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95puppeteer-%E4%B8%8Eqq%E7%A9%BA%E9%97%B4/" target="_blank" rel="noopener">自动化测试 puppeteer 与qq空间</a></h2><ul>
+    <content><![CDATA[<p><a href="https://github.com/jsonz1993/react-source-learn" target="_blank" rel="noopener">react16 源码阅读学习记录</a></p>
+<hr>
+<h1 id="目录-排名按时间顺序"><a href="#目录-排名按时间顺序" class="headerlink" title="目录 排名按时间顺序"></a>目录 排名按时间顺序</h1><h2 id="React-Hooks-食用指南"><a href="#React-Hooks-食用指南" class="headerlink" title="React Hooks 食用指南"></a><a href="https://github.com/jsonz1993/react-hooks" target="_blank" rel="noopener">React Hooks 食用指南</a></h2><h2 id="项目接入quicklink，尝试看效果如何"><a href="#项目接入quicklink，尝试看效果如何" class="headerlink" title="项目接入quicklink，尝试看效果如何"></a><a href="https://jsonz1993.github.io/2019/02/quicklink/">项目接入quicklink，尝试看效果如何</a></h2><h2 id="利用AST解决webpack-alias泛滥的问题"><a href="#利用AST解决webpack-alias泛滥的问题" class="headerlink" title="利用AST解决webpack alias泛滥的问题"></a><a href="https://jsonz1993.github.io/2019/01/AST-practice/">利用AST解决webpack alias泛滥的问题</a></h2><h2 id="react源码学习-ContextAPI"><a href="#react源码学习-ContextAPI" class="headerlink" title="react源码学习 ContextAPI"></a><a href="https://github.com/jsonz1993/react-source-learn/issues/5" target="_blank" rel="noopener">react源码学习 ContextAPI</a></h2><h2 id="正则全局标志注意事项"><a href="#正则全局标志注意事项" class="headerlink" title="正则全局标志注意事项"></a><a href="https://jsonz1993.github.io/2018/11/regexp-global/">正则全局标志注意事项</a></h2><h2 id="react源码学习系列"><a href="#react源码学习系列" class="headerlink" title="react源码学习系列"></a><a href="https://github.com/jsonz1993/react-source-learn" target="_blank" rel="noopener">react源码学习系列</a></h2><h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a><a href="https://jsonz1993.github.io/2018/08/fp/">函数式编程</a></h2><h2 id="一道赋值面试题引发的思考-——-对象引用问题"><a href="#一道赋值面试题引发的思考-——-对象引用问题" class="headerlink" title="一道赋值面试题引发的思考 —— 对象引用问题"></a><a href="https://jsonz1993.github.io/2018/07/circular-reference/">一道赋值面试题引发的思考 —— 对象引用问题</a></h2><h2 id="视频转字符画"><a href="#视频转字符画" class="headerlink" title="视频转字符画"></a><a href="https://jsonz1993.github.io/2018/07/video-to-chat/">视频转字符画</a></h2><h2 id="window-print-浏览器打印扫盲"><a href="#window-print-浏览器打印扫盲" class="headerlink" title="window.print 浏览器打印扫盲"></a><a href="https://jsonz1993.github.io/2018/06/window-print%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%93%E5%8D%B0/">window.print 浏览器打印扫盲</a></h2><h2 id="《http小书》http知识扫盲"><a href="#《http小书》http知识扫盲" class="headerlink" title="《http小书》http知识扫盲"></a><a href="https://jsonz1993.github.io/2018/05/http-mini-book/">《http小书》http知识扫盲</a></h2><h2 id="《css世界》常用技巧-——-读书笔记"><a href="#《css世界》常用技巧-——-读书笔记" class="headerlink" title="《css世界》常用技巧 —— 读书笔记"></a><a href="https://jsonz1993.github.io/2018/05/css-world/">《css世界》常用技巧 —— 读书笔记</a></h2><h2 id="浏览器恢复滚动行为-——-history-scrollRestoration"><a href="#浏览器恢复滚动行为-——-history-scrollRestoration" class="headerlink" title="浏览器恢复滚动行为 —— history.scrollRestoration"></a><a href="https://jsonz1993.github.io/2018/05/history-scroll-restoration/">浏览器恢复滚动行为 —— history.scrollRestoration</a></h2><h2 id="create-react-app-源码解析-一"><a href="#create-react-app-源码解析-一" class="headerlink" title="create-react-app 源码解析(一)"></a><a href="https://jsonz1993.github.io/2018/05/create-react-app-o/">create-react-app 源码解析(一)</a></h2><h2 id="create-react-app-源码解析-二"><a href="#create-react-app-源码解析-二" class="headerlink" title="create-react-app 源码解析(二)"></a><a href="https://jsonz1993.github.io/2018/05/create-react-app-t/">create-react-app 源码解析(二)</a></h2><h2 id="git查漏补缺-非常大好全的文章-慢慢适用一下控制台提交，熟悉之后再切客户端"><a href="#git查漏补缺-非常大好全的文章-慢慢适用一下控制台提交，熟悉之后再切客户端" class="headerlink" title="git查漏补缺 非常大好全的文章 慢慢适用一下控制台提交，熟悉之后再切客户端"></a><a href="https://mubu.com/doc/21wNPB_ZJp" target="_blank" rel="noopener">git查漏补缺 非常大好全的文章</a> 慢慢适用一下控制台提交，熟悉之后再切客户端</h2><h2 id="自动化功能测试流程方案"><a href="#自动化功能测试流程方案" class="headerlink" title="自动化功能测试流程方案"></a><a href="http://l.easyrentcars.com:4000/2018/04/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/" target="_blank" rel="noopener">自动化功能测试流程方案</a></h2><h2 id="项目代码规范工作流——editor、prettier、eslint、git-check"><a href="#项目代码规范工作流——editor、prettier、eslint、git-check" class="headerlink" title="项目代码规范工作流——editor、prettier、eslint、git-check"></a><a href="http://l.easyrentcars.com:4000/2018/03/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/" target="_blank" rel="noopener">项目代码规范工作流——editor、prettier、eslint、git-check</a></h2><h2 id="自动化测试-puppeteer-与qq空间"><a href="#自动化测试-puppeteer-与qq空间" class="headerlink" title="自动化测试 puppeteer 与qq空间"></a><a href="http://l.easyrentcars.com:4000/2018/03/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95puppeteer-%E4%B8%8Eqq%E7%A9%BA%E9%97%B4/" target="_blank" rel="noopener">自动化测试 puppeteer 与qq空间</a></h2><ul>
 <li><a href="https://github.com/jsonz1993/wheel/tree/master/qqZone" target="_blank" rel="noopener">源码</a></li>
 </ul>
 <h2 id="react全家桶-dva-实践整理总结"><a href="#react全家桶-dva-实践整理总结" class="headerlink" title="react全家桶 + dva 实践整理总结"></a><a href="http://l.easyrentcars.com:4000/2018/02/react%E5%85%A8%E5%AE%B6%E6%A1%B6-dva-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener">react全家桶 + dva 实践整理总结</a></h2><h2 id="了解-babel-写个babel-插件-——-了解编译器原理"><a href="#了解-babel-写个babel-插件-——-了解编译器原理" class="headerlink" title="了解 babel 写个babel 插件 —— 了解编译器原理"></a>了解 babel 写个babel 插件 —— 了解编译器原理</h2><ul>
@@ -174,16 +175,61 @@
       </tags>
   </entry>
   <entry>
-    <title>React源码系列</title>
-    <url>/2018/11/react-source/</url>
-    <content><![CDATA[<p><a href="https://github.com/jsonz1993/react-source-learn" target="_blank" rel="noopener">react16 源码阅读学习记录</a></p>
+    <title>我的2020</title>
+    <url>/2021/01/2020/</url>
+    <content><![CDATA[<blockquote>
+<p>想想还是需要上来写点东西，不然都快忘了有这么一个博客</p>
+</blockquote>
+<p>2020总体评分应该三到四颗星吧~<br>回顾一下，2019年抱怨述职ppt没什么好写的，今年好像也是，不过已经有了一点好的迹象，至少有了一锅石头汤，剩下的就是往里面加。</p>
+<h1 id="自考-⭐️⭐️⭐️⭐️⭐️"><a href="#自考-⭐️⭐️⭐️⭐️⭐️" class="headerlink" title="自考 ⭐️⭐️⭐️⭐️⭐️"></a>自考 ⭐️⭐️⭐️⭐️⭐️</h1><p>20年的第一个标签就是自考，今年自考也开始进入尾声。20年把所有的理论课都过了，电子技术基础，<strong>英语（二）</strong> ，高级程序设计，概率论与数理统计还有计算机应用的实践。<br>总体还是不错，从19年开始好像报考都能过，现在好像没了早上七点起来学习的习惯。<br>最开心的一点是 英语（二） 过了，现在就剩下 电子技术基础实践，学位英语和论文了。<br>但是时间点就很尴尬了，实践抱抱佛脚两周肯定没问题，但是一般五月份考，知道成绩估计都得七月份了<br>论文四月交终稿，如果自考的论文都是比较水的话，那这个没有特别担心，最担心的还是学位英语，如果上半年考不过又得拖时间。<br>按照最理想的来算，五月份实践考完，论文搞定，学位英语过了，也得下半年才能毕业，有一点出入的话还得拖到21年…<br>一直在补年轻的债啊<br><img src="./01.png" width="400"></p>
+<h1 id="工作-⭐️⭐️"><a href="#工作-⭐️⭐️" class="headerlink" title="工作 ⭐️⭐️"></a>工作 ⭐️⭐️</h1><p>今年工作还是很一般，基本没长进，虽然有好的点，但是还是不及格.</p>
+<p>舔着脸找老大说要提工资也没有通过（boss不给，说职级的薪资就这么多，要么提高职级要么拉倒）。<br>问了一圈，基本上同事都没有涨工资心里多少平衡一丁点，不过我也不没有抱很大希望。<br>比起19年的话，可能有两个小点，一个是又开始记录一些工作上的总结，但是这远远不够，想要更多的是一些工作上的思考更深层次的东西，而不是一些 <strong>使用心得</strong> 。这一方面霜爷确实是楷模。另一方面是开始有了一些小小的沉淀，如果你什么都做不好的，那就从一件事情开始入手。<br>也渐渐明白了切图、增删查改不是技术没有长进的接口</p>
+<p>举个例子,有一个需求是要做合同模版的</p>
+<ol>
+<li>做几套模版，留出一个插槽填值</li>
+<li>用组件去拼接这些模版</li>
+<li>写一个DSL，让产品自己去拼接这些逻辑</li>
+</ol>
+<p>所以这明显就是个人对技术和需求的追求….上面的DSL就霜爷做需求的时候想到再反向和产品提的建议<br><img src="./02.png" width="200"></p>
+<h1 id="身体-⭐️⭐️"><a href="#身体-⭐️⭐️" class="headerlink" title="身体 ⭐️⭐️"></a>身体 ⭐️⭐️</h1><p>身体和19年没什么大的变化，主要还是没有形成一个锻炼的习惯，后面讲到习惯的时候再补充。 不及格</p>
+<h1 id="阅读-⭐️⭐️⭐️⭐️"><a href="#阅读-⭐️⭐️⭐️⭐️" class="headerlink" title="阅读 ⭐️⭐️⭐️⭐️"></a>阅读 ⭐️⭐️⭐️⭐️</h1><p>得益于今年年初疫情在家的原因，定的十二本书目标完成~<br><img src="./03.png" width="400"></p>
+<p>如果按照罗老师的说法，今年读的书分类也还好，没有太过功利性。这里的罗老师不是老罗…<br>推一手罗老师的视频<a href="https://www.bilibili.com/video/BV1BK411L7DJ?from=search&amp;seid=17380124644798402912" target="_blank" rel="noopener">我们为什么要读书</a></p>
+<p>这里的我认为的功利性指的是适用性技能和工作上的技术书，而不是鸡汤成功学（泛指卡耐基为代表的的鸡汤）。<br>视频里面有一句话说的很好“只有非功利的读书才能抵制成功主义的读书”，但是在深圳这种地方真的很难静下心来读书，至少现在还没有很多这种情境。<br>印象中读闲书（我喜欢把非功利性的书称为闲书）的时间基本都是发生在考试过后的一两个月，这时候放松下来读闲书是最快乐的。真的就有五柳先生的那种心境 <em>好读书,不求甚解;每有会意,便欣然忘食</em>。<br>今年读书的一个好一点点的习惯就是开始有了简单的记录，虽然大部分记录都是功能性书的总结，但是总归有个好的开始，还是得鼓励一下。</p>
+<p>20201年想读的书没有一个强制性的书单，都是偶尔在哪里看到一本书想读的就记录下来，后面有空了就去翻翻。再不济就去书店逛一圈，读读畅销书，不过最近感兴趣的分类大概分布在 社会学，历史，传记，哲学和一些经典文学。<br>这里感谢《美国vs美国》打开了我对社会学的兴趣，不过翻了一圈中国好像很少有这种类型的书，毕竟这种题材比较敏感，能找到的相对类似的也是在几十年前的《乡土中国》。<br><img src="./04.png" width="200"></p>
+<h1 id="自闭"><a href="#自闭" class="headerlink" title="自闭"></a>自闭</h1><p>今年好像更自闭了，和大学相比，少了很多自信和锋芒，多了几份自卑。也开始不愿走出房门，这里说的不是家门是宿舍房门。不愿与人沟通，程序员的内敛逐渐显现，感觉一大部分的原因是因为目前工作和生活和预期的有落差，导致自卑不愿与人交流，当然工作上还是没什么问题主要指的是生活的扩展。<br>好在最近又开始注重形象了（像个正常的人）。接下来就是多参加一些活动还有扩展自己的兴趣。</p>
+<p>会定一些计划让自己走出房门。</p>
+<h1 id="习惯"><a href="#习惯" class="headerlink" title="习惯"></a>习惯</h1><p>咦，按照《程序员修炼之道》和《掌控习惯》，想着2021年的话，每个月取一个小主题，一个季度一个大主题。因为如果目标和重心太分散的话，真的很难有什么成果。</p>
+<ul>
+<li><p>每个月培养三个小习惯，开始把以前的习惯捡起来，比如上下班地铁十分钟可以背背单词；晚上散步、跑步、运动半个小时；作息早睡早起七点起床十一点半上床等等。</p>
+</li>
+<li><p>每个月读一本非技术书（功能性或闲书），每两个月读一本技术书。</p>
+<blockquote>
+<p>程序员修炼之道里面写的是一个月一本技术书，但是我想着上半年我可能精力还是在准备论文和考试，没那么多精力投入，下半年再看要不要调整吧。</p>
+</blockquote>
+</li>
+<li><p>每年学一门语言，这里指的是技术向，所以今年的ts算吗？</p>
+</li>
+<li><p>每月一个新的技术点尝试，比如git终端的使用，不一定说全要用terminal，但是大部分的命令还是练练，熟能生巧。</p>
+<blockquote>
+<p>这里修炼之道指的其实还包括工具（vsc,ide)和系统(mac,linux,window)<br>但是我目前觉得编辑器是为了快捷高效完成工作的，所以我想不到要换的理由。至于系统，现在的电脑实在是支撑不了我这个想法…</p>
+</blockquote>
+</li>
+</ul>
+<p>具体月份的主题等想好了再记录到trello上，还是挺佩服那些一开始就把一年规划好的人。</p>
+<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>今年工资没有涨不过也没有很在乎，一开始也没有设定目标，毕竟想着早晚要离开这个地，希望明年不用再为ma这个项目组烦心。</p>
+<p>至于存款，好像因为一直都没有存钱的概念，所以定的目标都很保守，而且花起钱来一直都很没概念。</p>
+<p>2020年不完全统计花了 91691.05。随手记，记到的就算统计到，忘记的就忽略不计，不过偏差应该不会超过500。平均下来一个月要花7.6k看着好像很多比预期的7k多了一些，但是看大额开销（超过10000的）好像也还好，都是必须要花的。回头做下规划，感觉要把日常开销和特殊开销区分，比如日常每个月开销是5k，然后遇上给家里人买手机啊 体检啊啥的再另外算会合理一些。</p>
+<p>回头加入豆瓣《抠门男性联合》！</p>
+<p>这两年的股票，单看收益率好像还行，虽然没有别人那么吊算是可以让我开心的程度。<br>不过主要是大盘好的原因，现在大家对明年的预期都很一般，想改变一下，一部分资金放在定投指数上面。<br>（哈哈哈 几万块钱都要放在不同篮子里）</p>
+<p><img src="./a.jpg" style="display:inline-block" width="200"><img src="./b.jpg" style="display:inline-block" width="200"><img src="./c.jpg" style="display:inline-block" width="200"></p>
+<p>感觉大一点的目标，结婚啊 买房啊离我都还很远，不敢想。<br>所以也只能定这种简单的小目标，接下来就是利用元旦三天把今年的方向规划好。</p>
+<p>2021年三个标签：本科 工作 健康生活</p>
 ]]></content>
       <categories>
-        <category>technology</category>
+        <category>live</category>
       </categories>
       <tags>
-        <tag>github</tag>
-        <tag>React</tag>
+        <tag>live</tag>
       </tags>
   </entry>
   <entry>
@@ -916,6 +962,19 @@
       <tags>
         <tag>JavaScript</tag>
         <tag>work</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>React源码系列</title>
+    <url>/2018/11/react-source/</url>
+    <content><![CDATA[<p><a href="https://github.com/jsonz1993/react-source-learn" target="_blank" rel="noopener">react16 源码阅读学习记录</a></p>
+]]></content>
+      <categories>
+        <category>technology</category>
+      </categories>
+      <tags>
+        <tag>github</tag>
+        <tag>React</tag>
       </tags>
   </entry>
   <entry>
