@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="日常面试小叨">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018-07-27 小记">
+<meta property="og:url" content="http://jsonz1993.github.io/2018-07-27/index.html">
+<meta property="og:site_name" content="Jsonz bug-log">
+<meta property="og:description" content="日常面试小叨">
+<meta property="og:locale">
+<meta property="og:image" content="http://jsonz1993.github.io/2018-07-27/wechat.jpeg">
+<meta property="og:image" content="http://jsonz1993.github.io/2018-07-27/c.jpg">
+<meta property="article:published_time" content="2018-07-27T17:10:46.000Z">
+<meta property="article:modified_time" content="2021-05-29T14:12:12.281Z">
+<meta property="article:author" content="Jsonz">
+<meta property="article:tag" content="Live">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jsonz1993.github.io/2018-07-27/wechat.jpeg">
+
+<link rel="canonical" href="http://jsonz1993.github.io/2018-07-27/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>2018-07-27 小记 | Jsonz bug-log</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jsonz bug-log" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jsonz bug-log</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端/JavaScript/React</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">39</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/2018-07-27/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2018-07-27 小记
+        </h1>
+        <div class="post-meta ">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-07-27 17:10:46" itemprop="dateCreated datePublished" datetime="2018-07-27T17:10:46+00:00">2018-07-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-29 14:12:12" itemprop="dateModified" datetime="2021-05-29T14:12:12+00:00">2021-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/live/" itemprop="url" rel="index"><span itemprop="name">live</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">日常面试小叨</div>
+
+        </div>
+
+      </header>
+
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>上一篇文已经是一个月前的，还是改不了懒的习惯</p>
+<p>习惯性对最近做一些总结，关于面试，关于工作上，关于最近学习的东西。</p>
+<h2 id="关于面试"><a href="#关于面试" class="headerlink" title="关于面试"></a>关于面试</h2><p>记得从四月尾就一段时间去面一次，现在已经确定继续留在租租车。顺路捣鼓一些东西，考考专升本。</p>
+<p>自荔枝之后面了四家</p>
+<ul>
+<li>cvte</li>
+<li>阿里外包</li>
+<li>YY</li>
+<li>车主无忧</li>
+</ul>
+<h3 id="cvte"><a href="#cvte" class="headerlink" title="cvte"></a>cvte</h3><p>cvte 我都忘了有投他公司简历，一天晚上看书，突然就来了个电话说是xxxx的xxx，来进行电话面试。<br>然后就稀里糊涂聊了半个多小时，之后就说等hr电话。</p>
+<p>hr电话聊了下加班情况，企业文化，福利等东西。</p>
+<p>其实之前就一直听说cvte很封闭，又很传统，加班贼疯狂，企业文化又很那啥，所以打心里不会去那里</p>
+<p>所以hr面的时候，也没有怎么回答，但是有一点是cvte居然是没有薪资保密的，所以我就顺路问了hr的薪资看是不是真的像他说的一样 薪资允许讨论。结果估计因为这个得罪了hr= =没有过hr面</p>
+<h3 id="阿里外包"><a href="#阿里外包" class="headerlink" title="阿里外包"></a>阿里外包</h3><p>阿里外包其实是最意外的一家<br>是武汉一家公司联系上的，联系之后想着去试一下阿里的面试到底是怎样的 所以就答应了<br>hr非常的好，面试前再三叮嘱，也把面试官看完简历的反馈告诉了我<br>还让同事提前面我一轮，面完说 没什么问题</p>
+<p>面试当天聊了下项目经验还有基础知识和一些问题的排查思路</p>
+<p>本以为答的挺不错的，和面试官也聊得很愉快。后面面试官说去找老大来面，让我骚等片刻</p>
+<p>过段时间后说老大在开会，让我回去等通知…现在想起才知道原来老大在开会是一个拒绝人的套路 图样图森破</p>
+<p>去阿里面想起了一年前去面uc，那时候也面得很开心，后面得知是应聘外包岗就没怎么想继续下去…</p>
+<p>但是阿里的面试官给我的感觉没有像一些小公司的人一样，给人的感觉是很亲切的。和我说如果想进某个大公司，最简单的方法就是参与该公司的开源项目，这是收获最大的一个点。</p>
+<p>虽然过了不会去，但是总体来说还是很意外。</p>
+<h3 id="车主无忧"><a href="#车主无忧" class="headerlink" title="车主无忧"></a>车主无忧</h3><p>车主无忧这个就比较尴尬了，是在公司同一栋…面试大概的感觉就是挺容易的，面试官问的问题都是针对项目经验，所以基本没有造假划水就没什么问题。<br>面三四轮，技术面面前端Leader，技术二面面部门负责人，然后就是cto面，面完hr和我说不能给我期望薪资<br>三年最多只能给xxk…说一开始以为我是有三年半经验，所以可以给四年的薪资<br>后面接了offer考虑下完全不值得跳就放弃</p>
+<p>但是车主无忧有个题外话，和hr聊天聊很久，hr说 之前租租车有高级前端来面试给出的评价是很水，所以对我原本的不抱什么希望。但是技术面给的评价是很不错，所以有点惊讶租租车内部的水平差异大。</p>
+<h3 id="YY-UED"><a href="#YY-UED" class="headerlink" title="YY UED"></a>YY UED</h3><p>面YY是最近最开心，收获最大的一次面试。<br>UED当时面试的时候只有四个前端，我总共面了五轮？基本上就是部门轮着人来虐我= =</p>
+<p>一面和leader聊聊天，说一些场景的解决方案</p>
+<p>然后就是笔试题，做完之后就是面三面。</p>
+<p>三面和部门一个技术大牛聊聊天，聊框架居多，一个vue的人 对react了解比我深很多，这是挺佩服的<br>他有个评分标准，大概就是想招vue 6分以上，以写写demo看看api为1分；能保证项目正常上线5分；熟悉整个框架结构原理，遇到问题能准确知道是在哪个环节出问题，对整个生命周期及运转很熟悉为6分；对整个vue生态都很了解，精准到每次迭代改动的源码部分，还有vuex等生态也很关注为10分。<br>大牛说我是面过的同等工作年限的中上水平，这句话让我开心了好久好久….哈哈哈哈<br>给出的评价是各方面都很均衡，没什么明确的缺点，但是这也意味着没有一个能拿出来讲的有深入研究的方向。<br>最后让我回去等通知</p>
+<p>几天后hr打电话说过去面试，开心。<br>四面是部门另一个前端面试，聊了一些基础知识吧，还有一些场景和概念性的问题。<br>具体问什么忘了，只记得聊的也挺愉快的。面完之后是leader下来闲聊一下，问还有什么问题，没有就面hr了</p>
+<p>hr面是在yy面试最累的一个，全程hr拿着小本本，边问边记。可能是前面和技术小伙伴聊得比较open，到hr这边突然变得谨慎了，所以面完hr之后 整个人都好累。也是很传统的问了以前的公司，为什么跳槽啊之类的。 有一些不一样的就是问我怎么保证有持续的产出和能保持高效长期学习，因为UED是需要不断的探索前瞻技术的，还有就是问我有没有blog，多少人订阅…emmmm 我说我的博客没人订阅没人看，自己写着玩 🤦‍</p>
+<p>过了几天后hr打电话聊offer，总体来说比现在的高了不少，算是很满意的一个offer了。</p>
+<p>本来铁了心要过去那边浪，毕竟部门的同事基本都见了一遍 哈哈哈哈，然后offer又比较心水。</p>
+<p>后面因为个人原因选择继续留在租租车，但是如果在以后有机会，还是会优先考虑yy的。</p>
+<h2 id="关于工作"><a href="#关于工作" class="headerlink" title="关于工作"></a>关于工作</h2><h3 id="项目拆包"><a href="#项目拆包" class="headerlink" title="项目拆包"></a>项目拆包</h3><p>既然选择留在租租车，肯定就不能像之前半年划划水就过去</p>
+<p>最近工作上主要负责的是，想着把部门的项目做个拆包</p>
+<p>原本小项目慢慢迭代成很大的项目，一次打包要花半个小时….加上现在目录的问题，每天过来都要打一个全量包。</p>
+<p>所以现在的计划是，对项目模块进行拆包，一个模块独立成一个项目，有自己的node_models，但是共用一个git。</p>
+<p>这个其实从半年前就有人提出来，但是太难搞了 所以一直没人去推</p>
+<p>首先要考虑的是部门不可能停掉日常迭代，来等你拆包。而且你的需求也不会因为这个技术需求而减少，所以要在平时做需求的间隙做这件事情。</p>
+<p>尽可能把路径替换，文件迁移等做成脚本去跑，不然做不下去。<br>而且拆包之后，要考虑后端的模板路径问题还有部署的问题，加上一些前端 pwa,amp的构建考虑<br>真是个大工程…</p>
+<p>最近的成果是本地能跑起来，但是还缺一个 本地服务，加上还没有和后端，部署那块沟通。</p>
+<p>任重道远</p>
+<h3 id="下半年的指标"><a href="#下半年的指标" class="headerlink" title="下半年的指标"></a>下半年的指标</h3><p>下半年，老大给定的技术指标是React和Webpack两项</p>
+<p>其实原本给的是Http和浏览器内核，但是我觉得说现在我去了解那两块没什么大的收获。</p>
+<p>加上在yy面试之后，面试官一直给的评价是没有一个很深入的点，所以就选了React去做深入的方向。</p>
+<p>React探索之余了解Webpack和 PWA部分</p>
+<h3 id="关于webpack"><a href="#关于webpack" class="headerlink" title="关于webpack"></a>关于webpack</h3><p>前几天有个需求是项目上用到的cookie都要记录到某个文档里面，一开始想着写一个webpack插件去做这件事情。 项目的webpack是3.x，官方的文档全都升级到4.x，一开始有点蛋疼，也没有一个比较适合入门的demo，要不就是太简单，要不就是很复杂的。</p>
+<p>后面终于大概跑了起来，但是跑起来之后，发现和预想的不一致。为什么呢？</p>
+<p>文档需要记录的是 key value description, 举个例子<br>cookie.set(‘name’, ‘jsonz’, ‘用户名’);</p>
+<p>我的方案是在webpack编译的时候拿到babel转义和代码压缩优化之前的内容，因为项目上涉及到cookie的操作都会用一个 <code>cookie-js</code> 的类库，所以可以利用这个做为切入点。</p>
+<p>大概的思路是： webpack生命周期里面去拿到源文件，然后用一个语法分析树，解析成AST，再根据类型去筛选出 cookie-js 函数调用传入的参数</p>
+<p>本来觉得天衣无缝，但是理想很天真，实际项目上五花八门，比如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Cookie <span class="keyword">from</span> <span class="string">&#x27;Cookie-js&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> cookie = <span class="built_in">require</span>(<span class="string">&#x27;Cookie-js&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> key = IS_DEV? <span class="string">&#x27;_name&#x27;</span>: <span class="string">&#x27;name&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> value = <span class="built_in">JSON</span>.parse(Cookie.get(<span class="string">&#x27;obj&#x27;</span>)).name;</span><br><span class="line">Cookie.set(key, value, <span class="string">&#x27;名字&#x27;</span>);</span><br><span class="line"></span><br><span class="line">cookie.set(<span class="string">&#x27;user&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&#x27;jsonz&#x27;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">25</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>所以其实如果真的要用脚本记录，只能在运行环境下记录，所以放弃这个方案….</p>
+<h2 id="关于捣鼓"><a href="#关于捣鼓" class="headerlink" title="关于捣鼓"></a>关于捣鼓</h2><h3 id="小程序"><a href="#小程序" class="headerlink" title="小程序"></a>小程序</h3><p>前段时间是自己捣鼓了一个小程序，用来给每天做计划的。大概长这样<br><img data-src="/2018-07-27/wechat.jpeg" alt="wechat 小程序"></p>
+<p>技术栈:<br>前端: 用的是美团的 mpvue，暂时发现其实和写vue很多不一样，因为有很多可能是小程序的局限问题，也可能是转换问题，n多莫名其妙的bug而且还无法正面干。</p>
+<p>后端:<br>Node: 做主要服务端语言，用的阿里Egg.js框架<br>MySQL: 为什么选择MySQL而不是前端(node)惯用的mongodb呢？ 主要原因有两个，一个是mongo体验过了；一个是现在业界其实mySql还是占绝大多数，而且比较成熟，想体验一波关系型数据库。</p>
+<p>服务器：<br>Nginx: 没什么好说的，对于一个没有折腾过的人来说还是挺开心的<br>Centos</p>
+<p>看起来是挺简单的，但是对于个人学习来说是个挺好的项目。特别是一个完全没有真正捣鼓过后端，服务端的人来说，真的很happy，比单纯写前端要考虑的事情多很多。</p>
+<p>但是最近因为工作的事情，暂时搁置一边，目前还是 0.0.1 可以用最简单的计划的功能。后面拆包完成之后就回来加功能再发布</p>
+<h3 id="图片转字符"><a href="#图片转字符" class="headerlink" title="图片转字符"></a>图片转字符</h3><p>前几天有高中好朋友在群里发一个视频，问我们说真的是可以这样的吗？<br><video src="./a.mp4" controls ></video><br>原视频是死肥宅都知道的极乐净土，然后我觉得很有趣，就问公司群这种怎么实现，大概是图片转字符串</p>
+<p>于是就去搜了一下 canvas 转字符串，再找了下怎么把视频转图片 🤦‍没错，我就是大自然的搬运工</p>
+<p>最后实现出来大概是这样子<br><video src="./b.mp4" width="300" controls ></video></p>
+<p>大概的实现思路是 通过video和canvas把视频逐帧丢到canvas里面，再用canvas读出每个像素的灰度去匹配一个字符串，然后用这些字符串重写一个canvas出来。</p>
+<p>后面有时间再把这个整理成一篇文章出来</p>
+<h2 id="关于学习"><a href="#关于学习" class="headerlink" title="关于学习"></a>关于学习</h2><p>最近是有点懒惰了，专升本一直看离散数学，原本预计7月份要看完顺路做一套题，现在怕是要延迟一个星期最少。<br>看完还有万恶的网络原理和数据库原理…</p>
+<p>加油💪</p>
+<p>最后附上周末团建的图<br><img data-src="./c.jpg" width="400" /></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ali_pay.jpeg" alt="Jsonz Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Live/" rel="tag"># Live</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/window-print%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%93%E5%8D%B0/" rel="prev" title="window.print——关于浏览器打印">
+      <i class="fa fa-chevron-left"></i> window.print——关于浏览器打印
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/video-to-chat/" rel="next" title="视频转字符画">
+      视频转字符画 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E9%9D%A2%E8%AF%95"><span class="nav-number">1.</span> <span class="nav-text">关于面试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cvte"><span class="nav-number">1.1.</span> <span class="nav-text">cvte</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%BF%E9%87%8C%E5%A4%96%E5%8C%85"><span class="nav-number">1.2.</span> <span class="nav-text">阿里外包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%A6%E4%B8%BB%E6%97%A0%E5%BF%A7"><span class="nav-number">1.3.</span> <span class="nav-text">车主无忧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YY-UED"><span class="nav-number">1.4.</span> <span class="nav-text">YY UED</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">关于工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E6%8B%86%E5%8C%85"><span class="nav-number">2.1.</span> <span class="nav-text">项目拆包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E5%8D%8A%E5%B9%B4%E7%9A%84%E6%8C%87%E6%A0%87"><span class="nav-number">2.2.</span> <span class="nav-text">下半年的指标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Ewebpack"><span class="nav-number">2.3.</span> <span class="nav-text">关于webpack</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%8D%A3%E9%BC%93"><span class="nav-number">3.</span> <span class="nav-text">关于捣鼓</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F"><span class="nav-number">3.1.</span> <span class="nav-text">小程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E7%89%87%E8%BD%AC%E5%AD%97%E7%AC%A6"><span class="nav-number">3.2.</span> <span class="nav-text">图片转字符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%AD%A6%E4%B9%A0"><span class="nav-number">4.</span> <span class="nav-text">关于学习</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jsonz"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Jsonz</p>
+  <div class="site-description" itemprop="description">前端👴🥬🐣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jsonz1993" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jsonz1993" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jsonz@qq.com" title="E-Mail → mailto:jsonz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://juejin.im/user/58dbb0b844d904006954ca8e" title="掘金 → https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;58dbb0b844d904006954ca8e" rel="noopener" target="_blank"><i class="fa fa-bullseye fa-fw"></i>掘金</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.hhking.cn/" title="hhking → https:&#x2F;&#x2F;blog.hhking.cn" rel="noopener" target="_blank"><i class="fa fa-user-friends fa-fw"></i>hhking</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备18066881号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/2018-07-27/',]
+      });
+      });
+  </script>
+
+</body>
+</html>

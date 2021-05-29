@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="quicklink学习以及结合React">
+<meta property="og:url" content="http://jsonz1993.github.io/quicklink/index.html">
+<meta property="og:site_name" content="Jsonz bug-log">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-02-26T19:49:46.000Z">
+<meta property="article:modified_time" content="2021-05-29T14:12:12.321Z">
+<meta property="article:author" content="Jsonz">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="性能优化">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jsonz1993.github.io/quicklink/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>quicklink学习以及结合React | Jsonz bug-log</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jsonz bug-log" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jsonz bug-log</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端/JavaScript/React</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">39</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/quicklink/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          quicklink学习以及结合React
+        </h1>
+        <div class="post-meta ">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-02-26 19:49:46" itemprop="dateCreated datePublished" datetime="2019-02-26T19:49:46+00:00">2019-02-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-29 14:12:12" itemprop="dateModified" datetime="2021-05-29T14:12:12+00:00">2021-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description"> </div>
+
+        </div>
+
+      </header>
+
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>谷歌团队在几个月前开源了一个项目，叫<a target="_blank" rel="noopener" href="https://github.com/GoogleChromeLabs/quicklink"><code>quicklink</code></a>。官方给出的介绍是</p>
+<blockquote>
+<p>Faster subsequent page-loads by prefetching in-viewport links during idle time</p>
+</blockquote>
+<p>这里简单的介绍一下这个项目，并且说明一下为什么我需要fork这个项目~</p>
+<p>quicklink的源码很简洁，作用可以用一句话总结: <strong>利用空闲时间来缓存界面上看到的链接，加快这些链接的访问速度。</strong></p>
+<p><strong>所以quicklink的作用是在下一个链接快速打开，而不是当前链接，这一点和很多其他优化都不一样。</strong></p>
+<p>原理很简单:</p>
+<ul>
+<li>获取页面上所有的A标签（注意，这里的a标签指的是调用函数的时候document下的a标签）</li>
+<li>等待浏览器空闲 (requestIdleCallback 或者用 setTimeout 做兼容)</li>
+<li>利用 IntersectionObserver 做监控，当监控的dom进入视图，就开始预加载</li>
+<li>与获取视图内的URL(<code>&lt;link rel=&quot;prefetch&quot;&gt;</code> or <code>XHR</code> or <code>fetch</code>)，以获得快速访问该链接的效果</li>
+</ul>
+<p>代码真的很简洁，很棒，这边没必要再贴出来，有兴趣的直接github fork一个去看或修改，除去注释代码量加起来不到200行</p>
+<h1 id="forked"><a href="#forked" class="headerlink" title="forked"></a>forked</h1><p>我fork该项目之后修改了一些东西 </p>
+<h2 id="默认添加了polyfill，直接打到包里"><a href="#默认添加了polyfill，直接打到包里" class="headerlink" title="默认添加了polyfill，直接打到包里"></a>默认添加了polyfill，直接打到包里</h2><p>为什么要加polyfill呢？ 因为<code>IntersectionObserver</code> 虽然好用，但是pc端<code>IE11</code>都不支持，移动端也要到了<code>IOS12 safari</code>才支持…支持面太窄了而且不用polyfill的话，直接报错….所以权衡之下，干脆直接全量引用<code>IntersectionObserver</code>的polyfill，gzip情况下整个包加起来才<code>3.5k</code> 值了。</p>
+<h2 id="添加了quicklink全局配置"><a href="#添加了quicklink全局配置" class="headerlink" title="添加了quicklink全局配置"></a>添加了quicklink全局配置</h2><p>在包里写了 <code>quicklinkOptions</code> 对象，这样每次调用 <code>quicklink</code> 的时候就可以公用一些配置，而不需要每次调用都塞一样的配置进去,至于为什么提到每次调用…后面会解释到</p>
+<h2 id="添加了manualPreFetch方法：-手动绑定某些dom监听"><a href="#添加了manualPreFetch方法：-手动绑定某些dom监听" class="headerlink" title="添加了manualPreFetch方法： 手动绑定某些dom监听"></a>添加了manualPreFetch方法： 手动绑定某些dom监听</h2><p><code>manualPreFetch</code> 方法，就是手动的意思，支持传入这些参数<code>&#123;dom, isForce, link, priority&#125;</code>。<br>为什么需要加多个方法呢？ 因为我发现 quicklink 只支持扫<code>&lt;a&gt;</code>标签去获取link，但是很多情况可能我们不是用a标签，而是类似写一个<code>button</code>，点击之后js控制跳转。 虽然说我们可以在代码层用button包a链接等方式去实现，但是这样就太局限了，所以才加了个方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// html</span></span><br><span class="line">&lt;button id=<span class="string">&quot;btn&quot;</span>&gt;跳转到xxx&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">manualPreFetch(&#123;</span><br><span class="line">  <span class="attr">dom</span>: <span class="built_in">document</span>.getElementById(<span class="string">&#x27;btn&#x27;</span>),</span><br><span class="line">  <span class="attr">link</span>: <span class="string">&#x27;www.easyrentcars.com&#x27;</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>该方法和 <code>quicklink</code> 一样，也是监听dom滚到当前位置才会发起预加载。这里会读取一部分的<code>quicklinkOptions</code>，这就是我加多个全局配置的原因了，不需要每次调用的时候都写一堆</p>
+<h2 id="增加了manualRemovePreFetch方法：-手动删除监听预加载"><a href="#增加了manualRemovePreFetch方法：-手动删除监听预加载" class="headerlink" title="增加了manualRemovePreFetch方法： 手动删除监听预加载"></a>增加了manualRemovePreFetch方法： 手动删除监听预加载</h2><p>添加个移除的方法，只是简单的移除掉要监听的dom，虽然对性能不会造成影响…但是就是有点强迫症鸭🦆</p>
+<h2 id="React-demo"><a href="#React-demo" class="headerlink" title="React demo"></a>React demo</h2><p><code>quicklink</code>是在执行的时候用 <code>(el || document).getQuesySelectorAll(&#39;a&#39;)</code> 去获取页面上的<code>&lt;a&gt;</code>，所以对于React就比较尴尬了，渲染是异步的，如果调用早的话，肯定是拿不到，那什么时候调用这个才是最佳时机?</p>
+<p><strong>比较通用的是<code>componentDidMount</code> 或者是<code>UseEffect</code>。不过个人比较建议配合<code>manualPreFetch</code>、<code>manualRemovePreFetch</code>对一些比较重要的加就好了，因为很多都是异步之后再渲染，可能 <code>componentDidMount</code>的时候，你需要预加载的链接还没出现。</strong></p>
+<p>这里简单给出两个关于React的通用demo。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useEffect, useRef &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> quicklink, &#123; manualPreFetch, manualRemovePreFetch&#125; <span class="keyword">from</span> <span class="string">&#x27;@jsonz/quicklink&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// class 类型</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QuicklinkComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params">props</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">super</span>(props);</span><br><span class="line">    <span class="built_in">this</span>.refRoot = React.createRef();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">componentDidMount</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// didMount 监听组件内所有的a链接</span></span><br><span class="line">    quicklink(&#123;</span><br><span class="line">      <span class="attr">el</span>: <span class="built_in">this</span>.refRoot.current,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="title">componentWillUnmount</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// willunmount 移除所有的a链接监听</span></span><br><span class="line">    batchManualRemove(<span class="built_in">this</span>.refRoot.current);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="title">render</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;this.refRoot&#125;</span>&gt;</span>&#123;this.props.children&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// hook 类型</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">QuicklinkDemo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> refRoot = useRef(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function">()=&gt;</span> &#123;</span><br><span class="line">    quicklink(&#123;</span><br><span class="line">      <span class="attr">el</span>: refRoot.current,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> <span class="function">()=&gt;</span> &#123;</span><br><span class="line">      batchManualRemove(refRoot.current);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ( <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;refRoot&#125;</span>&gt;</span>&#123;this.props.children&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span> );</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="3-1-致夭折的小ql"><a href="#3-1-致夭折的小ql" class="headerlink" title="3.1 致夭折的小ql"></a>3.1 致夭折的小ql</h1><p>本来已经加在项目上，打算拿一个项目/页面来试点，不过最后被说服暂时不用，原因有三</p>
+<ol>
+<li>quicklink 可能会对后端造成不小的压力，比如你的网站一打开，滑到最底部，那中间可能就会预加载20个链接….然而用户可能一个都不打开就关闭，那就白白给服务器添加20个请求，对于量比较大的网站，可能会很坑爹。总结来说就是命中率太低，不过可以改成做针对性的预加载，比如下单页预加载支付页的。</li>
+<li>只能预加载document，对于页面上占大头的js引用等静态资源没有起作用。效果可能对于实用站点不明显，对文章类会好很多。</li>
+<li>针对前面两种情况，好像pwa能做的会更多？ 所以如果是过渡方案或文字类(document)资源占比比较多的用quicklink比较好。</li>
+</ol>
+<p>但是项目上的pwa比较残疾，之前做的同事做了一版之后就离职了…一直没人去维护，所以pwa要被提上日程？</p>
+<blockquote>
+<p>补一个问题，我直接在quicklink内打polyfill不是很好，因为如果项目上也引用这个Polyfill就会重复了。</p>
+</blockquote>
+<p>告辞</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ali_pay.jpeg" alt="Jsonz Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag"># 性能优化</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/AST-practice/" rel="prev" title="利用AST解决项目webpack alias泛滥问题">
+      <i class="fa fa-chevron-left"></i> 利用AST解决项目webpack alias泛滥问题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/typescript_experience/" rel="next" title="typescript初体验">
+      typescript初体验 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#forked"><span class="nav-number">2.</span> <span class="nav-text">forked</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E6%B7%BB%E5%8A%A0%E4%BA%86polyfill%EF%BC%8C%E7%9B%B4%E6%8E%A5%E6%89%93%E5%88%B0%E5%8C%85%E9%87%8C"><span class="nav-number">2.1.</span> <span class="nav-text">默认添加了polyfill，直接打到包里</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E4%BA%86quicklink%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">添加了quicklink全局配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E4%BA%86manualPreFetch%E6%96%B9%E6%B3%95%EF%BC%9A-%E6%89%8B%E5%8A%A8%E7%BB%91%E5%AE%9A%E6%9F%90%E4%BA%9Bdom%E7%9B%91%E5%90%AC"><span class="nav-number">2.3.</span> <span class="nav-text">添加了manualPreFetch方法： 手动绑定某些dom监听</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A2%9E%E5%8A%A0%E4%BA%86manualRemovePreFetch%E6%96%B9%E6%B3%95%EF%BC%9A-%E6%89%8B%E5%8A%A8%E5%88%A0%E9%99%A4%E7%9B%91%E5%90%AC%E9%A2%84%E5%8A%A0%E8%BD%BD"><span class="nav-number">2.4.</span> <span class="nav-text">增加了manualRemovePreFetch方法： 手动删除监听预加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-demo"><span class="nav-number">2.5.</span> <span class="nav-text">React demo</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-1-%E8%87%B4%E5%A4%AD%E6%8A%98%E7%9A%84%E5%B0%8Fql"><span class="nav-number">3.</span> <span class="nav-text">3.1 致夭折的小ql</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jsonz"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Jsonz</p>
+  <div class="site-description" itemprop="description">前端👴🥬🐣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jsonz1993" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jsonz1993" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jsonz@qq.com" title="E-Mail → mailto:jsonz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://juejin.im/user/58dbb0b844d904006954ca8e" title="掘金 → https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;58dbb0b844d904006954ca8e" rel="noopener" target="_blank"><i class="fa fa-bullseye fa-fw"></i>掘金</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.hhking.cn/" title="hhking → https:&#x2F;&#x2F;blog.hhking.cn" rel="noopener" target="_blank"><i class="fa fa-user-friends fa-fw"></i>hhking</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备18066881号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/quicklink/',]
+      });
+      });
+  </script>
+
+</body>
+</html>

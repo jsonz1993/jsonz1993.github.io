@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="探索create-react-app框架的源码及思想（二）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="create-react-app 源码解析之react-scripts">
+<meta property="og:url" content="http://jsonz1993.github.io/create-react-app-t/index.html">
+<meta property="og:site_name" content="Jsonz bug-log">
+<meta property="og:description" content="探索create-react-app框架的源码及思想（二）">
+<meta property="og:locale">
+<meta property="og:image" content="http://jsonz1993.github.io/create-react-app-t/tty_choose_port.png">
+<meta property="og:image" content="http://jsonz1993.github.io/create-react-app-t/webpackDevServer_error.png">
+<meta property="article:published_time" content="2018-05-14T20:44:48.000Z">
+<meta property="article:modified_time" content="2021-05-29T14:12:12.273Z">
+<meta property="article:author" content="Jsonz">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jsonz1993.github.io/create-react-app-t/tty_choose_port.png">
+
+<link rel="canonical" href="http://jsonz1993.github.io/create-react-app-t/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>create-react-app 源码解析之react-scripts | Jsonz bug-log</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jsonz bug-log" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jsonz bug-log</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端/JavaScript/React</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">39</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/create-react-app-t/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          create-react-app 源码解析之react-scripts
+        </h1>
+        <div class="post-meta ">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-05-14 20:44:48" itemprop="dateCreated datePublished" datetime="2018-05-14T20:44:48+00:00">2018-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-29 14:12:12" itemprop="dateModified" datetime="2021-05-29T14:12:12+00:00">2021-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">探索create-react-app框架的源码及思想（二）</div>
+
+        </div>
+
+      </header>
+
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>上一篇我们已经讲了 <code>create-react-app</code>里面创建<code>package.json</code>安装依赖并且拷贝可运行的demo等步骤。<a href="https://jsonz1993.github.io/2018/05/create-react-app-o/">传送门</a></p>
+<p>这一篇我们来讲一下 <code>create-react-app</code>里面的启动服务等部分，就是平时我们安装完依赖之后，启动开发服务:<code>npm start</code>。这一块涉及到太多关于webpack与配置的东西，加上第一篇觉得描述的太过冗余~所以这篇不会讲得很细，只是大概把他运转的逻辑思路写出来，具体源码会提供传送门。</p>
+<p>推荐大家看第一篇的 <strong>项目初始化</strong> 和 <strong>断点调试</strong> 部分，这里就不在赘述。<a href="https://jsonz1993.github.io/2018/05/create-react-app-o/#%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96">传送门 项目初始化断点调试部分</a></p>
+<h1 id="准备阶段"><a href="#准备阶段" class="headerlink" title="准备阶段"></a><a href="#%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5">准备阶段</a></h1><p><strong>这里我们讨论的create-react-app版本依旧是<code>v1.1.4</code></strong></p>
+<p>既然这篇我们主要讲的是 <code>create-react-app</code>里面的webpack服务，那我们肯定要先新建一个项目。</p>
+<ul>
+<li><code>npm install create-react-app -g</code> 全局安装create-react-app</li>
+<li><code>create-react-app my-react-project</code> 用create-react-app新建一个项目</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd my-react-project</span><br><span class="line">yarn start</span><br></pre></td></tr></table></figure>
+<p>新建完之后，终端提示了我们直接进入项目，跑 yarn(npm) start 就可以开发了。我们打开 <code>package.json</code>就可以看到 yarn start 跑的命令是 <code>&quot;react-scripts start&quot;</code></p>
+<p>那么这个 react-scripts 命令到底是哪一个呢？</p>
+<p>一般写在 <code>package.json=&gt; scripts</code> 的命令，都会先去 <code>project_path(项目目录）/node_modules/.bin</code> 查找，找不到再找全局安装的包。</p>
+<p>那么 node_modules/.bin 里面的文件又是怎么来的呢？<br>我们如果在包的 package.json 加上 <code>bin</code> 字段，npm就会自动帮我们映射到 node_modules/.bin 里面 <a target="_blank" rel="noopener" href="https://docs.npmjs.com/files/package.json#bin">npm bin文档传送门</a></p>
+<p>我们直接打开 <code>node_modules/react-scripts/package.json</code> 能看到这么一行<code>&quot;react-scripts&quot;: &quot;./bin/react-scripts.js&quot;</code>,直接把命令指向<code>node_modules/react-scripts/.bin/react-scripts.js</code>，也验证了我们的观点。</p>
+<p>还记得上一篇，我们在 <code>create-react-app/packages</code> 里面发现了有一个 <code>react-scripts</code>。其实是同一个东西来的，那么接下来的步骤就很明确了，直接用老办法，改下配置，然后用vscode跑断点调试阅读<code>project_path/node_modules/react-scripts/.bin/react-scripts.js</code>的源码 一探究竟。</p>
+<h3 id="vscode-launch-json"><a href="#vscode-launch-json" class="headerlink" title="vscode launch.json"></a><a href="#vscode_launch.json">vscode launch.json</a></h3><p>这里我们传入 start 作为参数,模拟在项目里跑 <code>yarn start</code> 的效果。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;version&quot;</span>: <span class="string">&quot;0.2.0&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;configurations&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;node&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;request&quot;</span>: <span class="string">&quot;launch&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;启动程序&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;program&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/node_modules/react-scripts/bin/react-scripts.js&quot;</span>, <span class="comment">//调试的文件路径</span></span><br><span class="line">      <span class="attr">&quot;args&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;start&quot;</span> <span class="comment">// 传入 start 做为参数</span></span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><em><strong>ps:下面的<code>react-scripts</code>没有特殊说明，都代表<code>project_path/node_modules/react-scripts</code>目录方便阅读</strong></em></p>
+<h1 id="react-scripts-bin-react-scripts-js"><a href="#react-scripts-bin-react-scripts-js" class="headerlink" title="react-scripts/.bin/react-scripts.js"></a><a href="#react-scripts-bin-react-scripts-js">react-scripts/.bin/react-scripts.js</a></h1><p><a target="_blank" rel="noopener" href="https://github.com/facebook/create-react-app/blob/v1.1.4/packages/react-scripts/bin/react-scripts.js">文件传送门</a><br>这里我们还是老办法，先不看依赖 看主流程理解先，我们能看到这个文件也是一个入口文件，非常简短。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> args = process.argv.slice(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> scriptIndex = args.findIndex(</span><br><span class="line">  <span class="function"><span class="params">x</span> =&gt;</span> x === <span class="string">&#x27;build&#x27;</span> || x === <span class="string">&#x27;eject&#x27;</span> || x === <span class="string">&#x27;start&#x27;</span> || x === <span class="string">&#x27;test&#x27;</span></span><br><span class="line">);</span><br><span class="line"><span class="keyword">const</span> script = scriptIndex === -<span class="number">1</span> ? args[<span class="number">0</span>] : args[scriptIndex];</span><br><span class="line"><span class="keyword">const</span> nodeArgs = scriptIndex &gt; <span class="number">0</span> ? args.slice(<span class="number">0</span>, scriptIndex) : [];</span><br></pre></td></tr></table></figure>
+<p>首先处理传进来的参数，用<code>script</code>变量来获取我们跑的命令是哪一个，有[‘build’, ‘eject’, ‘start’, ‘test’]这么几种，分别对应 构建、暴露配置、开发、测试命令。<br>然后再获取一起传入的其他的参数，比如<code>npm test</code>命令就会带一个额外的参数<code>--env=jsdom</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (script) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">&#x27;build&#x27;</span>:</span><br><span class="line">  <span class="keyword">case</span> <span class="string">&#x27;eject&#x27;</span>:</span><br><span class="line">  <span class="keyword">case</span> <span class="string">&#x27;start&#x27;</span>:</span><br><span class="line">  <span class="keyword">case</span> <span class="string">&#x27;test&#x27;</span>: &#123;</span><br><span class="line">    <span class="comment">// 用 cross-spawn 去跑一个同步的命令</span></span><br><span class="line">    <span class="comment">// 根据传入的命令来拼接对应的路径 用node去跑</span></span><br><span class="line">    <span class="keyword">const</span> result = spawn.sync(</span><br><span class="line">      <span class="string">&#x27;node&#x27;</span>,</span><br><span class="line">      nodeArgs</span><br><span class="line">        .concat(<span class="built_in">require</span>.resolve(<span class="string">&#x27;../scripts/&#x27;</span> + script))</span><br><span class="line">        .concat(args.slice(scriptIndex + <span class="number">1</span>)),</span><br><span class="line">      &#123; <span class="attr">stdio</span>: <span class="string">&#x27;inherit&#x27;</span> &#125;</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">if</span> (result.signal) &#123;</span><br><span class="line">      <span class="keyword">if</span> (result.signal === <span class="string">&#x27;SIGKILL&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment">// 输出错误提醒日志</span></span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (result.signal === <span class="string">&#x27;SIGTERM&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment">// 输出错误提醒日志</span></span><br><span class="line">      &#125;</span><br><span class="line">      process.exit(<span class="number">1</span>); <span class="comment">// 退出进程， 传1代表有错误</span></span><br><span class="line">    &#125;</span><br><span class="line">    process.exit(result.status);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="attr">default</span>:</span><br><span class="line">    <span class="comment">// 这里输出匹配不到对应的命令</span></span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后根据获取到的命令，对应到<code>react-scripts/scripts</code>下面的文件去跑，比如 <code>react-scripts start</code> 就会去跑 <code>react-scripts/scripts/start.js</code>。</p>
+<p>这里插几句讲一下一个项目上比较常见的类库解耦方式，我们可以看到这里的 <code>spawn</code>引用的是<code>react-dev-utils/crossSpawn</code>。而在<code>react-dev-utils/corssSpawn</code>里面也只是简简单单的几句，引入<code>cross-spawn</code>再把<code>cross-spawn</code>暴露出去。<br>但是这么写就可以起到类库解耦的作用，比如以后这个库被爆出有重大的bug或者停止维护了，直接修改这个文件引入其他的类库，其他引用该文件的代码就不需要改动。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// react-dev-utils/corssSpawn</span></span><br><span class="line"><span class="meta">&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> crossSpawn = <span class="built_in">require</span>(<span class="string">&#x27;cross-spawn&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = crossSpawn;</span><br></pre></td></tr></table></figure>
+
+<h1 id="react-scripts-scripts-start-js"><a href="#react-scripts-scripts-start-js" class="headerlink" title="react-scripts/scripts/start.js"></a><a href="#react-scripts-scripts-start-js">react-scripts/scripts/start.js</a></h1><p><a target="_blank" rel="noopener" href="https://github.com/facebook/create-react-app/blob/v1.1.4/packages/react-scripts/scripts/start.js">文件传送门</a></p>
+<p>看过第一篇的人对这个文件夹应该不陌生，<code>create-react-app</code> 在安装完 <code>react</code> 等依赖之后，就会跑这个文件夹下面的<code>init.js</code>来拷贝模版文件，修改<code>package.json</code>等操作。</p>
+<p>既然我们已经知道他要执行 start.js, 接下来我们把vscode调试文件修改为 start.js 文件<code>&quot;program&quot;: &quot;$&#123;workspaceFolder&#125;/node_modules/react-scripts/scripts/start.js&quot;,</code> 之所以要修改是因为他这里不是引用js文件来运行，而是用终端来跑，所以不属于我们的项目调试范围~</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">process.env.BABEL_ENV = <span class="string">&#x27;development&#x27;</span>;</span><br><span class="line">process.env.NODE_ENV = <span class="string">&#x27;development&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Makes the script crash on unhandled rejections instead of silently</span></span><br><span class="line"><span class="comment">// ignoring them. In the future, promise rejections that are not handled will</span></span><br><span class="line"><span class="comment">// terminate the Node.js process with a non-zero exit code.</span></span><br><span class="line">process.on(<span class="string">&#x27;unhandledRejection&#x27;</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">throw</span> err;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>文件的最开头设置了两个环境变量，因为 start 是用来跑开发的，所以这里的环境变量都是 <code>development</code>，然后再给 <code>process</code> 绑定一个错误监听函数，这个错误监听实质上是用来监听 _一些没有被.catch的Promise_。 <a target="_blank" rel="noopener" href="https://nodejs.org/dist/latest-v8.x/docs/api/process.html#process_event_unhandledrejection">具体可以看node的文档</a>, 关于 Promise可以看一下之前写过的一篇<a href="https://jsonz1993.github.io/2017/12/%E6%B5%85%E6%9E%90Promise/">介绍Promise的文章从用法和实现原理都有所涉及</a></p>
+<p>接着引进一个 <code>../config/env</code>， 看文件名猜应该是做一些关于环境配置的事情，找到文件断点进来</p>
+<h1 id="react-scripts-config-env-js"><a href="#react-scripts-config-env-js" class="headerlink" title="react-scripts/config/env.js"></a><a href="#react-scripts-config-env-js">react-scripts/config/env.js</a></h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> paths = <span class="built_in">require</span>(<span class="string">&#x27;./paths&#x27;</span>);</span><br><span class="line"><span class="comment">// Make sure that including paths.js after env.js will read .env variables.</span></span><br><span class="line"><span class="keyword">delete</span> <span class="built_in">require</span>.cache[<span class="built_in">require</span>.resolve(<span class="string">&#x27;./paths&#x27;</span>)];</span><br></pre></td></tr></table></figure>
+<p><code>env.js</code> 文件在引入 <code>./paths.js</code> 之后，立即把他从cache中删除掉，这样下次如果有其他的模块引入<code>paths.js</code>，就不会从缓存里面去获取，保证了<code>paths.js</code>里面执行逻辑都会用到最新的环境变量。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dotenvFiles = [</span><br><span class="line">  <span class="comment">// 举个例子：第一个元素在我的电脑路径是这样的 Users/jsonz/Documents/my-react-project/.env.development.local.js</span></span><br><span class="line">  <span class="string">`<span class="subst">$&#123;paths.dotenv&#125;</span>.<span class="subst">$&#123;NODE_ENV&#125;</span>.local`</span>,</span><br><span class="line">  <span class="string">`<span class="subst">$&#123;paths.dotenv&#125;</span>.<span class="subst">$&#123;NODE_ENV&#125;</span>`</span>,</span><br><span class="line">  NODE_ENV !== <span class="string">&#x27;test&#x27;</span> &amp;&amp; <span class="string">`<span class="subst">$&#123;paths.dotenv&#125;</span>.local`</span>,</span><br><span class="line">  paths.dotenv,</span><br><span class="line">].filter(<span class="built_in">Boolean</span>);</span><br></pre></td></tr></table></figure>
+<p>然后再根据paths给出的地址去拿其他的环境变量，这里<code>paths.js</code>会根据不同的情况给出不同的路径，我们讨论的是正常的创建项目情况。<br>其他的几种情况有：</p>
+<ol>
+<li>我们在已经创建的项目跑了 <code>npm(yarn) eject</code>，这时候 <code>react-scripts</code>会把配置都暴露到 <code>project_path/config</code> 方便我们去根据项目修改配置，这个操作是不可逆的。</li>
+<li>我们正常创建项目，直接跑项目，这时候配置就存放在<code>project/node_modules/react-scripts</code>。</li>
+<li>开发人员自己调试用的，这时候配置存放在<code>create-react/packages/react-scripts/config</code>。</li>
+</ol>
+<p>拼装完路径之后，用<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/dotenv-expand">dotenv-expand</a>和<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/dotenv">dotenv</a>来把文件里面的环境变量加载进来，这一块一般场景用不上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getClientEnvironment</span>(<span class="params">publicUrl</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> raw = <span class="built_in">Object</span>.keys(process.env)</span><br><span class="line">    .filter(<span class="function"><span class="params">key</span> =&gt;</span> REACT_APP.test(key))</span><br><span class="line">    .reduce(</span><br><span class="line">      <span class="function">(<span class="params">env, key</span>) =&gt;</span> &#123;</span><br><span class="line">        env[key] = process.env[key];</span><br><span class="line">        <span class="keyword">return</span> env;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">NODE_ENV</span>: process.env.NODE_ENV || <span class="string">&#x27;development&#x27;</span>,</span><br><span class="line">      &#125;</span><br><span class="line">    );</span><br><span class="line">  <span class="keyword">const</span> stringified = &#123;</span><br><span class="line">    <span class="string">&#x27;process.env&#x27;</span>: <span class="built_in">Object</span>.keys(raw).reduce(<span class="function">(<span class="params">env, key</span>) =&gt;</span> &#123;</span><br><span class="line">      env[key] = <span class="built_in">JSON</span>.stringify(raw[key]);</span><br><span class="line">      <span class="keyword">return</span> env;</span><br><span class="line">    &#125;, &#123;&#125;),</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">return</span> &#123; raw, stringified &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后返回一个 <code>getClientEnvironment</code>函数，这个函数执行后会返回客户端的环境变量。</p>
+<h1 id="react-scripts-scripts-start-js-2"><a href="#react-scripts-scripts-start-js-2" class="headerlink" title="react-scripts/scripts/start.js(2)"></a><a href="#react-scripts-scripts-start-js-2">react-scripts/scripts/start.js(2)</a></h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> chalk = <span class="built_in">require</span>(<span class="string">&#x27;chalk&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">&#x27;webpack&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> WebpackDevServer = <span class="built_in">require</span>(<span class="string">&#x27;webpack-dev-server&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> clearConsole = <span class="built_in">require</span>(<span class="string">&#x27;react-dev-utils/clearConsole&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> checkRequiredFiles = <span class="built_in">require</span>(<span class="string">&#x27;react-dev-utils/checkRequiredFiles&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123;</span><br><span class="line">  choosePort,</span><br><span class="line">  createCompiler,</span><br><span class="line">  prepareProxy,</span><br><span class="line">  prepareUrls,</span><br><span class="line">&#125; = <span class="built_in">require</span>(<span class="string">&#x27;react-dev-utils/WebpackDevServerUtils&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> openBrowser = <span class="built_in">require</span>(<span class="string">&#x27;react-dev-utils/openBrowser&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> paths = <span class="built_in">require</span>(<span class="string">&#x27;../config/paths&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> config = <span class="built_in">require</span>(<span class="string">&#x27;../config/webpack.config.dev&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> createDevServerConfig = <span class="built_in">require</span>(<span class="string">&#x27;../config/webpackDevServer.config&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> useYarn = fs.existsSync(paths.yarnLockFile);</span><br><span class="line"><span class="keyword">const</span> isInteractive = process.stdout.isTTY;</span><br></pre></td></tr></table></figure>
+<p>加载完各种环境变量之后，我们回到<code>react-scripts/scripts/start.js</code>，老规矩，一系列的依赖先跳过不看，后面用到再来看。<br>还记得我们在<code>env.js</code>里面delet掉node.catch吗，这里<code>conts paths = require(&#39;../config/paths)</code>就不会从缓存里面去拿而是重新去加载。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) &#123;</span><br><span class="line">  process.exit(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>先判断一下我们两个入口文件有没有存在，分别是<code>project_path/public/index.html</code>和<code>project_path/src/index.js</code>，如果不存在给出提示结束程序。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> DEFAULT_PORT = <span class="built_in">parseInt</span>(process.env.PORT, <span class="number">10</span>) || <span class="number">3000</span>;</span><br><span class="line"><span class="keyword">const</span> HOST = process.env.HOST || <span class="string">&#x27;0.0.0.0&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>然后设置默认的端口和host，如果有特殊的需求，可以从环境变量传进去改变，没有就会用默认的<code>3000</code>端口。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">choosePort(HOST, DEFAULT_PORT).then(...) <span class="comment">// @return Promise</span></span><br></pre></td></tr></table></figure>
+<p>设置完默认的端口与host之后，开始判断这个端口有没有被其他的进程占用，有的话会提供下一个可用的端口，我们顺着<code>choosePort</code>去文件头找依赖，找到该方法位于依赖<code>react-dev-utils/WebpackDevServerUtils</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">choosePort</span>(<span class="params">host, defaultPort</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> detect(defaultPort, host).then(</span><br><span class="line">    <span class="function"><span class="params">port</span> =&gt;</span></span><br><span class="line">      <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (port === defaultPort) &#123;</span><br><span class="line">          <span class="keyword">return</span> resolve(port);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> message =</span><br><span class="line">          process.platform !== <span class="string">&#x27;win32&#x27;</span> &amp;&amp; defaultPort &lt; <span class="number">1024</span> &amp;&amp; !isRoot()</span><br><span class="line">            ? <span class="string">`Admin permissions are required to run a server on a port below 1024.`</span></span><br><span class="line">            : <span class="string">`Something is already running on port <span class="subst">$&#123;defaultPort&#125;</span>.`</span>;</span><br><span class="line">        <span class="keyword">if</span> (isInteractive) &#123;</span><br><span class="line">          clearConsole();</span><br><span class="line">          <span class="keyword">const</span> existingProcess = getProcessForPort(defaultPort);</span><br><span class="line">          <span class="keyword">const</span> question = &#123;</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;confirm&#x27;</span>,</span><br><span class="line">            <span class="attr">name</span>: <span class="string">&#x27;shouldChangePort&#x27;</span>,</span><br><span class="line">            <span class="attr">message</span>:</span><br><span class="line">              chalk.yellow(</span><br><span class="line">                message +</span><br><span class="line">                  <span class="string">`<span class="subst">$&#123;existingProcess ? <span class="string">` Probably:\n  <span class="subst">$&#123;existingProcess&#125;</span>`</span> : <span class="string">&#x27;&#x27;</span>&#125;</span>`</span></span><br><span class="line">              ) + <span class="string">&#x27;\n\nWould you like to run the app on another port instead?&#x27;</span>,</span><br><span class="line">            <span class="attr">default</span>: <span class="literal">true</span>,</span><br><span class="line">          &#125;;</span><br><span class="line">          inquirer.prompt(question).then(<span class="function"><span class="params">answer</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (answer.shouldChangePort) &#123;</span><br><span class="line">              resolve(port);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">              resolve(<span class="literal">null</span>);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(chalk.red(message));</span><br><span class="line">          resolve(<span class="literal">null</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;),</span><br><span class="line">    <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 输出错误日志</span></span><br><span class="line">    &#125;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>choosePort</code> 里面用到<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/detect-port-alt">detect-port-alt</a>去检测端口占用，如果被占用了返回一个最接近的递增方向可用的端口，比如3000端口被占用,3001没被占用就返回回来。<br>如果发现返回的可用端口不是默认的端口，给出一个交互式的命令询问用户是否要换一个端口去访问，交互式命令用的是<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/inquirer">inquirer</a>这个包。<br>这里如果用vsCode来调试，<code>process.stdout.isTTY</code> 返回的值是<code>undefined</code>。所以如果要测试这一块交互式命令，只能切回系统的终端去调试~</p>
+<p><img data-src="/create-react-app-t/tty_choose_port.png" alt="交互式命令询问是否切换端口" title="交互式命令询问是否切换端口"></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/facebook/create-react-app/blob/v1.1.4/packages/react-scripts/scripts/start.js#L71">文件传送门</a><br>检测完可用端口之后，回到<code>start.js</code>。</p>
+<p>前端处理一堆环境变量，还有加载一堆配置，全都用在这一块。这里主要做的就是把环境变量和配置组装起来，开个webpack本地调试服务。主要做的事情有:</p>
+<ol>
+<li>如果没有找到可用的端口直接返回不继续执行下去</li>
+<li>根据环境变量判断是否启用<code>https</code>，默认是<code>http</code>。</li>
+<li>根据 host, protocol, port 拼装一系列的url，包括<code>Browser</code>的url与<code>Terminal</code>的url。</li>
+<li>调用<code>createCompiler</code> 传入webpack，webpack配置，appName，第三步获取的url，还有是否使用Yarn等参数，生成一个 webpackCompiler。createCompiler负责的东西有:</li>
+<li>1 根据环境变量判断是否有冒烟测试的需求，如果有加一个 <code>handleCompile</code>，一有错误就中断程序。</li>
+<li>2 用传进来的配置和handleCompile生成一个webpackCompiler</li>
+<li>2 增加<code>invalid</code>钩子，一检测到更改文件，而且是交互式终端的话，先清空控制台，再输出日志</li>
+<li>3 增加<code>done</code>钩子，对webpack的输出日志整理统一输出</li>
+<li>创建开发服务配置 具体的配置代码放在<code>webpackDevServer.config.js</code></li>
+<li>把4和5丢给 <code>WebpackDevServer</code>，生成一个 webpack 本地开发服务</li>
+<li>大功告成，清除屏幕，打开调试连接</li>
+</ol>
+<p>相关的代码执行写到注释里面去了，没办法每个方法配置都拎出来讲…不然篇幅会很长，这里面很多点一讲都可以是一个知识点。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">choosePort(HOST, DEFAULT_PORT)</span><br><span class="line">  .then(<span class="function"><span class="params">port</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 没有找到可用端口，直接return</span></span><br><span class="line">    <span class="keyword">if</span> (port == <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 根据环境变量判断是否要用https</span></span><br><span class="line">    <span class="keyword">const</span> protocol = process.env.HTTPS === <span class="string">&#x27;true&#x27;</span> ? <span class="string">&#x27;https&#x27;</span> : <span class="string">&#x27;http&#x27;</span>;</span><br><span class="line">    <span class="keyword">const</span> appName = <span class="built_in">require</span>(paths.appPackageJson).name;</span><br><span class="line">    <span class="comment">// 获取当前的 host, port, protocol 生成一系列url</span></span><br><span class="line">    <span class="keyword">const</span> urls = prepareUrls(protocol, HOST, port);</span><br><span class="line">    <span class="comment">// 创建一个webpack compiler</span></span><br><span class="line">    <span class="keyword">const</span> compiler = createCompiler(webpack, config, appName, urls, useYarn);</span><br><span class="line">    <span class="comment">// 加载代理的配置，在 project_path/package.json 里面加载配置</span></span><br><span class="line">    <span class="keyword">const</span> proxySetting = <span class="built_in">require</span>(paths.appPackageJson).proxy;</span><br><span class="line">    <span class="keyword">const</span> proxyConfig = prepareProxy(proxySetting, paths.appPublic);</span><br><span class="line">    <span class="comment">// 生成 webpack dev server 的配置</span></span><br><span class="line">    <span class="keyword">const</span> serverConfig = createDevServerConfig(</span><br><span class="line">      proxyConfig,</span><br><span class="line">      urls.lanUrlForConfig</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">const</span> devServer = <span class="keyword">new</span> WebpackDevServer(compiler, serverConfig);</span><br><span class="line">    <span class="comment">// 监听 devServer</span></span><br><span class="line">    devServer.listen(port, HOST, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 一些日志输出</span></span><br><span class="line">      <span class="comment">// 自动用默认浏览器打开调试链接</span></span><br><span class="line">      openBrowser(urls.localUrlForBrowser);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 错误处理</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>react-dev-utils/WebpackDevServerUtils.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCompiler</span>(<span class="params">webpack, config, appName, urls, useYarn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> compiler;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    compiler = webpack(config, handleCompile); <span class="comment">// handleCompile为冒烟测试的对应处理</span></span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="comment">// 错误提示</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  compiler.plugin(<span class="string">&#x27;invalid&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// invalid 钩子，如果当前处于TTY终端，那么先清除控制台再输出 Compiling...</span></span><br><span class="line">    <span class="keyword">if</span> (isInteractive) &#123;</span><br><span class="line">      clearConsole();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Compiling...&#x27;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> isFirstCompile = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">  compiler.plugin(<span class="string">&#x27;done&#x27;</span>, <span class="function"><span class="params">stats</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 监听了 done 事件，对输出的日志做了格式化输出</span></span><br><span class="line">    <span class="comment">// 正常情况下会直接输出 `Compiled successfully!`</span></span><br><span class="line">    <span class="comment">// 如果有错误则输出错误信息，这里对错误信息做一些处理，让其输出比较友好</span></span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> compiler;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img data-src="/create-react-app-t/webpackDevServer_error.png" alt="输出日志格式化处理" title="输出日志统一格式化处理"></p>
+<h1 id="最后讲两句"><a href="#最后讲两句" class="headerlink" title="最后讲两句"></a>最后讲两句</h1><p>之前就一直好奇，这些脚手架是怎么清空我们的终端屏幕的。在看<code>create-react-app</code>的时候，瞄到有这么一个文件<a target="_blank" rel="noopener" href="https://github.com/facebook/create-react-app/blob/v1.1.4/packages/react-dev-utils/clearConsole.js">react-dev-utils/clearConsole.js</a>。这个文件十分剪短，核心代码就那么一句:</p>
+<h2 id="react-dev-utils-clearConsole-js"><a href="#react-dev-utils-clearConsole-js" class="headerlink" title="react-dev-utils/clearConsole.js"></a><a href="#react-dev-utils-clearConsole-js">react-dev-utils/clearConsole.js</a></h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">process.stdout.write(process.platform === <span class="string">&#x27;win32&#x27;</span> ? <span class="string">&#x27;\x1B[2J\x1B[0f&#x27;</span> : <span class="string">&#x27;\x1B[2J\x1B[3J\x1B[H&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>然后好奇心特别重，不知道后面两串是什么意思，一直搜没有找到想要的答案。问了身边的同事，说是十六进制，而在我狭隘的认知里面一直以为十六进制只能转成数字….但是定睛一看，这有个<code>J</code> 明显不是十六进制。一个女装大佬和我说这是ASCII码，百度了一下ASCII码，看了 <code>\x1B</code> ASCII对应到 <code>ESC</code>。 但是后面的 <code>[2J</code> <code>[3J</code> <code>[H</code> 是什么意思还是不清楚…<br>后面大佬又和我说找到可能是 <strong>Linux ANSI 控制码</strong> 找来找去折腾了挺久的后面才揭开神秘面纱~<br>这几个命令大概的意思是:<br><code>[2J</code> 清除控制台<br><code>[H</code> 将光标移至最顶部<br><code>[3J</code>还是没有找到，应该是更高级的系统层级的清除控制台<br>给出几个 Linux ANSI 控制码资料网站<br><a target="_blank" rel="noopener" href="http://manpages.ubuntu.com/manpages/bionic/zh_CN/man4/console_codes.4.html">Ubuntu Manpage: 控制终端代码 - Linux 控制终端转义和控制序列</a><br><a href="www.cnblogs.com/mugua/archive/2009/11/25/1610118.html">控制终端代码 - Linux 控制终端转义和控制序列(转) - 木瓜脑袋 - 博客园</a></p>
+<p>最后前端的小伙伴很多和我一样不是科班出身的，真的得加把劲补补一些计算机比较原理性或比较接近系统层级的知识~</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ali_pay.jpeg" alt="Jsonz Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018-05-08/" rel="prev" title="2018-05-08面试记B">
+      <i class="fa fa-chevron-left"></i> 2018-05-08面试记B
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/history-scroll-restoration/" rel="next" title="浏览器恢复滚动行为 —— history.scrollRestoration">
+      浏览器恢复滚动行为 —— history.scrollRestoration <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E9%98%B6%E6%AE%B5"><span class="nav-number">1.</span> <span class="nav-text">准备阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vscode-launch-json"><span class="nav-number">1.0.1.</span> <span class="nav-text">vscode launch.json</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react-scripts-bin-react-scripts-js"><span class="nav-number">2.</span> <span class="nav-text">react-scripts&#x2F;.bin&#x2F;react-scripts.js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react-scripts-scripts-start-js"><span class="nav-number">3.</span> <span class="nav-text">react-scripts&#x2F;scripts&#x2F;start.js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react-scripts-config-env-js"><span class="nav-number">4.</span> <span class="nav-text">react-scripts&#x2F;config&#x2F;env.js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#react-scripts-scripts-start-js-2"><span class="nav-number">5.</span> <span class="nav-text">react-scripts&#x2F;scripts&#x2F;start.js(2)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%90%8E%E8%AE%B2%E4%B8%A4%E5%8F%A5"><span class="nav-number">6.</span> <span class="nav-text">最后讲两句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#react-dev-utils-clearConsole-js"><span class="nav-number">6.1.</span> <span class="nav-text">react-dev-utils&#x2F;clearConsole.js</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jsonz"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Jsonz</p>
+  <div class="site-description" itemprop="description">前端👴🥬🐣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jsonz1993" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jsonz1993" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jsonz@qq.com" title="E-Mail → mailto:jsonz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://juejin.im/user/58dbb0b844d904006954ca8e" title="掘金 → https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;58dbb0b844d904006954ca8e" rel="noopener" target="_blank"><i class="fa fa-bullseye fa-fw"></i>掘金</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.hhking.cn/" title="hhking → https:&#x2F;&#x2F;blog.hhking.cn" rel="noopener" target="_blank"><i class="fa fa-user-friends fa-fw"></i>hhking</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备18066881号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/create-react-app-t/',]
+      });
+      });
+  </script>
+
+</body>
+</html>

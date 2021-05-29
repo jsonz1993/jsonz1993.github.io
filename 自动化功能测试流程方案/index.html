@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="项目自动化测试方案总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自动化功能测试流程方案">
+<meta property="og:url" content="http://jsonz1993.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:site_name" content="Jsonz bug-log">
+<meta property="og:description" content="项目自动化测试方案总结">
+<meta property="og:locale">
+<meta property="og:image" content="http://jsonz1993.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/auto_test_project.png">
+<meta property="og:image" content="http://jsonz1993.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/auto_test_backend_project.png">
+<meta property="og:image" content="http://jsonz1993.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/log.png">
+<meta property="og:image" content="http://jsonz1993.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/success.png">
+<meta property="og:image" content="http://jsonz1993.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/admin.png">
+<meta property="article:published_time" content="2018-04-03T14:38:10.000Z">
+<meta property="article:modified_time" content="2021-05-29T14:12:12.265Z">
+<meta property="article:author" content="Jsonz">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="Test">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jsonz1993.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/auto_test_project.png">
+
+<link rel="canonical" href="http://jsonz1993.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>自动化功能测试流程方案 | Jsonz bug-log</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jsonz bug-log" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jsonz bug-log</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端/JavaScript/React</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">39</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          自动化功能测试流程方案
+        </h1>
+        <div class="post-meta ">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-04-03 14:38:10" itemprop="dateCreated datePublished" datetime="2018-04-03T14:38:10+00:00">2018-04-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-29 14:12:12" itemprop="dateModified" datetime="2021-05-29T14:12:12+00:00">2021-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">项目自动化测试方案总结</div>
+
+        </div>
+
+      </header>
+
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>得益于谷歌开源了 <a target="_blank" rel="noopener" href="https://github.com/GoogleChrome/puppeteer">puppeteer</a> 无界面版的 Chrome nodeJs api。<br>现在前端可很方便快捷的开发一些脚本去跑浏览器端的操作，包括自动化测试，爬虫或其他比较机械化的操作。<br>可以参见我上一篇文<br><strong><a href="https://jsonz1993.github.io/2018/03/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95puppeteer-%E4%B8%8Eqq%E7%A9%BA%E9%97%B4/">自动化测试 puppeteer 与qq空间</a></strong></p>
+<p>ps: 🤦‍ 早知道当时删微博就直接写一个脚本，人工去删还漏了一些被批斗了一顿</p>
+<p>既然 puppeteer 可以拿来做这么多事情，那前端是不是可以整合出一套流程测试的方案？</p>
+<h2 id="大概的流程是："><a href="#大概的流程是：" class="headerlink" title="大概的流程是："></a>大概的流程是：</h2><ul>
+<li>定时跑业务流程</li>
+<li>成功则发送一条消息通知服务器</li>
+<li>失败则 截图发送截图与其他信息<ul>
+<li>到达一定的阈值就通知相关人员排查问题</li>
+</ul>
+</li>
+<li>提供一个前端页面可以查询 任务情况</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">                                        +-------------------+</span><br><span class="line">        +-----------------------------&gt; |    记录消息         |</span><br><span class="line">        |          success              |                   |</span><br><span class="line">        |                               +------+------------+</span><br><span class="line">        |                                      |</span><br><span class="line">+-------+------+                               |</span><br><span class="line">|              |                               v</span><br><span class="line">| 定时跑测试任务  |                         +-----+-----------+</span><br><span class="line">|              |                         |                 |</span><br><span class="line">|              |                         |                 |</span><br><span class="line">+------+-------+                         |    查看任务记录   |</span><br><span class="line">       |                                 |                 |</span><br><span class="line">       |                                 |                 |</span><br><span class="line">       |                                 +-----+-----------+</span><br><span class="line">       |                                       ^</span><br><span class="line">       |                                       |</span><br><span class="line">       |          error                  +-----+----------+</span><br><span class="line">       |                                 |                |</span><br><span class="line">       +-------------------------------&gt; |    记录消息      |</span><br><span class="line">                                         |                |</span><br><span class="line">                                         |                |</span><br><span class="line">                                         +-------+--------+</span><br><span class="line">                                                 |</span><br><span class="line">                                                 |</span><br><span class="line">                                                 |  阈值</span><br><span class="line">                                                 |</span><br><span class="line">                                        +--------v---------+</span><br><span class="line">                                        |                  |</span><br><span class="line">                                        |                  |</span><br><span class="line">                                        |      通知人员      |</span><br><span class="line">                                        |                  |</span><br><span class="line">                                        |                  |</span><br><span class="line">                                        +------------------+</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="用到的技术栈"><a href="#用到的技术栈" class="headerlink" title="用到的技术栈"></a>用到的技术栈</h2><p>自动化测试: puppeteer + axios + node-schedule<br>后台: egg + mongoose<br>前端界面: antd + dva</p>
+<p>其实主要就 puppeteer + egg + mongoose 即可，前端界面只是刚好公司一个后台是用 antd-pro 写的 所以顺手带上去而已 = =#</p>
+<p>本地一些环境：<code>node 8.9.4</code>, <code>npm 5.6.0</code>, <code>oxs 10.13.3</code>， 编辑器 <code>vscodeeeeee</code></p>
+<p>以下涉及到公司项目业务的 都会略过讲一下过程 不会出现具体代码或截图等…</p>
+<h1 id="自动化测试-auto-test-部分"><a href="#自动化测试-auto-test-部分" class="headerlink" title="自动化测试(auto_test)部分"></a>自动化测试(auto_test)部分</h1><p>目录结构:<br><img data-src="/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/auto_test_project.png" alt="auto_test_project"></p>
+<h2 id="入口-app-js-主要处理一些获取自动化测试浏览器的对象，-项目启动，-定时任务启动"><a href="#入口-app-js-主要处理一些获取自动化测试浏览器的对象，-项目启动，-定时任务启动" class="headerlink" title="入口: app.js 主要处理一些获取自动化测试浏览器的对象， 项目启动， 定时任务启动"></a>入口: app.js 主要处理一些获取自动化测试浏览器的对象， 项目启动， 定时任务启动</h2><figure class="highlight javascript"><figcaption><span>app.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mMonitor = <span class="built_in">require</span>(<span class="string">&#x27;./scripts/m&#x27;</span>);  <span class="comment">// m端测试脚本入口</span></span><br><span class="line"><span class="keyword">const</span> xDate = <span class="built_in">require</span>(<span class="string">&#x27;xdate&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> login = <span class="built_in">require</span>(<span class="string">&#x27;./scripts/login&#x27;</span>); <span class="comment">// 登录操作处理</span></span><br><span class="line"><span class="keyword">const</span> &#123; scheduleDelPic &#125; = <span class="built_in">require</span>(<span class="string">&#x27;./scripts/schedule&#x27;</span>); <span class="comment">// 定时任务</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 项目入口</span></span><br><span class="line">;(<span class="keyword">async</span>()=&gt; &#123;</span><br><span class="line">  <span class="comment">// 因为公司项目需要一些前置的 操作才能访问，比如登录管理后台等操作，</span></span><br><span class="line">  <span class="comment">// 所以这里直接用一个文件把这一块抽出来，方便后面专心处理业务 不用关心用户登录 权限 测试账号等问题</span></span><br><span class="line">  <span class="comment">// 处理完直接返回一个 browser 对象，后面的其他测试只需要在当前的 browser 新开一个tab去跑即可</span></span><br><span class="line">  <span class="keyword">const</span> browser = <span class="keyword">await</span> login();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// m端项目</span></span><br><span class="line">  mMonitor(browser); <span class="comment">// 传入browser 对象 开始处理自动化测试</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 10分钟跑一次，这里也可以把间隔抽出来放到config里</span></span><br><span class="line">  <span class="comment">// 多嘴说一句，用setInterval 有一个弊端就是，前面执行脚本堵塞，会造成 一个任务跑完 直接跑下一个，中间不是间隔10min。 看具体的业务需求，也可以用 setTimeout 或者递归等去执行</span></span><br><span class="line">  <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> mMonitor(browser), <span class="number">1000</span> * <span class="number">3600</span> * <span class="number">1</span>); </span><br><span class="line"></span><br><span class="line">  <span class="comment">// 其他的任务 定时任务等</span></span><br><span class="line">  <span class="comment">// 这里是写了个定时清理图片</span></span><br><span class="line">  scheduleDelPic();</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<h2 id="前置处理-login-js-这里可以取其他名字"><a href="#前置处理-login-js-这里可以取其他名字" class="headerlink" title="前置处理: login.js (这里可以取其他名字)"></a>前置处理: login.js (这里可以取其他名字)</h2><p>对于我这个项目来说 在开始跑之前要处理测试账号登录等问题，因为考虑到后面会有多个任务在跑的话，直接在 <code>browser</code> 对象 create new tab 可以同步跑，而不用每次都去处理登录问题。</p>
+<figure class="highlight javascript"><figcaption><span>login.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> puppeteer = <span class="built_in">require</span>(<span class="string">&#x27;puppeteer&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> browser = <span class="keyword">await</span> puppeteer.launch(&#123;</span><br><span class="line">    <span class="attr">headless</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">devtools</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">slowMo</span>: <span class="number">100</span>,</span><br><span class="line">    <span class="attr">ignoreHTTPSErrors</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 处理一些其他的逻辑</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// 把处理完的 browser 返回回去</span></span><br><span class="line">  <span class="keyword">return</span> browser;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="mMonitor-移动端测试任务"><a href="#mMonitor-移动端测试任务" class="headerlink" title="mMonitor 移动端测试任务"></a>mMonitor 移动端测试任务</h2><p>主要处理的事情有：</p>
+<ul>
+<li>调用其他的流程测试任务，比如我是： 公司项目的主流程下单任务</li>
+<li>处理一些需要记录的信息，比如从什么时候跑，什么时候结束</li>
+<li>处理与服务器的交互，成功调接口</li>
+<li>失败截图保存用户信息等 传递给服务端</li>
+</ul>
+<figure class="highlight javascript"><figcaption><span>m.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">mMonitor</span>(<span class="params">browser</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 建立一个 page 的引用，方便后面可以调用方法</span></span><br><span class="line">  <span class="keyword">let</span> page;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    startTime = <span class="built_in">Date</span>.now();</span><br><span class="line"></span><br><span class="line">    page = <span class="keyword">await</span> browser.newPage();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 把页面传入主流程的测试任务</span></span><br><span class="line">    <span class="comment">// 这里面就有超级无敌大量的 业务代码... emmm 根据项目不同来写 完全没有参考意义就不写了</span></span><br><span class="line">    <span class="keyword">await</span> mainProcess(page);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 测试任务执行成功的处理</span></span><br><span class="line">    <span class="keyword">const</span> params = &#123; </span><br><span class="line">      <span class="comment">// 测试结果数据</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调接口存数据</span></span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">await</span> mRequest(params);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;上报success接口成功&#x27;</span>, params);</span><br><span class="line"></span><br><span class="line">  &#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">    <span class="comment">// 跑测试流程中错误的对应处理</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> params = &#123;</span><br><span class="line">      <span class="comment">// 错误结果的数据， 比如 </span></span><br><span class="line">      <span class="comment">// 截图地址url</span></span><br><span class="line">      <span class="comment">// title</span></span><br><span class="line">      <span class="comment">// url</span></span><br><span class="line">      <span class="comment">// serviceCode 等等</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">await</span> mRequest(params);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;上报error 接口成功&#x27;</span>, params);</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="comment">// 关闭当前页面</span></span><br><span class="line">    page.close();</span><br><span class="line">    <span class="comment">// 其他操作...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="schedule-定时任务"><a href="#schedule-定时任务" class="headerlink" title="schedule 定时任务"></a>schedule 定时任务</h2><p>这里的定时任务用的是 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/node-schedule">node-schedule</a> 非常好用 支持 <code>Cron-style</code>。</p>
+<p><code>schedule.scheduleJob(cronStyle)</code></p>
+<p>cronStyle 参数 传入对应的时间，既可按照传入的参数 定时去执行，具体可以看👆链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cronStyle: </span><br><span class="line"></span><br><span class="line">*    *    *    *    *    *</span><br><span class="line">┬    ┬    ┬    ┬    ┬    ┬</span><br><span class="line">│    │    │    │    │    │</span><br><span class="line">│    │    │    │    │    └ day of week (0 - 7) (0 or 7 is Sun)</span><br><span class="line">│    │    │    │    └───── month (1 - 12)</span><br><span class="line">│    │    │    └────────── day of month (1 - 31)</span><br><span class="line">│    │    └─────────────── hour (0 - 23)</span><br><span class="line">│    └──────────────────── minute (0 - 59)</span><br><span class="line">└───────────────────────── second (0 - 59, OPTIONAL)</span><br></pre></td></tr></table></figure>
+
+<p>目前 <code>auto_test</code> 用到的定时任务只有一个</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> schedule= <span class="built_in">require</span>(<span class="string">&#x27;node-schedule&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//删除某个目录的一层文件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">delPathFile</span>(<span class="params">path</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!fs.existsSync(path)) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">const</span> files = fs.readdirSync(path);</span><br><span class="line">  files.forEach(<span class="function"><span class="params">file</span> =&gt;</span> fs.unlinkSync(<span class="string">`<span class="subst">$&#123;path&#125;</span>/<span class="subst">$&#123;file&#125;</span>`</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定时删除图片，每周一一次</span></span><br><span class="line"><span class="built_in">exports</span>.scheduleDelPic = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> initPath = path.join(process.cwd(), <span class="string">&#x27;/static/init&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> errorPath = path.join(process.cwd(), <span class="string">&#x27;/static/error&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> successPath = path.join(process.cwd(), <span class="string">&#x27;/static/success&#x27;</span>);</span><br><span class="line"></span><br><span class="line">  schedule.scheduleJob(<span class="string">&#x27;* * * * * 1&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    delPathFile(initPath);</span><br><span class="line">    delPathFile(errorPath);</span><br><span class="line">    delPathFile(successPath);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>总的来说 <code>auto_test</code> 做的事情大概就是</p>
+<ul>
+<li>启动 <code>app.js</code>， 项目就会 10分钟自动跑一次测试程序。</li>
+<li>成功、失败后做出对应的操作。</li>
+<li>每周清除一次本地的截图数据。</li>
+</ul>
+<p>但是几个弊端</p>
+<ol>
+<li>puppeteer 是模拟浏览器，所以你的所有行为都是模拟用户操作：选择dom，点击、填写、选择操作。这些都是很容易因为页面的dom变化而失效，比如本来是选了一个 <code>#userId</code>的文本框，后面迭代把 <code>#userId</code>改为<code>#uuid</code> 那你就选不到了。 所以业务测试代码(<code>__mainProcess__</code>模块) 做好模块拆分，后面跟项目迭代也方便调整。</li>
+<li>因为网络或dom操作经常触发异步行为，所以业务测试代码里面充满各种 <code>waitFor</code> <code>waitForSelector</code> <code>waitForNative</code> 等…不注意可能就会操作到没有出现的元素，这块要做好控制，比如waitFor 时间久一点，或者在<code>page</code>上封装一个方法，比如 <code>page._click</code>:<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="title">_click</span>(<span class="params">selector</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">await</span> page.waitForSelector(selector, &#123; <span class="attr">visible</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">  <span class="keyword">return</span> page.click(selector);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+在每次点击之前，先等待该元素出现再点击。这样可以避免很多运行时 没有找到元素的错误</li>
+<li>模仿用户行为测试的话，意味着你要做一些前置的处理 如<code>login.js</code>， 要把账号密码等写到代码里面…虽然可以加密 不过还是会存在部分泄露风险…</li>
+</ol>
+<h1 id="自动化测试服务端-auto-test-backend-部分"><a href="#自动化测试服务端-auto-test-backend-部分" class="headerlink" title="自动化测试服务端(auto_test_backend)部分"></a>自动化测试服务端(auto_test_backend)部分</h1><p>对比 <code>auto_test</code> 部分， <code>auto_test_backend</code>才是我最头疼的地方。<br>毕竟不是科班出身的前端，对后端思想 以及数据库操作也没碰过= =emmm 做起来真的是超级无敌的费劲<br>特别是 设计数据格式的时候，都是拍脑袋决定了。 咦 我加个字段， 咦 我改个字段 又不是很清楚怎么快捷操作…. 估计是不熟 <code>mongoose</code> 的原因….</p>
+<p>这个项目用的是 <a href="eggjs.org/zh-cn/intro/quickstart.html">egg</a> 框架，所以基本项目结构都是按着egg的规范来。</p>
+<p>目录结构:<br><img data-src="/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/auto_test_backend_project.png" alt="auto_test_backend_project"></p>
+<p>egg 帮我们做了很多事情，开发的时候只要跑一下 <code>npm run dev</code>，就会启动一个默认端口为<code>7001</code>的服务</p>
+<p>对我们现在来说，基本只是提供 RESTAPI。<br>剩下的就简单啦，在<code>app/router.js</code>写对应的路由 如:<br><code>router.post(&#39;/api/v1/monitor&#39;, app.controller.monitor.create);</code> 这样如果有<code>post</code>请求<code>:7001/api/v1/monitor</code> 就会交由 <code>monitor.create</code> 这个 <code>controller</code> 处理。</p>
+<h2 id="路由配置-app-router-js"><a href="#路由配置-app-router-js" class="headerlink" title="路由配置 app/router.js"></a>路由配置 app/router.js</h2><p>目前路由配置比较简单，就配置了两个，一个用来处理接收 <code>auto_test</code>项目中测试结果；一个用来输出测试列表。</p>
+<figure class="highlight javascript"><figcaption><span>app/router.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="params">app</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; router, controller &#125; = app;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// post 请求交由app.controller.monitor.create处理</span></span><br><span class="line">  router.post(<span class="string">&#x27;/api/v1/monitor&#x27;</span>, app.controller.monitor.create);</span><br><span class="line">  <span class="comment">// get 请求交由app.controller.monitor.get处理</span></span><br><span class="line">  router.get(<span class="string">&#x27;/api/v1/monitor&#x27;</span>, app.controller.monitor.get);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="controller-解析用户的输入，处理后返回相应的结果"><a href="#controller-解析用户的输入，处理后返回相应的结果" class="headerlink" title="controller 解析用户的输入，处理后返回相应的结果"></a>controller 解析用户的输入，处理后返回相应的结果</h2><p>egg帮我们做了封装，直接在controller文件夹下起文件，写对应的数据，后面可以从全局对象<code>app.controller.fileName.mothedName</code>去获取对应的方法，比如现在有这个文件 <code>app/controller/test</code>，那么我可以在其他地方通过 <code>app.controller.test</code>去获取。</p>
+<p>这里拿 <code>app.controller.monitor.get</code> 举例</p>
+<p>monitor.get 方法要做的事情有</p>
+<ul>
+<li>验证结构的请求参数规则</li>
+<li>处理查询参数</li>
+<li>处理分页的问题</li>
+<li>调service 获取数据</li>
+<li>处理数据</li>
+<li>调用rest中间件发送数据</li>
+</ul>
+<p>验证参数，这里用到的是 <a target="_blank" rel="noopener" href="https://github.com/eggjs/egg-validate">egg-validate</a>插件，直接配置就可以用了</p>
+<figure class="highlight javascript"><figcaption><span>config/plugin.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exports</span>.validate = &#123;</span><br><span class="line">  <span class="attr">enable</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">package</span>: <span class="string">&#x27;egg-validate&#x27;</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><figcaption><span>app/controller/monitor.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Controller = <span class="built_in">require</span>(<span class="string">&#x27;egg&#x27;</span>).Controller;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="class"><span class="keyword">class</span> <span class="title">MonitorController</span> <span class="keyword">extends</span> <span class="title">Controller</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> ctx = <span class="built_in">this</span>.ctx;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 这里验证失败会抛出一个 422 的异常</span></span><br><span class="line">  ctx.validate(&#123;</span><br><span class="line">    <span class="attr">start</span>: &#123; <span class="attr">type</span>: <span class="string">&#x27;number&#x27;</span>, <span class="attr">require</span>: <span class="literal">false</span>&#125;,</span><br><span class="line">    <span class="comment">// end, state, pagination等等其他参数验证</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 获取传过来的参数</span></span><br><span class="line">  <span class="keyword">const</span> &#123; start, end, state, <span class="attr">pagination</span>: _pagination&#125; = ctx.query;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 根据自身业务 处理查询参数</span></span><br><span class="line">  (<span class="keyword">typeof</span> state !== <span class="string">&#x27;undefined&#x27;</span>) &amp;&amp; (params.state = state);</span><br><span class="line">  <span class="keyword">if</span> (start &amp;&amp; end) &#123;</span><br><span class="line">    <span class="built_in">Object</span>.assign(params, &#123;</span><br><span class="line">      <span class="attr">time</span>: &#123;</span><br><span class="line">        <span class="attr">$gte</span>: start,</span><br><span class="line">        <span class="attr">$lte</span>: end,</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 处理分页参数</span></span><br><span class="line">  <span class="keyword">const</span> paramsPagination = <span class="built_in">Object</span>.assign(&#123; <span class="attr">size</span>: <span class="number">20</span>, <span class="attr">page</span>: <span class="number">1</span> &#125;, <span class="built_in">JSON</span>.parse(_pagination || <span class="string">&#x27;&#123;&#125;&#x27;</span>));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 调 service 获取数据</span></span><br><span class="line">  <span class="comment">// service也和 controller 一样，egg做了文件的映射，直接 ctx.service能很方便的去获取</span></span><br><span class="line">  <span class="keyword">const</span> &#123; list, pagination &#125; = <span class="keyword">await</span> ctx.service.monitor.find(&#123; params, ...paramsPagination &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 处理数据</span></span><br><span class="line">  list.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">    item.img_url = <span class="string">`http://localhost:7001<span class="subst">$&#123;item.img_url&#125;</span>`</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 调 rest中间件 处理返回数据</span></span><br><span class="line">  ctx.rest(&#123;</span><br><span class="line">    list,</span><br><span class="line">    pagination,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="service-处理一些和数据库交互的逻辑"><a href="#service-处理一些和数据库交互的逻辑" class="headerlink" title="service 处理一些和数据库交互的逻辑"></a>service 处理一些和数据库交互的逻辑</h2><p>service和controller 一样，egg帮我们做了一些文件的映射，所以也是直接在<code>app/service/monitor.js</code>写对应的逻辑即可</p>
+<p>这一块应该是最麻烦的， mongoose api 不熟，也不确定这么写会不会最优,合不合理等…有时间或者以后有机会 会去看《SQL必知必会》 学学数据库这一块软肋。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Service = <span class="built_in">require</span>(<span class="string">&#x27;egg&#x27;</span>).Service;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="class"><span class="keyword">class</span> <span class="title">MoitorService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="function"><span class="title">find</span>(<span class="params">&#123;params, size, page&#125;</span>)</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 查复合条件的页数</span></span><br><span class="line">    <span class="keyword">const</span> count = <span class="keyword">await</span> <span class="built_in">this</span>.app.model.Monitor</span><br><span class="line">      .find(params).count();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 处理分页</span></span><br><span class="line">    <span class="keyword">const</span> monitors = <span class="keyword">await</span> <span class="built_in">this</span>.app.model.Monitor</span><br><span class="line">      .find(params).sort(<span class="string">&#x27;time&#x27;</span>).select(<span class="string">&#x27;-__v&#x27;</span>)</span><br><span class="line">      .skip(size * (page-<span class="number">1</span>))</span><br><span class="line">      .limit(size).lean();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 处理要返回的格式</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">list</span>: monitors,</span><br><span class="line">      <span class="attr">pagination</span>: &#123;</span><br><span class="line">        count, size, page,</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="middleware-中间件"><a href="#middleware-中间件" class="headerlink" title="middleware 中间件"></a>middleware 中间件</h2><p>egg 其实基于koa实现的，所以对中间件形式和koa一样是洋葱圈模型。</p>
+<p>集成中间件也很简单，在<code>app/middleware/</code>下写对应的中间件，再在 <code>config/config.default.js</code>下配置即可启用。</p>
+<p>写中间件</p>
+<figure class="highlight javascript"><figcaption><span>app/middleware/error_handler.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function">()=&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">errorHandler</span>(<span class="params">ctx, next</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">await</span> next();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">      <span class="comment">// 所有异常都在 app 上触发一个 error 事件</span></span><br><span class="line">      ctx.app.emit(<span class="string">&#x27;error&#x27;</span>, err, ctx);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> status = err.status || <span class="number">500</span>;</span><br><span class="line">      <span class="comment">// 生产环境时 500 错误的详细错误内容不返回给客户端，可能包含敏感信息</span></span><br><span class="line">      <span class="keyword">const</span> error = status === <span class="number">500</span> &amp;&amp; ctx.app.config.env === <span class="string">&#x27;prod&#x27;</span></span><br><span class="line">        ? <span class="string">&#x27;Internal Server Error&#x27;</span></span><br><span class="line">        : err.message;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 从 error 对象上读出各个属性 设置到响应中</span></span><br><span class="line">      ctx.body = &#123; error &#125;;</span><br><span class="line">      <span class="keyword">if</span> (status === <span class="number">422</span>) &#123;</span><br><span class="line">        ctx.body.detail = err.errors;</span><br><span class="line">      &#125;</span><br><span class="line">      ctx.status = status;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>添加配置</p>
+<figure class="highlight javascript"><figcaption><span>app/config/config.default.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="params">appInfo</span>=&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> config = &#123;</span><br><span class="line">    <span class="comment">// 中间件配置</span></span><br><span class="line">    <span class="attr">middleware</span>: [<span class="string">&#x27;errorHandler&#x27;</span>],</span><br><span class="line"></span><br><span class="line">    <span class="comment">// errorHandler配置，只对 /api 开头的路由做处理</span></span><br><span class="line">    <span class="attr">errorHandler</span>: &#123;</span><br><span class="line">      <span class="attr">match</span>: <span class="string">&#x27;/api&#x27;</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> config;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="阈值发送邮件功能"><a href="#阈值发送邮件功能" class="headerlink" title="阈值发送邮件功能"></a>阈值发送邮件功能</h2><p>这一块要维护两个临时变量数组，三个配置参数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> temp = &#123;&#125;;</span><br><span class="line">temp.errorObj = &#123;</span><br><span class="line">  <span class="attr">errorArray</span>: [], <span class="comment">// 用来存每次错误上报的时间戳</span></span><br><span class="line">  <span class="attr">sendArray</span>: [], <span class="comment">// 用来存每次发送的时间戳</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> errorConfig = &#123;</span><br><span class="line">  <span class="attr">maxCount</span>: <span class="number">5</span>, <span class="comment">// 单位时间超过n次就报警</span></span><br><span class="line">  <span class="attr">unitTime</span>: <span class="number">30</span>, <span class="comment">// 单位时间为：n分钟</span></span><br><span class="line">  <span class="attr">maxSend</span>: <span class="number">2</span>, <span class="comment">// 单位时间最多发n封邮件</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">大概的逻辑是， 每次报错的时候， errorArray 塞入一个时间戳，然后判断：</span><br><span class="line"><span class="number">1.</span> 判断是否到达发送阈值</span><br><span class="line"><span class="number">2.</span> 根据当前的时间戳和配置来清理过期的数据</span><br><span class="line"><span class="number">3.</span> 判断单位时间内是否达到发送阈值</span><br><span class="line"><span class="number">4.</span> 判断单位时间内是否超过发送次数</span><br><span class="line"><span class="number">5.</span> 构建发送内容， 🚀  处理后续的记录操作</span><br></pre></td></tr></table></figure>
+<p>用到的发邮件插件是 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ee200a67853c">nodemailer</a> 简单粗暴 用过都说好</p>
+<h2 id="and"><a href="#and" class="headerlink" title="and"></a>and</h2><p>其实 <code>auto_test_project</code> 最麻烦的是在定义数据库格式的时候，经常定义少一些关键的字段（目前肯定也还存在这种情况的）。<br>还有就是本来以为和 <code>angular</code> 一样，<code>controller</code> 会塞大量的业务逻辑， 等到后面有一个场景是要在某个 <code>controller</code>调用另一个<code>controller</code> 时才发现，原来 controller 主要的职责是负责处理路由和一些参数验证输出等比较对外的工作，对内的基本都写成了<code>service</code>。</p>
+<p>前端的小伙伴很多人懂node 可能也只是懂node的语法层 要想真的写后台或者微全栈，还是有很多东西要学的。</p>
+<h1 id="列表展示-admin-项目"><a href="#列表展示-admin-项目" class="headerlink" title="列表展示(admin)项目"></a>列表展示(admin)项目</h1><p>列表展示相对简单，没什么好讲的。想用什么技术栈都比较随意，react,vue甚至hbs或者直接在js里面写html字符串循环都ok。</p>
+<p>这里推一下一篇文章，介绍工作中的一个项目 <a href="https://jsonz1993.github.io/2018/02/react%E5%85%A8%E5%AE%B6%E6%A1%B6-dva-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/">react全家桶 &amp;&amp; dva最佳实践</a></p>
+<h1 id="end"><a href="#end" class="headerlink" title="end"></a>end</h1><p>跑自动化测试脚本(auto_test)的log<br><img data-src="/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/log.png" alt="log.png"></p>
+<p>自动化测试成功后提交数据(admin)<br><img data-src="/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/success.png" alt="success"></p>
+<p>自动化测试失败后将数据上报(admin) 包含了标题，报错信息，链接，截图，标记等<br><img data-src="/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/admin.png" alt="admin"></p>
+<p>文章作为学习的记录到此结束，这个项目主要学习了 egg,mongodb,puppeteer 等 还是挺有收获的.</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ali_pay.jpeg" alt="Jsonz Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/Test/" rel="tag"># Test</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/" rel="prev" title="项目代码规范工作流——editor、prettier、eslint、git-check">
+      <i class="fa fa-chevron-left"></i> 项目代码规范工作流——editor、prettier、eslint、git-check
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/%E4%BA%8B%E4%BB%B6%E9%87%8D%E5%A4%8D%E7%BB%91%E5%AE%9A%E4%B8%8EstopImmediatePropagation/" rel="next" title="事件重复绑定与stopImmediatePropagation">
+      事件重复绑定与stopImmediatePropagation <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E6%A6%82%E7%9A%84%E6%B5%81%E7%A8%8B%E6%98%AF%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">大概的流程是：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E5%88%B0%E7%9A%84%E6%8A%80%E6%9C%AF%E6%A0%88"><span class="nav-number">1.2.</span> <span class="nav-text">用到的技术栈</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95-auto-test-%E9%83%A8%E5%88%86"><span class="nav-number">2.</span> <span class="nav-text">自动化测试(auto_test)部分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3-app-js-%E4%B8%BB%E8%A6%81%E5%A4%84%E7%90%86%E4%B8%80%E4%BA%9B%E8%8E%B7%E5%8F%96%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%AF%B9%E8%B1%A1%EF%BC%8C-%E9%A1%B9%E7%9B%AE%E5%90%AF%E5%8A%A8%EF%BC%8C-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%90%AF%E5%8A%A8"><span class="nav-number">2.1.</span> <span class="nav-text">入口: app.js 主要处理一些获取自动化测试浏览器的对象， 项目启动， 定时任务启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E5%A4%84%E7%90%86-login-js-%E8%BF%99%E9%87%8C%E5%8F%AF%E4%BB%A5%E5%8F%96%E5%85%B6%E4%BB%96%E5%90%8D%E5%AD%97"><span class="nav-number">2.2.</span> <span class="nav-text">前置处理: login.js (这里可以取其他名字)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mMonitor-%E7%A7%BB%E5%8A%A8%E7%AB%AF%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.3.</span> <span class="nav-text">mMonitor 移动端测试任务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#schedule-%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="nav-number">2.4.</span> <span class="nav-text">schedule 定时任务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95%E6%9C%8D%E5%8A%A1%E7%AB%AF-auto-test-backend-%E9%83%A8%E5%88%86"><span class="nav-number">3.</span> <span class="nav-text">自动化测试服务端(auto_test_backend)部分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E9%85%8D%E7%BD%AE-app-router-js"><span class="nav-number">3.1.</span> <span class="nav-text">路由配置 app&#x2F;router.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#controller-%E8%A7%A3%E6%9E%90%E7%94%A8%E6%88%B7%E7%9A%84%E8%BE%93%E5%85%A5%EF%BC%8C%E5%A4%84%E7%90%86%E5%90%8E%E8%BF%94%E5%9B%9E%E7%9B%B8%E5%BA%94%E7%9A%84%E7%BB%93%E6%9E%9C"><span class="nav-number">3.2.</span> <span class="nav-text">controller 解析用户的输入，处理后返回相应的结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#service-%E5%A4%84%E7%90%86%E4%B8%80%E4%BA%9B%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A4%E4%BA%92%E7%9A%84%E9%80%BB%E8%BE%91"><span class="nav-number">3.3.</span> <span class="nav-text">service 处理一些和数据库交互的逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#middleware-%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">3.4.</span> <span class="nav-text">middleware 中间件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%98%88%E5%80%BC%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%E5%8A%9F%E8%83%BD"><span class="nav-number">3.5.</span> <span class="nav-text">阈值发送邮件功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#and"><span class="nav-number">3.6.</span> <span class="nav-text">and</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E5%B1%95%E7%A4%BA-admin-%E9%A1%B9%E7%9B%AE"><span class="nav-number">4.</span> <span class="nav-text">列表展示(admin)项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#end"><span class="nav-number">5.</span> <span class="nav-text">end</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jsonz"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Jsonz</p>
+  <div class="site-description" itemprop="description">前端👴🥬🐣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jsonz1993" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jsonz1993" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jsonz@qq.com" title="E-Mail → mailto:jsonz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://juejin.im/user/58dbb0b844d904006954ca8e" title="掘金 → https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;58dbb0b844d904006954ca8e" rel="noopener" target="_blank"><i class="fa fa-bullseye fa-fw"></i>掘金</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.hhking.cn/" title="hhking → https:&#x2F;&#x2F;blog.hhking.cn" rel="noopener" target="_blank"><i class="fa fa-user-friends fa-fw"></i>hhking</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备18066881号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/',]
+      });
+      });
+  </script>
+
+</body>
+</html>

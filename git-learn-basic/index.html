@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="git基础知识备忘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git基础">
+<meta property="og:url" content="http://jsonz1993.github.io/git-learn-basic/index.html">
+<meta property="og:site_name" content="Jsonz bug-log">
+<meta property="og:description" content="git基础知识备忘">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-03-16T16:56:56.000Z">
+<meta property="article:modified_time" content="2021-05-29T14:12:12.329Z">
+<meta property="article:author" content="Jsonz">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jsonz1993.github.io/git-learn-basic/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>git基础 | Jsonz bug-log</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jsonz bug-log" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jsonz bug-log</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端/JavaScript/React</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">39</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/git-learn-basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git基础
+        </h1>
+        <div class="post-meta ">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-16 16:56:56" itemprop="dateCreated datePublished" datetime="2020-03-16T16:56:56+00:00">2020-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-29 14:12:12" itemprop="dateModified" datetime="2021-05-29T14:12:12+00:00">2021-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">git基础知识备忘</div>
+
+        </div>
+
+      </header>
+
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Git-Basic"><a href="#Git-Basic" class="headerlink" title="Git Basic"></a>Git Basic</h1><h2 id="获取仓库"><a href="#获取仓库" class="headerlink" title="获取仓库"></a>获取仓库</h2><p><code>git clone url &lt;folder&gt;</code></p>
+<p>发现commit信息写错了，重新提交commit信息 <code>git commit --amend</code> </p>
+<h2 id="记录每次更新"><a href="#记录每次更新" class="headerlink" title="记录每次更新"></a>记录每次更新</h2><p>git status 短模式<br><code>git status -s --short</code><br>暂存区状态 工作区状态 文件</p>
+<p>.gitignore <a target="_blank" rel="noopener" href="https://github.com/github/gitignore">githubIgnore</a></p>
+<ul>
+<li>所有空行或者以 # 开头的行都会被 Git 忽略。</li>
+<li>可以使用标准的 glob 模式匹配，它会递归地应用在整个工作区中。</li>
+<li>匹配模式可以以（/）开头防止递归。</li>
+<li>匹配模式可以以（/）结尾指定目录。</li>
+<li>要忽略指定模式以外的文件或目录，可以在模式前加上叹号（!）取反。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 忽略所有的 .a 文件</span><br><span class="line">*.a</span><br><span class="line"># 但跟踪所有的 lib.a，即便你在前面忽略了 .a 文件</span><br><span class="line">!lib.a</span><br><span class="line"># 只忽略当前目录下的 TODO 文件，而不忽略 subdir/TODO</span><br><span class="line">/TODO</span><br><span class="line"># 忽略任何目录下名为 build 的文件夹</span><br><span class="line">build/</span><br><span class="line"># 忽略 doc/notes.txt，但不忽略 doc/server/arch.txt</span><br><span class="line">doc/*.txt</span><br><span class="line"># 忽略 doc/ 目录及其所有子目录下的 .pdf 文件</span><br><span class="line">doc/**/*.pdf</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h2><p><code>git rm</code> 直接从git仓库删除，并删除文件库<br><code>git rm --cached</code> 只删除git追踪，不删除磁盘文件，比如忘了把node_module加到.gitignore，就可以通过 git rm –cached删除追踪<br>支持 glob 模式匹配</p>
+<h2 id="重命名-移动文件"><a href="#重命名-移动文件" class="headerlink" title="重命名/移动文件"></a>重命名/移动文件</h2><p><code>git mv oldFile newFile</code><br>相当于执行了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mv oldFile newFile</span><br><span class="line">git add newFile</span><br><span class="line">git rm oldFile</span><br></pre></td></tr></table></figure>
+
+<h2 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2">git log</a></h2><p>限制显示的条数 <code>git log -l</code> 例如 <code>git log -2</code></p>
+<p>查看每次commit改动的代码 <code>git log -p</code></p>
+<p>增加总结，commit时各个文件增删多少行以及汇总 <code>git log --stat</code></p>
+<p>一行输出 <code>git log --oneline</code></p>
+<p>自定义format <code>git log --pretty=format:&quot;formation&quot;</code> 具体看链接文档</p>
+<p>图形展示 <code>git log --graph</code></p>
+<p>限制时间 <code>git log --since=2.days</code> 具体看链接文档</p>
+<p>不展示merge节点 <code>git log --no-merges</code></p>
+<h2 id="撤消操作"><a href="#撤消操作" class="headerlink" title="撤消操作"></a>撤消操作</h2><p><code>git reset file</code> 把暂存区的文件取出来<br><code>git checkout -- file</code> 把工作区文件修改撤销(变为已暂存/已提交的文件状态)</p>
+<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><p><code>git remote -v</code> 显示git读写的仓库地址<br><code>git remote add &lt;name&gt; &lt;url&gt;</code> 添加远程仓库 git add origin <a href="mailto:&#103;&#105;&#116;&#64;&#103;&#105;&#x74;&#46;&#x78;&#120;&#x78;&#x78;">&#103;&#105;&#116;&#64;&#103;&#105;&#x74;&#46;&#x78;&#120;&#x78;&#x78;</a></p>
+<h2 id="打标签"><a href="#打标签" class="headerlink" title="打标签"></a>打标签</h2><p>添加tag<br><code>git tag -a tagName </code> 简单模式<br><code>git tag -a tagName -m message</code> 添加tag的说明</p>
+<p>展示tag<br><code>git show tagName</code><br><code>git tag</code><br><code>git tag -l &#39;tagName glob</code></p>
+<p>删除tag<br><code>git tag -d tagName</code> 只会删除本地<br><code>git push origin --delete tagName</code> 删除本地与远程<br><code>git push origin :refs/tags/tagName</code> 同上</p>
+<p>检出标签<br><code>git checkout -b brand-version2 tagName</code></p>
+<h2 id="Git别名"><a href="#Git别名" class="headerlink" title="Git别名"></a>Git别名</h2><p>可以让我们的终端操作更加方便快捷<br><code>git config --global alias.unstage &#39;reset HEAD --&#39;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">当我们执行 git unstage 时相当于执行了 reset HEAD --</span><br><span class="line">即</span><br><span class="line">git unstage fileA</span><br><span class="line">git reset HEAD -- fileA</span><br></pre></td></tr></table></figure>
+
+<p>再比如我们经常看最后一次更改的话，可以设置个别名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --gloabl alias.last &#x27;git log -1 HEAD&#x27;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Git-Branch"><a href="#Git-Branch" class="headerlink" title="Git Branch"></a>Git Branch</h1><h2 id="创建、合并与删除"><a href="#创建、合并与删除" class="headerlink" title="创建、合并与删除"></a>创建、合并与删除</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git checkout xxxx 检出分支</span><br><span class="line">git checkout -b xxx 创建并检出分支</span><br><span class="line">git branch xxxx 创建分支</span><br><span class="line"></span><br><span class="line">合并</span><br><span class="line">git checkout master</span><br><span class="line">git merge hotfix</span><br><span class="line"></span><br><span class="line">删除</span><br><span class="line">git branch -d xxxx</span><br><span class="line">git push origin --delete xxxx 删除远程分支</span><br></pre></td></tr></table></figure>
+
+<p>冲突</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git mergetool </span><br><span class="line">git mergetool --tool-help 查看有什么diff工具</span><br><span class="line">git config merge.tool xxxx 设置merge tool</span><br></pre></td></tr></table></figure>
+
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><p>git branch 查看分支<br>git branch -v 查看分支&amp;&amp;最后一次commit<br>git branch -vv 查看分支&amp;&amp;远程跟踪分支&amp;&amp;最后一次commit<br>git branch –merged/–no-merged 查看分支是否有被merge过，如果被merge过的分支，删掉该分支也没问题<br>git push <romote> <branch> 推动不同远程分支<br>git checkout –track <remote>/<branch> 切换并追踪分支<br>git branch -u/–set-upstream-to <remote>/<branch> 显示设置追踪远程分支<br>git push origin –delete xxxx 删除远程分支</p>
+<h2 id="变基"><a href="#变基" class="headerlink" title="变基"></a><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA">变基</a></h2><p>merge的操作是三方合并（当前节点，待合并节点，共同祖先节点）<br>rebase更像是把所有提交重新在当前分支跑一遍，不过rebase有时候更灵活</p>
+<p><code>git rebase --onto master server client</code><br>取出 client 分支，找出它从 server 分支分歧之后的补丁， 然后把这些补丁在 master 分支上重放一遍，让 client 看起来像直接基于 master 修改一样</p>
+<p><em>变基还是比较疑惑</em></p>
+<h1 id="Git-Utils"><a href="#Git-Utils" class="headerlink" title="Git Utils"></a>Git Utils</h1><h2 id="贮藏与清理-git-stash"><a href="#贮藏与清理-git-stash" class="headerlink" title="贮藏与清理 git stash"></a>贮藏与清理 git stash</h2><p>贮藏 <code>git stash push</code><br>取出 <code>git stash pop</code><br>查看贮藏列表 <code>git stash list</code><br>骚操作 交互式贮藏，这个功能fork暂时不支持，所以只能通过命令行来实现 <code>git stash --patch</code><br>创建一个分支用来apply贮藏的东西 <code>git stash branch &lt;new branchName&gt;</code></p>
+<p><code>git clean</code> 可以用来清理一些未被跟踪的文件，包括新建的和被ignore的<br>更好的方法是用 <code>git stash push --all</code>来暂存所有文件，因为clean删除操作是不可逆的</p>
+<p>预演一遍会删除什么文件 <code>git clean -n</code><br>强制删除 <code>git clean -f</code><br>交互式 <code>git clean -i</code><br>静默模式 <code>git clean -q</code><br>也删除忽略的文件 <code>git clean -x</code><br>只删除忽略文件 <code>git clean -X</code><br>删除整个文件 <code>git clean -d</code></p>
+<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><p><code>git grep</code> 强大的搜索功能，不过一般好像都用ide直接搜或者用</p>
+<p>搜索git仓库中的 removeSignoffAttachments 常用的命令<br><code>git grap -n removeSignoffAttachment</code> -n是为了显示在第几行<br><code>git grap -c removeSignoffAttachment</code> –count 显示在某个文件共出现多少次</p>
+<h2 id="重写历史"><a href="#重写历史" class="headerlink" title="重写历史"></a><a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2">重写历史</a></h2><p>如果你的commit信息写错了，但是还没有推送到远程可以用 <code>git commit --amend</code>重新修改</p>
+<p><strong>交互式变基</strong><br><code>git rebase -i HEAD~3</code> 交互式变基操作最近的三个commit</p>
+<p>我们可以利用交互式变基做很多事情，比如修改多个交易信息。<code>git rebase -i HEAD~3</code> 然后再编辑器里面修改，如果只是修改commit信息，把<code>pick</code>改为<code>r</code>再改后面的信息就好。</p>
+<p>你也可以在这里删除掉某个commit。 或者你想把commit合并成一个，可以把后面两个的 <code>pick</code> 改为 <code>squash</code>，git就会把后面两个的commit内容合并到第一个</p>
+<h2 id="重写大量提交-filter-branch"><a href="#重写大量提交-filter-branch" class="headerlink" title="重写大量提交 filter-branch"></a>重写大量提交 filter-branch</h2><p>从每一个提交中移除一个文件: <code>git filter-branch --tree-filter &#39;rm -f passwords.txt&#39; HEAD</code></p>
+<p>全局修改邮箱地址:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git filter-branch --commit-filter &#x27;</span><br><span class="line">if [ &quot;$GIT_AUTHOR_EMAIL&quot; = &quot;schacon@localhost&quot; ];</span><br><span class="line">then</span><br><span class="line">        GIT_AUTHOR_NAME=&quot;Scott Chacon&quot;;</span><br><span class="line">        GIT_AUTHOR_EMAIL=&quot;schacon@example.com&quot;;</span><br><span class="line">        git commit-tree &quot;$@&quot;;</span><br><span class="line">else</span><br><span class="line">        git commit-tree &quot;$@&quot;;</span><br><span class="line">fi&#x27; HEAD</span><br></pre></td></tr></table></figure>
+
+<h2 id="重置解密"><a href="#重置解密" class="headerlink" title="重置解密"></a>重置解密</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD~ 默认选项，把上个提交修改文件置于工作区</span><br><span class="line">git reset --soft HEAD~ 上个提交的修改置于暂存区</span><br><span class="line">git reset --hard HEAD~ 直接将指针指向上个修改，强制覆盖了工作目录中的文件。如果你的commit没有Push的话，那估计找不到了</span><br><span class="line"></span><br><span class="line">reset 命令会以特定的顺序重写这三棵树，在你指定以下选项时停止：</span><br><span class="line"></span><br><span class="line">1. 移动 HEAD 分支的指向 （若指定了 --soft，则到此停止）</span><br><span class="line">2. 使索引看起来像 HEAD （若未指定 --hard，则到此停止）</span><br><span class="line">3. 使工作目录看起来像索引</span><br></pre></td></tr></table></figure>
+
+<h2 id="reset-合并提交"><a href="#reset-合并提交" class="headerlink" title="reset 合并提交"></a>reset 合并提交</h2><p>除了<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/Git-%E5%B7%A5%E5%85%B7-%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2#_squashing">压缩提交</a>以外，还可以用reset来合并提交，前提也是你的代码还没push</p>
+<p>假设你有一个项目，第一次提交中有一个文件，第二次提交增加了一个新的文件并修改了第一个文件，第三次提交再次修改了第一个文件。 由于第二次提交是一个未完成的工作，因此你想要压缩它。</p>
+<p><code>git reset --soft HEAD~2</code> 就会把前两个commit给撤回，并把修改都放在暂存区，这时候再一起commit</p>
+<h2 id="高级合并"><a href="#高级合并" class="headerlink" title="高级合并"></a>高级合并</h2><p>正常合并冲突直接在ied里面解决冲突会比命令行人性化很多</p>
+<h2 id="查看每行的修改信息"><a href="#查看每行的修改信息" class="headerlink" title="查看每行的修改信息"></a>查看每行的修改信息</h2><p>类似vscode的 <code>File Blame</code>功能<br><code>git blame [-L 1,200] index.jsx</code> 查看 index.jsx的第1~200行的修改信息，如果加<code>-C</code>参数还可以看到这几行最原始出现的地方，也就是说有可能是其他地方copy过来的</p>
+<h2 id="查看第一次出现在仓库是什么时候"><a href="#查看第一次出现在仓库是什么时候" class="headerlink" title="查看第一次出现在仓库是什么时候"></a>查看第一次出现在仓库是什么时候</h2><p><code>git log -S text</code> 可以知道仓库什么时候提交出现过这些 text</p>
+<h2 id="git-子模块（子git）"><a href="#git-子模块（子git）" class="headerlink" title="git 子模块（子git）"></a>git 子模块（子git）</h2><p>添加子模块 <code>git submodule add &lt;repo&gt; [&lt;dir&gt;]</code></p>
+<p>当仓库中有子模块时，需要用 <code>git submodule init &amp;&amp; git submit update</code>来初始化并检出父项目中列出的合适的提交<br>当然你也可以在克隆的时候直接加参数来处理<code>git clone &lt;repo&gt; --recurse-submodules</code></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ali_pay.jpeg" alt="Jsonz Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Git/" rel="tag"># Git</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/github-actions/" rel="prev" title="用github actions部署你的应用(hexo)">
+      <i class="fa fa-chevron-left"></i> 用github actions部署你的应用(hexo)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/code-check/" rel="next" title="学好Git 拒绝背锅">
+      学好Git 拒绝背锅 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-Basic"><span class="nav-number">1.</span> <span class="nav-text">Git Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%BB%93%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">获取仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%B0%E5%BD%95%E6%AF%8F%E6%AC%A1%E6%9B%B4%E6%96%B0"><span class="nav-number">1.2.</span> <span class="nav-text">记录每次更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%91%BD%E5%90%8D-%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">重命名&#x2F;移动文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-log"><span class="nav-number">1.5.</span> <span class="nav-text">git log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%92%A4%E6%B6%88%E6%93%8D%E4%BD%9C"><span class="nav-number">1.6.</span> <span class="nav-text">撤消操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.7.</span> <span class="nav-text">远程仓库的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%93%E6%A0%87%E7%AD%BE"><span class="nav-number">1.8.</span> <span class="nav-text">打标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Git%E5%88%AB%E5%90%8D"><span class="nav-number">1.9.</span> <span class="nav-text">Git别名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-Branch"><span class="nav-number">2.</span> <span class="nav-text">Git Branch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E3%80%81%E5%90%88%E5%B9%B6%E4%B8%8E%E5%88%A0%E9%99%A4"><span class="nav-number">2.1.</span> <span class="nav-text">创建、合并与删除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%94%AF%E7%AE%A1%E7%90%86"><span class="nav-number">2.2.</span> <span class="nav-text">分支管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%98%E5%9F%BA"><span class="nav-number">2.3.</span> <span class="nav-text">变基</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-Utils"><span class="nav-number">3.</span> <span class="nav-text">Git Utils</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%AE%E8%97%8F%E4%B8%8E%E6%B8%85%E7%90%86-git-stash"><span class="nav-number">3.1.</span> <span class="nav-text">贮藏与清理 git stash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2"><span class="nav-number">3.2.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%86%99%E5%8E%86%E5%8F%B2"><span class="nav-number">3.3.</span> <span class="nav-text">重写历史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E5%86%99%E5%A4%A7%E9%87%8F%E6%8F%90%E4%BA%A4-filter-branch"><span class="nav-number">3.4.</span> <span class="nav-text">重写大量提交 filter-branch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%8D%E7%BD%AE%E8%A7%A3%E5%AF%86"><span class="nav-number">3.5.</span> <span class="nav-text">重置解密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reset-%E5%90%88%E5%B9%B6%E6%8F%90%E4%BA%A4"><span class="nav-number">3.6.</span> <span class="nav-text">reset 合并提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E5%90%88%E5%B9%B6"><span class="nav-number">3.7.</span> <span class="nav-text">高级合并</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%AF%8F%E8%A1%8C%E7%9A%84%E4%BF%AE%E6%94%B9%E4%BF%A1%E6%81%AF"><span class="nav-number">3.8.</span> <span class="nav-text">查看每行的修改信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%87%BA%E7%8E%B0%E5%9C%A8%E4%BB%93%E5%BA%93%E6%98%AF%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99"><span class="nav-number">3.9.</span> <span class="nav-text">查看第一次出现在仓库是什么时候</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-%E5%AD%90%E6%A8%A1%E5%9D%97%EF%BC%88%E5%AD%90git%EF%BC%89"><span class="nav-number">3.10.</span> <span class="nav-text">git 子模块（子git）</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jsonz"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Jsonz</p>
+  <div class="site-description" itemprop="description">前端👴🥬🐣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jsonz1993" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jsonz1993" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jsonz@qq.com" title="E-Mail → mailto:jsonz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://juejin.im/user/58dbb0b844d904006954ca8e" title="掘金 → https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;58dbb0b844d904006954ca8e" rel="noopener" target="_blank"><i class="fa fa-bullseye fa-fw"></i>掘金</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.hhking.cn/" title="hhking → https:&#x2F;&#x2F;blog.hhking.cn" rel="noopener" target="_blank"><i class="fa fa-user-friends fa-fw"></i>hhking</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备18066881号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/git-learn-basic/',]
+      });
+      });
+  </script>
+
+</body>
+</html>

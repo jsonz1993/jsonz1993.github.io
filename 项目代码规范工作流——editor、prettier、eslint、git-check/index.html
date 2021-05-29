@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="常用的项目规范总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="项目代码规范工作流——editor、prettier、eslint、git-check">
+<meta property="og:url" content="http://jsonz1993.github.io/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/index.html">
+<meta property="og:site_name" content="Jsonz bug-log">
+<meta property="og:description" content="常用的项目规范总结">
+<meta property="og:locale">
+<meta property="og:image" content="http://jsonz1993.github.io/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/error1.png">
+<meta property="og:image" content="http://jsonz1993.github.io/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/error2.png">
+<meta property="og:image" content="http://jsonz1993.github.io/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/error3.png">
+<meta property="og:image" content="http://jsonz1993.github.io/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/git-check.png">
+<meta property="article:published_time" content="2018-03-29T10:21:28.000Z">
+<meta property="article:modified_time" content="2021-05-29T14:12:12.261Z">
+<meta property="article:author" content="Jsonz">
+<meta property="article:tag" content="Work">
+<meta property="article:tag" content="Build">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jsonz1993.github.io/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/error1.png">
+
+<link rel="canonical" href="http://jsonz1993.github.io/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>项目代码规范工作流——editor、prettier、eslint、git-check | Jsonz bug-log</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jsonz bug-log" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jsonz bug-log</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端/JavaScript/React</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">39</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          项目代码规范工作流——editor、prettier、eslint、git-check
+        </h1>
+        <div class="post-meta ">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-03-29 10:21:28" itemprop="dateCreated datePublished" datetime="2018-03-29T10:21:28+00:00">2018-03-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-29 14:12:12" itemprop="dateModified" datetime="2021-05-29T14:12:12+00:00">2021-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">常用的项目规范总结</div>
+
+        </div>
+
+      </header>
+
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>最近部门进了挺多新前端，有实习生 有应届生，人一多<br>代码规范就不能完全依赖 “口口相传” 去约束了， 特别是看到一堆的 有分号，无分号，四缩进，二缩进等问题</p>
+<p>对于有小小代码洁癖的我实在是受不了 于是终于在项目中 集成各种用来 规范（约束）的工具。</p>
+<p>主要有：</p>
+<ul>
+<li>editorConfig 编辑器配置文件</li>
+<li>Prettier 批量格式化代码</li>
+<li>Eslint js、jsx 文件代码检查规范</li>
+<li>Flow (暂未集成)</li>
+<li>lint-staged 提交到git之前跑一次代码检查</li>
+</ul>
+<p>本地一些环境：<code>node 8.9.4</code>, <code>npm 5.6.0</code>, <code>oxs 10.13.3</code>， 编辑器 <code>vscodeeeeee</code></p>
+<h1 id="EditorConfig"><a href="#EditorConfig" class="headerlink" title="EditorConfig"></a>EditorConfig</h1><p>What is EditorConfig?<br>官网给出的答案是：editorconfig帮助开发人员在不同的编辑器和ide之间定义和维护一致的编码风格。<br><strong>简单来说就是跨编辑器使用同一份代码缩进等配置</strong></p>
+<p>EditorConfig 集成起来十分简单， 大概就是创建配置文件，安装相应的编辑器插件即可。</p>
+<ol>
+<li>创建 <a target="_blank" rel="noopener" href="http://editorconfig.org/#example-file"><code>.editorconfig</code></a> 文件</li>
+<li><a target="_blank" rel="noopener" href="http://editorconfig.org/#download">安装对应编辑器的插件</a></li>
+</ol>
+<p>我用的是 vscode 直接安装这个 <code>EditorConfig for vs code</code>，安装完重启，编辑器就会根据配置文件里面的配置来控制代码缩进等行为</p>
+<p>附上项目的配置文件</p>
+<figure class="highlight json"><figcaption><span>.editorconfig</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">root = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[*]</span><br><span class="line">charset = utf<span class="number">-8</span></span><br><span class="line">end_of_line = lf # mac linux/unix 都用lf。 window 设置 cr 在 *nix 有问题</span><br><span class="line">indent_size = <span class="number">4</span></span><br><span class="line">indent_style = space</span><br><span class="line">max_line_length = <span class="number">120</span></span><br><span class="line">trim_trailing_whitespace = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[*.jsx]</span><br><span class="line">indent_size= <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="Prettier"><a href="#Prettier" class="headerlink" title="Prettier"></a>Prettier</h1><p>现在有了一些基本的配置，以后写的代码就可以比较规范一点点点，但是原来的旧代码怎么办呢？<br>不可能一个文件一个文件去打开吧，不完全统计 项目有上千个编辑的文件….一个一个去手动打开不符合程序员的风格</p>
+<p>so… <a target="_blank" rel="noopener" href="https://prettier.io/">Prettier</a>就是为我们做这些事情的</p>
+<ol>
+<li>安装: <code>npm i --save-dev prettier</code></li>
+<li>创建 <a target="_blank" rel="noopener" href="https://prettier.io/docs/en/configuration.html"><code>.prettierrc</code>配置文件</a><br>该配置文件会继承<code>editorConfig</code>的配置</li>
+<li>向<code>package.json</code>添加脚本: <code>&quot;prettier&quot;: &quot;prettier --write ./*&quot;</code><blockquote>
+<p>我项目里面用的是 <code>&quot;prettier&quot;: &quot;prettier --write &#39;./src/**/*.js&#39; &#39;./src/**/*.jsx&#39; &#39;./src/**/*.css&#39; &#39;./src/**/*.scss&#39;&quot;,</code></p>
+</blockquote>
+</li>
+<li>创建 <code>.prettierignore</code> 文件，用来忽略一些文件 &amp;&amp; 目录</li>
+<li>一切准备就绪之后 !!!! <code>npm run prettier</code> 呼呼 看到提示一千个文件更改记录 哈哈哈</li>
+</ol>
+<p>附上配置文件:</p>
+<figure class="highlight javascript"><figcaption><span>.prettierrc.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// https://prettier.io/docs/en/options.html</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">trailingComma</span>: <span class="string">&quot;es5&quot;</span>, <span class="comment">// 数组 对象尾随逗号 [arr, ] &#123; obj, &#125;</span></span><br><span class="line">    <span class="comment">// bracketSpacing: true, // 对象空格 &#123; foo: bar &#125;, false=&gt; &#123;foo:bar&#125;</span></span><br><span class="line"><span class="comment">// jsxBracketSameLine: false, // jsx闭标签是否另起一行 &lt;Test&gt;&lt;/Test&gt;</span></span><br><span class="line"><span class="comment">// arrowParens: &#x27;avoid&#x27;, // 箭头函数是否省略括号 a=&gt; a, (a)=&gt; a</span></span><br><span class="line">    <span class="attr">singleQuote</span>: <span class="literal">true</span>, <span class="comment">// 单引号</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><figcaption><span>.prettierignore</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/node_modules</span><br><span class="line">/dist</span><br><span class="line">/src/lib/</span><br><span class="line"><span class="regexp">/src/g</span>lobal/fonts</span><br></pre></td></tr></table></figure>
+
+<h1 id="Eslint"><a href="#Eslint" class="headerlink" title="Eslint"></a>Eslint</h1><p>有了上面介绍的 <code>editor</code>、<code>prettier</code>还是远远不够的，因为 js语法 不是很严格，比如有没有分号啊 之类的问题还是要用 eslint 来约束的。</p>
+<p>在很多年前，我是特别反感 Eslint 的，因为经常写得一点不规范，直接就报 error 整个项目跑不起来。<br>但是 存在即合理，现在觉得这东西贼好用。</p>
+<ol>
+<li>安装 eslint: <code>npm i --save-dev eslint</code></li>
+<li>启动引导脚本: <code>./node_modules/.bin/eslint --init</code> 配置 <code>.eslintrc</code>。<blockquote>
+<p>这里可以直接选 <code>Use a popular style guide</code> 然后选行业比较看好的规范 <code>airbnb</code>的，原先是打算选这个，但是后面发现和项目现有的规范很不相同，所以后面就走回答问题选项。</p>
+</blockquote>
+</li>
+<li>向 <code>package.json</code> 添加脚本: <code>&quot;eslint&quot;: &quot;eslint --fix ./&quot;</code><blockquote>
+<p>我写的是 <code>&quot;eslint&quot;: &quot;eslint --fix &#39;./src/**/*.&#123;jsx, js&#125;&#39;&quot;,</code></p>
+</blockquote>
+</li>
+<li>创建 <code>.eslintignore</code> 文件，并向其添加需要忽略的文件或目录。</li>
+<li>安装 <a target="_blank" rel="noopener" href="https://eslint.org/docs/user-guide/integrations">编辑器 eslint 插件</a></li>
+<li>配置编辑器，我这里用的是 vscode</li>
+</ol>
+<ul>
+<li>“eslint.autoFixOnSave”: true  <code>开启eslint 检查</code></li>
+<li>“javascript.validate.enable”: false <code>关闭vscode自带的js检查</code></li>
+</ul>
+<p>eslint插件会智能检查编辑状态的 JS 文件，并自动修复；<code>npm run eslint</code> 脚本可以检查和智能修复“对应的文件”。 不过亲测修复的效果比较一般，更多的报错需要手动去处理</p>
+<p>在配置eslint的时候 遇到了几个比较郁闷的地方</p>
+<h2 id="可以先把一些报错项改为-警告项，慢慢迭代-免得一上eslint-要停几天来修改原来的文件"><a href="#可以先把一些报错项改为-警告项，慢慢迭代-免得一上eslint-要停几天来修改原来的文件" class="headerlink" title="可以先把一些报错项改为 警告项，慢慢迭代 免得一上eslint 要停几天来修改原来的文件"></a>可以先把一些报错项改为 警告项，慢慢迭代 免得一上eslint 要停几天来修改原来的文件</h2><h2 id="一些简单的处理可以写脚本去做"><a href="#一些简单的处理可以写脚本去做" class="headerlink" title="一些简单的处理可以写脚本去做"></a>一些简单的处理可以写脚本去做</h2><p>比如说之前项目写的比较不规范，出现了很多类似：<code>export default from &#39;file-path&#39;</code>的语句，但是eslint不认，觉得这是不符合规范的，需要改为 <code>export &#123; default &#125; from &#39;file-path&#39;</code></p>
+<p>这点我也比较认同，但是 这么多个文件，一个一个改是不存在的，所以写了个短脚本去处理</p>
+<figure class="highlight javascript"><figcaption><span>fix-export-default</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">scan</span>(<span class="params">&#123;dirPath&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> isDirectory = fs.statSync(dirPath).isDirectory();</span><br><span class="line">    <span class="keyword">if</span> (isDirectory) &#123;</span><br><span class="line">        <span class="keyword">const</span> childs = fs.readdirSync(dirPath);</span><br><span class="line">        childs.forEach(<span class="function"><span class="params">child</span>=&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> nextPath = path.join(dirPath, child);</span><br><span class="line">            <span class="keyword">const</span> stat = fs.statSync(nextPath);</span><br><span class="line">            <span class="keyword">const</span> isDirectory = stat.isDirectory();</span><br><span class="line">            <span class="keyword">const</span> isFile = stat.isFile();</span><br><span class="line">            <span class="keyword">const</span> extname = isFile &amp;&amp; path.extname(child);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 文件夹类型 递归</span></span><br><span class="line">            <span class="keyword">if</span> (isDirectory) scan(&#123;<span class="attr">dirPath</span>: nextPath&#125;);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 排除不是 js jsx 的文件</span></span><br><span class="line">            <span class="keyword">if</span> (![<span class="string">&#x27;.js&#x27;</span>, <span class="string">&#x27;.jsx&#x27;</span>].includes(extname)) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 开始读文件</span></span><br><span class="line">            <span class="keyword">let</span> fileStr = fs.readFileSync(nextPath) +<span class="string">&#x27;&#x27;</span>;</span><br><span class="line">            <span class="keyword">const</span> exg = <span class="regexp">/export default from/gi</span>;</span><br><span class="line">            <span class="keyword">if</span> (exg.exec(fileStr))</span><br><span class="line">                fileStr = fileStr.replace(<span class="string">&#x27;export default from&#x27;</span>, <span class="string">&#x27;export &#123;default&#125; from&#x27;</span>);</span><br><span class="line">            fs.writeFileSync(nextPath, fileStr, &#123;<span class="attr">encoding</span>: <span class="string">&#x27;utf-8&#x27;</span>&#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">scan(&#123;</span><br><span class="line">    <span class="attr">dirPath</span>: path.join(process.cwd(), <span class="string">&#x27;/src&#x27;</span>),</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="webpack别名引用-路径报错问题"><a href="#webpack别名引用-路径报错问题" class="headerlink" title="webpack别名引用 路径报错问题"></a>webpack别名引用 路径报错问题</h2><p>安装对应的 eslint 处理插件: <code>npm i --save-dev eslint-import-resolver-webpack eslint-plugin-import</code></p>
+<p>在 <code>.eslint.js</code> 里面加这段配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;settings&quot;</span>: &#123;</span><br><span class="line">  <span class="string">&#x27;import/resolver&#x27;</span>: &#123;</span><br><span class="line">      <span class="attr">webpack</span>: &#123;</span><br><span class="line">          <span class="attr">config</span>: getWebpackConfig, <span class="comment">// 这里是webpack配置路径</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他注意问题"><a href="#其他注意问题" class="headerlink" title="其他注意问题"></a>其他注意问题</h2><p>项目是在 浏览器运行， 又是 es6语法， 又有一些node脚本，会有一些全局的变量引用提示报错，怎么办？<br>改配置!</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;env&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">browser</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">es6</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">node</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>项目是后端模版渲染的，会有一些全局变量，eslint报错怎么办？<br>改配置!</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;globals&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">__DEV__</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">__HTTPS__</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">FB</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">ga</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">$</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">ercjs</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">google</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">IS_APP</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">i18n</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">Zepto</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">AdjustEvent</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">Adjust</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">fbq</span>: <span class="literal">true</span>,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>项目用了很多新语法 eslint 不识别, 用了 react 怎么办？<br>改配置…具体的 谷歌一下 一堆答案 不再赘述</p>
+<h1 id="Flow"><a href="#Flow" class="headerlink" title="Flow"></a>Flow</h1><p>Flow可以理解为 很轻量型 无侵入的 静态类型检查<br>项目暂时没有考虑集成，所以这里不做过多介绍</p>
+<h1 id="git-check"><a href="#git-check" class="headerlink" title="git-check"></a>git-check</h1><p>既然我们 有了编辑器的配置， js编辑实时检查， 但是如果有些小伙伴不遵守规则 搞事情怎么办呢？<br>这时候我们可以在最后一个流程加上验证的部分，  在git 提交的时候跑一些脚本去验证，如果通过就给提交，不通过就提示错误</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/okonet/lint-staged">lint-staged</a> 可以帮我们做这些事情</p>
+<ol>
+<li>安装 lint-staged husky: <code> npm i --save-dev lint-staged husky</code></li>
+<li>向 <code>package.json</code> 添加运行脚本 <code>&quot;precommit&quot;: &quot;lint-staged&quot;</code><blockquote>
+<p>这时候在git commit 之前会跑 lint-staged的东西</p>
+</blockquote>
+</li>
+<li>再向 <code>package.json</code> 添加内容:  注意，这时候不是加在 <code>scripts</code>里面，而是加在同级<br><code>&quot;lint-staged&quot;: &#123;  // 上面提供的“自动化脚本”  &quot;*.js&quot;: [&quot;eslint --fix&quot;, &quot;git add&quot;],  &quot;*.json&quot;: [&quot;prettier --write&quot;, &quot;git add&quot;],  &quot;*.css&quot;: [&quot;prettier --write&quot;, &quot;git add&quot;],  &quot;*.scss&quot;: [&quot;prettier --write&quot;, &quot;git add&quot;],  &quot;*.md&quot;: [&quot;prettier --write&quot;, &quot;git add&quot;] &#125;</code><blockquote>
+<p>因为项目是本地打包再推远程，所以我的配置是指定了 src下的<br><code>&quot;src/**/*.js&quot;: [ &quot;eslint --fix&quot;, &quot;git add&quot; ], &quot;src/**/*.jsx&quot;: [ &quot;eslint --fix&quot;, &quot;git add&quot; ], &quot;src/**/*.css&quot;: [ &quot;prettier --write&quot;, &quot;git add&quot; ], &quot;src/**/*.scss&quot;: [ &quot;prettier --write&quot;, &quot;git add&quot; ]</code></p>
+</blockquote>
+</li>
+</ol>
+<p>这样在提交之前就会对 新增的(git add) .js 文件执行 <code>&quot;eslint --fix&quot;</code> 脚本， 以此类推…</p>
+<h1 id="End"><a href="#End" class="headerlink" title="End"></a>End</h1><p>emmmmmmmmmmmmmmmmmmmmmmmmm 虽然看起来挺简单的，但是整套结合项目去折腾下来 挺多坑的。<br>特别是eslint这块的配置</p>
+<p>第一次跑 <code>airbnb</code> 的项目： <img data-src="/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/error1.png" alt="eror1"><br>目前项目配置官方推荐的 esling 之后: <img data-src="/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/error2.png" alt="eror2"><br>把error改为 warn保证项目能跑起来: <img data-src="/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/error3.png" alt="eror3"><br>git提交检查失败: <img data-src="/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/git-check.png" alt="git-check"></p>
+<p>最后附上eslint配置</p>
+<figure class="highlight javascript"><figcaption><span>.eslint.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getWebpackConfig = <span class="built_in">require</span>(<span class="string">&#x27;./config/webpack.dev.config&#x27;</span>)(process.cwd());</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="string">&quot;parser&quot;</span>: <span class="string">&quot;babel-eslint&quot;</span>,</span><br><span class="line">    <span class="string">&quot;extends&quot;</span>: [<span class="string">&#x27;eslint:recommended&#x27;</span>, <span class="string">&quot;plugin:react/recommended&quot;</span>, <span class="string">&quot;prettier&quot;</span>],</span><br><span class="line">    <span class="string">&quot;parserOptions&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;ecmaVersion&quot;</span>: <span class="number">8</span>,</span><br><span class="line">        <span class="string">&quot;sourceType&quot;</span>: <span class="string">&quot;module&quot;</span>,</span><br><span class="line">        <span class="string">&quot;ecmaFeatures&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;jsx&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="string">&quot;modules&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="string">&quot;experimentalObjectRestSpread&quot;</span>: <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;plugins&quot;</span>: [<span class="string">&quot;react&quot;</span>],</span><br><span class="line">    <span class="string">&quot;settings&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;import/resolver&#x27;</span>: &#123;</span><br><span class="line">            <span class="attr">webpack</span>: &#123;</span><br><span class="line">                <span class="attr">config</span>: getWebpackConfig,</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;react&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;pragma&quot;</span>: <span class="string">&quot;React&quot;</span>,</span><br><span class="line">            <span class="string">&quot;version&quot;</span>: <span class="string">&quot;16.1.1&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;env&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">browser</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">es6</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">node</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;globals&quot;</span>: &#123;</span><br><span class="line">        <span class="attr">__DEV__</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">__HTTPS__</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">FB</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">ga</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">$</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">ercjs</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">google</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">IS_APP</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">i18n</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">Zepto</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">AdjustEvent</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">Adjust</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">fbq</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="string">&quot;rules&quot;</span>: &#123;</span><br><span class="line">        <span class="string">&quot;sort-imports&quot;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&quot;import/first&quot;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&quot;import/no-named-as-default&quot;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&quot;import/no-named-as-default-member&quot;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&quot;import/extensions&quot;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&quot;prefer-destructuring&quot;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&quot;no-new&quot;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&quot;react/jsx-filename-extension&quot;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&quot;no-plusplus&quot;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&quot;func-names&quot;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&quot;no-console&quot;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&quot;no-useless-escape&quot;</span>: <span class="number">0</span>,</span><br><span class="line">        <span class="string">&quot;semi&quot;</span>: <span class="number">2</span>,</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 这些规则后面会改为错误，暂时先警告</span></span><br><span class="line">        <span class="string">&quot;no-unused-vars&quot;</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="string">&quot;react/prop-types&quot;</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="string">&quot;react/no-string-refs&quot;</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="string">&quot;react/jsx-key&quot;</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="string">&quot;react/no-unescaped-entities&quot;</span>: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ali_pay.jpeg" alt="Jsonz Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Work/" rel="tag"># Work</a>
+              <a href="/tags/Build/" rel="tag"># Build</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95puppeteer-%E4%B8%8Eqq%E7%A9%BA%E9%97%B4/" rel="prev" title="自动化测试 puppeteer 与qq空间">
+      <i class="fa fa-chevron-left"></i> 自动化测试 puppeteer 与qq空间
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/%E8%87%AA%E5%8A%A8%E5%8C%96%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95%E6%B5%81%E7%A8%8B%E6%96%B9%E6%A1%88/" rel="next" title="自动化功能测试流程方案">
+      自动化功能测试流程方案 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EditorConfig"><span class="nav-number">2.</span> <span class="nav-text">EditorConfig</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Prettier"><span class="nav-number">3.</span> <span class="nav-text">Prettier</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eslint"><span class="nav-number">4.</span> <span class="nav-text">Eslint</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E5%85%88%E6%8A%8A%E4%B8%80%E4%BA%9B%E6%8A%A5%E9%94%99%E9%A1%B9%E6%94%B9%E4%B8%BA-%E8%AD%A6%E5%91%8A%E9%A1%B9%EF%BC%8C%E6%85%A2%E6%85%A2%E8%BF%AD%E4%BB%A3-%E5%85%8D%E5%BE%97%E4%B8%80%E4%B8%8Aeslint-%E8%A6%81%E5%81%9C%E5%87%A0%E5%A4%A9%E6%9D%A5%E4%BF%AE%E6%94%B9%E5%8E%9F%E6%9D%A5%E7%9A%84%E6%96%87%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">可以先把一些报错项改为 警告项，慢慢迭代 免得一上eslint 要停几天来修改原来的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E7%9A%84%E5%A4%84%E7%90%86%E5%8F%AF%E4%BB%A5%E5%86%99%E8%84%9A%E6%9C%AC%E5%8E%BB%E5%81%9A"><span class="nav-number">4.2.</span> <span class="nav-text">一些简单的处理可以写脚本去做</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack%E5%88%AB%E5%90%8D%E5%BC%95%E7%94%A8-%E8%B7%AF%E5%BE%84%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98"><span class="nav-number">4.3.</span> <span class="nav-text">webpack别名引用 路径报错问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%B3%A8%E6%84%8F%E9%97%AE%E9%A2%98"><span class="nav-number">4.4.</span> <span class="nav-text">其他注意问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flow"><span class="nav-number">5.</span> <span class="nav-text">Flow</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-check"><span class="nav-number">6.</span> <span class="nav-text">git-check</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#End"><span class="nav-number">7.</span> <span class="nav-text">End</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jsonz"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Jsonz</p>
+  <div class="site-description" itemprop="description">前端👴🥬🐣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jsonz1993" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jsonz1993" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jsonz@qq.com" title="E-Mail → mailto:jsonz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://juejin.im/user/58dbb0b844d904006954ca8e" title="掘金 → https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;58dbb0b844d904006954ca8e" rel="noopener" target="_blank"><i class="fa fa-bullseye fa-fw"></i>掘金</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.hhking.cn/" title="hhking → https:&#x2F;&#x2F;blog.hhking.cn" rel="noopener" target="_blank"><i class="fa fa-user-friends fa-fw"></i>hhking</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备18066881号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E5%B7%A5%E4%BD%9C%E6%B5%81%E2%80%94%E2%80%94editor%E3%80%81prettier%E3%80%81eslint%E3%80%81git-check/',]
+      });
+      });
+  </script>
+
+</body>
+</html>

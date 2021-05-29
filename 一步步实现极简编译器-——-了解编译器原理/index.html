@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="从零开始写一个自己的编译器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一步步实现极简编译器 —— 了解编译器原理">
+<meta property="og:url" content="http://jsonz1993.github.io/%E4%B8%80%E6%AD%A5%E6%AD%A5%E5%AE%9E%E7%8E%B0%E6%9E%81%E7%AE%80%E7%BC%96%E8%AF%91%E5%99%A8-%E2%80%94%E2%80%94-%E4%BA%86%E8%A7%A3%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86/index.html">
+<meta property="og:site_name" content="Jsonz bug-log">
+<meta property="og:description" content="从零开始写一个自己的编译器">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-01-13T17:36:54.000Z">
+<meta property="article:modified_time" content="2021-05-29T14:12:12.233Z">
+<meta property="article:author" content="Jsonz">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jsonz1993.github.io/%E4%B8%80%E6%AD%A5%E6%AD%A5%E5%AE%9E%E7%8E%B0%E6%9E%81%E7%AE%80%E7%BC%96%E8%AF%91%E5%99%A8-%E2%80%94%E2%80%94-%E4%BA%86%E8%A7%A3%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>一步步实现极简编译器 —— 了解编译器原理 | Jsonz bug-log</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jsonz bug-log" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jsonz bug-log</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端/JavaScript/React</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">39</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/%E4%B8%80%E6%AD%A5%E6%AD%A5%E5%AE%9E%E7%8E%B0%E6%9E%81%E7%AE%80%E7%BC%96%E8%AF%91%E5%99%A8-%E2%80%94%E2%80%94-%E4%BA%86%E8%A7%A3%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一步步实现极简编译器 —— 了解编译器原理
+        </h1>
+        <div class="post-meta ">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-01-13 17:36:54" itemprop="dateCreated datePublished" datetime="2018-01-13T17:36:54+00:00">2018-01-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-29 14:12:12" itemprop="dateModified" datetime="2021-05-29T14:12:12+00:00">2021-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">从零开始写一个自己的编译器</div>
+
+        </div>
+
+      </header>
+
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="welcome"><a href="#welcome" class="headerlink" title="welcome"></a>welcome</h2><p>今天在看 babel 的时候，无意中被引到一个外链</p>
+<blockquote>
+<p>关于编译器的优秀/简单的教程，请查看 <a target="_blank" rel="noopener" href="https://babeljs.cn/docs/plugins/">the-super-tiny-compiler</a> ，同时它也从宏观角度上解释了 Babel 本身是如何工作的。</p>
+</blockquote>
+<p>觉得挺感兴趣的，加上代码也不多，就跟着思路自己理解敲了一遍。</p>
+<p>本文主要是帮助理解编译器的原理 不做过多的其他扩展</p>
+<h2 id="编译器的基本组成"><a href="#编译器的基本组成" class="headerlink" title="编译器的基本组成"></a>编译器的基本组成</h2><p>一般简单的编译器可以由以下几部分组成:</p>
+<ul>
+<li>tokenizer 词法分析器 把代码或文本按类型分开，返回: <code>tokens</code></li>
+<li>parser 语法剖析器 对分析后的文本按照语法分析转换成 抽象语法树 返回：ast</li>
+<li>transformer 语法转换器 把语法剖析后的抽象语法树转换成我们想要的: newAst</li>
+<li>codeGenerator 代码生成器 把AST 转换为 目标代码</li>
+</ul>
+<blockquote>
+<p>babel 初始阶段并没有做任何事，基本上等于 <code>const babel = code=&gt; code</code>;<br>先 tokenizer， parser 解析代码，再 transformer 的时候，完全不改动原来的 ast</p>
+</blockquote>
+<p>接下来以最简单的编译器组成 一个环节一个环节走下去</p>
+<h2 id="tokenizer-词法分析器"><a href="#tokenizer-词法分析器" class="headerlink" title="tokenizer 词法分析器"></a>tokenizer 词法分析器</h2><p>词法分析器其实可以理解为简单的将文本切割，然后将有价值的按照相邻同等类型的 文本组合一起输出。<br><em><small>ps:无价值指对代码生成没有影响的部分，比如js里面非文本 一个空格和一百个空格对编译器来说是没有区别的</small></em></p>
+<p>实现思路：</p>
+<ol>
+<li>有一个值存着当前的光标 <code>current</code></li>
+<li>有一个数组用来存放按类型分出来的值 <code>tokens</code></li>
+<li>对文本进行循环， 取 <code>current</code> 的值做 分类型处理</li>
+<li><code>(</code></li>
+<li><code>)</code></li>
+<li>空格</li>
+<li>数字</li>
+<li>字符串</li>
+<li>方法名</li>
+<li>将处理后的值存进数组 <code>token</code> 并返回</li>
+</ol>
+<figure class="highlight javascript"><figcaption><span>tokenizer</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">tokenizer</span>(<span class="params">input</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> current = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">const</span> tokens = [];</span><br><span class="line">  <span class="keyword">while</span> (current &lt; input.length) &#123;</span><br><span class="line">    <span class="keyword">let</span> char = input[current];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (char === <span class="string">&quot;(&quot;</span> || char === <span class="string">&quot;)&quot;</span>) &#123;</span><br><span class="line">      tokens.push(&#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;paren&#x27;</span>,</span><br><span class="line">        <span class="attr">value</span>: char</span><br><span class="line">      &#125;);</span><br><span class="line">      current++;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> WHITESPACE = <span class="regexp">/\s/</span>;</span><br><span class="line">    <span class="keyword">if</span> (WHITESPACE.test(char)) &#123;</span><br><span class="line">      current++;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> LETTERS = <span class="regexp">/[a-z]/i</span>;</span><br><span class="line">    <span class="keyword">if</span> (LETTERS.test(char)) &#123;</span><br><span class="line">      <span class="keyword">let</span> name = <span class="string">&quot;&quot;</span>;</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">while</span> (LETTERS.test(char)) &#123;</span><br><span class="line">        name += char;</span><br><span class="line">        current++;</span><br><span class="line">        char = input[current];</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      tokens.push(&#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;name&#x27;</span>,</span><br><span class="line">        <span class="attr">value</span>: name</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> NUMBERS = <span class="regexp">/[0-9]/</span>;</span><br><span class="line">    <span class="keyword">if</span> (NUMBERS.test(char)) &#123;</span><br><span class="line">      <span class="keyword">let</span> numbers = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">while</span>(NUMBERS.test(char)) &#123;</span><br><span class="line">        numbers += char;</span><br><span class="line">        current++;</span><br><span class="line">        char = input[current];</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      tokens.push(&#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;number&#x27;</span>,</span><br><span class="line">        <span class="attr">value</span>: numbers</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (char === <span class="string">&#x27;&quot;&#x27;</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> string = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">      current++;</span><br><span class="line">      char = input[current];</span><br><span class="line"></span><br><span class="line">      <span class="keyword">while</span>(char !== <span class="string">&#x27;&quot;&#x27;</span>) &#123;</span><br><span class="line">        string += char;</span><br><span class="line">        current++;</span><br><span class="line">        char = input[current];</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      tokens.push(&#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;string&#x27;</span>,</span><br><span class="line">        <span class="attr">value</span>: string</span><br><span class="line">      &#125;);</span><br><span class="line">      current++;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">&#x27;不知道你输入的是什么鬼东西 &#x27;</span> + char);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> tokens;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> input = <span class="string">&#x27;(add 2 (subtract 4 2 &quot;djwaqp&quot;))&#x27;</span>;</span><br><span class="line">tokenizer(input);</span><br><span class="line"><span class="comment">// 输出</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">[&#123; type: &#x27;paren&#x27;, value: &#x27;(&#x27; &#125;,</span></span><br><span class="line"><span class="comment">&#123; type: &#x27;name&#x27;, value: &#x27;add&#x27; &#125;,</span></span><br><span class="line"><span class="comment">&#123; type: &#x27;number&#x27;, value: &#x27;2&#x27; &#125;,</span></span><br><span class="line"><span class="comment">&#123; type: &#x27;paren&#x27;, value: &#x27;(&#x27; &#125;,</span></span><br><span class="line"><span class="comment">&#123; type: &#x27;name&#x27;, value: &#x27;subtract&#x27; &#125;,</span></span><br><span class="line"><span class="comment">&#123; type: &#x27;number&#x27;, value: &#x27;4&#x27; &#125;,</span></span><br><span class="line"><span class="comment">&#123; type: &#x27;number&#x27;, value: &#x27;2&#x27; &#125;,</span></span><br><span class="line"><span class="comment">&#123; type: &#x27;string&#x27;, value: &#x27;djwaqp&#x27; &#125;,</span></span><br><span class="line"><span class="comment">&#123; type: &#x27;paren&#x27;, value: &#x27;)&#x27; &#125;,</span></span><br><span class="line"><span class="comment">&#123; type: &#x27;paren&#x27;, value: &#x27;)&#x27; &#125;];</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="parser"><a href="#parser" class="headerlink" title="parser"></a>parser</h2><p>语法剖析器就是把 <code>tokens</code> 解析，转化为抽象语法树(AST)🌲🌲🌲，方便后续的处理。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[&#123; <span class="attr">type</span>: <span class="string">&#x27;paren&#x27;</span>, <span class="attr">value</span>: <span class="string">&#x27;(&#x27;</span> &#125;, ...]   =&gt;   &#123; <span class="attr">type</span>: <span class="string">&#x27;Program&#x27;</span>, <span class="attr">body</span>: [...] &#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现思路：</p>
+<ol>
+<li>首先也要有一个 <code>current</code> 对 <code>tokens</code> 进行遍历，每一项 <code>token</code> 进行分析处理</li>
+<li>有一棵树，顶级结构为 <code>&#123;type: &#39;Program&#39; , body: [...]&#125;</code></li>
+<li>根据 <code>token.type</code> 进行相应的归类处理:</li>
+<li><code>number</code>： 直接返回  <code>&#123;type: &#39;NumberLiteral&#39;, value, &#125;</code></li>
+<li><code>string</code>： 直接返回 <code>&#123;type: &#39;StringLiteral&#39;, value, &#125;</code></li>
+<li><code>paren (</code> ： 对下一个进行递归，直到出现 <code>paren )</code></li>
+<li>将处理后的 ast 返回</li>
+</ol>
+<figure class="highlight javascript"><figcaption><span>parser</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parser</span>(<span class="params">tokens</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> current = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">const</span> ast = &#123; </span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;Program&#x27;</span>, </span><br><span class="line">    <span class="attr">body</span>: []</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">walk</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> token = tokens[current];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (token.type === <span class="string">&#x27;number&#x27;</span>) &#123;</span><br><span class="line">      current ++;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;NumberLiteral&#x27;</span>,</span><br><span class="line">        <span class="attr">value</span>: token.value</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (token.type === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">      current ++;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;StringLiteral&#x27;</span>,</span><br><span class="line">        <span class="attr">value</span>: token.value</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (token.type === <span class="string">&#x27;paren&#x27;</span> &amp;&amp; token.value === <span class="string">&#x27;(&#x27;</span>) &#123;</span><br><span class="line">      token = tokens[++current];</span><br><span class="line">      <span class="keyword">let</span> node = &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&quot;CallExpression&quot;</span>,</span><br><span class="line">        <span class="attr">name</span>: token.value,</span><br><span class="line">        <span class="attr">params</span>: []</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      token = tokens[++current];</span><br><span class="line">      <span class="keyword">while</span> ((token.type !== <span class="string">&#x27;paren&#x27;</span>) || (token.type === <span class="string">&#x27;paren&#x27;</span> &amp;&amp; token.value !== <span class="string">&#x27;)&#x27;</span>)) &#123;</span><br><span class="line">        node.params.push(walk());</span><br><span class="line">        token = tokens[current];</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      current++;</span><br><span class="line">      <span class="keyword">return</span> node;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(token.type);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span>(current &lt; tokens.length) &#123;</span><br><span class="line">    ast.body.push(walk());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ast;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">[&#123; <span class="attr">type</span>: <span class="string">&#x27;paren&#x27;</span>, <span class="attr">value</span>: <span class="string">&#x27;(&#x27;</span> &#125;,</span><br><span class="line">&#123; <span class="attr">type</span>: <span class="string">&#x27;name&#x27;</span>, <span class="attr">value</span>: <span class="string">&#x27;add&#x27;</span> &#125;,</span><br><span class="line">&#123; <span class="attr">type</span>: <span class="string">&#x27;number&#x27;</span>, <span class="attr">value</span>: <span class="string">&#x27;2&#x27;</span> &#125;,</span><br><span class="line">&#123; <span class="attr">type</span>: <span class="string">&#x27;paren&#x27;</span>, <span class="attr">value</span>: <span class="string">&#x27;(&#x27;</span> &#125;,</span><br><span class="line">&#123; <span class="attr">type</span>: <span class="string">&#x27;name&#x27;</span>, <span class="attr">value</span>: <span class="string">&#x27;subtract&#x27;</span> &#125;,</span><br><span class="line">&#123; <span class="attr">type</span>: <span class="string">&#x27;number&#x27;</span>, <span class="attr">value</span>: <span class="string">&#x27;4&#x27;</span> &#125;,</span><br><span class="line">&#123; <span class="attr">type</span>: <span class="string">&#x27;number&#x27;</span>, <span class="attr">value</span>: <span class="string">&#x27;2&#x27;</span> &#125;,</span><br><span class="line">&#123; <span class="attr">type</span>: <span class="string">&#x27;string&#x27;</span>, <span class="attr">value</span>: <span class="string">&#x27;djwaqp&#x27;</span> &#125;,</span><br><span class="line">&#123; <span class="attr">type</span>: <span class="string">&#x27;paren&#x27;</span>, <span class="attr">value</span>: <span class="string">&#x27;)&#x27;</span> &#125;,</span><br><span class="line">&#123; <span class="attr">type</span>: <span class="string">&#x27;paren&#x27;</span>, <span class="attr">value</span>: <span class="string">&#x27;)&#x27;</span> &#125;]</span><br><span class="line">=&gt;</span><br><span class="line">output:</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;type&quot;</span>: <span class="string">&quot;Program&quot;</span>,</span><br><span class="line">	<span class="string">&quot;body&quot;</span>: [&#123;</span><br><span class="line">		<span class="string">&quot;type&quot;</span>: <span class="string">&quot;CallExpression&quot;</span>,</span><br><span class="line">		<span class="string">&quot;name&quot;</span>: <span class="string">&quot;ADD&quot;</span>,</span><br><span class="line">		<span class="string">&quot;params&quot;</span>: [&#123;</span><br><span class="line">			<span class="string">&quot;type&quot;</span>: <span class="string">&quot;NumberLiteral&quot;</span>,</span><br><span class="line">			<span class="string">&quot;value&quot;</span>: <span class="string">&quot;2&quot;</span></span><br><span class="line">		&#125;, &#123;</span><br><span class="line">			<span class="string">&quot;type&quot;</span>: <span class="string">&quot;CallExpression&quot;</span>,</span><br><span class="line">			<span class="string">&quot;name&quot;</span>: <span class="string">&quot;subtract&quot;</span>,</span><br><span class="line">			<span class="string">&quot;params&quot;</span>: [&#123;</span><br><span class="line">				<span class="string">&quot;type&quot;</span>: <span class="string">&quot;NumberLiteral&quot;</span>,</span><br><span class="line">				<span class="string">&quot;value&quot;</span>: <span class="string">&quot;4&quot;</span></span><br><span class="line">			&#125;, &#123;</span><br><span class="line">				<span class="string">&quot;type&quot;</span>: <span class="string">&quot;NumberLiteral&quot;</span>,</span><br><span class="line">				<span class="string">&quot;value&quot;</span>: <span class="string">&quot;2&quot;</span></span><br><span class="line">			&#125;, &#123;</span><br><span class="line">				<span class="string">&quot;type&quot;</span>: <span class="string">&quot;StringLiteral&quot;</span>,</span><br><span class="line">				<span class="string">&quot;value&quot;</span>: <span class="string">&quot;djwaqp&quot;</span></span><br><span class="line">			&#125;]</span><br><span class="line">		&#125;]</span><br><span class="line">	&#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="transformer"><a href="#transformer" class="headerlink" title="transformer"></a>transformer</h2><p>transformer 顾名思义，为转换部分，最复杂 也最常用。<br><code>.babelrc</code> 添加的插件，也只是在这个环节进行操作，将原本的 ast( es6 ) 转换为目标的 newAst (es5)。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ast &#123; <span class="attr">type</span>: <span class="string">&#x27;Program&#x27;</span>, <span class="attr">body</span>: [...] &#125;   =&gt;   newAst &#123; <span class="attr">type</span>: <span class="string">&#x27;Program&#x27;</span>, <span class="attr">body</span>: [...] &#125;</span><br></pre></td></tr></table></figure>
+
+<p>实现思路：</p>
+<ol>
+<li>首先，要有一颗树，和 ast 一样。 顶级结构为 <code>&#123; type: &#39;Program&#39;, body: [...] &#125;</code></li>
+<li>在 <code>ast</code> 上建一个引用<code>_context</code>到 <code>newAst.body</code>;</li>
+<li>对 ast 树进行处理, 直接处理 <code>_context</code></li>
+<li>对 ast 上 每个类型都做 enter 处理与 exit处理的钩子</li>
+<li>Number 或 String 直接处理并添加到树节点上即可</li>
+<li>CallExpression 则要创建一个数组去存参数</li>
+<li>对类型为：<code>Program</code> 或 <code>CallExpression</code> 对子级进行 递归 <code>4</code> 处理</li>
+<li>将处理后的 newAst 返回</li>
+</ol>
+<figure class="highlight javascript"><figcaption><span>transformer 部分</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">traverser</span>(<span class="params">node, visitor</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">traverseArray</span>(<span class="params">nodeArr, parent</span>) </span>&#123;</span><br><span class="line">    nodeArr.forEach(<span class="function"><span class="params">child</span> =&gt;</span> traverseNode(child, parent));</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">traverseNode</span>(<span class="params">node, parent</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> methods = visitor[node.type];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (methods &amp;&amp; methods.enter) &#123;</span><br><span class="line">      methods.enter(node, parent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span> (node.type) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;Program&#x27;</span>:</span><br><span class="line">        traverseArray(node.body, node);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;CallExpression&#x27;</span>:</span><br><span class="line">        traverseArray(node.params, node);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;NumberLiteral&#x27;</span>:</span><br><span class="line">      <span class="keyword">case</span> <span class="string">&#x27;StringLiteral&#x27;</span>:</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    </span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(node.type);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (methods &amp;&amp; methods.exit) &#123;</span><br><span class="line">      methods.exit(node, parent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  traverseNode(node, <span class="literal">null</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">transformer</span>(<span class="params">ast</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> newAst = &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;Program&#x27;</span>,</span><br><span class="line">    <span class="attr">body</span>: []</span><br><span class="line">  &#125;;</span><br><span class="line">  ast._context = newAst.body;</span><br><span class="line"></span><br><span class="line">  traverser(ast, &#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">NumberLiteral</span>: &#123;</span><br><span class="line">      <span class="function"><span class="title">enter</span>(<span class="params">node, parent</span>)</span> &#123;</span><br><span class="line">        parent._context.push(&#123;</span><br><span class="line">          <span class="attr">type</span>: <span class="string">&#x27;NumberLiteral&#x27;</span>,</span><br><span class="line">          <span class="attr">value</span>: node.value</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="attr">StringLiteral</span>: &#123;</span><br><span class="line">      <span class="function"><span class="title">enter</span>(<span class="params">node, parent</span>)</span> &#123;</span><br><span class="line">        parent._context.push(&#123;</span><br><span class="line">          <span class="attr">type</span>: <span class="string">&#x27;StringLiteral&#x27;</span>,</span><br><span class="line">          <span class="attr">value</span>: node.value,</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="attr">CallExpression</span>: &#123;</span><br><span class="line">      <span class="function"><span class="title">enter</span>(<span class="params">node, parent</span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> expression = &#123;</span><br><span class="line">          <span class="attr">type</span>: <span class="string">&#x27;CallExpression&#x27;</span>,</span><br><span class="line">          <span class="attr">callee</span>: &#123;</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;Identifier&#x27;</span>,</span><br><span class="line">            <span class="attr">name</span>: node.name</span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="attr">arguments</span>: []</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        node._context = expression.arguments;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (parent.type !== <span class="string">&#x27;CallExpression&#x27;</span>) &#123;</span><br><span class="line">          expression = &#123;</span><br><span class="line">            <span class="attr">type</span>: <span class="string">&#x27;ExpressionStatement&#x27;</span>,</span><br><span class="line">            <span class="attr">expression</span>: expression</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        parent._context.push(expression);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> newAst;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;type&quot;</span>: <span class="string">&quot;Program&quot;</span>,</span><br><span class="line">	<span class="string">&quot;body&quot;</span>: [&#123;</span><br><span class="line">		<span class="string">&quot;type&quot;</span>: <span class="string">&quot;CallExpression&quot;</span>,</span><br><span class="line">		<span class="string">&quot;name&quot;</span>: <span class="string">&quot;ADD&quot;</span>,</span><br><span class="line">		<span class="string">&quot;params&quot;</span>: [&#123;</span><br><span class="line">			<span class="string">&quot;type&quot;</span>: <span class="string">&quot;NumberLiteral&quot;</span>,</span><br><span class="line">			<span class="string">&quot;value&quot;</span>: <span class="string">&quot;2&quot;</span></span><br><span class="line">		&#125;, &#123;</span><br><span class="line">			<span class="string">&quot;type&quot;</span>: <span class="string">&quot;CallExpression&quot;</span>,</span><br><span class="line">			<span class="string">&quot;name&quot;</span>: <span class="string">&quot;subtract&quot;</span>,</span><br><span class="line">			<span class="string">&quot;params&quot;</span>: [&#123;</span><br><span class="line">				<span class="string">&quot;type&quot;</span>: <span class="string">&quot;NumberLiteral&quot;</span>,</span><br><span class="line">				<span class="string">&quot;value&quot;</span>: <span class="string">&quot;4&quot;</span></span><br><span class="line">			&#125;, &#123;</span><br><span class="line">				<span class="string">&quot;type&quot;</span>: <span class="string">&quot;NumberLiteral&quot;</span>,</span><br><span class="line">				<span class="string">&quot;value&quot;</span>: <span class="string">&quot;2&quot;</span></span><br><span class="line">			&#125;, &#123;</span><br><span class="line">				<span class="string">&quot;type&quot;</span>: <span class="string">&quot;StringLiteral&quot;</span>,</span><br><span class="line">				<span class="string">&quot;value&quot;</span>: <span class="string">&quot;djwaqp&quot;</span></span><br><span class="line">			&#125;]</span><br><span class="line">		&#125;]</span><br><span class="line">	&#125;]</span><br><span class="line">&#125;</span><br><span class="line">=&gt;</span><br><span class="line">output:</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;type&quot;</span>: <span class="string">&quot;Program&quot;</span>,</span><br><span class="line">	<span class="string">&quot;body&quot;</span>: [&#123;</span><br><span class="line">		<span class="string">&quot;type&quot;</span>: <span class="string">&quot;ExpressionStatement&quot;</span>,</span><br><span class="line">		<span class="string">&quot;expression&quot;</span>: &#123;</span><br><span class="line">			<span class="string">&quot;type&quot;</span>: <span class="string">&quot;CallExpression&quot;</span>,</span><br><span class="line">			<span class="string">&quot;callee&quot;</span>: &#123;</span><br><span class="line">				<span class="string">&quot;type&quot;</span>: <span class="string">&quot;Identifier&quot;</span>,</span><br><span class="line">				<span class="string">&quot;name&quot;</span>: <span class="string">&quot;ADD&quot;</span></span><br><span class="line">			&#125;,</span><br><span class="line">			<span class="string">&quot;arguments&quot;</span>: [&#123;</span><br><span class="line">				<span class="string">&quot;type&quot;</span>: <span class="string">&quot;NumberLiteral&quot;</span>,</span><br><span class="line">				<span class="string">&quot;value&quot;</span>: <span class="string">&quot;2&quot;</span></span><br><span class="line">			&#125;, &#123;</span><br><span class="line">				<span class="string">&quot;type&quot;</span>: <span class="string">&quot;CallExpression&quot;</span>,</span><br><span class="line">				<span class="string">&quot;callee&quot;</span>: &#123;</span><br><span class="line">					<span class="string">&quot;type&quot;</span>: <span class="string">&quot;Identifier&quot;</span>,</span><br><span class="line">					<span class="string">&quot;name&quot;</span>: <span class="string">&quot;subtract&quot;</span></span><br><span class="line">				&#125;,</span><br><span class="line">				<span class="string">&quot;arguments&quot;</span>: [&#123;</span><br><span class="line">					<span class="string">&quot;type&quot;</span>: <span class="string">&quot;NumberLiteral&quot;</span>,</span><br><span class="line">					<span class="string">&quot;value&quot;</span>: <span class="string">&quot;4&quot;</span></span><br><span class="line">				&#125;, &#123;</span><br><span class="line">					<span class="string">&quot;type&quot;</span>: <span class="string">&quot;NumberLiteral&quot;</span>,</span><br><span class="line">					<span class="string">&quot;value&quot;</span>: <span class="string">&quot;2&quot;</span></span><br><span class="line">				&#125;, &#123;</span><br><span class="line">					<span class="string">&quot;type&quot;</span>: <span class="string">&quot;StringLiteral&quot;</span>,</span><br><span class="line">					<span class="string">&quot;value&quot;</span>: <span class="string">&quot;djwaqp&quot;</span></span><br><span class="line">				&#125;]</span><br><span class="line">			&#125;]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="codeGenerator"><a href="#codeGenerator" class="headerlink" title="codeGenerator"></a>codeGenerator</h2><p>最后一步就是 <code>codeGenerator</code>， 用 <code>newAst</code> 递归调用，根据 <code>node</code> 与一系列规则去生成一个 string。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newAst &#123; <span class="attr">type</span>: <span class="string">&#x27;Program&#x27;</span>, <span class="attr">body</span>: [...] &#125; =&gt; call(argumentsA, ...argumentsN);</span><br></pre></td></tr></table></figure>
+
+<p>实现思路：</p>
+<ol>
+<li>根据 node.type 做对应逻辑：</li>
+<li><code>Program</code> =&gt; 对 node.body 进行递归</li>
+<li><code>ExpressionStatement</code>=&gt; 对 node.expression 进行处理</li>
+<li><code>CallExpression</code> =&gt; 对 node.callee 与 node.arguments 进行处理</li>
+<li><code>Identifier</code> &amp;&amp; <code>NumberLiteral</code> &amp;&amp; <code>StringLiteral</code> 直接返回对应的字段</li>
+</ol>
+<figure class="highlight javascript"><figcaption><span>codeGenerator</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">codeGenerator</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (node.type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;Program&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> node.body.map(codeGenerator).join(<span class="string">&#x27;\n&#x27;</span>);</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;ExpressionStatement&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> codeGenerator(node.expression) + <span class="string">&#x27;;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;CallExpression&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> (codeGenerator(node.callee) +<span class="string">&#x27;(&#x27;</span> + node.arguments.map(codeGenerator).join(<span class="string">&#x27;, &#x27;</span>) + <span class="string">&#x27;)&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;Identifier&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> node.name;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;NumberLiteral&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> node.value;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;StringLiteral&#x27;</span>:</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&#x27;&quot;&#x27;</span> + node.value + <span class="string">&#x27;&quot;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(node.type);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">input:</span><br><span class="line">&#123;</span><br><span class="line">	<span class="string">&quot;type&quot;</span>: <span class="string">&quot;Program&quot;</span>,</span><br><span class="line">	<span class="string">&quot;body&quot;</span>: [&#123;</span><br><span class="line">		<span class="string">&quot;type&quot;</span>: <span class="string">&quot;ExpressionStatement&quot;</span>,</span><br><span class="line">		<span class="string">&quot;expression&quot;</span>: &#123;</span><br><span class="line">			<span class="string">&quot;type&quot;</span>: <span class="string">&quot;CallExpression&quot;</span>,</span><br><span class="line">			<span class="string">&quot;callee&quot;</span>: &#123;</span><br><span class="line">				<span class="string">&quot;type&quot;</span>: <span class="string">&quot;Identifier&quot;</span>,</span><br><span class="line">				<span class="string">&quot;name&quot;</span>: <span class="string">&quot;ADD&quot;</span></span><br><span class="line">			&#125;,</span><br><span class="line">			<span class="string">&quot;arguments&quot;</span>: [&#123;</span><br><span class="line">				<span class="string">&quot;type&quot;</span>: <span class="string">&quot;NumberLiteral&quot;</span>,</span><br><span class="line">				<span class="string">&quot;value&quot;</span>: <span class="string">&quot;2&quot;</span></span><br><span class="line">			&#125;, &#123;</span><br><span class="line">				<span class="string">&quot;type&quot;</span>: <span class="string">&quot;CallExpression&quot;</span>,</span><br><span class="line">				<span class="string">&quot;callee&quot;</span>: &#123;</span><br><span class="line">					<span class="string">&quot;type&quot;</span>: <span class="string">&quot;Identifier&quot;</span>,</span><br><span class="line">					<span class="string">&quot;name&quot;</span>: <span class="string">&quot;subtract&quot;</span></span><br><span class="line">				&#125;,</span><br><span class="line">				<span class="string">&quot;arguments&quot;</span>: [&#123;</span><br><span class="line">					<span class="string">&quot;type&quot;</span>: <span class="string">&quot;NumberLiteral&quot;</span>,</span><br><span class="line">					<span class="string">&quot;value&quot;</span>: <span class="string">&quot;4&quot;</span></span><br><span class="line">				&#125;, &#123;</span><br><span class="line">					<span class="string">&quot;type&quot;</span>: <span class="string">&quot;NumberLiteral&quot;</span>,</span><br><span class="line">					<span class="string">&quot;value&quot;</span>: <span class="string">&quot;2&quot;</span></span><br><span class="line">				&#125;, &#123;</span><br><span class="line">					<span class="string">&quot;type&quot;</span>: <span class="string">&quot;StringLiteral&quot;</span>,</span><br><span class="line">					<span class="string">&quot;value&quot;</span>: <span class="string">&quot;djwaqp&quot;</span></span><br><span class="line">				&#125;]</span><br><span class="line">			&#125;]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;]</span><br><span class="line">&#125;</span><br><span class="line">=&gt; </span><br><span class="line">output:</span><br><span class="line">add(<span class="number">2</span>, subtract(<span class="number">4</span>, <span class="number">2</span>, <span class="string">&quot;djwaqp&quot;</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="compiler"><a href="#compiler" class="headerlink" title="compiler"></a>compiler</h2><p>至此，编译器所需的几个步骤： 词法分析，解析，转换，生成都已经完成。</p>
+<figure class="highlight javascript"><figcaption><span>compiler</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compiler</span>(<span class="params">input</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> tokens = tokenizer(input);</span><br><span class="line">  <span class="keyword">const</span> ast = parser(tokens);</span><br><span class="line">  <span class="keyword">const</span> newAst = transformer(ast);</span><br><span class="line">  <span class="keyword">const</span> output = codeGenerator(newAst);</span><br><span class="line">  <span class="keyword">return</span> output;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> input = <span class="string">&#x27;(add 2 (subtract 4 2 &quot;djwaqp&quot;))&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> output = compilter(input); <span class="comment">// &#x27;add(2, subtract(4, 2, &quot;djwaqp&quot;));&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="babel"><a href="#babel" class="headerlink" title="babel"></a>babel</h2><p>babel 的工作原理可以理解成就是一个简单的编译器：<code>分析</code> =&gt; <code>转换</code> =&gt; <code>生成代码</code></p>
+<p>bable 的篇幅太多，下面直接给出 <a target="_blank" rel="noopener" href="https://github.com/jsonz1993/learn/tree/master/finish/babel-plugin-jsonz_test">demo源码</a>。<br>具体可以看 <a target="_blank" rel="noopener" href="https://github.com/thejameskyle/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md#toc-writing-your-first-babel-plugin">官方插件手册 babel-handbook</a></p>
+<p>我们写的babel 插件，都是在转换的部分运行</p>
+<figure class="highlight javascript"><figcaption><span>自定义插件 babel-plugin-jsonz</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> t = <span class="built_in">require</span>(<span class="string">&#x27;babel-types&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports=  <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// plugin contents</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">visitor</span>: &#123;</span><br><span class="line">      <span class="comment">// visitor contents</span></span><br><span class="line">      <span class="function"><span class="title">BinaryExpression</span>(<span class="params">path, state</span>)</span> &#123;</span><br><span class="line">        <span class="comment">// 如果操作符不是 === 则返回</span></span><br><span class="line">        <span class="keyword">if</span> (path.node.operator !== <span class="string">&#x27;===&#x27;</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 操作符的左边替换为 sebmck, 右边替换为 dork</span></span><br><span class="line">        path.node.left = t.identifier(<span class="string">&#x27;&quot;sebmck&quot;&#x27;</span>);</span><br><span class="line">        path.node.right = t.identifier(<span class="string">&#x27;&quot;dork&quot;&#x27;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><figcaption><span>目标代码./src/test1.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">demo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">1</span>===<span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>安装相关依赖:<code>npm i babel-cli babel-types --save-dev</code></p>
+<p>运行脚本: <code>babel src/ -d build/</code></p>
+<figure class="highlight javascript"><figcaption><span>生成后的代码 ./build/test2.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">demo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;sebmck&quot;</span> === <span class="string">&quot;dork&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后再推一波关于学习中看到的好网站</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/jsonz1993/wheel/blob/master/min-compiler/min-compiler.js">源码</a><br><a target="_blank" rel="noopener" href="http://esprima.org/demo/parse.html#">esprima 解析语法树🌲</a><br><a target="_blank" rel="noopener" href="http://astexplorer.net/">AST Explorer</a><br><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E6%8A%BD%E8%B1%A1%E8%AA%9E%E6%B3%95%E6%A8%B9">ast名词解释</a><br><a target="_blank" rel="noopener" href="https://github.com/thejameskyle/babel-handbook/blob/master/translations/zh-Hans/plugin-handbook.md">babel-plugin-handbook</a></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ali_pay.jpeg" alt="Jsonz Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/react%E5%85%A8%E5%AE%B6%E6%A1%B6-dva-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/" rel="next" title="react全家桶 + dva 实践整理总结">
+      react全家桶 + dva 实践整理总结 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#welcome"><span class="nav-number">1.</span> <span class="nav-text">welcome</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%84%E6%88%90"><span class="nav-number">2.</span> <span class="nav-text">编译器的基本组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tokenizer-%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">tokenizer 词法分析器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#parser"><span class="nav-number">4.</span> <span class="nav-text">parser</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transformer"><span class="nav-number">5.</span> <span class="nav-text">transformer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#codeGenerator"><span class="nav-number">6.</span> <span class="nav-text">codeGenerator</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#compiler"><span class="nav-number">7.</span> <span class="nav-text">compiler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#babel"><span class="nav-number">8.</span> <span class="nav-text">babel</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jsonz"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Jsonz</p>
+  <div class="site-description" itemprop="description">前端👴🥬🐣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jsonz1993" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jsonz1993" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jsonz@qq.com" title="E-Mail → mailto:jsonz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://juejin.im/user/58dbb0b844d904006954ca8e" title="掘金 → https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;58dbb0b844d904006954ca8e" rel="noopener" target="_blank"><i class="fa fa-bullseye fa-fw"></i>掘金</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.hhking.cn/" title="hhking → https:&#x2F;&#x2F;blog.hhking.cn" rel="noopener" target="_blank"><i class="fa fa-user-friends fa-fw"></i>hhking</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备18066881号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/%E4%B8%80%E6%AD%A5%E6%AD%A5%E5%AE%9E%E7%8E%B0%E6%9E%81%E7%AE%80%E7%BC%96%E8%AF%91%E5%99%A8-%E2%80%94%E2%80%94-%E4%BA%86%E8%A7%A3%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86/',]
+      });
+      });
+  </script>
+
+</body>
+</html>

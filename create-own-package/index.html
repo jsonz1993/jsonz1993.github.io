@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="首先我们罗列一下，一个npm工具包需要包含哪些通用的内容  package.json √ dist目录 √ src目录 √ 开发服务（编译）√ example √ 单元测试 Readme and docs eslint √ githook 发布相关  package.json首先，必要的字段有 “name” 和 “version”建议直接用 npm init跑一遍就好，也可以偷个懒直接 npm i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="create-own-package">
+<meta property="og:url" content="http://jsonz1993.github.io/create-own-package/index.html">
+<meta property="og:site_name" content="Jsonz bug-log">
+<meta property="og:description" content="首先我们罗列一下，一个npm工具包需要包含哪些通用的内容  package.json √ dist目录 √ src目录 √ 开发服务（编译）√ example √ 单元测试 Readme and docs eslint √ githook 发布相关  package.json首先，必要的字段有 “name” 和 “version”建议直接用 npm init跑一遍就好，也可以偷个懒直接 npm i">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-06-23T17:18:23.000Z">
+<meta property="article:modified_time" content="2021-05-29T14:12:12.329Z">
+<meta property="article:author" content="Jsonz">
+<meta property="article:tag" content="Jsonz Jsonz1993 张耿欣 React">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jsonz1993.github.io/create-own-package/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>create-own-package | Jsonz bug-log</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jsonz bug-log" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jsonz bug-log</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端/JavaScript/React</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">39</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/create-own-package/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          create-own-package
+        </h1>
+        <div class="post-meta ">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-23 17:18:23" itemprop="dateCreated datePublished" datetime="2020-06-23T17:18:23+00:00">2020-06-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-29 14:12:12" itemprop="dateModified" datetime="2021-05-29T14:12:12+00:00">2021-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+
+      </header>
+
+    
+    
+    
+    
+      <p class="self-read"> 本文只是自己记录方便偶尔查阅，没有任何干货或阅读价值...</p>
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>首先我们罗列一下，一个npm工具包需要包含哪些通用的内容</p>
+<ul>
+<li>package.json √</li>
+<li>dist目录 √</li>
+<li>src目录 √</li>
+<li>开发服务（编译）√</li>
+<li>example √</li>
+<li>单元测试</li>
+<li>Readme and docs</li>
+<li>eslint √</li>
+<li>githook</li>
+<li>发布相关</li>
+</ul>
+<h1 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h1><p>首先，必要的字段有 <strong>“name”</strong> 和 <strong>“version”</strong><br>建议直接用 <code>npm init</code>跑一遍就好，也可以偷个懒直接 <code>npm init -y</code>使用预设的默认值</p>
+<p>可以在terminal上键入以下命令设置一些默认值<br><code>npm set init.author.email &quot;jsonz@qq.com&quot;</code><br><code>npm set init.author.name &quot;jsonz&quot;</code></p>
+<h2 id="version"><a href="#version" class="headerlink" title="version"></a>version</h2><p>可以参照<br><a target="_blank" rel="noopener" href="https://docs.npmjs.com/about-semantic-versioning">npm semantic versioning</a></p>
+<p>总结一下就是 版本号为<code>x.y.z</code>：向后兼容的bug修复补丁递增z；向后兼容的features新功能递增y；破坏性改动递增x版本号</p>
+<p>更详细的可以看 <a target="_blank" rel="noopener" href="https://semver.org/lang/zh-CN/">semver version</a></p>
+<h3 id="版本符号问题"><a href="#版本符号问题" class="headerlink" title="版本符号问题"></a>版本符号问题</h3><p>常见的版本定义</p>
+<ul>
+<li>version 相当于锁版本，只能安装该版本 “1.0.0”</li>
+<li>&gt;version </li>
+<li>&gt;=version </li>
+<li>&lt;version </li>
+<li>&lt;= version</li>
+<li><del>version 小版本变动，比如 “</del>1.0.1” 代表大于等于 1.0.1，且小于 1.1.0，既z版本变动</li>
+<li>^version 中版本与小版本变动，比如 “^1.0.1” 代表大于等于 1.0.1 且小于 2.0.0，既 y 与 z版本的变动</li>
+<li>1.0.x y版本任意</li>
+<li>tag 比如 “latest”</li>
+<li>path 本地的包 “file:../package1”</li>
+</ul>
+<p><strong>本地包不是手动写一个url，而是用 <code>npm install /Filepath</code> 去安装的</strong></p>
+<p>还有一些 url 相关的可以看 <a target="_blank" rel="noopener" href="https://docs.npmjs.com/configuring-npm/package-json.html#urls-as-dependencies">package.json dependencies url</a></p>
+<p>最后补上一个特别实用的版本计算器<br><a target="_blank" rel="noopener" href="https://semver.npmjs.com/">npm semver calculator</a></p>
+<h3 id="npm-version-用法"><a href="#npm-version-用法" class="headerlink" title="npm version 用法"></a>npm version 用法</h3><p>在当前版本已经修改完之后，commit 更改<br>再根据改动跑 <code>npm run major|minor|patch</code>，该命令会处理几项任务</p>
+<ol>
+<li>自动修改 package.json 的version</li>
+<li>打个当前version的tag</li>
+<li>git commit 且提交信息为当前 version </li>
+</ol>
+<h2 id="devDependencies-amp-amp-dependencies-amp-amp-peerDependencies等等"><a href="#devDependencies-amp-amp-dependencies-amp-amp-peerDependencies等等" class="headerlink" title="devDependencies &amp;&amp; dependencies &amp;&amp; peerDependencies等等"></a>devDependencies &amp;&amp; dependencies &amp;&amp; peerDependencies等等</h2><p>一个是你项目的开发依赖，一个是你项目中的依赖<br>举个例子，我们项目里用到的 <code>lodash</code>属于 __dependencies__，而项目开发的时候用到的<code>webpack</code> 则属于 <strong>devDependencies</strong></p>
+<p><a target="_blank" rel="noopener" href="https://docs.npmjs.com/cli/v7/configuring-npm/package-json#peerdependencies">peer</a></p>
+<p>对于一些需要准确安装peerDependencies的，可以利用 <code>install-peerdeps</code>，例如 <code>npx install-peerdeps --dev eslint-config-airbnb</code>就会安装 eslint-config-airbnb 前置依赖，eslint, eslint-plugin-import, eslint-plugin-react, eslint-plugin-react-hooks, and eslint-plugin-jsx-a11y。</p>
+<h2 id="engines"><a href="#engines" class="headerlink" title="engines"></a>engines</h2><p>当前程序需要什么版本支持，比如</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;engines&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;node&quot;</span>: <span class="string">&quot;&gt;=10.0.0&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;npm&quot;</span>: <span class="string">&quot;&gt;=6.0.0&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="dist-tag"><a href="#dist-tag" class="headerlink" title="dist-tag"></a>dist-tag</h2><p><a target="_blank" rel="noopener" href="https://docs.npmjs.com/adding-dist-tags-to-packages">https://docs.npmjs.com/adding-dist-tags-to-packages</a></p>
+<p>比如最新的自动会打上一个  <strong>latest</strong> 标签，一般我们不需要去关注这一块的东西</p>
+<h2 id="description、keywords-包的描述"><a href="#description、keywords-包的描述" class="headerlink" title="description、keywords 包的描述"></a>description、keywords 包的描述</h2><p>用于 <code>npm search</code> 匹配用户搜索的关键字</p>
+<h2 id="homepage-主页、文档"><a href="#homepage-主页、文档" class="headerlink" title="homepage 主页、文档"></a>homepage 主页、文档</h2><p>用于 <code>npm home</code>和 <code>npm docs</code>跳转的</p>
+<h2 id="bugs-问题反馈"><a href="#bugs-问题反馈" class="headerlink" title="bugs 问题反馈"></a>bugs 问题反馈</h2><p>用于 <code>npm bugs</code>跳转</p>
+<h2 id="license"><a href="#license" class="headerlink" title="license"></a>license</h2><p>@TODO 占坑展开几个比较常见的协议</p>
+<h2 id="author"><a href="#author" class="headerlink" title="author"></a>author</h2><p>可以是单行 <code>&lt;name&gt; &lt;email&gt; (&lt;homePage&gt;)</code> 也可以是对象形式，包含 <strong>name</strong>, <strong>email</strong> 和 <strong>url</strong> 三个字段</p>
+<h2 id="files"><a href="#files" class="headerlink" title="files"></a>files</h2><p>你的包包括哪一些文件，如果项目中有 <strong>.npmignore</strong> 则包含除了该文件外的其他文件，如果没有 __.npmignore__，但是有 <strong>.gitignore</strong> 则会用 __.gitignore__。 具体见 <a target="_blank" rel="noopener" href="https://docs.npmjs.com/configuring-npm/package-json.html#files">packages.json files</a></p>
+<p>但是不管怎么设置都会包含这些文件</p>
+<ul>
+<li>package.json</li>
+<li>README</li>
+<li>CHANGES / CHANGELOG / HISTORY</li>
+<li>LICENSE / LICENCE</li>
+<li>NOTICE</li>
+<li>package.json <code>main</code> 字段包含的文件</li>
+</ul>
+<h2 id="main"><a href="#main" class="headerlink" title="main"></a>main</h2><p>配置一个文件路径，当别人引入你的模块时默认会加载这个文件。一般指向__”commonjs”__文件</p>
+<h2 id="browser"><a href="#browser" class="headerlink" title="browser"></a>browser</h2><p>只能在浏览器使用的文件</p>
+<h2 id="module"><a href="#module" class="headerlink" title="module"></a>module</h2><p>引入 <strong>esm</strong> 模块的文件</p>
+<p><a target="_blank" rel="noopener" href="https://rollupjs.org/guide/en/#outputformat">https://rollupjs.org/guide/en/#outputformat</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/129310389">https://zhuanlan.zhihu.com/p/129310389</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5cfe6d3be51d454d544abf30">https://juejin.im/post/5cfe6d3be51d454d544abf30</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/SunshowerC/blog/issues/8">https://github.com/SunshowerC/blog/issues/8</a></p>
+<p>@TODO 补充更详细的介绍 esm  commonjs main 等情况？ <a target="_blank" rel="noopener" href="https://github.com/SunshowerC/blog/issues/8">https://github.com/SunshowerC/blog/issues/8</a></p>
+<h2 id="bin"><a href="#bin" class="headerlink" title="bin"></a>bin</h2><p>可执行文件，写在这里的可执行文件会被软链到 __node_module/.bin__下面。<br>比如 <code>jest</code>，当我们 <code>npm install jest</code> 之后，直接在当前目录执行 <code>jest</code>就会去跑 __node_module/jest`下面 package.json 的bin字段指定的可执行文件</p>
+<p><a target="_blank" rel="noopener" href="https://docs.npmjs.com/configuring-npm/package-json.html#bin"> package.json bin</a></p>
+<h2 id="repository"><a href="#repository" class="headerlink" title="repository"></a>repository</h2><p>当前包的仓库， <code>npm repo</code> 时跳转</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;git&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;url&quot;</span>: <span class="string">&quot;https://github.com/jsonz1993/project.git&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="config"><a href="#config" class="headerlink" title="config"></a>config</h2><p>占坑</p>
+<h1 id="README-or-Docs"><a href="#README-or-Docs" class="headerlink" title="README or Docs"></a>README or Docs</h1><h2 id="README-md"><a href="#README-md" class="headerlink" title="README.md"></a>README.md</h2><p>README一般包含了最简单的使用教程，包括 安装、配置、使用等</p>
+<p>如果你写的包有很多功能或接口的话，则推荐有 docs 模块介绍当前包的接口的，如果只是比较简单的接口，则可以也写在<code>README.md</code></p>
+<h1 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h1><h2 id="npmignore"><a href="#npmignore" class="headerlink" title=".npmignore"></a>.npmignore</h2><p>对于不重要的东西，可以使用 <code>.npmignore</code> 避免上传到 npm 上，比如 <code>.babelrc</code>, <code>.editorconfig</code>, <code>docs/</code>, <code>test/</code> 等等</p>
+<p><a target="_blank" rel="noopener" href="https://docs.npmjs.com/misc/developers#keeping-files-out-of-your-package">.npmignore guide</a></p>
+<h2 id="npmrc"><a href="#npmrc" class="headerlink" title=".npmrc"></a>.npmrc</h2><p><a target="_blank" rel="noopener" href="https://docs.npmjs.com/configuring-npm/npmrc.html">.npmrc guide</a><br>当前项目的npm配置，会覆盖全局的 .npmrc，比如我发的是公司内部的私有包，可以在项目下新建一个 .npmrc。然后写上 <strong>registry</strong> 等字段</p>
+<h2 id="不再维护-or-弃用"><a href="#不再维护-or-弃用" class="headerlink" title="不再维护 or 弃用"></a>不再维护 or 弃用</h2><p>如果说你不想再维护某个包，或者某个版本有严重bug，你不想用户去使用它，可以弃用该包。使用场景比较少，具体参照<a target="_blank" rel="noopener" href="https://docs.npmjs.com/deprecating-and-undeprecating-packages-or-package-versions">官方文档</a></p>
+<h1 id="常用的cli"><a href="#常用的cli" class="headerlink" title="常用的cli"></a>常用的cli</h1><h2 id="npm-bugs-直接打开反馈bug的网站"><a href="#npm-bugs-直接打开反馈bug的网站" class="headerlink" title="npm bugs 直接打开反馈bug的网站"></a>npm bugs 直接打开反馈bug的网站</h2><p><code>npm bugs react</code>是打开react github repos 的issues</p>
+<h2 id="npm-config"><a href="#npm-config" class="headerlink" title="npm config"></a>npm config</h2><p>处理npm 配置相关问题</p>
+<h2 id="npm-docs"><a href="#npm-docs" class="headerlink" title="npm docs"></a>npm docs</h2><p><code>npm docs react</code>打开react 官网主页</p>
+<h2 id="npm-link-本地开发必备"><a href="#npm-link-本地开发必备" class="headerlink" title="npm link 本地开发必备"></a>npm link 本地开发必备</h2><p>占坑</p>
+<h2 id="npm-repo-打开包的仓库"><a href="#npm-repo-打开包的仓库" class="headerlink" title="npm repo 打开包的仓库"></a>npm repo 打开包的仓库</h2><p>一般直接打开 github repo</p>
+<h1 id="开发服务（编译）"><a href="#开发服务（编译）" class="headerlink" title="开发服务（编译）"></a>开发服务（编译）</h1><p>目前比较流行的 <strong>webpack</strong>,<strong>roolup</strong>,__parcel__和比较年轻的__snowpack__。</p>
+<h1 id="关于本地调试npm"><a href="#关于本地调试npm" class="headerlink" title="关于本地调试npm"></a>关于本地调试npm</h1><p>在开发的npm包下面跑 <code>npm link </code><br>在要用的地方跑 <code>npm i packageName</code></p>
+<p>调试完之后 开发的包下面 <code>npm unlink</code><br>要用的地方 <code>npm uninstall packageName &amp;&amp; npm install packageName</code></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ali_pay.jpeg" alt="Jsonz Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/vscode-alias/" rel="prev" title="vscode项目alias设置">
+      <i class="fa fa-chevron-left"></i> vscode项目alias设置
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/" rel="next" title="我的2020">
+      我的2020 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#package-json"><span class="nav-number">1.</span> <span class="nav-text">package.json</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#version"><span class="nav-number">1.1.</span> <span class="nav-text">version</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E7%AC%A6%E5%8F%B7%E9%97%AE%E9%A2%98"><span class="nav-number">1.1.1.</span> <span class="nav-text">版本符号问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm-version-%E7%94%A8%E6%B3%95"><span class="nav-number">1.1.2.</span> <span class="nav-text">npm version 用法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#devDependencies-amp-amp-dependencies-amp-amp-peerDependencies%E7%AD%89%E7%AD%89"><span class="nav-number">1.2.</span> <span class="nav-text">devDependencies &amp;&amp; dependencies &amp;&amp; peerDependencies等等</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#engines"><span class="nav-number">1.3.</span> <span class="nav-text">engines</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dist-tag"><span class="nav-number">1.4.</span> <span class="nav-text">dist-tag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#description%E3%80%81keywords-%E5%8C%85%E7%9A%84%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.5.</span> <span class="nav-text">description、keywords 包的描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#homepage-%E4%B8%BB%E9%A1%B5%E3%80%81%E6%96%87%E6%A1%A3"><span class="nav-number">1.6.</span> <span class="nav-text">homepage 主页、文档</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bugs-%E9%97%AE%E9%A2%98%E5%8F%8D%E9%A6%88"><span class="nav-number">1.7.</span> <span class="nav-text">bugs 问题反馈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#license"><span class="nav-number">1.8.</span> <span class="nav-text">license</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#author"><span class="nav-number">1.9.</span> <span class="nav-text">author</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#files"><span class="nav-number">1.10.</span> <span class="nav-text">files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main"><span class="nav-number">1.11.</span> <span class="nav-text">main</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#browser"><span class="nav-number">1.12.</span> <span class="nav-text">browser</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#module"><span class="nav-number">1.13.</span> <span class="nav-text">module</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bin"><span class="nav-number">1.14.</span> <span class="nav-text">bin</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#repository"><span class="nav-number">1.15.</span> <span class="nav-text">repository</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config"><span class="nav-number">1.16.</span> <span class="nav-text">config</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#README-or-Docs"><span class="nav-number">2.</span> <span class="nav-text">README or Docs</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#README-md"><span class="nav-number">2.1.</span> <span class="nav-text">README.md</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%91%E5%B8%83"><span class="nav-number">3.</span> <span class="nav-text">发布</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#npmignore"><span class="nav-number">3.1.</span> <span class="nav-text">.npmignore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npmrc"><span class="nav-number">3.2.</span> <span class="nav-text">.npmrc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%86%8D%E7%BB%B4%E6%8A%A4-or-%E5%BC%83%E7%94%A8"><span class="nav-number">3.3.</span> <span class="nav-text">不再维护 or 弃用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84cli"><span class="nav-number">4.</span> <span class="nav-text">常用的cli</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#npm-bugs-%E7%9B%B4%E6%8E%A5%E6%89%93%E5%BC%80%E5%8F%8D%E9%A6%88bug%E7%9A%84%E7%BD%91%E7%AB%99"><span class="nav-number">4.1.</span> <span class="nav-text">npm bugs 直接打开反馈bug的网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npm-config"><span class="nav-number">4.2.</span> <span class="nav-text">npm config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npm-docs"><span class="nav-number">4.3.</span> <span class="nav-text">npm docs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npm-link-%E6%9C%AC%E5%9C%B0%E5%BC%80%E5%8F%91%E5%BF%85%E5%A4%87"><span class="nav-number">4.4.</span> <span class="nav-text">npm link 本地开发必备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#npm-repo-%E6%89%93%E5%BC%80%E5%8C%85%E7%9A%84%E4%BB%93%E5%BA%93"><span class="nav-number">4.5.</span> <span class="nav-text">npm repo 打开包的仓库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E6%9C%8D%E5%8A%A1%EF%BC%88%E7%BC%96%E8%AF%91%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">开发服务（编译）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%9C%AC%E5%9C%B0%E8%B0%83%E8%AF%95npm"><span class="nav-number">6.</span> <span class="nav-text">关于本地调试npm</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jsonz"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Jsonz</p>
+  <div class="site-description" itemprop="description">前端👴🥬🐣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jsonz1993" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jsonz1993" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jsonz@qq.com" title="E-Mail → mailto:jsonz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://juejin.im/user/58dbb0b844d904006954ca8e" title="掘金 → https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;58dbb0b844d904006954ca8e" rel="noopener" target="_blank"><i class="fa fa-bullseye fa-fw"></i>掘金</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.hhking.cn/" title="hhking → https:&#x2F;&#x2F;blog.hhking.cn" rel="noopener" target="_blank"><i class="fa fa-user-friends fa-fw"></i>hhking</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备18066881号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/create-own-package/',]
+      });
+      });
+  </script>
+
+</body>
+</html>

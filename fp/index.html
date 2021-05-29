@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本文ppt请笑纳 函数式编程维基百科对函数式编程的定义：函数式编程（英语：functional programming）或称函数程序设计，是一种编程典范，它将计算机运算视为数学上的函数计算，并且避免使用程序状态以及易变对象。这里的函数指的是数学上的函数，既自变量（数据）的映射。 与命令式编程对比，函数式编程更加强调__程序执行的结果__而非__执行的过程__，倡导利用若干简单的执行单元(小函数)让">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数式编程">
+<meta property="og:url" content="http://jsonz1993.github.io/fp/index.html">
+<meta property="og:site_name" content="Jsonz bug-log">
+<meta property="og:description" content="本文ppt请笑纳 函数式编程维基百科对函数式编程的定义：函数式编程（英语：functional programming）或称函数程序设计，是一种编程典范，它将计算机运算视为数学上的函数计算，并且避免使用程序状态以及易变对象。这里的函数指的是数学上的函数，既自变量（数据）的映射。 与命令式编程对比，函数式编程更加强调__程序执行的结果__而非__执行的过程__，倡导利用若干简单的执行单元(小函数)让">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-09-11T10:32:12.000Z">
+<meta property="article:modified_time" content="2021-05-29T14:12:12.301Z">
+<meta property="article:author" content="Jsonz">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="FP">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jsonz1993.github.io/fp/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>函数式编程 | Jsonz bug-log</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jsonz bug-log" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jsonz bug-log</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端/JavaScript/React</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">39</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/fp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          函数式编程
+        </h1>
+        <div class="post-meta ">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-09-11 10:32:12" itemprop="dateCreated datePublished" datetime="2018-09-11T10:32:12+00:00">2018-09-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-29 14:12:12" itemprop="dateModified" datetime="2021-05-29T14:12:12+00:00">2021-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+
+      </header>
+
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://ppt.baomitu.com/d/b063f5fc">本文ppt请笑纳</a></p>
+<h1 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h1><p>维基百科对函数式编程的定义：函数式编程（英语：functional programming）或称函数程序设计，是一种编程典范，它将计算机运算视为数学上的函数计算，并且避免使用程序状态以及易变对象。这里的函数指的是数学上的函数，既自变量（数据）的映射。</p>
+<p>与<code>命令式编程</code>对比，<code>函数式编程</code>更加强调__程序执行的结果__而非__执行的过程__，倡导利用若干简单的执行单元(小函数)让计算结果不断渐进，逐层推导复杂的运算，而不是设计一个复杂的执行过程。</p>
+<p>我的理解是，以纯函数（ 避免使用程序状态以及异变对象）为单元，去抽象、拆分模块功能的编程思想。其实函数式编程我们平时不陌生，比如react, redux 都多多少少有一些相关。</p>
+<p>所以我们得出几个函数式编程的要点：</p>
+<ol>
+<li>避免使用程序状态以及异变对象，数据映射=&gt; 纯函数</li>
+<li>强调执行结果而非过程=&gt; 声明式</li>
+</ol>
+<h1 id="纯函数"><a href="#纯函数" class="headerlink" title="纯函数"></a>纯函数</h1><p>纯函数：输出结果只由输入决定，并且不产生副作用(effects)。 </p>
+<ol>
+<li>避免使用 this，window 等外部变量</li>
+<li>没有产生副作用(Effects)，既把Effects抽离出来</li>
+</ol>
+<blockquote>
+<p>Effects有哪些呢？<br>比如 改动外部数据，发起ajax请求，改动dom等等。<br>写过dva的就知道，dva的model有一个effects，就是用来放这些副作用的代码。</p>
+</blockquote>
+<p>我们把Effects分离出来之后，剩下的就是纯函数，纯函数可以很简单的进行单元测试，所以是不容易出bug的，因为往往有bug的都是不可预见的部分。</p>
+<p>举个例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr=[<span class="string">&#x27;bilibili&#x27;</span>, <span class="string">&#x27;hello&#x27;</span>, <span class="string">&#x27;jsonz&#x27;</span>];</span><br><span class="line">arr.slice(<span class="number">1</span>, <span class="number">3</span>); <span class="comment">// 没副作用</span></span><br><span class="line">arr.splice(<span class="number">1</span>, <span class="number">2</span>); <span class="comment">// 有副作用，修改到原来的arr数组 可能会造成意想不到的bug</span></span><br></pre></td></tr></table></figure>
+
+<p>虽然执行之后，都能得到 <code>Hello Jsonz</code>。 但是 splice 会改动到原来的数组，所以不算纯函数。</p>
+<p>工作中其实很多工具类的function都是纯函数，redux的Reducer也是标准的纯函数。</p>
+<p>redux reducers</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">set</span>(<span class="params">state, &#123; payload &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    ...state,</span><br><span class="line">    ...payload,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>纯函数的好处是，你不需要担心某个值在某处发送意想不到的改变导致出bug；纯函数里不产生副作用，所以也不会担心改动到其他地方，代码更健硕；可以更优雅的组合复用，方便移植到其他环境(web workers)；方便的写单元测试。</p>
+<h1 id="声明式"><a href="#声明式" class="headerlink" title="声明式"></a>声明式</h1><p>在说声明式之前，要先普及一下与之对应的命令式（指令式）。<br>我们平时写的代码基本都是命令式，既我们通过一条一条的命令去执行一些操作，其中会涉及到很多细节的东西。<br>既关注执行过程，用各种控制语句<code>if...else...</code>与<code>for</code>循环等。</p>
+<p><strong>命令式编程：命令“机器”如何去做事情(how)，这样不管你想要的是什么(what)，它都会按照你的命令实现。</strong><br><strong>声明式编程：告诉“机器”你想要的是什么(what)，让机器想出如何去做(how)。</strong></p>
+<blockquote>
+<p>SQL语句是典型声明式，SQL存储过程和存储函数则是命令式编程。</p>
+</blockquote>
+<figure class="highlight javascript"><figcaption><span>react里面的两种编程方式</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 函数式编程</span></span><br><span class="line"><span class="keyword">const</span> data= [&#123;<span class="attr">name</span>: <span class="string">&#x27;jsonz&#x27;</span>, <span class="attr">age</span>: <span class="number">2</span>&#125;, &#123; <span class="attr">name</span>: <span class="string">&#x27;balala&#x27;</span>, <span class="attr">age</span>: <span class="number">3</span>&#125;, &#123; <span class="attr">name</span>: <span class="string">&#x27;小魔仙&#x27;</span>, <span class="attr">age</span>: <span class="number">30</span>&#125;];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> dom = data.filter(<span class="function"><span class="params">item</span>=&gt;</span> age&lt;<span class="number">10</span>)</span><br><span class="line">  .map(<span class="function"><span class="params">item</span>=&gt;</span> &lt;span&gt;&#123;item.name&#125; - &#123;item.age&#125;&lt;span&gt;); // 这里后面的span是闭合的&lt;/span&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 命令式编程</span><br><span class="line">const data= [&#123;name: &#x27;jsonz&#x27;, age: 2&#125;, &#123; name: &#x27;balala&#x27;, age: 3&#125;, &#123; name: &#x27;小魔仙&#x27;, age: 30&#125;];</span><br><span class="line"></span><br><span class="line">let newData = [];</span><br><span class="line">for (let i= 0; i&lt; data.length; i++) &#123;</span><br><span class="line">  if (data[i].age &lt; 10) &#123;</span><br><span class="line">    newData.push(data);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const dom2 = [];</span><br><span class="line">for (let i= 0; i&lt; newData.length; i++) &#123;</span><br><span class="line">  dom2.push(`&lt;span&gt;$&#123;item.name&#125;-$&#123;item.age&#125;&lt;span&gt;`);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以看出声明式的代码更加简洁清晰优雅。</p>
+<figure class="highlight javascript"><figcaption><span>声明式代码复用</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 双倍</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">double</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> results = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i&lt; arr.length; i++) &#123;</span><br><span class="line">    results.push(arr[i] * <span class="number">2</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> results;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// +1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addOne</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> results = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i&lt; arr.length; i++) &#123;</span><br><span class="line">    results.push(arr[i] +<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> results;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明式: 去重复代码，简洁</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">double</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> arr.map(<span class="function"><span class="params">item</span>=&gt;</span> item*<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addOne</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> arr.map(<span class="function"><span class="params">item</span>=&gt;</span> item+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 声明式究极版： 借助 Ramda</span></span><br><span class="line"><span class="keyword">const</span> m= _.curry(<span class="function">(<span class="params">fn, arr</span>) =&gt;</span> arr.map(<span class="function"><span class="params">item</span>=&gt;</span> fn(item)));</span><br><span class="line"><span class="keyword">const</span> double = m(<span class="function"><span class="params">item</span>=&gt;</span> item*<span class="number">2</span>);</span><br><span class="line"><span class="keyword">const</span> addOne = m(<span class="function"><span class="params">item</span>=&gt;</span> item+<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+
+<p>这里我们可以看出一些函数式最简单的思路：<br>把循环和判断等控制语句尽可能换成<code>筛选 filter</code>、<code>映射 map</code>、<code>化约 reduce</code>。</p>
+<figure class="highlight javascript"><figcaption><span>cookie获取</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 命令式</span></span><br><span class="line"><span class="comment">// 获取cookie</span></span><br><span class="line"><span class="keyword">var</span> _cookie = <span class="built_in">document</span>.cookie;</span><br><span class="line"><span class="comment">// cookie 的形式是字符串 &quot;key1=value1; key2=value2; &quot;; 把他转变成数组形式 [&quot;key1=value1&quot;, &quot;key2=value2&quot;]。 用 &quot;; &quot;作为分隔符</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> _cookieArray = _cookie.split(<span class="string">&#x27;; &#x27;</span>);</span><br><span class="line"><span class="comment">// 循环把数组里面的 key1=value1变成对象obj的key和value 方便获取</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i= <span class="number">0</span>; i&lt; _cookieArray.length; i++) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取出cookie数组里面的单个:  key1=value1</span></span><br><span class="line">    <span class="keyword">var</span> cookieItem = _cookieArray[i];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 把这个字符串key1= value1 变换成数组 [key1, value1]，用 &quot;=&quot; 做为分割符</span></span><br><span class="line">    <span class="keyword">var</span> cookieItemArray = cookieItem.split(<span class="string">&#x27;=&#x27;</span>); <span class="comment">// [key1, value1]</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 把分割好的数组，赋值给obj  </span></span><br><span class="line">    <span class="keyword">var</span> key = cookieItemArray[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">var</span> value = cookieItemArray[<span class="number">1</span>];</span><br><span class="line">    obj[key] = value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数式</span></span><br><span class="line"><span class="built_in">document</span>.cookie.split(<span class="string">&#x27;; &#x27;</span>)</span><br><span class="line">    .map(<span class="function"><span class="params">item</span>=&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> [key, value] = item.split(<span class="string">&#x27;=&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> &#123;key, value&#125;;</span><br><span class="line">    &#125;)</span><br><span class="line">    .reduce(<span class="function">(<span class="params">acc, cur</span>)=&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> &#123; key, value &#125; = cur;</span><br><span class="line">        acc[key] = value;</span><br><span class="line">        <span class="keyword">return</span> acc;</span><br><span class="line">    &#125;, &#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="综合-纯函数-声明式"><a href="#综合-纯函数-声明式" class="headerlink" title="综合 纯函数 + 声明式"></a>综合 纯函数 + 声明式</h1><p>该部分源代码可以看这个仓库 ( ☉_☉)≡☞o────★°<a target="_blank" rel="noopener" href="https://github.com/jsonz1993/wheel/tree/master/fq-demo">仓库地址</a></p>
+<figure class="highlight javascript"><figcaption><span>求完美数</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  完全数（Perfect number），又称完美数或完备数，是一些特殊的自然数。 它所有的真因子（即除了自身以外的约数）的和（即因子函数），恰好等于它本身</span></span><br><span class="line"><span class="comment">// 比如 6 = 1 + 2 + 3 是完美数; 8 != 1 + 2 + 4 不是完美数</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> num = <span class="number">6</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">isPerfect</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> aliquotSum() === num;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">isFactor</span>(<span class="params">potential</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num % potential === <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getFactors</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> arr = [];</span><br><span class="line"></span><br><span class="line">    arr.push(<span class="number">1</span>); </span><br><span class="line">    arr.push(num);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i= <span class="number">2</span>; i&lt; num; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (isFactor(i)) arr.push(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">aliquotSum</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">const</span> factors = getFactors(num);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i= <span class="number">0</span>; i&lt; factors.length; i++) &#123;</span><br><span class="line">      sum += factors[i];</span><br><span class="line">    &#125;</span><br><span class="line">    sum -= num;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> result = isPerfect();</span><br><span class="line">  <span class="built_in">console</span>.log(result);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 向函数式靠拢</span></span><br><span class="line"><span class="comment">// 1. 将 num 变为传参 而不是外部状态</span></span><br><span class="line"><span class="comment">// 2. 使得所有方法都变为纯函数</span></span><br><span class="line"><span class="comment">// 3. 真因子相加改为函数式写法</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">isPerfect</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> aliquotSum(num) === num;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">isFactor</span>(<span class="params">num, potential</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num % potential === <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">getFactors</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Array</span>.from(<span class="built_in">Array</span>(num), <span class="function">(<span class="params">item, i</span>)=&gt;</span> i)</span><br><span class="line">      .filter(<span class="function"><span class="params">v</span>=&gt;</span> isFactor(num, v));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">aliquotSum</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">const</span> factors = getFactors(num);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i= <span class="number">0</span>; i&lt; factors.length; i++) &#123;</span><br><span class="line">      sum += factors[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> result = isPerfect(<span class="number">6</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(result);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 究极版</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">const</span> aliquotSum = <span class="function"><span class="params">num</span>=&gt;</span> <span class="built_in">Array</span>.from(<span class="built_in">Array</span>(num), <span class="function">(<span class="params">item, i</span>)=&gt;</span> i)</span><br><span class="line">    .filter(<span class="function"><span class="params">item</span>=&gt;</span> num % item === <span class="number">0</span>)</span><br><span class="line">    .reduce(<span class="function">(<span class="params">cur, next</span>)=&gt;</span> cur += next);</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">isPerfect</span>(<span class="params">num</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> aliquotSum(num) === num;</span><br><span class="line">  &#125;</span><br><span class="line">    </span><br><span class="line">  <span class="keyword">const</span> result = isPerfect(<span class="number">6</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面都是比较小的工具demo，基本上不包含Effects，但是实际上项目充斥一堆业务逻辑(Effects)，所以一般会借助一些工具/库来实现,比如 <code>ramda.js</code>和<code>rx.js</code>。</p>
+<blockquote>
+<p><code>rxJs</code> 官网的描述是 Reactive Extensions Library for JavaScript简单来说RxJS就是辅助我们写出函数式响应式代码的一种工具。</p>
+</blockquote>
+<p>我们现在来实现一个功能，页面上有一个按钮，点击之后输出计数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 普通版本</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">const</span> button = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#button&#x27;</span>);</span><br><span class="line">  button.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function">()=&gt;</span> &#123;</span><br><span class="line">    count += <span class="number">1</span>; <span class="comment">// 用到外部变量</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`clicked!<span class="subst">$&#123;count&#125;</span> times`</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// RxJs版本</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="keyword">const</span> &#123; fromEvent, <span class="attr">operators</span>: &#123; scan, &#125; &#125; = rxjs;</span><br><span class="line"> <span class="keyword">const</span> button = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#button&#x27;</span>);</span><br><span class="line"></span><br><span class="line"> fromEvent(button, <span class="string">&#x27;click&#x27;</span>)</span><br><span class="line">  .pipe(</span><br><span class="line">    <span class="comment">// scan 随着时间的推移进行归并。</span></span><br><span class="line">    scan(<span class="function">(<span class="params">count</span>)=&gt;</span> count+ <span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">  )</span><br><span class="line">  .subscribe(<span class="function"><span class="params">count</span>=&gt;</span> <span class="built_in">console</span>.log(<span class="string">`clicked! <span class="subst">$&#123;count&#125;</span> times`</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>节流和累加点击坐标</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">const</span> button = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#button&#x27;</span>);</span><br><span class="line">  <span class="keyword">const</span> rate = <span class="number">1000</span>;</span><br><span class="line">  <span class="keyword">let</span> lastClick = <span class="built_in">Date</span>.now() - rate;</span><br><span class="line">  button.addEventListener(<span class="string">&#x27;click&#x27;</span>, <span class="function">(<span class="params">e</span>)=&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Date</span>.now() - lastClick &gt;= rate) &#123;</span><br><span class="line">      count += e.clientX;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">`clicked!<span class="subst">$&#123;count&#125;</span> times`</span>);</span><br><span class="line">      lastClick = <span class="built_in">Date</span>.now();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"> <span class="keyword">const</span> &#123; fromEvent, <span class="attr">operators</span>: &#123; scan, throttleTime, map &#125; &#125; = rxjs;</span><br><span class="line"> <span class="keyword">const</span> button = <span class="built_in">document</span>.querySelector(<span class="string">&#x27;#button&#x27;</span>);</span><br><span class="line"></span><br><span class="line"> fromEvent(button, <span class="string">&#x27;click&#x27;</span>)</span><br><span class="line">  .pipe(</span><br><span class="line">    throttleTime(<span class="number">1000</span>),</span><br><span class="line">    map(<span class="function"><span class="params">e</span>=&gt;</span> e.clientX),</span><br><span class="line">    scan(<span class="function">(<span class="params">count, clientX</span>)=&gt;</span> count+ clientX, <span class="number">0</span>)</span><br><span class="line">  )</span><br><span class="line">  .subscribe(<span class="function"><span class="params">count</span>=&gt;</span> <span class="built_in">console</span>.log(<span class="string">`clicked! <span class="subst">$&#123;count&#125;</span> times`</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们用<code>Ramda.js</code>来实现一个页面，获取某个关键字图片，并展示出来。<code>Ramda</code>主要帮忙实现一些 <code>curry</code>, <code>compose</code> 等功能</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">requirejs.config(&#123;</span><br><span class="line">  <span class="attr">paths</span>: &#123;</span><br><span class="line">    <span class="attr">ramda</span>: <span class="string">&#x27;https://cdnjs.cloudflare.com/ajax/libs/ramda/0.13.0/ramda.min&#x27;</span>,</span><br><span class="line">    <span class="attr">jquery</span>: <span class="string">&#x27;https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">require</span>([</span><br><span class="line">    <span class="string">&#x27;ramda&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;jquery&#x27;</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">_, $</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 我们把不纯的Effects抽出来</span></span><br><span class="line">    <span class="keyword">const</span> Impure = &#123;</span><br><span class="line">      <span class="attr">getJSON</span>: _.curry(<span class="function">(<span class="params">callback, url</span>)=&gt;</span> $.getJSON(url, callback)),</span><br><span class="line"></span><br><span class="line">      <span class="attr">setHtml</span>: _.curry(<span class="function">(<span class="params">sel, html</span>)=&gt;</span> $(sel).html(html)),</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 传入url 生成 img dom</span></span><br><span class="line">    <span class="keyword">const</span> img = <span class="function"><span class="keyword">function</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> $(<span class="string">&#x27;&lt;img /&gt;&#x27;</span>, &#123; <span class="attr">src</span>: url &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取传入参数的 media 属性，以及获取 media属性上的 m。 等价于 arg.media.m</span></span><br><span class="line">    <span class="keyword">const</span> mediaUrl = _.compose(_.prop(<span class="string">&#x27;m&#x27;</span>), _.prop(<span class="string">&#x27;media&#x27;</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取传入参数的 item 属性，以及对每个item执行 mediaUrl 函数</span></span><br><span class="line">    <span class="keyword">const</span> srcs = _.compose(_.map(mediaUrl), _.prop(<span class="string">&#x27;items&#x27;</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 把img和srcs函数整合起来</span></span><br><span class="line">    <span class="keyword">const</span> images = _.compose(_.map(img), srcs);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> url = <span class="function"><span class="params">term</span>=&gt;</span> <span class="string">`https://api.flickr.com/services/feeds/photos_public.gne</span></span><br><span class="line"><span class="string">    ?tags=<span class="subst">$&#123;term&#125;</span>&amp;format=json&amp;jsoncallback=?`</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 把imges获取到的参数传给 Impure.setHtml(&#x27;body&#x27;);</span></span><br><span class="line">    <span class="keyword">const</span> renderImages = _.compose(Impure.setHtml(<span class="string">&#x27;body&#x27;</span>), images);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 把所有小函数整合成一个大的函数，我们只需要给这个app喂数据即可</span></span><br><span class="line">    <span class="keyword">const</span> app = _.compose(Impure.getJSON(renderImages), url);</span><br><span class="line"></span><br><span class="line">    app(<span class="string">&#x27;cat&#x27;</span>);</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>优化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// old</span></span><br><span class="line">    <span class="keyword">const</span> mediaUrl = _.compose(_.prop(<span class="string">&#x27;m&#x27;</span>), _.prop(<span class="string">&#x27;media&#x27;</span>));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> srcs = _.compose(_.map(mediaUrl), _.prop(<span class="string">&#x27;items&#x27;</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> images = _.compose(_.map(img), srcs);</span><br><span class="line">    </span><br><span class="line"><span class="comment">// new</span></span><br><span class="line">    <span class="keyword">const</span> mediaUrl = _.compose(_.prop(<span class="string">&#x27;m&#x27;</span>), _.prop(<span class="string">&#x27;media&#x27;</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> images = _.compose(_.map(img), _.map(mediaUrl), _.prop(<span class="string">&#x27;items&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<p>再优化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> images = _.compose(_.map(_.compose(img, mediaUrl)), _.prop(<span class="string">&#x27;items&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<!-- 严格意义上的函数式编程意味着不使用可变的变量，赋值，循环和其他命令式控制结构进行编程。
+
+由于命令式编程语言也可以通过类似函数指针的方式来实现高阶函数，函数式的最主要的好处主要是不可变性带来的。没有可变的状态，函数就是引用透明（Referential transparency）的和没有副作用。
+
+函数式编程是给软件开发者提供的另一套工具箱，为我们提供了另外一种抽象和思考的方式。  -->
+
+
+<h1 id="函数式和面向对象对比"><a href="#函数式和面向对象对比" class="headerlink" title="函数式和面向对象对比"></a>函数式和面向对象对比</h1><p>面向对象编程思想，<code>封装</code> <code>继承</code> <code>多态</code>。</p>
+<p>把状态的改变封装起来，让代码更加清晰，通过类与继承去处理关联关系。但是会充满公用变量，<code>this</code>，<code>bind</code>等。</p>
+<p>面向对象目前更加广泛，而且更容易被接受，写起来更容易，但可能会有更多冗余的代码，捆绑了很多状态，典型的问题是 <strong>你只需要一个香蕉，但是却得到一个拿着香蕉的大猩猩以及整个丛林。</strong></p>
+<hr>
+<p>函数式编程思想，尽量减少不确定因素，来让代码更加清晰健硕。</p>
+<p>每个函数都不要去修改原有的数据，而是通过产生新的数据来做为运算结果，_这也意味着函数式比较耗资源，所以在计算机石器时代并不流行_。</p>
+<p>简单来说就是很多小的纯函数，一个小函数只做一些事情，然后用这些小函数来组织成更大的函数，函数的参数与返回值也大部分都是函数。<br>最后能得到一个超级牛逼的函数，我们只要把数据给他，就可以了。</p>
+<p>函数式简洁，清晰可复用性高，出错几率更小。但是一开始思维很难从面向对象或命令式转换过来，往往也需要借助一些工具库来编写。</p>
+<h1 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h1><p>这里只提了函数式编程的一些思想，但是真正函数式开发还包含很多其他要学的。比如我们用到的<code>柯里化curry</code>还有<code>代码组合compose</code>等，光<code>RxJs</code>提供的api就有179个之多…</p>
+<p>再者不知道是不是对函数式的理解不够透彻，有试过某个需求用函数式的思想去写，但是有点好像硬掰的样子，写的有点不伦不类….所以现在只是吸收一些函数式的思想（比如纯函数减少不确定性），但是平时工作不会很刻意全部都用函数式去写。只是当成一个可以扩展的知识面，后面如果函数式真的在前端流行起来，再上手也不迟。</p>
+<p>顺路感慨JS的灵活性，既有ES6面向对象的特性<code>class</code>也有ES5的 <code>filter</code>、<code>map</code>、<code>reduce</code>，以及ES.Next的装饰器(Decorator)等函数式编程的特性。</p>
+<p>最后再给出参考的以及学习过程看到的一些不错的书籍和文章:</p>
+<p><a target="_blank" rel="noopener" href="https://www.gitbook.com/book/llh911001/mostly-adequate-guide-chinese">JS 函数式编程指南</a><br><a target="_blank" rel="noopener" href="https://www.amazon.cn/dp/B07CXZ9D8N/ref=sr_1_1?ie=UTF8&qid=1535945880&sr=8-1&keywords=%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BARxjs">深入浅出Rxjs</a><br><a target="_blank" rel="noopener" href="https://www.amazon.cn/dp/B014SCOQA0/ref=sr_1_1?ie=UTF8&qid=1535945728&sr=8-1&keywords=%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E6%80%9D%E7%BB%B4">函数式编程思维</a><br><a target="_blank" rel="noopener" href="https://juejin.im/post/5950b0c56fb9a06bca0b7c04">命令式、声明式、面向对象、函数式、控制反转之华山论剑（上）</a><br><a target="_blank" rel="noopener" href="https://github.com/ReactiveX/rxjs">RxJs 响应式代码库</a><br><a target="_blank" rel="noopener" href="https://github.com/ramda/ramda">Ramda 函数式工具库</a><br><a target="_blank" rel="noopener" href="https://www.haskell.org/">Haskell 纯函数式编程语言</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28292740">什么是函数式编程思维</a><br><a target="_blank" rel="noopener" href="http://pinggod.com/2016/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E6%9C%AF%E8%AF%AD%E8%A7%A3%E6%9E%90/">函数式编程术语解析</a></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ali_pay.jpeg" alt="Jsonz Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+              <a href="/tags/FP/" rel="tag"># FP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/circular-reference/" rel="prev" title="一道赋值面试题引发的思考">
+      <i class="fa fa-chevron-left"></i> 一道赋值面试题引发的思考
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/react-source/" rel="next" title="React源码系列">
+      React源码系列 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">函数式编程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BA%AF%E5%87%BD%E6%95%B0"><span class="nav-number">2.</span> <span class="nav-text">纯函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">声明式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%BC%E5%90%88-%E7%BA%AF%E5%87%BD%E6%95%B0-%E5%A3%B0%E6%98%8E%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">综合 纯函数 + 声明式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%BC%8F%E5%92%8C%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%AF%B9%E6%AF%94"><span class="nav-number">5.</span> <span class="nav-text">函数式和面向对象对比</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">6.</span> <span class="nav-text">结语</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jsonz"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Jsonz</p>
+  <div class="site-description" itemprop="description">前端👴🥬🐣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jsonz1993" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jsonz1993" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jsonz@qq.com" title="E-Mail → mailto:jsonz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://juejin.im/user/58dbb0b844d904006954ca8e" title="掘金 → https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;58dbb0b844d904006954ca8e" rel="noopener" target="_blank"><i class="fa fa-bullseye fa-fw"></i>掘金</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.hhking.cn/" title="hhking → https:&#x2F;&#x2F;blog.hhking.cn" rel="noopener" target="_blank"><i class="fa fa-user-friends fa-fw"></i>hhking</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备18066881号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/fp/',]
+      });
+      });
+  </script>
+
+</body>
+</html>

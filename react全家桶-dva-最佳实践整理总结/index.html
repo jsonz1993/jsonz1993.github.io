@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="中后台项目上使用react全家桶方案总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react全家桶 + dva 实践整理总结">
+<meta property="og:url" content="http://jsonz1993.github.io/react%E5%85%A8%E5%AE%B6%E6%A1%B6-dva-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Jsonz bug-log">
+<meta property="og:description" content="中后台项目上使用react全家桶方案总结">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-02-28T16:07:43.000Z">
+<meta property="article:modified_time" content="2021-05-29T14:12:12.233Z">
+<meta property="article:author" content="Jsonz">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jsonz1993.github.io/react%E5%85%A8%E5%AE%B6%E6%A1%B6-dva-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>react全家桶 + dva 实践整理总结 | Jsonz bug-log</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jsonz bug-log" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jsonz bug-log</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端/JavaScript/React</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">39</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/react%E5%85%A8%E5%AE%B6%E6%A1%B6-dva-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          react全家桶 + dva 实践整理总结
+        </h1>
+        <div class="post-meta ">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-02-28 16:07:43" itemprop="dateCreated datePublished" datetime="2018-02-28T16:07:43+00:00">2018-02-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-29 14:12:12" itemprop="dateModified" datetime="2021-05-29T14:12:12+00:00">2021-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">中后台项目上使用react全家桶方案总结</div>
+
+        </div>
+
+      </header>
+
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h1><p>最近接手组内一个前端大牛的项目，大概理清了里面的总理逻辑与数据流向等， 写个总结 方便以后可以查阅参考。</p>
+<p>在之前做的后台管理平台里面，就有用到 <code>dva+antd</code>， 到后面直接用 <code>antd-pro</code> 重新整合了一遍，不得不说 <code>antd-pro</code> 真的是开箱即用 优雅粗暴。</p>
+<p>但是里面可能很多和我们平时使用习惯有所不同， 所以这次接触的项目是基于 dva 自己再重组了一下 <code>model</code> <code>router</code> 目录结构等。 </p>
+<p>使得页面更加的模块化，既 models, routes 不是在一个文件目录里，而是直接按照页面级别来组合。有一个好处就是 本来 models,routes 这些几乎就是不能公用的，那直接按着页面去分 方便问题定位与维护。</p>
+<h1 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">├── config              # 一些关于 webpack babel dll 等项目构件的配置</span><br><span class="line">│   ├── babel-plugin-wrap-source.js</span><br><span class="line">│   ├── babel-plugin-wrap.js</span><br><span class="line">│   ├── build.log</span><br><span class="line">│   ├── dist.js</span><br><span class="line">│   ├── dll</span><br><span class="line">│   ├── server.js</span><br><span class="line">│   ├── ssr-middleware.js</span><br><span class="line">│   ├── theme.config.js</span><br><span class="line">│   ├── webpack.config.common.js</span><br><span class="line">│   ├── webpack.config.dll.js</span><br><span class="line">│   └── webpack.config.prod.js</span><br><span class="line">├── dist               # 打包好的文件</span><br><span class="line">│   ├── css</span><br><span class="line">│   ├── index.html</span><br><span class="line">│   └── js</span><br><span class="line">├── package-lock.json</span><br><span class="line">├── package.json</span><br><span class="line">├── src</span><br><span class="line">│   ├── assets        # 放一些静态资源，如 全局一些 less 文件等</span><br><span class="line">│   ├── common        # 公共文件， 如 config request utils 等</span><br><span class="line">│   ├── components    # 通用组件, 如 editor loading 等，用了 antd 之后，这个文件夹的文件较少</span><br><span class="line">│   ├── index-ssr.js</span><br><span class="line">│   ├── index.js      # 项目入口文件</span><br><span class="line">│   ├── mock          # mock文件</span><br><span class="line">│   ├── modules       # 业务页面文件夹  代码的绝大部分放在此处</span><br><span class="line">│       └── activity  #  业务页面 每个业务页面起一个文件夹</span><br><span class="line">│           ├── index.js   # 当前页面的路由及动态加载文件的配置文件</span><br><span class="line">│           ├── model.js   # 当前页面的 dva model</span><br><span class="line">│           ├── businessUtil.js # </span><br><span class="line">│           └── view       # 当前页面的 view 文件</span><br><span class="line">│               └── index.js</span><br><span class="line">│   ├── router.js     # 总路由入口</span><br><span class="line">│   └── services      # 后台接口服务</span><br><span class="line">└── webpack.config.js # webpack 配置</span><br></pre></td></tr></table></figure>
+
+<h1 id="项目剖析"><a href="#项目剖析" class="headerlink" title="项目剖析"></a>项目剖析</h1><h2 id="index-js"><a href="#index-js" class="headerlink" title="index.js"></a>index.js</h2><p>和其他项目一样 <code>index.js</code> 处理的东西很简单</p>
+<ul>
+<li>进行一些关于 dva 的配置初始化</li>
+<li>加载配置app model <code>require(modules/app/model)</code></li>
+<li>加载配置app router <code>require(&#39;./router&#39;).default</code></li>
+<li>&amp;&amp;&amp;&amp;&amp;&amp;&amp; 启动应用</li>
+</ul>
+<p>这里就引出两个分支， model &amp;&amp; router 前端架构中比较关心的两个。</p>
+<h2 id="router-管理"><a href="#router-管理" class="headerlink" title="router 管理"></a>router 管理</h2><p>在 <code>router.js</code> 里面 定义了主 <code>Component</code> 与默认 url</p>
+<p>router.childRoutes 也是使用模块的方式，只引用了几个大模块，如 <code>require(&#39;modules/activity&#39;)(app),</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Routers = <span class="function"><span class="keyword">function</span> (<span class="params">&#123; history, app &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> routes = getRoutes(app);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">Router</span> <span class="attr">history</span>=<span class="string">&#123;history&#125;</span> <span class="attr">routes</span>=<span class="string">&#123;routes&#125;</span> <span class="attr">render</span>=<span class="string">&#123;applyRouterMiddleware(useScroll())&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getRoutes</span>(<span class="params">app</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">      <span class="attr">component</span>: App,</span><br><span class="line">      <span class="attr">childRoutes</span>: [</span><br><span class="line">        <span class="built_in">require</span>(<span class="string">&#x27;modules/activity&#x27;</span>)(app),</span><br><span class="line">      ],</span><br><span class="line">    &#125;,</span><br><span class="line">  ];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>modules/activity/index.js</code> 再去加载构建他的子级路由</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> app=&gt;(&#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;url&#x27;</span>,</span><br><span class="line">    getComponent (nextState, cb) &#123;</span><br><span class="line">        <span class="built_in">require</span>.ensure([], <span class="function">(<span class="params"><span class="built_in">require</span></span>) =&gt;</span> &#123;</span><br><span class="line">            app.model(<span class="built_in">require</span>(<span class="string">&#x27;./model&#x27;</span>)); <span class="comment">// 加载当前模块的model</span></span><br><span class="line">            cb(<span class="literal">null</span>, <span class="built_in">require</span>(<span class="string">&#x27;./view&#x27;</span>)); <span class="comment">// 记载当前模块的view</span></span><br><span class="line">        &#125;, <span class="string">&#x27;模块名&#x27;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">childRoutes</span>:[</span><br><span class="line">      <span class="built_in">require</span>(<span class="string">&#x27;modules/child1&#x27;</span>)(app), </span><br><span class="line">      <span class="built_in">require</span>(<span class="string">&#x27;modules/child2&#x27;</span>)(app)</span><br><span class="line">    ],</span><br><span class="line">    ...其他配置</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>就这样一层一层的构建自己的路由， 根据页面去配置也可以更加的细腻可控。不会写成长长的一坨。</p>
+<h2 id="model"><a href="#model" class="headerlink" title="model"></a>model</h2><p>model层用的是 <code>dva</code> 那套， 帮我们整合了 <code>redux</code>, <code>redux-sage</code> and <code>react-router</code> 十分超级好用。</p>
+<p>这里只是把目录结构也调整为 页面级别里面，与页面的 路由配置同级。 也是出于更好的定位问题与维护。</p>
+<p>一般与<code>model</code> 相关的文件还有各个页面级别文件夹（即<code>modules/activity</code>)里面的 <code>businessUtil.js</code> 文件。</p>
+<p>这个文件主要用来辅助处理一些和 model 有关的事情，一般会有三个方法 <code> export &#123; getInitState, convertProps2Params, convertParams2Props &#125;</code>。 分别处理 <code>初始化state</code>, <code>server</code> 端数据与组件 <code>props</code> 之间的差异转换。</p>
+<h2 id="mock-数据"><a href="#mock-数据" class="headerlink" title="mock 数据"></a>mock 数据</h2><p>mock 数据，用了 dva 自带的那套。</p>
+<p>我们平时写接口的时候，会在 <code>services/</code> 下面起一个文件 里面带有某个接口地址 用来请求数据接口的<br>然后在 <code>mock/</code> 下面也会起一个文件 相同的也会带有一个接口地址<br>这样我们如果这个接口地址改变，岂不是要改两个地方？</p>
+<p>为此，我们在 <code>services/</code> 下面的文件，只是简单的写了一些原始数据，如 url, method 等</p>
+<figure class="highlight javascript"><figcaption><span>services/feature1</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//@wrapFunction: common/request</span></span><br><span class="line"><span class="comment">// @1 上面那行注释是干什么用的呢？</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">url</span>:<span class="string">&#x27;api/feature1&#x27;</span>,</span><br><span class="line">  <span class="attr">method</span>:<span class="string">&#x27;POST&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样在 <code>mock/</code> 下面就可以直接引入 <code>services/feature1</code> 就可以拿到相同的url， 接口地址改动的话也只需要改动 <code>services</code> 下的文件。</p>
+<p>但是如果只是简单的返回一些原始数据，那和一个 <code>config</code> 文件有何区别，这样完全没有放在 <code>services</code> 下面的必要啊。。。  所以我们用了一行注释来做一些操作</p>
+<p>大概的原理是 写了一个 babel 插件，用来处理一些操作。<br>如果匹配到 <code>//@wrapFunction: </code> 则用后面的链接 require 一个方法来包着页面上的代码。</p>
+<p>这样就能起到，前端跑代码的时候 <code>feature1</code> 是一个接口功能的文件， <code>mock</code> 的时候是一个单纯的数据输出文件.</p>
+<h2 id="babel-插件自动处理-services-js"><a href="#babel-插件自动处理-services-js" class="headerlink" title="babel 插件自动处理 services/*.js"></a>babel 插件自动处理 <code>services/*.js</code></h2><p>在上面一小节讲到我们用 babel插件来处理差异化，这里我们具体讲一下是怎么处理的</p>
+<p>因为项目用的是 <code>roadhog</code> 搭建的， 所以我们在 <code>.roadhogrc.js</code> 里面配置一下 babel 插件，引进自己插件的文件。 这里我们的插件放置在 <code>/config/babel-plugin-wrap.js</code>;</p>
+<ol>
+<li>在 <code>services/*.js</code> 里面添加一行注释代码用作 babel 识别的标识</li>
+<li>判断页面上有无对应注释</li>
+<li>获取注释与目标路径， 把export default 的输出用函数调用表达式替换掉</li>
+</ol>
+<p>具体的 babel插件编写方式可以看官网 <a target="_blank" rel="noopener" href="https://babeljs.cn/docs/plugins/">https://babeljs.cn/docs/plugins/</a></p>
+<p>了解编译器原理可以参考 上一篇文<a href="https://jsonz1993.github.io/2018/01/%E4%B8%80%E6%AD%A5%E6%AD%A5%E5%AE%9E%E7%8E%B0%E6%9E%81%E7%AE%80%E7%BC%96%E8%AF%91%E5%99%A8-%E2%80%94%E2%80%94-%E4%BA%86%E8%A7%A3%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86/">一步步实现极简编译器 —— 了解编译器原理</a></p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>剩下的 dll 打包， ssr 以后有用到再去了解。<br>emmm 最近阿里刚出了一个 <a target="_blank" rel="noopener" href="https://umijs.org/">umiJs</a> 想起知乎上一个评价 用这一时爽 改起来火葬场。<br>在用 <code>antd-pro</code> 的时候就深有体会了。 所以建议如果不是比较小的项目或者灵活性要求高的项目， 还是不要上 <code>antd-pro</code>的好。。。</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ali_pay.jpeg" alt="Jsonz Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/%E4%B8%80%E6%AD%A5%E6%AD%A5%E5%AE%9E%E7%8E%B0%E6%9E%81%E7%AE%80%E7%BC%96%E8%AF%91%E5%99%A8-%E2%80%94%E2%80%94-%E4%BA%86%E8%A7%A3%E7%BC%96%E8%AF%91%E5%99%A8%E5%8E%9F%E7%90%86/" rel="prev" title="一步步实现极简编译器 —— 了解编译器原理">
+      <i class="fa fa-chevron-left"></i> 一步步实现极简编译器 —— 了解编译器原理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95puppeteer-%E4%B8%8Eqq%E7%A9%BA%E9%97%B4/" rel="next" title="自动化测试 puppeteer 与qq空间">
+      自动化测试 puppeteer 与qq空间 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">项目背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%89%96%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">项目剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#index-js"><span class="nav-number">3.1.</span> <span class="nav-text">index.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#router-%E7%AE%A1%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">router 管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#model"><span class="nav-number">3.3.</span> <span class="nav-text">model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mock-%E6%95%B0%E6%8D%AE"><span class="nav-number">3.4.</span> <span class="nav-text">mock 数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#babel-%E6%8F%92%E4%BB%B6%E8%87%AA%E5%8A%A8%E5%A4%84%E7%90%86-services-js"><span class="nav-number">3.5.</span> <span class="nav-text">babel 插件自动处理 services&#x2F;*.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">3.6.</span> <span class="nav-text">结语</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jsonz"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Jsonz</p>
+  <div class="site-description" itemprop="description">前端👴🥬🐣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jsonz1993" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jsonz1993" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jsonz@qq.com" title="E-Mail → mailto:jsonz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://juejin.im/user/58dbb0b844d904006954ca8e" title="掘金 → https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;58dbb0b844d904006954ca8e" rel="noopener" target="_blank"><i class="fa fa-bullseye fa-fw"></i>掘金</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.hhking.cn/" title="hhking → https:&#x2F;&#x2F;blog.hhking.cn" rel="noopener" target="_blank"><i class="fa fa-user-friends fa-fw"></i>hhking</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备18066881号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/react%E5%85%A8%E5%AE%B6%E6%A1%B6-dva-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/',]
+      });
+      });
+  </script>
+
+</body>
+</html>

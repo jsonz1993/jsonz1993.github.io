@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Http小书阅读记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP常用知识点总结">
+<meta property="og:url" content="http://jsonz1993.github.io/http-mini-book/index.html">
+<meta property="og:site_name" content="Jsonz bug-log">
+<meta property="og:description" content="Http小书阅读记录">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-05-23T12:17:42.000Z">
+<meta property="article:modified_time" content="2021-05-29T14:12:12.281Z">
+<meta property="article:author" content="Jsonz">
+<meta property="article:tag" content="Book">
+<meta property="article:tag" content="Http">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jsonz1993.github.io/http-mini-book/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>HTTP常用知识点总结 | Jsonz bug-log</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jsonz bug-log" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jsonz bug-log</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端/JavaScript/React</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">39</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/http-mini-book/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          HTTP常用知识点总结
+        </h1>
+        <div class="post-meta ">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-05-23 12:17:42" itemprop="dateCreated datePublished" datetime="2018-05-23T12:17:42+00:00">2018-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-29 14:12:12" itemprop="dateModified" datetime="2021-05-29T14:12:12+00:00">2021-05-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">Http小书阅读记录</div>
+
+        </div>
+
+      </header>
+
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>同样是因为面试的过程中，发现自己对http的一些概念和知识点和零碎，借此机会看了《HTTP小书》，顺手写了篇记录总结一些常见的http知识点。</p>
+<h1 id="http-简介"><a href="#http-简介" class="headerlink" title="http 简介"></a>http 简介</h1><p>请求:<br>客户端软件打开到服务器的连接，发起请求如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET /hello.htm HTTP/1.1</span><br><span class="line">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36</span><br><span class="line">Host: example.com</span><br><span class="line">Accept-Language: en-us</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br></pre></td></tr></table></figure>
+
+<p>响应:<br>服务端收到请求消息后根据资源定位符在服务器找到该资源，并响应给客户端:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">X-Powered-By: Express</span><br><span class="line">Content-Type: text/html; charset=utf-8</span><br><span class="line">Content-Length: 22</span><br><span class="line">ETag: W/&quot;16-dDTk/xb5lvRNBfrz6lE//HVBox8&quot;</span><br><span class="line">Date: Tue, 22 May 2018 03:04:08 GMT</span><br><span class="line">Connection: keep-alive</span><br><span class="line"></span><br><span class="line">&lt;h1&gt;Hello, Jsonz!&lt;/h1&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="请求消息"><a href="#请求消息" class="headerlink" title="请求消息"></a>请求消息</h2><p>请求信息一般由请求行、头部字段区、CRLF与消息主体（可选）组成</p>
+<h3 id="请求行"><a href="#请求行" class="headerlink" title="请求行"></a>请求行</h3><p>请求消息的第一行称为请求行，一般包括 <code>请求方法</code>， <code>请求资源标识符</code> 还有请求的<code>协议版本</code></p>
+<blockquote>
+<p>Request-List = Method SPACE Request-URI SPACE HTTP-Version CRLF</p>
+</blockquote>
+<p>请求方法比较常用的有 <code>GET</code>, <code>POST</code>。 这里用的是<code>GET</code> 发起一个请求获取资源</p>
+<ul>
+<li>GET 请求一个制定名称的资源</li>
+<li>POST 创建一个新的子资源，或者更新一个存在的资源</li>
+<li>PUT 指定的URL不存在则创建，存在则修改</li>
+<li>DELETE 删除指定资源</li>
+<li>OPTIONS 返回服务器支持的方法</li>
+<li>CONNECT、TRACE</li>
+</ul>
+<blockquote>
+<p>对于 POST 和 PUT的选择，作者给出的例子是创建订单<br>PUT /other/1 创建单号为1的订单，如果存在就更新他，订单号由客户端提供<br>POST /other 创建订单，订单号由服务端提供<br>POST /other/1 更新订单，如果不存在应该抛错<br>重复执行PUT请求不会影响服务器状态，而POST则会导致创建两个订单</p>
+</blockquote>
+<p>但是工作中，几乎只用过GET和POST，对于创建订单的例子中，PUT和POST的区别我的理解比较浅显，一个是客户端/服务端提供订单号，一个是语义化。</p>
+<h3 id="头部字段"><a href="#头部字段" class="headerlink" title="头部字段"></a>头部字段</h3><p>从第二行到空行之间都属于头部字段区，用来传递更多详细的信息，这个案例里面是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36</span><br><span class="line">Host: example.com</span><br><span class="line">Accept-Language: en-us</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br></pre></td></tr></table></figure>
+<p>比如说这里:<br><code>User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36</code> 我们可以知道客户端用的是 Mac OSx系统，Chrome v66.0.x版本的浏览器<br><code>Accept-Language: en-us</code> 语言是英语<br><code>Accept-Encoding: gzip, deflate</code> 支持的压缩编码为gzip和deflate</p>
+<h3 id="空行-CRLF"><a href="#空行-CRLF" class="headerlink" title="空行(CRLF)"></a>空行(CRLF)</h3><p>空行也叫CRLF，是隔开请求头与请求主体的</p>
+<h3 id="消息主体"><a href="#消息主体" class="headerlink" title="消息主体"></a>消息主体</h3><p>发送给服务端的消息，比如用POST方法提交表单时，表单的内容就是存在消息主体里面。如果是用GET方法就会丢到请求URL里</p>
+<h2 id="响应信息"><a href="#响应信息" class="headerlink" title="响应信息"></a>响应信息</h2><p>响应信息和请求信息的组成结构相似，由状态行、头部字段行、空行（CRLF）和消息主体构成。</p>
+<h3 id="状态行"><a href="#状态行" class="headerlink" title="状态行"></a>状态行</h3><p><code>HTTP/1.1 200 OK</code></p>
+<p>请求行一般由 <code>协议版本号</code>、<code>状态码</code>与<code>状态码描述</code>组成。</p>
+<p>协议版本号有: 0.9、1.0、1.1、2.0等，目前比较流行的是2.0与1.1</p>
+<p>状态码有以下几种类型，状态码和前端开发会比较相关一点，更具体的介绍后面会详细说</p>
+<ul>
+<li>1xx 信息提示</li>
+<li>2xx 成功</li>
+<li>3xx 重定向</li>
+<li>4xx 客户端错误</li>
+<li>5xx 服务端错误</li>
+</ul>
+<h3 id="头部字段-1"><a href="#头部字段-1" class="headerlink" title="头部字段"></a>头部字段</h3><p>状态行与空行之间就是响应头部字段了， 响应头比请求头功能相对来说多一点，比如后面会说到的<code>Set-Cookie</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">X-Powered-By: Express</span><br><span class="line">Content-Type: text/html; charset=utf-8</span><br><span class="line">Content-Length: 22</span><br><span class="line">ETag: W/&quot;16-dDTk/xb5lvRNBfrz6lE//HVBox8&quot;</span><br><span class="line">Date: Tue, 22 May 2018 03:04:08 GMT</span><br><span class="line">Connection: keep-alive</span><br></pre></td></tr></table></figure>
+<p>响应头包括一些服务本身的信息以及响应内容体的信息，比如这里的<br><code>Date: Tue, 22 May 2018 03:04:08 GMT</code> 是响应的时间<br><code>Content-Length: 22</code>是返回的消息体长度。</p>
+<h3 id="空行-CRLF-1"><a href="#空行-CRLF-1" class="headerlink" title="空行(CRLF)"></a>空行(CRLF)</h3><p>和请求的CRLF是一样的，用来隔开响应头和响应内容主体</p>
+<h3 id="响应消息主体"><a href="#响应消息主体" class="headerlink" title="响应消息主体"></a>响应消息主体</h3><p>在我们这个例子里面是一句很简单的 <code>&lt;h1&gt;Hello, Jsonz!&lt;/h1&gt;</code>，这里响应主体有很多种格式，如果是gif的话会返回gif的二进制字节集合</p>
+<h1 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h1><p>请求的结构组成Request:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Request-Line CRLF</span><br><span class="line">*Request-HEAD CRLF</span><br><span class="line">CRLF</span><br><span class="line">[ message-body ]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Request-Line =&gt; Request-List = Method SPACE Request-URI SPACE HTTP-Version CRLF<br>这里我们主要Request-Methods部分</p>
+</blockquote>
+<h2 id="GET"><a href="#GET" class="headerlink" title="GET"></a>GET</h2><p>GET 方法一般是用来获取URL指定的资源</p>
+<h3 id="可以配合-Range-来获取局部资源。"><a href="#可以配合-Range-来获取局部资源。" class="headerlink" title="可以配合 Range 来获取局部资源。"></a>可以配合 <code>Range</code> 来获取局部资源。</h3><p>发起请求</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /index.txt HTTP/1.1</span><br><span class="line">Range: bytes=0-4</span><br></pre></td></tr></table></figure>
+
+<p>服务端响应</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 206 Partial Content</span><br><span class="line">Content-Type: text/html</span><br><span class="line">Content-Range: bytes 0-5/12</span><br><span class="line">Content-Length: 5</span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
+
+<p>在一些视频的场景，比如用户点击到某个进度，我们可以直接从该进度去请求，而不是整一个视频都请求下来。<br>响应头的<code>Content-Range: bytes 0-5/12</code>指的是当前返回0-5，总长为12。</p>
+<h3 id="配合-ETag-做缓存"><a href="#配合-ETag-做缓存" class="headerlink" title="配合 ETag 做缓存"></a>配合 ETag 做缓存</h3><p>服务端在响应头里面会给一个<code>ETag</code>标识，这个标识我们在开头的时候有说了是文件的唯一标识符。<br>那么我们是不是可以这么做，在GET请求时使用条件获取头部字段，如果服务端发现这个字段与文件的ETag标识匹配，则可以做缓存，否则发送新的文档过来。</p>
+<p>发起请求</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GET /hello.htm HTTP/1.1</span><br><span class="line">If-None-Match:  W/&quot;16-dDTk/xb5lvRNBfrz6lE//HVBox8&quot;</span><br></pre></td></tr></table></figure>
+
+<p>服务端响应</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 304 Not Modified</span><br><span class="line">X-Powered-By: Express</span><br><span class="line">ETag: W/&quot;16-dDTk/xb5lvRNBfrz6lE//HVBox8&quot;</span><br><span class="line">Date: Tue, 22 May 2018 12:08:23 GMT</span><br><span class="line">Connection: keep-alive</span><br></pre></td></tr></table></figure>
+
+<p>这里我们的ETag与文件匹配上了，所以服务端直接响应 304 状态码(Not Modified);</p>
+<h2 id="HEAD"><a href="#HEAD" class="headerlink" title="HEAD"></a>HEAD</h2><p>HEAD方法和GET方法的区别是 HEAD方法请求，响应的时候就只会发送响应消息的头部字段，不会把响应消息主体返回</p>
+<p>那么HEAD的场景一般在什么地方呢？ 一般可用于发起一个请求来获取服务端的资源大小，再分段获取。</p>
+<h2 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h2><p>我们平时大部分场景用的都是POST方法，因为POST方法不会把参数都丢在URL上，对请求的数据大小没有限制，请求也不会缓存。</p>
+<h2 id="OPTIONS"><a href="#OPTIONS" class="headerlink" title="OPTIONS"></a>OPTIONS</h2><p>OPTIONS方法主要是用来查询URL指定的资源所支持的方法列表</p>
+<p>发起请求</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS /hello.htm HTTP/1.1</span><br></pre></td></tr></table></figure>
+
+<p>服务端响应</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">X-Powered-By: Express</span><br><span class="line">Allow: GET,HEAD</span><br><span class="line">Content-Type: text/html; charset=utf-8</span><br><span class="line">Content-Length: 8</span><br><span class="line">ETag: W/&quot;8-ZRAf8oNBS3Bjb/SU2GYZCmbtmXg&quot;</span><br><span class="line">Date: Tue, 22 May 2018 12:20:42 GMT</span><br><span class="line">Connection: keep-alive</span><br><span class="line"></span><br><span class="line">GET,HEAD%</span><br></pre></td></tr></table></figure>
+
+<p>这里列出了这个资源支持 GET与HEAD方法</p>
+<h2 id="PUT"><a href="#PUT" class="headerlink" title="PUT"></a>PUT</h2><p>PUT方法上面讲了是 对URL指定的资源进行创建，如果存在就修改他。</p>
+<p>理论上这种需求直接用POST方法就完全够用了，比如创建订单<code>POST /order/create</code><br>更新订单 <code>POST /order/orderId</code></p>
+<p>但是这里如果改成PUT创建的话，可以直接这样 <code>PUT /order</code> 更符合Restful API规范，如果换成前端的层面来说，就像<code>div</code>与<code>header, nav, section, aside, footer</code>这些更有语义化的标签。</p>
+<h2 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h2><p>删除某个资源，没什么好说的</p>
+<h2 id="CONNECT"><a href="#CONNECT" class="headerlink" title="CONNECT"></a>CONNECT</h2><blockquote>
+<p>在当前已经建立HTTP连接的情况下，CONNECT 方法用来告知代理服务器，客户端想要和服务器之间建立SSL连接。</p>
+</blockquote>
+<blockquote>
+<p>客户端使用如下消息，通知代理服务器，去做一个连接到指定的服务器地址和端口:</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CONNECT example.com 443 HTTP/1.1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>代理服务器随后提取CONNECT 方法指定的地址和端口（这里是 example.com 443 ），建立和此服务器的SSL连接，成功后随后通知客户端，需要的连接建立完毕：</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 OK </span><br></pre></td></tr></table></figure>
+
+<p>使用CONNECT发起请求，服务端不会去解析字段等操作，而是完完全全单纯的做转发，我们称之为透明代理。</p>
+<h2 id="TRACE"><a href="#TRACE" class="headerlink" title="TRACE"></a>TRACE</h2><p>查询到目标资源经过的中间节点。</p>
+<h1 id="响应"><a href="#响应" class="headerlink" title="响应"></a>响应</h1><p>响应结构组成Response:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Response-Line</span><br><span class="line">*(header CRLF) </span><br><span class="line">CRLF</span><br><span class="line">[ message-body ] </span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Response-Line =&gt; HTTP-Version SPACE Status-Code SPACE Reason-Phrease CRLF<br>这里我们主要Status-Code部分</p>
+</blockquote>
+<h2 id="1xx"><a href="#1xx" class="headerlink" title="1xx"></a>1xx</h2><h3 id="100-Continue"><a href="#100-Continue" class="headerlink" title="100 Continue"></a>100 Continue</h3><p>服务器已经接收到请求头，并且客户端应继续发送请求主体（在需要发送身体的请求的情况下：例如，POST请求），或者如果请求已经完成，忽略这个响应。</p>
+<p>比如客户端上传一些视频文件，可以先在请求头加一个<code>Expect: 100-continue</code> 如果服务端允许接收该文件（大小），就返回100，不允许则返回417状态码。</p>
+<h2 id="2xx"><a href="#2xx" class="headerlink" title="2xx"></a>2xx</h2><p>2xx 系列都是表示请求已经成功处理了，这里列举几个比较常见的</p>
+<h3 id="200-OK"><a href="#200-OK" class="headerlink" title="200 OK"></a>200 OK</h3><p>最常见的可能就是200了，平时写ajax很多都是直接判断 <code>xmlhttp.status==200</code>, 他代表的是请求已经成功完成</p>
+<h3 id="201-Created"><a href="#201-Created" class="headerlink" title="201 Created"></a>201 Created</h3><p>201表示请求已经被实现，而且有一个新的资源已经依据请求的需要而创建，且其URI已经随Location头信息返回。假如需要的资源无法及时创建的话，应当返回’202 Accepted’。</p>
+<h3 id="202-Accepted"><a href="#202-Accepted" class="headerlink" title="202 Accepted"></a>202 Accepted</h3><p>202代表服务器已接受请求，但尚未处理。最终该请求可能会也可能不会被执行，并且可能在处理发生时被禁止</p>
+<h3 id="204-No-Content"><a href="#204-No-Content" class="headerlink" title="204 No Content"></a>204 No Content</h3><p>服务器成功处理了请求，没有返回任何内容。</p>
+<h3 id="206-Partical-Content"><a href="#206-Partical-Content" class="headerlink" title="206 Partical Content"></a>206 Partical Content</h3><p>206主要是为了支持大文件的分段下载，类似迅雷这类的HTTP 下载工具都是使用此类响应实现断点续传或者将一个大文档分解为多个下载段同时下载。</p>
+<p>这里用书里的一个例子来展示,先用 HEAD 获取该资源的大小，再用Range分段获取，这些方法上面都有介绍过，这里综合起来运用:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">HEAD /large.jpg HTTP/1.1</span><br><span class="line">Host: example.com</span><br><span class="line"></span><br><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Content-Length: 4000</span><br><span class="line"></span><br><span class="line">Get /large.jpg HTTP/1.1</span><br><span class="line">Host: example.com</span><br><span class="line">Range: bytes=0-1999</span><br><span class="line"></span><br><span class="line">HTTP/1.1 206 Partical Content</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Content-Length: 2000</span><br><span class="line">Content-Range: bytes 0-1999/4000</span><br><span class="line"></span><br><span class="line">&#123;binary data&#125;</span><br><span class="line"></span><br><span class="line">GET /large.jpg HTTP/1.1</span><br><span class="line">Host: example.com</span><br><span class="line">Range: bytes=2000-</span><br><span class="line"></span><br><span class="line">HTTP/1.1 206 Partical Content</span><br><span class="line">Accept-Ranges: bytes</span><br><span class="line">Content-Length: 2000</span><br><span class="line">Content-Range: bytes 2000-3999/4000</span><br><span class="line"></span><br><span class="line">&#123;binary data&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2xx 很多只是规范与语义化的区别。</p>
+<h2 id="3xx"><a href="#3xx" class="headerlink" title="3xx"></a>3xx</h2><p>3xx系列除了 304 以外，其他都是用于重定向的</p>
+<h3 id="300-Multiple-Choices"><a href="#300-Multiple-Choices" class="headerlink" title="300 Multiple Choices"></a>300 Multiple Choices</h3><p>300是请求的资源有一系列可供选择的回馈信息，用户或浏览器能够自行选择一个首选的地址进行重定向。</p>
+<h3 id="301-Moved-Permanently-amp-amp-302-Found"><a href="#301-Moved-Permanently-amp-amp-302-Found" class="headerlink" title="301 Moved Permanently &amp;&amp; 302 Found"></a>301 Moved Permanently &amp;&amp; 302 Found</h3><p>301 与 302 都代表当前访问的URL对应的资源被移动到一个新的位置，这个位置会在响应头Location内指定。<br>他们的区别是 301是永久被移动到新位置，而302是暂时性的临时重定向</p>
+<h3 id="304-Not-Modified"><a href="#304-Not-Modified" class="headerlink" title="304 Not Modified"></a>304 Not Modified</h3><p>304我们在前面已经有见到过了，用ETag与If-None-Match配合做缓存时，就会返回304 代表该资源未被修改，可以继续用以前下载的副本。</p>
+<h2 id="400"><a href="#400" class="headerlink" title="400"></a>400</h2><p>400指的是客户端错误，既服务端接收到该请求，但是收到的请求无法处理,这里列出常见的几种</p>
+<h3 id="400-Bad-Request"><a href="#400-Bad-Request" class="headerlink" title="400 Bad Request"></a>400 Bad Request</h3><p>由于明显的客户端错误（例如，格式错误的请求语法，太大的大小，无效的请求消息或欺骗性路由请求），服务器不能或不会处理该请求</p>
+<h3 id="401-Unauthorized"><a href="#401-Unauthorized" class="headerlink" title="401 Unauthorized"></a>401 Unauthorized</h3><p>401既未认证，应该是最简单的用户认证登录系统了。与403不同，这里如果用户提供必要的凭据，就可以访问资源。</p>
+<h3 id="403-Forbidden"><a href="#403-Forbidden" class="headerlink" title="403 Forbidden"></a>403 Forbidden</h3><p>服务器已经理解请求，但是拒绝执行它。与401响应不同的是，身份验证并不能提供任何帮助，而且这个请求也不应该被重复提交。项目中的经验就是，如果用户登录状态过期，后台返回403状态码，这时候我们再去执行自动登录或者提示登录的逻辑。</p>
+<h3 id="404-Not-Fount"><a href="#404-Not-Fount" class="headerlink" title="404 Not Fount"></a>404 Not Fount</h3><p>请求失败，请求所希望得到的资源未被在服务器上发现，但允许用户的后续请求。这个可能是最常见的4xx状态码</p>
+<h3 id="412-Precondition-Failed"><a href="#412-Precondition-Failed" class="headerlink" title="412 Precondition Failed"></a>412 Precondition Failed</h3><blockquote>
+<p>客户端发起了条件请求，服务器发现这个请求中的其中一个条件并不成立，那么服务器就会用此错误码作为响应消息的状态码返回给客户端。<br>比如我们在请求头设置条件限定:<code>If-Unmodified-Since</code>，如果服务端校验这个条件，发现说没有满足的话，就会返回 412 状态码。</p>
+</blockquote>
+<h2 id="5xx"><a href="#5xx" class="headerlink" title="5xx"></a>5xx</h2><p>400是客户端错误，500就是服务端的错误状态码。</p>
+<h3 id="500-Internal-Server-Error"><a href="#500-Internal-Server-Error" class="headerlink" title="500 Internal Server Error"></a>500 Internal Server Error</h3><p>500为通用错误消息，服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理。没有给出具体错误信息，一般开发者可以查日志等去解决该错误。</p>
+<h3 id="503-Service-Unavailable"><a href="#503-Service-Unavailable" class="headerlink" title="503 Service Unavailable"></a>503 Service Unavailable</h3><blockquote>
+<p>说明服务器现在无法提供服务，但是将来可以。如果服务器知道何时资源可用，应该在响应中包含Retry-After的首部，提示客户端可以重试服务的时间。<br>如果没有提供Retry-After头部，那么客户端应当以处理500响应的方式处理它。</p>
+</blockquote>
+<p>以上是觉得比较常见的状态码，更多请见<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/HTTP%E7%8A%B6%E6%80%81%E7%A0%81">维基百科</a></p>
+<h2 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a>Cache-Control</h2><p>一般我们在服务端响应可以加上这个响应头<code>Cache-Control: max-age=2592000</code> 来让浏览器把这个资源缓存下来，缓存的时间为<code>2592000</code>既30天，也可以在时间后面加上个<code>public</code>来指示该响应可以被任何中间人（cdn,代理)缓存。</p>
+<h1 id="消息主体-1"><a href="#消息主体-1" class="headerlink" title="消息主体"></a>消息主体</h1><p>在请求消息或响应消息里面，都可以包含一个可选的消息主体，服务端或客户端都没办法从消息主体里面获取是什么内容啊，什么类型啊什么的，所以就会有一组头部字段来标示他。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Content-Type 实体中所承载对象的类型,如 txt/html; image/jpeg</span><br><span class="line">Content-Length 所传送实体主体的长度或大小。</span><br><span class="line">Content-Language 与所传送对象最相配的人类语言, en-us等</span><br><span class="line">Content-Encoding 对象数据所做的压缩格式,gzip等.</span><br><span class="line">Content-Location 一个备用位置，请求时可通过它获得对象。</span><br><span class="line">Content-Range 说明它是整体的哪个部分,可用于分段获取。</span><br><span class="line">Content-MD5 实体主体内容的校验和。</span><br><span class="line">Last-Modified 所传输内容在服务器上创建或最后修改的日期时间。</span><br><span class="line">Expires 实体数据将要失效的日期时间。</span><br><span class="line">Allow 该资源所允许的各种请求方法，例如，GET 和 HEAD。</span><br><span class="line">ETag 这份文档的唯一验证码，可用于缓存</span><br></pre></td></tr></table></figure>
+
+<h1 id="HTTP-2-0-h2"><a href="#HTTP-2-0-h2" class="headerlink" title="HTTP/2.0(h2)"></a>HTTP/2.0(h2)</h1><p>这里简单说一下h2与HTTP/1.1对于前端开发人员来说比较大的改动。</p>
+<h2 id="多路复用-Multiplexing"><a href="#多路复用-Multiplexing" class="headerlink" title="多路复用 (Multiplexing)"></a>多路复用 (Multiplexing)</h2><p>多路复用允许同时通过单一的 HTTP/2 连接发起多重的请求-响应消息。<br>在HTTP/1.1中，我们客户端在同一时间，针对同一于域名下的请求会有限制，如果超过某个值的请求会被堵塞到。所以一般的优化有前端用雪碧图来合并多个小图片减少请求，后端把资源分到不同的域下面，减少同域的限制。<br>但是如果网站用了h2的话，前端不需要考虑类似雪碧图之类的把多个请求合并为一个减少的优化。</p>
+<h1 id="最后啰嗦两句"><a href="#最后啰嗦两句" class="headerlink" title="最后啰嗦两句"></a>最后啰嗦两句</h1><p>之所以会看《HTTP小书》是因为前段时间问我一个朋友说有没有关于HTTP比较好的书籍推荐，《HTTP权威指南》六七百页细节太多怕是看完留不住什么概念。他给我推了《HTTP小书》，这本书算是有点改变我一些关于知识获取的认知。<br>简单来说就是，大家别看9块钱的书就那么几页，翻一个上午或者一天就看完，然后就觉得不值，非得要看哪种几百页的才觉得钱回本了。<br>这篇文只是个人在看的时候做了一些归纳，书中有更详细更好的解释，关键是提供了源码与例子，在看概念的时候实操一遍会加深很多印象。<br>总的来说，这本书挺值的，和他的标语一样：<em>准能帮你省下不少<strong>时间</strong></em></p>
+<p><a target="_blank" rel="noopener" href="http://www.ituring.com.cn/book/1791">《HTTP小书》</a><br><a target="_blank" rel="noopener" href="https://juejin.im/user/58774201570c35006207d274">《HTTP小书》作者刘传君</a><br><a target="_blank" rel="noopener" href="http://www.cnblogs.com/machao/p/5788425.html">HTTP Method 更详细的介绍</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Caching_FAQ">HTTP缓存 - MDN</a></p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ali_pay.jpeg" alt="Jsonz Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Book/" rel="tag"># Book</a>
+              <a href="/tags/Http/" rel="tag"># Http</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018-05-21/" rel="prev" title="2018-05-21 小记">
+      <i class="fa fa-chevron-left"></i> 2018-05-21 小记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/window-print%E2%80%94%E2%80%94%E5%85%B3%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E6%89%93%E5%8D%B0/" rel="next" title="window.print——关于浏览器打印">
+      window.print——关于浏览器打印 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#http-%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">http 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E6%B6%88%E6%81%AF"><span class="nav-number">1.1.</span> <span class="nav-text">请求消息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E8%A1%8C"><span class="nav-number">1.1.1.</span> <span class="nav-text">请求行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B4%E9%83%A8%E5%AD%97%E6%AE%B5"><span class="nav-number">1.1.2.</span> <span class="nav-text">头部字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E8%A1%8C-CRLF"><span class="nav-number">1.1.3.</span> <span class="nav-text">空行(CRLF)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E4%B8%BB%E4%BD%93"><span class="nav-number">1.1.4.</span> <span class="nav-text">消息主体</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E4%BF%A1%E6%81%AF"><span class="nav-number">1.2.</span> <span class="nav-text">响应信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E8%A1%8C"><span class="nav-number">1.2.1.</span> <span class="nav-text">状态行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B4%E9%83%A8%E5%AD%97%E6%AE%B5-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">头部字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A9%BA%E8%A1%8C-CRLF-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">空行(CRLF)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E6%B6%88%E6%81%AF%E4%B8%BB%E4%BD%93"><span class="nav-number">1.2.4.</span> <span class="nav-text">响应消息主体</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82"><span class="nav-number">2.</span> <span class="nav-text">请求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GET"><span class="nav-number">2.1.</span> <span class="nav-text">GET</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E9%85%8D%E5%90%88-Range-%E6%9D%A5%E8%8E%B7%E5%8F%96%E5%B1%80%E9%83%A8%E8%B5%84%E6%BA%90%E3%80%82"><span class="nav-number">2.1.1.</span> <span class="nav-text">可以配合 Range 来获取局部资源。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E5%90%88-ETag-%E5%81%9A%E7%BC%93%E5%AD%98"><span class="nav-number">2.1.2.</span> <span class="nav-text">配合 ETag 做缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HEAD"><span class="nav-number">2.2.</span> <span class="nav-text">HEAD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#POST"><span class="nav-number">2.3.</span> <span class="nav-text">POST</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OPTIONS"><span class="nav-number">2.4.</span> <span class="nav-text">OPTIONS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PUT"><span class="nav-number">2.5.</span> <span class="nav-text">PUT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DELETE"><span class="nav-number">2.6.</span> <span class="nav-text">DELETE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CONNECT"><span class="nav-number">2.7.</span> <span class="nav-text">CONNECT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TRACE"><span class="nav-number">2.8.</span> <span class="nav-text">TRACE</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%93%8D%E5%BA%94"><span class="nav-number">3.</span> <span class="nav-text">响应</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1xx"><span class="nav-number">3.1.</span> <span class="nav-text">1xx</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#100-Continue"><span class="nav-number">3.1.1.</span> <span class="nav-text">100 Continue</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2xx"><span class="nav-number">3.2.</span> <span class="nav-text">2xx</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#200-OK"><span class="nav-number">3.2.1.</span> <span class="nav-text">200 OK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#201-Created"><span class="nav-number">3.2.2.</span> <span class="nav-text">201 Created</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#202-Accepted"><span class="nav-number">3.2.3.</span> <span class="nav-text">202 Accepted</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#204-No-Content"><span class="nav-number">3.2.4.</span> <span class="nav-text">204 No Content</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#206-Partical-Content"><span class="nav-number">3.2.5.</span> <span class="nav-text">206 Partical Content</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3xx"><span class="nav-number">3.3.</span> <span class="nav-text">3xx</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#300-Multiple-Choices"><span class="nav-number">3.3.1.</span> <span class="nav-text">300 Multiple Choices</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#301-Moved-Permanently-amp-amp-302-Found"><span class="nav-number">3.3.2.</span> <span class="nav-text">301 Moved Permanently &amp;&amp; 302 Found</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#304-Not-Modified"><span class="nav-number">3.3.3.</span> <span class="nav-text">304 Not Modified</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#400"><span class="nav-number">3.4.</span> <span class="nav-text">400</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#400-Bad-Request"><span class="nav-number">3.4.1.</span> <span class="nav-text">400 Bad Request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#401-Unauthorized"><span class="nav-number">3.4.2.</span> <span class="nav-text">401 Unauthorized</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#403-Forbidden"><span class="nav-number">3.4.3.</span> <span class="nav-text">403 Forbidden</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#404-Not-Fount"><span class="nav-number">3.4.4.</span> <span class="nav-text">404 Not Fount</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#412-Precondition-Failed"><span class="nav-number">3.4.5.</span> <span class="nav-text">412 Precondition Failed</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5xx"><span class="nav-number">3.5.</span> <span class="nav-text">5xx</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#500-Internal-Server-Error"><span class="nav-number">3.5.1.</span> <span class="nav-text">500 Internal Server Error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#503-Service-Unavailable"><span class="nav-number">3.5.2.</span> <span class="nav-text">503 Service Unavailable</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cache-Control"><span class="nav-number">3.6.</span> <span class="nav-text">Cache-Control</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E4%B8%BB%E4%BD%93-1"><span class="nav-number">4.</span> <span class="nav-text">消息主体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-2-0-h2"><span class="nav-number">5.</span> <span class="nav-text">HTTP&#x2F;2.0(h2)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8-Multiplexing"><span class="nav-number">5.1.</span> <span class="nav-text">多路复用 (Multiplexing)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%90%8E%E5%95%B0%E5%97%A6%E4%B8%A4%E5%8F%A5"><span class="nav-number">6.</span> <span class="nav-text">最后啰嗦两句</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jsonz"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Jsonz</p>
+  <div class="site-description" itemprop="description">前端👴🥬🐣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">39</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jsonz1993" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jsonz1993" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jsonz@qq.com" title="E-Mail → mailto:jsonz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://juejin.im/user/58dbb0b844d904006954ca8e" title="掘金 → https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;58dbb0b844d904006954ca8e" rel="noopener" target="_blank"><i class="fa fa-bullseye fa-fw"></i>掘金</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.hhking.cn/" title="hhking → https:&#x2F;&#x2F;blog.hhking.cn" rel="noopener" target="_blank"><i class="fa fa-user-friends fa-fw"></i>hhking</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备18066881号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/http-mini-book/',]
+      });
+      });
+  </script>
+
+</body>
+</html>
