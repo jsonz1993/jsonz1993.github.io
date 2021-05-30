@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="探索写跨框架组件的一种思路">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于数据模型驱动的树组件">
+<meta property="og:url" content="http://jsonz1993.github.io/tree-component-with-tree-store/index.html">
+<meta property="og:site_name" content="Jsonz bug-log">
+<meta property="og:description" content="探索写跨框架组件的一种思路">
+<meta property="og:locale">
+<meta property="og:image" content="http://jsonz1993.github.io/tree-component-with-tree-store/vscode-tree.png">
+<meta property="og:image" content="http://jsonz1993.github.io/tree-component-with-tree-store/var.png">
+<meta property="article:published_time" content="2021-05-30T09:48:38.000Z">
+<meta property="article:modified_time" content="2021-05-30T02:06:54.027Z">
+<meta property="article:author" content="Jsonz">
+<meta property="article:tag" content="Component">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://jsonz1993.github.io/tree-component-with-tree-store/vscode-tree.png">
+
+<link rel="canonical" href="http://jsonz1993.github.io/tree-component-with-tree-store/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>基于数据模型驱动的树组件 | Jsonz bug-log</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jsonz bug-log" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jsonz bug-log</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端/JavaScript/React</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">28</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">42</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/tree-component-with-tree-store/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基于数据模型驱动的树组件
+        </h1>
+        <div class="post-meta ">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-05-30 09:48:38 / Modified: 02:06:54" itemprop="dateCreated datePublished" datetime="2021-05-30T09:48:38+00:00">2021-05-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">探索写跨框架组件的一种思路</div>
+
+        </div>
+
+      </header>
+
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="背景概述"><a href="#背景概述" class="headerlink" title="背景概述"></a>背景概述</h2><p>​        最近在做一个商业化系统的权限模块，涉及到很多树相关的组件，比如组织架构图，部门选择，权限树的编辑等等。但是由于项目的原因，暂时不能使用市面上类似antDesign等开源的组件库，项目内部的组件库中树组件又满足不了业务需求(没有展示线）。所以需要重新写一个树组件来满足业务开发需求。</p>
+<p>​        按照现在前端流行的框架比如React、Vue等开发方式，我们写组件都是逻辑夹杂着视图写在一起。这次受到 <a target="_blank" rel="noopener" href="https://github.com/swiftcarrot/js-tree">js-tree</a> 、<a target="_blank" rel="noopener" href="https://github.com/swiftcarrot/react-ui-tree">react-ui-tree</a> 与项目中用到的 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/ten-design-react">ten-design-react</a>中树组件的启发，决定采用相同的思想来写一个树组件。本文接下来的内容将讲述如何将逻辑从组件中抽离出来，不受视图印象，并从零开发一个简单的React、Vue版本的树组件。</p>
+<p>​        本文写作目的主要是记录一个组件如何从零开始构思并一步一步写起来，从思想到具体实现，所以会有大量代码，比较枯燥。</p>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><p>​        开发者平时接触的最多的树结构应该就是编辑器，比如vsCode中的项目目录，或者平时调试时的变量树。</p>
+<p><img data-src="./vscode-tree.png" style="zoom:25%;" /> <img data-src="./var.png" style="zoom:25%;" /></p>
+<p>​        这里我们先假设树只有最简单的展示与展开收起功能，由上面的树结构我们可以简单的推导出来树节点的数据结构如下，每个节点负责当前节点上面的属性及节点之间的关系。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="attr">value</span>: ID; <span class="comment">// tree id</span></span><br><span class="line">  label: <span class="built_in">string</span>; <span class="comment">// tree 展示的文案</span></span><br><span class="line">  dataset: T; <span class="comment">// 数据集</span></span><br><span class="line">  parent?: TreeNode&lt;T&gt;; <span class="comment">// 父节点</span></span><br><span class="line">  children: TreeNode&lt;T&gt;[]; <span class="comment">// 子节点</span></span><br><span class="line">  isFirst: <span class="built_in">boolean</span>; <span class="comment">// 是否第一个节点</span></span><br><span class="line">  isLast: <span class="built_in">boolean</span>; <span class="comment">// 是否最后一个节点</span></span><br><span class="line">  isLeaf: <span class="built_in">boolean</span>; <span class="comment">// 是否叶节点</span></span><br><span class="line">  visible: <span class="built_in">boolean</span>; <span class="comment">// 是否可见</span></span><br><span class="line">  expanded: <span class="built_in">boolean</span>; <span class="comment">// 是否已展开</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>​        假设组件可以根据TreeNode去渲染对应的视图，但是如何对树的所有节点进行管理，并且节点之间的全局信息又是从哪里获得？比如当前树中有哪些节点是已展开的，这些信息我们不可能每次想知道都重新遍历生成一次，所以我们需要有一个管理这些节点的对象，称之为 TreeStore。</p>
+<p>​        TreeStore负责当前整棵树的节点管理，包括节点获取，配置管理以及树的全局信息存储等，树的属性大概是这样的。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">TreeStore</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="attr">data</span>: T[];</span><br><span class="line">  nodeMap: <span class="built_in">Map</span>&lt;ID, TreeNode&lt;T&gt;&gt;; <span class="comment">// 所有节点的map</span></span><br><span class="line">  nodes: TreeNode&lt;T&gt;[]; <span class="comment">// 所有树节点的深度优先遍历</span></span><br><span class="line">  children: TreeNode&lt;T&gt;[]; <span class="comment">// 根节点，可能会有多个</span></span><br><span class="line">  config: TreeStoreOptions&lt;T&gt;; <span class="comment">// 树配置</span></span><br><span class="line">  expandedSet: <span class="built_in">Set</span>&lt;ID&gt;; <span class="comment">// 存储当前已展开的节点ID</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="构建树结构并初始化节点属性"><a href="#构建树结构并初始化节点属性" class="headerlink" title="构建树结构并初始化节点属性"></a>构建树结构并初始化节点属性</h2><p>明确完数据结构之后，可以开始编写代码</p>
+<p>首先定义好 append 负责将传入的数组对象构建成一个数，并添加到 children中。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tree-store</span></span><br><span class="line">append(): <span class="built_in">void</span> &#123;</span><br><span class="line">	<span class="built_in">this</span>.children = data.map(<span class="function"><span class="params">item</span> =&gt;</span> <span class="keyword">new</span> TreeNode&lt;T&gt;(<span class="built_in">this</span>, item))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tree-node</span></span><br><span class="line"> <span class="function"><span class="title">constructor</span>(<span class="params">tree: TreeStore&lt;T&gt;, data: T, parent: TreeNode&lt;T&gt; | <span class="literal">null</span> = <span class="literal">null</span></span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">this</span>.tree = tree</span><br><span class="line">    <span class="built_in">this</span>.dataset = data</span><br><span class="line">    <span class="built_in">this</span>.label = <span class="built_in">this</span>.getLabel()</span><br><span class="line">    <span class="built_in">this</span>.value = <span class="built_in">this</span>.getValue()</span><br><span class="line">    <span class="keyword">if</span> (parent) <span class="built_in">this</span>.parent = parent</span><br><span class="line">   <span class="comment">// 将当前节点更新到tree-store</span></span><br><span class="line">    <span class="built_in">this</span>.tree.nodeMap.set(<span class="built_in">this</span>.value, <span class="built_in">this</span>)</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 初始化 expanded 与 visible的值</span></span><br><span class="line">    <span class="built_in">this</span>.initExpanded()</span><br><span class="line">    <span class="built_in">this</span>.initVisible()</span><br><span class="line">    <span class="comment">// 递归生成子节点</span></span><br><span class="line">   <span class="keyword">if</span> (<span class="built_in">this</span>.dataset.children) &#123;</span><br><span class="line">     <span class="built_in">this</span>.children = <span class="built_in">this</span>.dataset.children.map(<span class="function"><span class="params">child</span> =&gt;</span> <span class="keyword">new</span> TreeNode&lt;T&gt;(child, tree, <span class="built_in">this</span>))</span><br><span class="line">   &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">initExpanded(): <span class="built_in">boolean</span> &#123;</span><br><span class="line">  <span class="comment">// 判断tree.expandedSet上是否有当前node</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">initVisible(): <span class="built_in">boolean</span> &#123;</span><br><span class="line">	<span class="comment">// 判断父节点中是否都是展开状态，若都为展开，本节点为显示状态</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过上述初始化过程，我们其实已经得到一颗非常基础的树了，至少是一个包含树结构的对象。</p>
+<p>但是怎么获取树上面的节点，或者怎么知道需要渲染那些节点呢？这时候就需要给treeStore添加一些方法来获取树节点了。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tree-store</span></span><br><span class="line">append(): <span class="built_in">void</span> &#123;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">	<span class="comment">// 在构建子树之后，需要深度优先遍历生成一个nodes的数组，方便遍历展示</span></span><br><span class="line">  <span class="built_in">this</span>.nodes = <span class="built_in">this</span>.refreshNodes()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">refreshNodes(): TreeNode&lt;T&gt;[] &#123;</span><br><span class="line">  <span class="built_in">this</span>.nodes.length = <span class="number">0</span></span><br><span class="line">  <span class="built_in">this</span>.children.forEach(<span class="function"><span class="params">child</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.nodeMap.has(child.value)) &#123;</span><br><span class="line">      <span class="built_in">this</span>.nodes.push(</span><br><span class="line">        ...child.walk()</span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.nodes</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getNodes(): TreeNode&lt;T&gt;[] &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.nodes;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tree-node</span></span><br><span class="line"><span class="comment">// 获取包含当前节点与当前的所有子节点</span></span><br><span class="line">walk(includeSelf: <span class="built_in">boolean</span> = <span class="literal">true</span>): TreeNode&lt;T&gt;[] &#123;</span><br><span class="line">	<span class="keyword">const</span> nodes: TreeNode&lt;T&gt;[] = includeSelf? [<span class="built_in">this</span>]: []</span><br><span class="line">  <span class="built_in">this</span>.children.forEach(<span class="function"><span class="params">child</span> =&gt;</span> &#123;</span><br><span class="line">	  nodes.push(...child.walk())</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> nodes</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样我们就可以在组件中先实例化treeStore，再调用getNodes来获取需要渲染的节点模型数据。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> TreeStore&lt;T&gt;(&#123; <span class="attr">data</span>: [&#123;value, label, children&#125;]  &#125;)</span><br><span class="line"><span class="keyword">const</span> nodes = store.getNodes()</span><br><span class="line"><span class="keyword">const</span> visibleNodes = nodes.filter(<span class="function"><span class="params">node</span> =&gt;</span> node.visible)</span><br><span class="line"></span><br><span class="line">render(visibleNodes) <span class="comment">// 渲染所有node</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="触发视图更新"><a href="#触发视图更新" class="headerlink" title="触发视图更新"></a>触发视图更新</h2><p>现在树模型的基本架子已经搭好了，有了基本属性，也能获取当前类型用于渲染的节点，但是如果这时候树节点需要更新状态，比如展开，收起，要如何更新并且通知到组件重新渲染。</p>
+<p>所以我们要解决的有两件事，第一如何更新，第二如何通知组件重新渲染。</p>
+<h3 id="如何更新"><a href="#如何更新" class="headerlink" title="如何更新"></a>如何更新</h3><p>举展开收起为例子，更新expanded这个状态一般有两种情况。第一种情况是单个节点的更新，一般是用户点击操作触发某个结点的展开收起状态变更。第二种情况是批量更新，一般是初始化时想要展开多个节点，或者受控情况下每次有变动就主动触发一次树节点的批量变化。</p>
+<p>对于第一种情况，我们可以在treeNode上添加一个方法来处理节点的更新，并且更新store中的expandedSet集合。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// treeNode</span></span><br><span class="line">setExpanded(expanded: <span class="built_in">boolean</span>): <span class="built_in">void</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; <span class="attr">tree</span>: &#123; expandedSet &#125;, value &#125; = <span class="built_in">this</span></span><br><span class="line">  <span class="built_in">this</span>.expanded = expanded</span><br><span class="line">  <span class="keyword">if</span> (expanded) &#123;</span><br><span class="line">    expandedSet.add(value)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    expandedSet.delete(value)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 更新后需要触发visible的更新</span></span><br><span class="line">  <span class="built_in">this</span>.updateVisible()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更新visible</span></span><br><span class="line">updateVisible(): <span class="built_in">void</span> &#123; <span class="built_in">this</span>.visible = <span class="built_in">this</span>.getVisible() &#125;</span><br><span class="line"><span class="comment">// 更新expanded</span></span><br><span class="line">updateExpanded(): <span class="built_in">void</span> &#123; <span class="built_in">this</span>.expanded = <span class="built_in">this</span>.getExpanded() &#125;</span><br><span class="line"><span class="comment">// 递归获取所有parents</span></span><br><span class="line">getParents(): TreeNode&lt;T&gt;[] &#123;</span><br><span class="line">  <span class="keyword">const</span> parents: TreeNode&lt;T&gt;[] = []</span><br><span class="line">  <span class="keyword">let</span> parent = <span class="built_in">this</span>.parent</span><br><span class="line">  <span class="keyword">while</span> (parent) &#123;</span><br><span class="line">    parents.push(parent)</span><br><span class="line">    parent = parent.parent</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> parents</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>第二种情况，我们可以在store上添加一个方法，用于替换当前树中的expandedSet集合，在这个方法里面我们先比对当前与目标对象的差异，对expandedSet做对应的修改，并且调用相关的节点更新expanded与visible状态</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// treeStore</span></span><br><span class="line">replaceExpanded(expandedList: ID[]): <span class="built_in">void</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> currentList = <span class="built_in">Array</span>.from(<span class="built_in">this</span>.expandedSet)</span><br><span class="line">  <span class="keyword">const</span> nextList = list</span><br><span class="line">  <span class="keyword">const</span> remove = difference(currentList, nextList)</span><br><span class="line">  <span class="keyword">const</span> add = difference(nextList, currentList)</span><br><span class="line">  remove.forEach(<span class="function"><span class="params">id</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.expandedSet.delete(id)</span><br><span class="line">  &#125;)</span><br><span class="line">  add.forEach(<span class="function"><span class="params">id</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.expandedSet.add(id)</span><br><span class="line">  &#125;);</span><br><span class="line">	[...remove, ...add].forEach(<span class="function"><span class="params">updateId</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> node = <span class="built_in">this</span>.getNode(updateId)</span><br><span class="line">    <span class="keyword">if</span> (!node) <span class="keyword">return</span></span><br><span class="line">    node.updateExpanded()</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> relatedNodes = <span class="built_in">this</span>.getRelatedNodes([...remove, ...add].map(<span class="function"><span class="params">v</span> =&gt;</span> <span class="built_in">this</span>.getNode(v)))</span><br><span class="line">  relatedNodes.forEach(<span class="function"><span class="params">node</span> =&gt;</span> node.updateVisible())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取相关的节点: children, self, parents</span></span><br><span class="line">getRelatedNodes(list: TreeNode&lt;T&gt;[], <span class="attr">withParents</span>: <span class="built_in">boolean</span> = <span class="literal">true</span>): TreeNode&lt;T&gt;[] &#123;</span><br><span class="line">  <span class="keyword">const</span> nodes: TreeNode&lt;T&gt;[] = []</span><br><span class="line">  <span class="keyword">const</span> set: <span class="built_in">Set</span>&lt;TreeNode&lt;T&gt;&gt; = <span class="keyword">new</span> <span class="built_in">Set</span>()</span><br><span class="line">  list.forEach(<span class="function"><span class="params">node</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (set.has(node) || !<span class="built_in">this</span>.nodeMap.has(node.value)) <span class="keyword">return</span>;</span><br><span class="line">    set.add(node)</span><br><span class="line">    nodes.push(...node.walk())</span><br><span class="line">    <span class="keyword">if</span> (withParents) nodes.push(...node.getParents())</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> nodes;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="如何通知视图更新"><a href="#如何通知视图更新" class="headerlink" title="如何通知视图更新"></a>如何通知视图更新</h3><p>到这里我们的所有方法都仅限于数据模型的逻辑，并没有涉及到视图相关的部分。那么要如何在需要更新是触发视图的更新呢？</p>
+<p>我们可以在实例化store时传入一个回调，当树中有更新是，调用该回调触发视图的更新。所以问题点转为，在节点一些属性变化时，我们需要触发视图的更新。</p>
+<p>这里可能会发现一些问题，expanded变动时我们需要触发更新，visible变动我们也需要触发视图更新，这样的话当前代码存在两个问题，第一个是updateXXX太过分散，每个updateXX中去触发也不是不可以，但是这样很麻烦。第二个问题是如果每个节点update的时候都触发一次回调，那频率太过频繁了，会造成很多性能问题。</p>
+<p>基于上述两个问题我们可以分别这么解决，统一一个update方法，在update方法中更新需要更新的visible、expanded属性。在store中实现一个throttle，一段时间才去触发一次更新，这里可以简单的用setTimeout去解决。</p>
+<h4 id="treeNode添加更新函数，并触发tree的更新操作"><a href="#treeNode添加更新函数，并触发tree的更新操作" class="headerlink" title="treeNode添加更新函数，并触发tree的更新操作"></a>treeNode添加更新函数，并触发tree的更新操作</h4><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tree-node</span></span><br><span class="line">update(): <span class="built_in">void</span> &#123;</span><br><span class="line">  <span class="built_in">this</span>.visible = <span class="built_in">this</span>.getVisible()</span><br><span class="line">  <span class="built_in">this</span>.expanded = <span class="built_in">this</span>.getExpanded()</span><br><span class="line">	<span class="comment">// 有更新则触发tree的更新</span></span><br><span class="line">	<span class="built_in">this</span>.tree.update(<span class="built_in">this</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="treeStore维护一个更新函数"><a href="#treeStore维护一个更新函数" class="headerlink" title="treeStore维护一个更新函数"></a>treeStore维护一个更新函数</h5><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tree-store</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeStore</span> ... </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="attr">updatedSet</span>: <span class="built_in">Set</span>&lt;ID&gt; = <span class="keyword">new</span> <span class="built_in">Set</span>() <span class="comment">// 更新的节点</span></span><br><span class="line">	<span class="attr">updateTimer</span>: <span class="built_in">number</span></span><br><span class="line">  </span><br><span class="line">  update(node?: TreeNode&lt;T&gt;): <span class="built_in">void</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; updateSet &#125; = <span class="built_in">this</span></span><br><span class="line">    node &amp;&amp; <span class="built_in">this</span>.updateSet.add(node.value);</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">this</span>.updateTimer) <span class="keyword">return</span></span><br><span class="line">		<span class="built_in">this</span>.updateTimer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">			<span class="built_in">this</span>.updateTimer = <span class="literal">null</span></span><br><span class="line">      <span class="keyword">const</span> &#123; <span class="attr">config</span>: &#123; onUpdate &#125; &#125; = <span class="built_in">this</span></span><br><span class="line">      onUpdate?.(&#123;</span><br><span class="line">      	<span class="attr">nodes</span>: <span class="built_in">Array</span>.from(updateSet.keys()).map(<span class="function"><span class="params">id</span> =&gt;</span> <span class="built_in">this</span>.getNode(id))</span><br><span class="line">	    &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="组件内部"><a href="#组件内部" class="headerlink" title="组件内部"></a>组件内部</h5><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tree-component</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNodes</span>(<span class="params">store: TreeStore&lt;T&gt;</span>): <span class="title">TreeNode</span>&lt;<span class="title">T</span>&gt;[] </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> nodes = store.getNodes()</span><br><span class="line">	<span class="keyword">const</span> visibleNodes = nodes.filter(<span class="function"><span class="params">node</span> =&gt;</span> node.visible)</span><br><span class="line">  <span class="keyword">return</span> visibleNodes</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = <span class="keyword">new</span> TreeStore&lt;T&gt;(&#123;</span><br><span class="line">  	<span class="attr">data</span>: [&#123;value, label, children&#125;],</span><br><span class="line">  	<span class="function"><span class="title">onUpdate</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> nodes = getNodes(store)</span><br><span class="line">			reRender(nodes) <span class="comment">// 触发重新渲染</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> visibleNodes = getNodes(store)</span><br><span class="line">render(visibleNodes) <span class="comment">// 渲染所有node</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="React-组件"><a href="#React-组件" class="headerlink" title="React 组件"></a>React 组件</h2><p>这里我们实现一个最简单基础的React树组件，包括树结构模型的生成以及展开收起逻辑</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">function ReactTreeComponent&lt;T&gt;(props) &#123;</span><br><span class="line">  const &#123;</span><br><span class="line">    data,</span><br><span class="line">  &#125; = props</span><br><span class="line"></span><br><span class="line">  const [visibleNode, updateVisibleNode] = React.useState&lt;TreeNode&lt;T&gt;[]&gt;([])</span><br><span class="line"></span><br><span class="line">  const store = React.useRef(new TreeStore&lt;T&gt;(&#123;</span><br><span class="line">    onUpdate() &#123;</span><br><span class="line">      const nodes = store.getNodes().filter(node =&gt; node.visible)</span><br><span class="line">      updateVisibleNode(nodes)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)).current</span><br><span class="line">  </span><br><span class="line">  store.append(data)</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;&gt;</span><br><span class="line">      &#123;</span><br><span class="line">        visibleNode.map(node =&gt; &#123;</span><br><span class="line">          const &#123; value, label, expanded, setExpanded, isLeaf &#125; = node</span><br><span class="line">          return (</span><br><span class="line">            &lt;span key=&#123;value&#125; &gt;</span><br><span class="line">              &#123;</span><br><span class="line">                isLeaf? null:</span><br><span class="line">                &lt;span onClick=&#123;() =&gt; setExpanded(!expanded)&#125;&gt;</span><br><span class="line">                  &#123;</span><br><span class="line">                    expanded? &#x27;-&#x27;: &#x27;+&#x27;</span><br><span class="line">                  &#125;</span><br><span class="line">                &lt;/span&gt;</span><br><span class="line">              &#125;</span><br><span class="line">              &#123;label&#125;</span><br><span class="line">            &lt;/span&gt;</span><br><span class="line">          )</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &lt;/&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Next"><a href="#Next" class="headerlink" title="Next"></a>Next</h2><p>到这里，tree-store的思想已经描述完。但是目前的tree-store还不够完善，比如可以添加 select, checkbox属性，然后在对应的view实现里面实现多选和单选的功能。也可以添加 load、lazy 属性，负责children的加载以及加载方式。</p>
+<p>当然，我们也可以扩展一下，比如前端用的很多的表单控件（组件）。是不是也可以抽象成一个数据模型和一个视图渲染层，数据模型负责每个字段的校验，取值，是否必填，数值转换以及label、placeholder等属性，视图渲染层只需要根据模型变动重新渲染即可。不过表单数据模型的话，很难用事件传递的方式(手动调用update去触发reRender)，更适合用Proxy的方式，每个字段如果有变动，直接去调用，避免手动管理的麻烦。也可以扩展到table组件上，table组件有一个ReactTable的实现方式就比较相似，但是ReactTable也是局限于用React的Hook去实现一套数据管理，如果能把这一层更抽象，脱离React技术栈，那后面vue、angular也能直接拿来封装就用，达到复用的效果。</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ali_pay.jpeg" alt="Jsonz Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Component/" rel="tag"># Component</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/npm-with-github-action/" rel="prev" title="npm with github action">
+      <i class="fa fa-chevron-left"></i> npm with github action
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">背景概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E6%A0%91%E7%BB%93%E6%9E%84%E5%B9%B6%E5%88%9D%E5%A7%8B%E5%8C%96%E8%8A%82%E7%82%B9%E5%B1%9E%E6%80%A7"><span class="nav-number">3.</span> <span class="nav-text">构建树结构并初始化节点属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E8%A7%86%E5%9B%BE%E6%9B%B4%E6%96%B0"><span class="nav-number">4.</span> <span class="nav-text">触发视图更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%9B%B4%E6%96%B0"><span class="nav-number">4.1.</span> <span class="nav-text">如何更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%80%9A%E7%9F%A5%E8%A7%86%E5%9B%BE%E6%9B%B4%E6%96%B0"><span class="nav-number">4.2.</span> <span class="nav-text">如何通知视图更新</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#treeNode%E6%B7%BB%E5%8A%A0%E6%9B%B4%E6%96%B0%E5%87%BD%E6%95%B0%EF%BC%8C%E5%B9%B6%E8%A7%A6%E5%8F%91tree%E7%9A%84%E6%9B%B4%E6%96%B0%E6%93%8D%E4%BD%9C"><span class="nav-number">4.2.1.</span> <span class="nav-text">treeNode添加更新函数，并触发tree的更新操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#treeStore%E7%BB%B4%E6%8A%A4%E4%B8%80%E4%B8%AA%E6%9B%B4%E6%96%B0%E5%87%BD%E6%95%B0"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">treeStore维护一个更新函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E5%86%85%E9%83%A8"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">组件内部</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-%E7%BB%84%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">React 组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Next"><span class="nav-number">6.</span> <span class="nav-text">Next</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jsonz"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Jsonz</p>
+  <div class="site-description" itemprop="description">前端👴🥬🐣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jsonz1993" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jsonz1993" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jsonz@qq.com" title="E-Mail → mailto:jsonz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://juejin.im/user/58dbb0b844d904006954ca8e" title="掘金 → https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;58dbb0b844d904006954ca8e" rel="noopener" target="_blank"><i class="fa fa-bullseye fa-fw"></i>掘金</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.hhking.cn/" title="hhking → https:&#x2F;&#x2F;blog.hhking.cn" rel="noopener" target="_blank"><i class="fa fa-user-friends fa-fw"></i>hhking</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备18066881号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/tree-component-with-tree-store/',]
+      });
+      });
+  </script>
+
+</body>
+</html>
