@@ -115,38 +115,6 @@
       </tags>
   </entry>
   <entry>
-    <title>记录第一个vue组件 Backtop</title>
-    <url>/first-vue-component-backtop/</url>
-    <content><![CDATA[<p>Backtop 作为一个不起眼的小组件，api也不会很多，最适合拿来当上手的小组件，这里是基于vue写的组件。</p>
-<span id="more"></span>
-
-<p>在写一个组件之前，我们要先考虑这个组件的api都有哪些，先把 props 列好，再规划组件怎么写就事半功倍</p>
-<p>在做之前也参考了一些业界比较有名的组件库，比如 <a href="https://ant.design/">ant-design</a>、<a href="https://element.eleme.io/#/zh-CN">element-ui</a></p>
-<ul>
-<li>target 触发滚动的对象 默认是 document.documentElement</li>
-<li>visible 是否显示，如果有传值则组件为受控组件，否则根据其他条件来展示（滚动的高度）</li>
-<li>visiblityHeight 滚动高度的阈值，当监听的对象滚动超过这个值时才出现回到顶部的按钮</li>
-<li>right, bottom, className 按钮的样式配置</li>
-<li>slot 自定义回到顶部的dom结构</li>
-</ul>
-<p>上面这些props都很好实现，这个组件的灵魂其实就只有 <code>scrollTo</code> 这个功能</p>
-<h2 id="ScrollTo"><a href="#ScrollTo" class="headerlink" title="ScrollTo"></a>ScrollTo</h2><p>我们可以单独实现一个<code>scrollTo</code>的公共函数，后面其他组件可以直接调用</p>
-<h3 id="scrollBehavior"><a href="#scrollBehavior" class="headerlink" title="scrollBehavior"></a>scrollBehavior</h3><p>在一般的情况下，如果只是默认回到顶部，没有滚动时间需求的话，用系统的api是最优选择<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/scroll-behavior">MDN scroll-behavior</a></p>
-<figure class="highlight javascript"><figcaption><span>demo</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">// 先判断是否支持该属性，不支持的话，会直接跳到目标位置没有动画</span></span><br><span class="line"><span class="keyword">const</span> isSuperScrollBehavior = <span class="string">&#x27;scrollBehavior&#x27;</span> <span class="keyword">in</span> target.style</span><br><span class="line">isSuperScrollBehavior &amp;&amp; target.scrollTo(&#123;</span><br><span class="line">  top,</span><br><span class="line">  <span class="attr">behavior</span>: <span class="string">&#x27;smooth&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<h3 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h3><p>如果浏览器不支持(safari)或者我们需要控制滚动的时间怎么办呢？<br>这时候我们就得手动计算当前滚动值，然后赋值给 target.scrollTop 以达到滚动的效果<br>一般这种模拟动画执行我们都会用 rAF(<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/window/requestAnimationFrame">requestAnimationFrame</a>)，对于不支持rAF的浏览器直接简单粗暴用 <code>setTimeout(cb, 16)</code> 来代替。</p>
-<p>滚动的动画我选的是 <code>easeInOutCubic</code>，关于其他的贝塞尔曲线实现可以看这个仓库<a href="https://github.com/gre/bezier-easing">bezier-easing</a></p>
-<p>最后再注意一下重复调用scrollTo的绑定问题就可以了</p>
-<figure class="highlight javascript"><figcaption><span>scrollTo</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sign = <span class="built_in">Symbol</span>(<span class="string">&#x27;elementScrollToEvent&#x27;</span>); <span class="comment">// 这里可以直接项目的规范不用Symbol</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 缓动函数</span></span><br><span class="line"><span class="keyword">const</span> easeInOutCubic = <span class="function"><span class="params">t</span> =&gt;</span> t &lt; <span class="number">.5</span></span><br><span class="line">    ? (t ** <span class="number">3</span>) * <span class="number">4</span></span><br><span class="line">    : (t - <span class="number">1</span>) * ( <span class="number">2</span> * t - <span class="number">2</span>) ** <span class="number">2</span> + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getScroll = <span class="function">(<span class="params">target, isTop</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> isWindow = target === <span class="built_in">window</span>;</span><br><span class="line">  <span class="keyword">const</span> props = isTop ? <span class="string">&#x27;pageYOffset&#x27;</span> : <span class="string">&#x27;PageXOffset&#x27;</span>;</span><br><span class="line">  <span class="keyword">const</span> methods = isTop ? <span class="string">&#x27;scrollTop&#x27;</span> : <span class="string">&#x27;scrollLeft&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> target[isWindow ? props : methods];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">scrollTo</span>(<span class="params">target, &#123; top = <span class="number">0</span>, time &#125; = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> superScrollBehavior = <span class="string">&#x27;scrollBehavior&#x27;</span> <span class="keyword">in</span> target.style;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (time || !superScrollBehavior) &#123;</span><br><span class="line">    <span class="keyword">const</span> startTime = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">const</span> startScrollTop = getScroll(target, <span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">const</span> totalOffset = startScrollTop - top;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (target[sign]) &#123;</span><br><span class="line">      <span class="built_in">window</span>.cancelAnimationFrame(target[sign]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> frameFunc = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> progress = (<span class="built_in">Date</span>.now() - startTime) / (time || <span class="number">450</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (progress &lt; <span class="number">1</span>) &#123;</span><br><span class="line">        target.scrollTop = startScrollTop - totalOffset * easeInOutCubic(progress);</span><br><span class="line">        <span class="built_in">window</span>.requestAnimationFrame(frameFunc);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        target.scrollTop = top;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    target[sign] = <span class="built_in">window</span>.requestAnimationFrame(frameFunc);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    target.scrollTo(&#123;</span><br><span class="line">      top,</span><br><span class="line">      <span class="attr">behavior</span>: <span class="string">&#x27;smooth&#x27;</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>technology</category>
-      </categories>
-      <tags>
-        <tag>Vue</tag>
-        <tag>Component</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>我的2020</title>
     <url>/2020/</url>
     <content><![CDATA[<blockquote>
@@ -181,6 +149,38 @@
       </categories>
       <tags>
         <tag>Live</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>记录第一个vue组件 Backtop</title>
+    <url>/first-vue-component-backtop/</url>
+    <content><![CDATA[<p>Backtop 作为一个不起眼的小组件，api也不会很多，最适合拿来当上手的小组件，这里是基于vue写的组件。</p>
+<span id="more"></span>
+
+<p>在写一个组件之前，我们要先考虑这个组件的api都有哪些，先把 props 列好，再规划组件怎么写就事半功倍</p>
+<p>在做之前也参考了一些业界比较有名的组件库，比如 <a href="https://ant.design/">ant-design</a>、<a href="https://element.eleme.io/#/zh-CN">element-ui</a></p>
+<ul>
+<li>target 触发滚动的对象 默认是 document.documentElement</li>
+<li>visible 是否显示，如果有传值则组件为受控组件，否则根据其他条件来展示（滚动的高度）</li>
+<li>visiblityHeight 滚动高度的阈值，当监听的对象滚动超过这个值时才出现回到顶部的按钮</li>
+<li>right, bottom, className 按钮的样式配置</li>
+<li>slot 自定义回到顶部的dom结构</li>
+</ul>
+<p>上面这些props都很好实现，这个组件的灵魂其实就只有 <code>scrollTo</code> 这个功能</p>
+<h2 id="ScrollTo"><a href="#ScrollTo" class="headerlink" title="ScrollTo"></a>ScrollTo</h2><p>我们可以单独实现一个<code>scrollTo</code>的公共函数，后面其他组件可以直接调用</p>
+<h3 id="scrollBehavior"><a href="#scrollBehavior" class="headerlink" title="scrollBehavior"></a>scrollBehavior</h3><p>在一般的情况下，如果只是默认回到顶部，没有滚动时间需求的话，用系统的api是最优选择<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/scroll-behavior">MDN scroll-behavior</a></p>
+<figure class="highlight javascript"><figcaption><span>demo</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">// 先判断是否支持该属性，不支持的话，会直接跳到目标位置没有动画</span></span><br><span class="line"><span class="keyword">const</span> isSuperScrollBehavior = <span class="string">&#x27;scrollBehavior&#x27;</span> <span class="keyword">in</span> target.style</span><br><span class="line">isSuperScrollBehavior &amp;&amp; target.scrollTo(&#123;</span><br><span class="line">  top,</span><br><span class="line">  <span class="attr">behavior</span>: <span class="string">&#x27;smooth&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame"></a>requestAnimationFrame</h3><p>如果浏览器不支持(safari)或者我们需要控制滚动的时间怎么办呢？<br>这时候我们就得手动计算当前滚动值，然后赋值给 target.scrollTop 以达到滚动的效果<br>一般这种模拟动画执行我们都会用 rAF(<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/window/requestAnimationFrame">requestAnimationFrame</a>)，对于不支持rAF的浏览器直接简单粗暴用 <code>setTimeout(cb, 16)</code> 来代替。</p>
+<p>滚动的动画我选的是 <code>easeInOutCubic</code>，关于其他的贝塞尔曲线实现可以看这个仓库<a href="https://github.com/gre/bezier-easing">bezier-easing</a></p>
+<p>最后再注意一下重复调用scrollTo的绑定问题就可以了</p>
+<figure class="highlight javascript"><figcaption><span>scrollTo</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> sign = <span class="built_in">Symbol</span>(<span class="string">&#x27;elementScrollToEvent&#x27;</span>); <span class="comment">// 这里可以直接项目的规范不用Symbol</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 缓动函数</span></span><br><span class="line"><span class="keyword">const</span> easeInOutCubic = <span class="function"><span class="params">t</span> =&gt;</span> t &lt; <span class="number">.5</span></span><br><span class="line">    ? (t ** <span class="number">3</span>) * <span class="number">4</span></span><br><span class="line">    : (t - <span class="number">1</span>) * ( <span class="number">2</span> * t - <span class="number">2</span>) ** <span class="number">2</span> + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getScroll = <span class="function">(<span class="params">target, isTop</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> isWindow = target === <span class="built_in">window</span>;</span><br><span class="line">  <span class="keyword">const</span> props = isTop ? <span class="string">&#x27;pageYOffset&#x27;</span> : <span class="string">&#x27;PageXOffset&#x27;</span>;</span><br><span class="line">  <span class="keyword">const</span> methods = isTop ? <span class="string">&#x27;scrollTop&#x27;</span> : <span class="string">&#x27;scrollLeft&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> target[isWindow ? props : methods];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">scrollTo</span>(<span class="params">target, &#123; top = <span class="number">0</span>, time &#125; = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> superScrollBehavior = <span class="string">&#x27;scrollBehavior&#x27;</span> <span class="keyword">in</span> target.style;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (time || !superScrollBehavior) &#123;</span><br><span class="line">    <span class="keyword">const</span> startTime = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">const</span> startScrollTop = getScroll(target, <span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">const</span> totalOffset = startScrollTop - top;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (target[sign]) &#123;</span><br><span class="line">      <span class="built_in">window</span>.cancelAnimationFrame(target[sign]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> frameFunc = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> progress = (<span class="built_in">Date</span>.now() - startTime) / (time || <span class="number">450</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (progress &lt; <span class="number">1</span>) &#123;</span><br><span class="line">        target.scrollTop = startScrollTop - totalOffset * easeInOutCubic(progress);</span><br><span class="line">        <span class="built_in">window</span>.requestAnimationFrame(frameFunc);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        target.scrollTop = top;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    target[sign] = <span class="built_in">window</span>.requestAnimationFrame(frameFunc);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    target.scrollTo(&#123;</span><br><span class="line">      top,</span><br><span class="line">      <span class="attr">behavior</span>: <span class="string">&#x27;smooth&#x27;</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>technology</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>Component</tag>
       </tags>
   </entry>
   <entry>
@@ -357,7 +357,7 @@
 <p>限制时间 <code>git log --since=2.days</code> 具体看链接文档</p>
 <p>不展示merge节点 <code>git log --no-merges</code></p>
 <h2 id="撤消操作"><a href="#撤消操作" class="headerlink" title="撤消操作"></a>撤消操作</h2><p><code>git reset file</code> 把暂存区的文件取出来<br><code>git checkout -- file</code> 把工作区文件修改撤销(变为已暂存/已提交的文件状态)</p>
-<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><p><code>git remote -v</code> 显示git读写的仓库地址<br><code>git remote add &lt;name&gt; &lt;url&gt;</code> 添加远程仓库 git add origin <a href="mailto:&#x67;&#105;&#116;&#64;&#103;&#x69;&#116;&#x2e;&#x78;&#120;&#120;&#x78;">&#x67;&#105;&#116;&#64;&#103;&#x69;&#116;&#x2e;&#x78;&#120;&#120;&#x78;</a></p>
+<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><p><code>git remote -v</code> 显示git读写的仓库地址<br><code>git remote add &lt;name&gt; &lt;url&gt;</code> 添加远程仓库 git add origin <a href="mailto:&#103;&#105;&#x74;&#x40;&#103;&#x69;&#x74;&#46;&#120;&#120;&#120;&#x78;">&#103;&#105;&#x74;&#x40;&#103;&#x69;&#x74;&#46;&#120;&#120;&#120;&#x78;</a></p>
 <h2 id="打标签"><a href="#打标签" class="headerlink" title="打标签"></a>打标签</h2><p>添加tag<br><code>git tag -a tagName </code> 简单模式<br><code>git tag -a tagName -m message</code> 添加tag的说明</p>
 <p>展示tag<br><code>git show tagName</code><br><code>git tag</code><br><code>git tag -l &#39;tagName glob</code></p>
 <p>删除tag<br><code>git tag -d tagName</code> 只会删除本地<br><code>git push origin --delete tagName</code> 删除本地与远程<br><code>git push origin :refs/tags/tagName</code> 同上</p>
