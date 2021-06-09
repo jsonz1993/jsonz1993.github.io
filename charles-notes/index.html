@@ -21,23 +21,23 @@
     var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="忍不住要记录一下，typescript简直是神器!!! 最近在看自考的《数据结构》，里面的代码是C写的，虽然看着挺好理解，但是就是记不住。所以想着还是要自己敲一遍才行，但是C断点调试太麻烦了（其实是我还没有看怎么断掉调试），虽然环境搭好了，但是感觉还是很多不习惯。 所以想着干脆用js来实现，然后又想着C有那么多类型，干脆我用typescript来实现一下也可以，给我的感觉typescript就很像">
+  <meta name="description" content="简单备忘一下Charles 代理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="typescript初体验">
-<meta property="og:url" content="http://jsonz1993.github.io/typescript_experience/index.html">
+<meta property="og:title" content="charles 代理备忘">
+<meta property="og:url" content="http://jsonz1993.github.io/charles-notes/index.html">
 <meta property="og:site_name" content="Jsonz bug-log">
-<meta property="og:description" content="忍不住要记录一下，typescript简直是神器!!! 最近在看自考的《数据结构》，里面的代码是C写的，虽然看着挺好理解，但是就是记不住。所以想着还是要自己敲一遍才行，但是C断点调试太麻烦了（其实是我还没有看怎么断掉调试），虽然环境搭好了，但是感觉还是很多不习惯。 所以想着干脆用js来实现，然后又想着C有那么多类型，干脆我用typescript来实现一下也可以，给我的感觉typescript就很像">
+<meta property="og:description" content="简单备忘一下Charles 代理">
 <meta property="og:locale">
-<meta property="og:image" content="http://jsonz1993.github.io/typescript_experience/ts1.png">
-<meta property="og:image" content="http://jsonz1993.github.io/typescript_experience/ts2.png">
-<meta property="article:published_time" content="2019-03-22T22:09:56.000Z">
-<meta property="article:modified_time" content="2021-06-09T07:03:55.531Z">
+<meta property="og:image" content="http://jsonz1993.github.io/charles-notes/1.png">
+<meta property="og:image" content="http://jsonz1993.github.io/charles-notes/2.png">
+<meta property="article:published_time" content="2021-06-09T14:51:21.000Z">
+<meta property="article:modified_time" content="2021-06-09T07:03:55.543Z">
 <meta property="article:author" content="Jsonz">
-<meta property="article:tag" content="Typescript">
+<meta property="article:tag" content="DevTool">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://jsonz1993.github.io/typescript_experience/ts1.png">
+<meta name="twitter:image" content="http://jsonz1993.github.io/charles-notes/1.png">
 
-<link rel="canonical" href="http://jsonz1993.github.io/typescript_experience/">
+<link rel="canonical" href="http://jsonz1993.github.io/charles-notes/">
 
 
 <script id="page-configurations">
@@ -50,7 +50,7 @@
   };
 </script>
 
-  <title>typescript初体验 | Jsonz bug-log</title>
+  <title>charles 代理备忘 | Jsonz bug-log</title>
   
 
 
@@ -204,7 +204,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/typescript_experience/">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/charles-notes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -217,7 +217,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          typescript初体验
+          charles 代理备忘
         </h1>
         <div class="post-meta ">
             <span class="post-meta-item">
@@ -225,16 +225,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2019-03-22 22:09:56" itemprop="dateCreated datePublished" datetime="2019-03-22T22:09:56+00:00">2019-03-22</time>
+              <time title="Created: 2021-06-09 14:51:21 / Modified: 07:03:55" itemprop="dateCreated datePublished" datetime="2021-06-09T14:51:21+00:00">2021-06-09</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-09 07:03:55" itemprop="dateModified" datetime="2021-06-09T07:03:55+00:00">2021-06-09</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -246,6 +240,7 @@
             </span>
 
           
+            <div class="post-description">简单备忘一下Charles 代理</div>
 
         </div>
 
@@ -255,19 +250,34 @@
     
     
     
-      <p class="self-read"> 本文只是自己记录方便偶尔查阅，没有任何干货或阅读价值...</p>
-    
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>忍不住要记录一下，<code>typescript</code>简直是神器!!!</p>
-<p>最近在看自考的《数据结构》，里面的代码是<code>C</code>写的，虽然看着挺好理解，但是就是记不住。所以想着还是要自己敲一遍才行，但是C断点调试太麻烦了（其实是我还没有看怎么断掉调试），虽然环境搭好了，但是感觉还是很多不习惯。</p>
-<p>所以想着干脆用js来实现，然后又想着<code>C</code>有那么多类型，干脆我用<code>typescript</code>来实现一下也可以，给我的感觉<code>typescript</code>就很像<code>java</code>和<code>javascript</code>的组合，刚好之前学过一小点<code>java</code>的语法，对<code>java</code>的强类型挺喜欢的。</p>
-<p>学<code>ts</code>这个网站<a target="_blank" rel="noopener" href="https://ts.xcatliu.com/">https://ts.xcatliu.com</a>看完基本上都可以上手了，复杂一点的可能要慢慢补，<code>antD</code>仓库的代码就都是<code>ts</code>。</p>
-<p>然后!!!!关键点来了!!! ts的提示比我想象中的爽超级多！</p>
-<p>超级爽的代码注释 &amp;&amp; 参数提示<br><img data-src="/typescript_experience/ts1.png" alt="代码提示"></p>
-<p>值类型上方法的提示<br><img data-src="/typescript_experience/ts2.png" alt="类型方法提示"></p>
-<p>简直是大型开发或多人开发的神器，注释的规范可以参照这个<a target="_blank" rel="noopener" href="https://github.com/fex-team/styleguide/blob/master/javascript.md#24-%E6%B3%A8%E9%87%8A">fex-team</a> 告辞！</p>
+        <h2 id="http代理"><a href="#http代理" class="headerlink" title="http代理"></a>http代理</h2><ol>
+<li><p>Proxy -&gt; Proxy Settings -&gt; macOS，勾选 Enable macOS proxy、Use HTTP proxy 和 Enable macOS proxy on launch</p>
+<p> <img data-src="/charles-notes/1.png"></p>
+</li>
+<li><p>勾选 Proxy → macOS Proxy</p>
+</li>
+</ol>
+<h2 id="https-代理"><a href="#https-代理" class="headerlink" title="https 代理"></a>https 代理</h2><h3 id="macOS"><a href="#macOS" class="headerlink" title="macOS"></a>macOS</h3><ol>
+<li>Help -&gt; SSL Proxying -&gt; Install Charles Root Certificate</li>
+<li>安装完证书选择始终信任</li>
+<li>勾选 Proxy → macOS Proxy</li>
+</ol>
+<h3 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h3><ol>
+<li><p>Help -&gt; SSL Proxying -&gt; Install Charles Root Certificate on Mobile Device or Remote Browser</p>
+</li>
+<li><p>手动设置代理后，访问网站下载证书</p>
+</li>
+<li><p>在设置里面信任证书</p>
+<p> <img data-src="/charles-notes/2.png"></p>
+</li>
+</ol>
+<h3 id="iOS模拟器"><a href="#iOS模拟器" class="headerlink" title="iOS模拟器"></a>iOS模拟器</h3><ol>
+<li>Help -&gt; SSL Proxying -&gt; Install Charles Root Certificate on IOS Simulators</li>
+<li>同样需要在 IOS 模拟器设置中信任 Charles 的证书</li>
+</ol>
 
     </div>
 
@@ -297,7 +307,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Typescript/" rel="tag"># Typescript</a>
+              <a href="/tags/DevTool/" rel="tag"># DevTool</a>
           </div>
 
         
@@ -306,13 +316,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/quicklink/" rel="prev" title="quicklink学习以及结合React">
-      <i class="fa fa-chevron-left"></i> quicklink学习以及结合React
+    <a href="/tree-component-with-tree-store/" rel="prev" title="基于数据模型驱动的树组件">
+      <i class="fa fa-chevron-left"></i> 基于数据模型驱动的树组件
     </a></div>
-      <div class="post-nav-item">
-    <a href="/march-say/" rel="next" title="march say">
-      march say <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -371,6 +378,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#http%E4%BB%A3%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">http代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#https-%E4%BB%A3%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">https 代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#macOS"><span class="nav-number">2.1.</span> <span class="nav-text">macOS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS"><span class="nav-number">2.2.</span> <span class="nav-text">iOS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS%E6%A8%A1%E6%8B%9F%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">iOS模拟器</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -550,7 +558,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
       quicklink({
         timeout : 3000,
         priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/typescript_experience/',]
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/charles-notes/',]
       });
       });
   </script>

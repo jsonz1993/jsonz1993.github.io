@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>charles 代理备忘</title>
+    <url>/charles-notes/</url>
+    <content><![CDATA[<h2 id="http代理"><a href="#http代理" class="headerlink" title="http代理"></a>http代理</h2><ol>
+<li><p>Proxy -&gt; Proxy Settings -&gt; macOS，勾选 Enable macOS proxy、Use HTTP proxy 和 Enable macOS proxy on launch</p>
+<p> <img data-src="/charles-notes/1.png"></p>
+</li>
+<li><p>勾选 Proxy → macOS Proxy</p>
+</li>
+</ol>
+<h2 id="https-代理"><a href="#https-代理" class="headerlink" title="https 代理"></a>https 代理</h2><h3 id="macOS"><a href="#macOS" class="headerlink" title="macOS"></a>macOS</h3><ol>
+<li>Help -&gt; SSL Proxying -&gt; Install Charles Root Certificate</li>
+<li>安装完证书选择始终信任</li>
+<li>勾选 Proxy → macOS Proxy</li>
+</ol>
+<h3 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h3><ol>
+<li><p>Help -&gt; SSL Proxying -&gt; Install Charles Root Certificate on Mobile Device or Remote Browser</p>
+</li>
+<li><p>手动设置代理后，访问网站下载证书</p>
+</li>
+<li><p>在设置里面信任证书</p>
+<p> <img data-src="/charles-notes/2.png"></p>
+</li>
+</ol>
+<h3 id="iOS模拟器"><a href="#iOS模拟器" class="headerlink" title="iOS模拟器"></a>iOS模拟器</h3><ol>
+<li>Help -&gt; SSL Proxying -&gt; Install Charles Root Certificate on IOS Simulators</li>
+<li>同样需要在 IOS 模拟器设置中信任 Charles 的证书</li>
+</ol>
+]]></content>
+      <categories>
+        <category>technology</category>
+      </categories>
+      <tags>
+        <tag>DevTool</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基于数据模型驱动的树组件</title>
     <url>/tree-component-with-tree-store/</url>
     <content><![CDATA[<h2 id="背景概述"><a href="#背景概述" class="headerlink" title="背景概述"></a>背景概述</h2><p>​        最近在做一个商业化系统的权限模块，涉及到很多树相关的组件，比如组织架构图，部门选择，权限树的编辑等等。但是由于项目的原因，暂时不能使用市面上类似antDesign等开源的组件库，项目内部的组件库中树组件又满足不了业务需求(没有展示线）。所以需要重新写一个树组件来满足业务开发需求。</p>
@@ -357,7 +393,7 @@
 <p>限制时间 <code>git log --since=2.days</code> 具体看链接文档</p>
 <p>不展示merge节点 <code>git log --no-merges</code></p>
 <h2 id="撤消操作"><a href="#撤消操作" class="headerlink" title="撤消操作"></a>撤消操作</h2><p><code>git reset file</code> 把暂存区的文件取出来<br><code>git checkout -- file</code> 把工作区文件修改撤销(变为已暂存/已提交的文件状态)</p>
-<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><p><code>git remote -v</code> 显示git读写的仓库地址<br><code>git remote add &lt;name&gt; &lt;url&gt;</code> 添加远程仓库 git add origin <a href="mailto:&#103;&#105;&#x74;&#x40;&#103;&#x69;&#x74;&#46;&#120;&#120;&#120;&#x78;">&#103;&#105;&#x74;&#x40;&#103;&#x69;&#x74;&#46;&#120;&#120;&#120;&#x78;</a></p>
+<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><p><code>git remote -v</code> 显示git读写的仓库地址<br><code>git remote add &lt;name&gt; &lt;url&gt;</code> 添加远程仓库 git add origin <a href="mailto:&#x67;&#x69;&#x74;&#64;&#x67;&#105;&#x74;&#46;&#x78;&#120;&#x78;&#120;">&#x67;&#x69;&#x74;&#64;&#x67;&#105;&#x74;&#46;&#x78;&#120;&#x78;&#120;</a></p>
 <h2 id="打标签"><a href="#打标签" class="headerlink" title="打标签"></a>打标签</h2><p>添加tag<br><code>git tag -a tagName </code> 简单模式<br><code>git tag -a tagName -m message</code> 添加tag的说明</p>
 <p>展示tag<br><code>git show tagName</code><br><code>git tag</code><br><code>git tag -l &#39;tagName glob</code></p>
 <p>删除tag<br><code>git tag -d tagName</code> 只会删除本地<br><code>git push origin --delete tagName</code> 删除本地与远程<br><code>git push origin :refs/tags/tagName</code> 同上</p>

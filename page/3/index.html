@@ -131,7 +131,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">28</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">29</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -141,7 +141,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">42</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">43</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -194,6 +194,56 @@
 
           <div class="content index posts-expand">
             
+    
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/quicklink/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/quicklink/" class="post-title-link" itemprop="url">quicklink学习以及结合React</a>
+        </h2>
+
+      </header>
+
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p class="post-prev-description"> </p>
+          <!--noindex-->
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+    
     
       
   
@@ -688,72 +738,6 @@
   
 
     
-    
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/2018-05-21/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Jsonz">
-      <meta itemprop="description" content="前端👴🥬🐣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jsonz bug-log">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018-05-21/" class="post-title-link" itemprop="url">2018-05-21 小记</a>
-        </h2>
-
-      </header>
-
-    
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近工作不是很忙，也没有再投简历去面试，好像又开始恢复以前的学习热情与节奏。<br>&lt;– more –&gt;</p>
-<p>发了几篇水文~ 看了一个小脚手架的部分源码《create-react-app》，看了一本技术书《css世界》，一本小说《白金数据》。</p>
-<p>但是写这篇流水的主要目的是再次意识到自己看问题太过 __局限__。</p>
-<p>先交代一下背景：</p>
-<ol>
-<li>目前公司的项目是基于 cookie 去判断一些环境，然后指向测试环境或者正式环境</li>
-<li>对于 font 字体文件来说，他的请求是没有带上cookie的（chrome的bug，chrome觉得说这个文件不需要带上cookie，safari就会带)</li>
-<li>出现的问题是： 如果测试环境有了新的 font 字体，那么因为他没有带上cookie，所以会被指向正式环境服务器去请求资源，但是这个时候正式环境还没有这个 font 字体，所以会报404。 怎么解决？</li>
-</ol>
-<p>我给出的方案是:</p>
-<ol>
-<li>后端给出一个页面，我们打包后把字体文件丢到正式环境上面</li>
-<li>如果不想这么low手动的话， 那就在打包字体的命令行后面自动去提交到正式环境</li>
-</ol>
-<p>老大给出的方案是:<br>直接根据目前的环境分离机制，在nginx配置一下：测试环境下所有静态资源直接指到测试环境</p>
-<p>= =简直被吊打，看问题还是很局限 没有跳出前端的圈子…╮(╯▽╰)╭</p>
-<p>所以接下来优先补后端的一些基础知识 💪</p>
-          <!--noindex-->
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
 
   
   <nav class="pagination">
@@ -825,7 +809,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -838,7 +822,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
