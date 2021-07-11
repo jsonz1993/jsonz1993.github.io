@@ -21,20 +21,21 @@
     var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="面试记录">
+  <meta name="description" content="用ts+jest+rollup实现一个简单的EventBus">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2018-05-08面试记B">
-<meta property="og:url" content="http://jsonz1993.github.io/2018-05-08/index.html">
+<meta property="og:title" content="实现简易EventBus">
+<meta property="og:url" content="http://jsonz1993.github.io/typescript-package-example-event/index.html">
 <meta property="og:site_name" content="Jsonz bug-log">
-<meta property="og:description" content="面试记录">
+<meta property="og:description" content="用ts+jest+rollup实现一个简单的EventBus">
 <meta property="og:locale">
-<meta property="article:published_time" content="2018-05-08T23:29:16.000Z">
-<meta property="article:modified_time" content="2021-07-11T06:46:46.411Z">
+<meta property="article:published_time" content="2021-07-11T14:02:34.000Z">
+<meta property="article:modified_time" content="2021-07-11T06:46:46.487Z">
 <meta property="article:author" content="Jsonz">
-<meta property="article:tag" content="Interview">
+<meta property="article:tag" content="Typescript">
+<meta property="article:tag" content="Npm">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://jsonz1993.github.io/2018-05-08/">
+<link rel="canonical" href="http://jsonz1993.github.io/typescript-package-example-event/">
 
 
 <script id="page-configurations">
@@ -47,7 +48,7 @@
   };
 </script>
 
-  <title>2018-05-08面试记B | Jsonz bug-log</title>
+  <title>实现简易EventBus | Jsonz bug-log</title>
   
 
 
@@ -201,7 +202,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/2018-05-08/">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/typescript-package-example-event/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
@@ -214,7 +215,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          2018-05-08面试记B
+          实现简易EventBus
         </h1>
         <div class="post-meta ">
             <span class="post-meta-item">
@@ -222,16 +223,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2018-05-08 23:29:16" itemprop="dateCreated datePublished" datetime="2018-05-08T23:29:16+00:00">2018-05-08</time>
+              <time title="Created: 2021-07-11 14:02:34 / Modified: 06:46:46" itemprop="dateCreated datePublished" datetime="2021-07-11T14:02:34+00:00">2021-07-11</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-11 06:46:46" itemprop="dateModified" datetime="2021-07-11T06:46:46+00:00">2021-07-11</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -243,7 +238,7 @@
             </span>
 
           
-            <div class="post-description">面试记录</div>
+            <div class="post-description">用ts+jest+rollup实现一个简单的EventBus</div>
 
         </div>
 
@@ -256,43 +251,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>欧啦啦啦啦啦啦啦啦啦 </p>
-<p>记录下最近的面试等情况~~~ </p>
-<h2 id="简历投递情况2"><a href="#简历投递情况2" class="headerlink" title="简历投递情况2"></a>简历投递情况2</h2><p><a href="https://jsonz1993.github.io/2018/04/2018-04-29/">简历投递情况传送门</a><br>据不完全统计:<br>投 <code>荔枝</code> 技术面<br>投 <code>100教育</code> 待沟通<br>投 <code>尚德教育</code> 没面试机会</p>
-<p>最最最最最开心的事情可能就是面了荔枝~ 虽然最后没有过 不过还是挺不错的一次体验 记录一下</p>
-<p>首先流程是： 笔试 =&gt; 机试 =&gt; 两个人的技术面</p>
-<p>笔试比较基础的问题，但是面试官会根据写的题问思路，而且会各种变形问，可以比较深了解基础的知识。</p>
-<p>以下只是个人的面试记录，如果发现有不妥的联系即删。</p>
-<h2 id="荔枝笔试"><a href="#荔枝笔试" class="headerlink" title="荔枝笔试"></a>荔枝笔试</h2><ol>
-<li><p>作用域的问题</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> t;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">t</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">  <span class="keyword">var</span> t;</span><br><span class="line">  t = <span class="number">20</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">typeof</span> a();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 还有各种变形</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">t</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  <span class="keyword">var</span> t;</span><br><span class="line">  <span class="keyword">return</span> t;</span><br><span class="line">  t = <span class="number">20</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">t</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  <span class="keyword">var</span> t;</span><br><span class="line">  <span class="keyword">return</span> t;</span><br><span class="line">  t = <span class="number">20</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">t</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  <span class="keyword">var</span> t;</span><br><span class="line">  <span class="keyword">return</span> t;</span><br><span class="line">  t = <span class="number">20</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> t;</span><br><span class="line">  <span class="keyword">var</span> t;</span><br><span class="line">  t = <span class="number">20</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>兼容低版本浏览器模拟 Function.prototype.bind</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">直接用 call || allpy 模拟，返回一个闭包，参数用 <span class="built_in">Array</span>.prototype.slice.apple 去取即可~</span><br></pre></td></tr></table></figure></li>
-<li><p>关于正则的比较简单~ 不写出来了</p>
-</li>
-<li><p>关于zIndex的，推荐直接看张鑫旭大佬的文章，超不过那个范围<a target="_blank" rel="noopener" href="http://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/">张鑫旭大佬传送门</a></p>
-</li>
-<li><p>实现一个宽高都是浏览器 40%的正方形</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 用vw方案</span><br><span class="line">2. 用padding ( emmm 这个面试大佬提示了才想起 padding 是根据父级宽度的)</span><br></pre></td></tr></table></figure></li>
-<li><p>a,b,c,d 四个接口，求最快 || 最慢的响应时间</p>
-</li>
-</ol>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">直接用 <span class="built_in">Promise</span>.all || <span class="built_in">Promise</span>.race 即可</span><br></pre></td></tr></table></figure>
+        <p>最近在看一个文章，里面写到event，然后就想试一下，于是就写了一个简单的事件模块。</p>
+<p>正好最近的工作一直都在就项目上写代码，很久没有接触ts，干脆以 <code>Events</code> 为例，用ts编写，jest单测，rollup打包编译。</p>
+<h2 id="初始化项目与安装rollup与rollup插件"><a href="#初始化项目与安装rollup与rollup插件" class="headerlink" title="初始化项目与安装rollup与rollup插件"></a>初始化项目与安装rollup与rollup插件</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm init -y</span><br><span class="line">npm i rollup rollup/plugin-typescript -D</span><br></pre></td></tr></table></figure>
 
-<p>笔试题还好，作用域那一题有点混 其他没什么问题，算是有惊无险</p>
-<h2 id="机试"><a href="#机试" class="headerlink" title="机试"></a>机试</h2><p>机试题二选一 一个是实现一个<code>dialog</code> 一个是实现一个验证表单<br>选了 dialog 做的时候没有看题…有个功能点没有实现完全就跑去做验证题，验证题没有做完<br>dialog 应该算是实现的不够及格线</p>
-<p>引出了挺多优化方案的，比如 dom 处理，比如动画处理，里面有一个面试官暗示了好多次，但是没有想起来的一个api <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Events/animationend">animationend</a><br><a target="_blank" rel="noopener" href="http://www.runoob.com/jsref/event-animationend.html">animationend demo</a></p>
-<h2 id="面试"><a href="#面试" class="headerlink" title="面试"></a>面试</h2><p>面试就根据前面做的两份题扩展去问思路等等</p>
-<p>问题的套路是比较喜欢的，举个例子：</p>
-<p>Q: 左边自适应，右边固定有什么布局?<br>A: flex布局, flex: 1 &amp;&amp; width: …<br>Q: 浏览器这时候缩小会有什么情况？<br>A: flex: 1 慢慢缩小，另一个不变（这个回答我模棱两可犹豫了，虽然知道是不变，但是好像项目中有遇过变的…扣分了)<br>Q: 还有其他的吗?<br>A: 浮动 float:left; overflow: auto<br>Q: 清除浮动有哪些<br>A: 委元素清除 &amp;&amp; BFC<br>Q: BFC是什么，有什么作用，怎么设置BFC<br>A: 块级格式化上下文，清除浮动或者消除master合并，可以用overflow(hidden,auto,scroll) || float(left,right) || display(inline-block) || position(absolute, fixed)</p>
-<p>后面聊了下 工作的优化， webpack构建， react优化, 缓存机制(涉及http), pwa等等</p>
-<p>还问了小程序和vue的东西，但是其实上一次做小程序已经是一年前了，说了vue和小程序的上手不应该成为一个问题所在。</p>
-<p>然后问了下职业规划，说了最近是在看 <code>create-react-app</code>源码，接下来的规划是 <strong>专前端 通其他</strong></p>
-<h2 id="荔枝结果"><a href="#荔枝结果" class="headerlink" title="荔枝结果"></a>荔枝结果</h2><p>工作优化可能不是很满意<br>webpack构建优化应该还行，毕竟项目上用的比较多<br>react也还好，虽然面试的是用vue和小程序<br>pwa也有所了解<br>主要是 http这块暴露了后台知识薄弱，没有形成一个比较全面知识体系</p>
-<p>后面还被嫌弃了三年呆了三个公司太过频繁</p>
-<p>最后让面试官给了一下面试的评价：<br><strong>1. css 概念不熟</strong><br><strong>2. 浏览器api认识不全</strong><br><strong>3. http、后端知识没有系统学习</strong><br><strong>4. 跳槽过多~ 三年呆了三个公司</strong></p>
-<p>╮(╯▽╰)╭哎 还闹了个乌龙，想说 《CSS世界》 说成 《css揭秘》</p>
-<p>最近应该折腾完手上东西后，会比较系统的去看 切图写页面的这一块，比较 html+css 其实也是很重要的</p>
+<p>创建rollup配置</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// rollup.config.js</span></span><br><span class="line"><span class="keyword">import</span> typescript <span class="keyword">from</span> <span class="string">&#x27;@rollup/plugin-typescript&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">input</span>: <span class="string">&#x27;src/index.ts&#x27;</span>,</span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">dir</span>: <span class="string">&#x27;dist&#x27;</span>,</span><br><span class="line">    <span class="attr">format</span>: <span class="string">&#x27;cjs&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">plugins</span>: [typescript()]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>新建 <code>tsconfig.json</code> 用于ts配置</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;compilerOptions&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;declaration&quot;</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">&quot;declarationDir&quot;</span>: <span class="string">&quot;./dist&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">	<span class="string">&quot;include&quot;</span>: [<span class="string">&quot;src&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><p>现在最流行的应该就是jest，而且各方面支持也不错，event只是一个简单的小库，不涉及ui界面还好一些。</p>
+<p>有ts的话用 <code>ts-jest</code>初始化，或者也可以直接用 <code>jest --init</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev jest typescript ts-jest @types/jest</span><br><span class="line"></span><br><span class="line">npx ts-jest config:init </span><br><span class="line">或</span><br><span class="line">npx jest --init</span><br></pre></td></tr></table></figure>
+
+<p>最后得到一份 <code>jest.config.js</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">	<span class="attr">collectCoverage</span>: <span class="literal">true</span>,</span><br><span class="line">	<span class="attr">coverageDirectory</span>: <span class="string">&quot;coverage&quot;</span>,</span><br><span class="line">	<span class="attr">coverageProvider</span>: <span class="string">&quot;v8&quot;</span>,</span><br><span class="line">	<span class="attr">preset</span>: <span class="string">&#x27;ts-jest&#x27;</span>,</span><br><span class="line">	<span class="attr">testEnvironment</span>: <span class="string">&quot;node&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编写单元测试</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="string">&#x27;添加监听函数&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">	test(<span class="string">&#x27;on函数&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">		<span class="keyword">const</span> ee = <span class="keyword">new</span> EventEmiter()</span><br><span class="line">		<span class="keyword">const</span> fn = jest.fn()</span><br><span class="line">		ee.on(<span class="string">&#x27;test&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">			fn()</span><br><span class="line">		&#125;)</span><br><span class="line">		ee.emit(<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line">		expect(fn.mock.calls.length).toBe(<span class="number">1</span>)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="coding…"><a href="#coding…" class="headerlink" title="coding…"></a>coding…</h2><p>TDD特别适合这种翻译的项目，已经知道API和函数入参、出参等，写好各种测试用例，然后边写边跑测试用例…</p>
+<p>比如看到<a href="%5Bhttps://github.com/browserify/events/blob/48e3d18659caf72d94d319871106f089bb40002d/events.js%5D(https://github.com/browserify/events/blob/48e3d18659caf72d94d319871106f089bb40002d/events.js#L153)">Event.emit绑定的上下文是this</a></p>
+<p>那可以先在测试文件里面写上测试用例，后面再根据这个测试用例去写代码，跑通了意味着代码功能实现。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.test.ts</span></span><br><span class="line">test(<span class="string">&#x27;this 指向&#x27;</span>, <span class="function">(<span class="params">done</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> ee = <span class="keyword">new</span> EventEmitter()</span><br><span class="line">    ee.on(<span class="string">&#x27;test&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      expect(<span class="built_in">this</span>).toEqual(ee)</span><br><span class="line">      done()</span><br><span class="line">    &#125;)</span><br><span class="line">    ee.emit(<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="修改package-json"><a href="#修改package-json" class="headerlink" title="修改package.json"></a>修改package.json</h2><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">&quot;main&quot;</span>: <span class="string">&quot;./dist/index.js&quot;</span>,</span><br><span class="line">	<span class="attr">&quot;types&quot;</span>: <span class="string">&quot;./dist/index.d.ts&quot;</span>,</span><br><span class="line">	<span class="attr">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;build&quot;</span>: <span class="string">&quot;npm test &amp;&amp; rollup --config ./rollup.config.js&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;watch&quot;</span>: <span class="string">&quot;rollup --config ./rollup.config.js --watch&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;test&quot;</span>: <span class="string">&quot;jest&quot;</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果有需要发布到npm的，可以加一个 github action去发布。具体可以看 <a href="https://jsonz1993.github.io/npm-with-github-action/">https://jsonz1993.github.io/npm-with-github-action/</a></p>
+<p>仓库地址: <a target="_blank" rel="noopener" href="https://github.com/jsonz1993/Events">https://github.com/jsonz1993/Events</a></p>
 
     </div>
 
@@ -322,7 +310,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Interview/" rel="tag"># Interview</a>
+              <a href="/tags/Typescript/" rel="tag"># Typescript</a>
+              <a href="/tags/Npm/" rel="tag"># Npm</a>
           </div>
 
         
@@ -331,13 +320,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/create-react-app-o/" rel="prev" title="create-react-app 源码解析">
-      <i class="fa fa-chevron-left"></i> create-react-app 源码解析
+    <a href="/animation-course/" rel="prev" title="animation-course">
+      <i class="fa fa-chevron-left"></i> animation-course
     </a></div>
-      <div class="post-nav-item">
-    <a href="/create-react-app-t/" rel="next" title="create-react-app 源码解析之react-scripts">
-      create-react-app 源码解析之react-scripts <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -396,7 +382,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8E%86%E6%8A%95%E9%80%92%E6%83%85%E5%86%B52"><span class="nav-number">1.</span> <span class="nav-text">简历投递情况2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8D%94%E6%9E%9D%E7%AC%94%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">荔枝笔试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%BA%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">机试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%A2%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">面试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8D%94%E6%9E%9D%E7%BB%93%E6%9E%9C"><span class="nav-number">5.</span> <span class="nav-text">荔枝结果</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE%E4%B8%8E%E5%AE%89%E8%A3%85rollup%E4%B8%8Erollup%E6%8F%92%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">初始化项目与安装rollup与rollup插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">单元测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#coding%E2%80%A6"><span class="nav-number">3.</span> <span class="nav-text">coding…</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9package-json"><span class="nav-number">4.</span> <span class="nav-text">修改package.json</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -576,7 +562,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
       quicklink({
         timeout : 3000,
         priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/2018-05-08/',]
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/typescript-package-example-event/',]
       });
       });
   </script>
