@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>业务表单自动保存引发的小思考</title>
+    <url>/form-auto-save-think/</url>
+    <content><![CDATA[<p>最近接到一个表单自动保存的需求，一开始以为只是简单的数据保存，抄起键盘就干，十行代码不到实现个大概的:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">localStorage</span>.setItem(<span class="string">&#x27;paymentData&#x27;</span>, <span class="built_in">JSON</span>.stringify(paymentData))</span><br><span class="line">&#125;, <span class="number">1000</span> * <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">init</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  paymentData = <span class="built_in">JSON</span>.parse(<span class="built_in">localStorage</span>.getItem(<span class="string">&#x27;paymentData&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看需求是要pc端和app端同步，好像也不难，只是把保存到localStorage的过程改成保存到服务端，但是实际做起来问题倒是挺多的。</p>
+<blockquote>
+<p>Q: 实现的基本思路</p>
+</blockquote>
+<p>A: 项目一直尝试MVC模式，也有一点DDD的味道。所以虽然pc端和app端有很大的差异，但是模式差不多，表单一般都由一个具体的表单模型去驱动。所以基本的思路是，pc端和app端分别是两个不同的model,那就基于这两个model去抽离出一套通用的数据格式。<br>然后基于这份数据格式，存的时候pc和app转换成该数据格式，拉取的时候又分别根据这份数据转换为自己需要的格式存到model里。<br>除了存的这些格式外，还需要做一套接口，比如某个字段变动之后，会调用接口去异步查询，或者某几个字段有联动。比如支付金额超过4000万，且支付币种为美金时需要调接口去查询是否需要拆单。<br>有了基本的思路就开始实现了…</p>
+<blockquote>
+<p>Q: 一些组件不是瓦全由数据驱动的，有一些是行为触发，所以你数据一致并不能百分百的还原当时的组件状态。</p>
+</blockquote>
+<p>A: 对这个问题，没有特别好的办法，属于历史留下的包袱，解决的方法就是直接去改造这个组件。因为这些其实属于一个bug，只是以前一直没有这种 time travel 的场景，所以没有被发现。</p>
+<blockquote>
+<p>Q: 一些数据属于临时状态，业务表单的时候不需要提交到服务端，但是他又会影响到一些业务判断。</p>
+</blockquote>
+<p>A: 把这些数据也存起来，可以在 getSaveData() 的时候手动给他拼接进去。</p>
+<blockquote>
+<p>Q: 一些字段有联动，比如字段改动后回触发异步请求去校验，或者拉取其他的新数据。</p>
+</blockquote>
+<p>A: 封装一套工具，做一些通用的hook，比如每个字段填充之前调用接口，自定义填充方式，全部填充后调用一些初始化的接口等等。配置大致可以如下：</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	delay?: <span class="built_in">number</span>,</span><br><span class="line">	<span class="attr">namespace</span>: <span class="built_in">string</span>,</span><br><span class="line">	interval?: <span class="built_in">number</span>,</span><br><span class="line"></span><br><span class="line">	fillBackItem?: <span class="function">(<span class="params">&#123; key, value, data &#125;</span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">	preFillBackItem?: <span class="function">(<span class="params">&#123; key, value, data &#125;</span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">	postFillBackItem?: <span class="function">(<span class="params">&#123; key, value, data &#125;</span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">	preFillBackItem?: <span class="function"><span class="params">data</span> =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">	postFillBackItem?: <span class="function"><span class="params">data</span> =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line"></span><br><span class="line">	<span class="attr">getSaveData</span>: <span class="function">() =&gt;</span> Data, <span class="comment">// 需要保存的数据</span></span><br><span class="line">	preSaveData?: <span class="function"><span class="params">Data</span> =&gt;</span> Data,</span><br><span class="line">	postSaveData?: <span class="function"><span class="params">Data</span> =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line"></span><br><span class="line">	keysConfig?: (<span class="built_in">string</span> | &#123;</span><br><span class="line">		<span class="attr">key</span>: <span class="built_in">string</span>,</span><br><span class="line">		getValue4Save?: <span class="function">(<span class="params">value, data</span>) =&gt;</span> value,</span><br><span class="line">		<span class="attr">fillBack</span>: <span class="function">(<span class="params">&#123; key, value, data &#125;</span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">		<span class="attr">preFillBack</span>: <span class="function">(<span class="params">&#123; key, value, data &#125;</span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">		<span class="attr">postFillBack</span>: <span class="function">(<span class="params">&#123; key, value, data &#125;</span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">	&#125;)[]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是最好的做法还是在 pc和 app统一一套支付的model，然后在model层做，这才是我认为的最优解。把业务无关的抽离成模型去框架化，这样不管你用的是angular,react还是vue都可以公用一套，这对于我们项目来说是非常实用的。不过由于诸多历史包袱，现在还没有实现，但是已经在路上了。</p>
+]]></content>
+      <categories>
+        <category>technology</category>
+      </categories>
+      <tags>
+        <tag>Thinking</tag>
+        <tag>Model</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>tim项目构建升级(一)</title>
     <url>/tim-web-build-upgrade-1/</url>
     <content><![CDATA[<h1 id="项目背景"><a href="#项目背景" class="headerlink" title="项目背景"></a>项目背景</h1><p>团队开发维护的tim项目，分为几个平台，分别是 pc端，app端，微信端，以及外网的一些其他页面总共四个项目。一开始是分成四个仓库维护，公用的部分发npm包维护，但是随着项目的复杂度上升，而且每周至少两个迭代的速度，npm包维护公共工具、库的形式非常繁琐。</p>
@@ -534,7 +568,7 @@
 <p>限制时间 <code>git log --since=2.days</code> 具体看链接文档</p>
 <p>不展示merge节点 <code>git log --no-merges</code></p>
 <h2 id="撤消操作"><a href="#撤消操作" class="headerlink" title="撤消操作"></a>撤消操作</h2><p><code>git reset file</code> 把暂存区的文件取出来<br><code>git checkout -- file</code> 把工作区文件修改撤销(变为已暂存/已提交的文件状态)</p>
-<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><p><code>git remote -v</code> 显示git读写的仓库地址<br><code>git remote add &lt;name&gt; &lt;url&gt;</code> 添加远程仓库 git add origin <a href="mailto:&#x67;&#x69;&#116;&#64;&#103;&#105;&#116;&#x2e;&#x78;&#120;&#x78;&#120;">&#x67;&#x69;&#116;&#64;&#103;&#105;&#116;&#x2e;&#x78;&#120;&#x78;&#120;</a></p>
+<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><p><code>git remote -v</code> 显示git读写的仓库地址<br><code>git remote add &lt;name&gt; &lt;url&gt;</code> 添加远程仓库 git add origin <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#x69;&#116;&#46;&#x78;&#x78;&#x78;&#120;">&#103;&#105;&#116;&#64;&#x67;&#x69;&#116;&#46;&#x78;&#x78;&#x78;&#120;</a></p>
 <h2 id="打标签"><a href="#打标签" class="headerlink" title="打标签"></a>打标签</h2><p>添加tag<br><code>git tag -a tagName </code> 简单模式<br><code>git tag -a tagName -m message</code> 添加tag的说明</p>
 <p>展示tag<br><code>git show tagName</code><br><code>git tag</code><br><code>git tag -l &#39;tagName glob</code></p>
 <p>删除tag<br><code>git tag -d tagName</code> 只会删除本地<br><code>git push origin --delete tagName</code> 删除本地与远程<br><code>git push origin :refs/tags/tagName</code> 同上</p>

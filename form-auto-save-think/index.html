@@ -21,18 +21,21 @@
     var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="前端👴🥬🐣">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Jsonz bug-log">
-<meta property="og:url" content="http://jsonz1993.github.io/tags/Git/index.html">
+  <meta name="description" content="做支付表单自动保存引发的关于model的小思考">
+<meta property="og:type" content="article">
+<meta property="og:title" content="业务表单自动保存引发的小思考">
+<meta property="og:url" content="http://jsonz1993.github.io/form-auto-save-think/index.html">
 <meta property="og:site_name" content="Jsonz bug-log">
-<meta property="og:description" content="前端👴🥬🐣">
+<meta property="og:description" content="做支付表单自动保存引发的关于model的小思考">
 <meta property="og:locale">
+<meta property="article:published_time" content="2021-07-16T11:09:15.000Z">
+<meta property="article:modified_time" content="2021-07-16T04:32:04.209Z">
 <meta property="article:author" content="Jsonz">
-<meta property="article:tag" content="Jsonz Jsonz1993 张耿欣 React">
+<meta property="article:tag" content="Thinking">
+<meta property="article:tag" content="Model">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://jsonz1993.github.io/tags/Git/">
+<link rel="canonical" href="http://jsonz1993.github.io/form-auto-save-think/">
 
 
 <script id="page-configurations">
@@ -40,12 +43,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-Hans'
   };
 </script>
 
-  <title>Tag: Git | Jsonz bug-log</title>
+  <title>业务表单自动保存引发的小思考 | Jsonz bug-log</title>
   
 
 
@@ -192,71 +195,133 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Git
-          <small>Tag</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/form-auto-save-think/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          业务表单自动保存引发的小思考
+        </h1>
+        <div class="post-meta ">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-16 11:09:15 / Modified: 04:32:04" itemprop="dateCreated datePublished" datetime="2021-07-16T11:09:15+00:00">2021-07-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/technology/" itemprop="url" rel="index"><span itemprop="name">technology</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">做支付表单自动保存引发的关于model的小思考</div>
+
+        </div>
+
+      </header>
+
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2020</span>
-    </div>
+        <p>最近接到一个表单自动保存的需求，一开始以为只是简单的数据保存，抄起键盘就干，十行代码不到实现个大概的:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">localStorage</span>.setItem(<span class="string">&#x27;paymentData&#x27;</span>, <span class="built_in">JSON</span>.stringify(paymentData))</span><br><span class="line">&#125;, <span class="number">1000</span> * <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">init</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  paymentData = <span class="built_in">JSON</span>.parse(<span class="built_in">localStorage</span>.getItem(<span class="string">&#x27;paymentData&#x27;</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看需求是要pc端和app端同步，好像也不难，只是把保存到localStorage的过程改成保存到服务端，但是实际做起来问题倒是挺多的。</p>
+<blockquote>
+<p>Q: 实现的基本思路</p>
+</blockquote>
+<p>A: 项目一直尝试MVC模式，也有一点DDD的味道。所以虽然pc端和app端有很大的差异，但是模式差不多，表单一般都由一个具体的表单模型去驱动。所以基本的思路是，pc端和app端分别是两个不同的model,那就基于这两个model去抽离出一套通用的数据格式。<br>然后基于这份数据格式，存的时候pc和app转换成该数据格式，拉取的时候又分别根据这份数据转换为自己需要的格式存到model里。<br>除了存的这些格式外，还需要做一套接口，比如某个字段变动之后，会调用接口去异步查询，或者某几个字段有联动。比如支付金额超过4000万，且支付币种为美金时需要调接口去查询是否需要拆单。<br>有了基本的思路就开始实现了…</p>
+<blockquote>
+<p>Q: 一些组件不是瓦全由数据驱动的，有一些是行为触发，所以你数据一致并不能百分百的还原当时的组件状态。</p>
+</blockquote>
+<p>A: 对这个问题，没有特别好的办法，属于历史留下的包袱，解决的方法就是直接去改造这个组件。因为这些其实属于一个bug，只是以前一直没有这种 time travel 的场景，所以没有被发现。</p>
+<blockquote>
+<p>Q: 一些数据属于临时状态，业务表单的时候不需要提交到服务端，但是他又会影响到一些业务判断。</p>
+</blockquote>
+<p>A: 把这些数据也存起来，可以在 getSaveData() 的时候手动给他拼接进去。</p>
+<blockquote>
+<p>Q: 一些字段有联动，比如字段改动后回触发异步请求去校验，或者拉取其他的新数据。</p>
+</blockquote>
+<p>A: 封装一套工具，做一些通用的hook，比如每个字段填充之前调用接口，自定义填充方式，全部填充后调用一些初始化的接口等等。配置大致可以如下：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	delay?: <span class="built_in">number</span>,</span><br><span class="line">	<span class="attr">namespace</span>: <span class="built_in">string</span>,</span><br><span class="line">	interval?: <span class="built_in">number</span>,</span><br><span class="line"></span><br><span class="line">	fillBackItem?: <span class="function">(<span class="params">&#123; key, value, data &#125;</span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">	preFillBackItem?: <span class="function">(<span class="params">&#123; key, value, data &#125;</span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">	postFillBackItem?: <span class="function">(<span class="params">&#123; key, value, data &#125;</span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">	preFillBackItem?: <span class="function"><span class="params">data</span> =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">	postFillBackItem?: <span class="function"><span class="params">data</span> =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line"></span><br><span class="line">	<span class="attr">getSaveData</span>: <span class="function">() =&gt;</span> Data, <span class="comment">// 需要保存的数据</span></span><br><span class="line">	preSaveData?: <span class="function"><span class="params">Data</span> =&gt;</span> Data,</span><br><span class="line">	postSaveData?: <span class="function"><span class="params">Data</span> =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line"></span><br><span class="line">	keysConfig?: (<span class="built_in">string</span> | &#123;</span><br><span class="line">		<span class="attr">key</span>: <span class="built_in">string</span>,</span><br><span class="line">		getValue4Save?: <span class="function">(<span class="params">value, data</span>) =&gt;</span> value,</span><br><span class="line">		<span class="attr">fillBack</span>: <span class="function">(<span class="params">&#123; key, value, data &#125;</span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">		<span class="attr">preFillBack</span>: <span class="function">(<span class="params">&#123; key, value, data &#125;</span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">		<span class="attr">postFillBack</span>: <span class="function">(<span class="params">&#123; key, value, data &#125;</span>) =&gt;</span> <span class="built_in">void</span>,</span><br><span class="line">	&#125;)[]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-04-09T16:13:47+00:00"
-              content="2020-04-09">
-          04-09
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/code-check/" itemprop="url">
-            <span itemprop="name">学好Git 拒绝背锅</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2020-03-16T16:56:56+00:00"
-              content="2020-03-16">
-          03-16
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/git-learn-basic/" itemprop="url">
-            <span itemprop="name">git基础</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
+<p>但是最好的做法还是在 pc和 app统一一套支付的model，然后在model层做，这才是我认为的最优解。把业务无关的抽离成模型去框架化，这样不管你用的是angular,react还是vue都可以公用一套，这对于我们项目来说是非常实用的。不过由于诸多历史包袱，现在还没有实现，但是已经在路上了。</p>
 
     </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ali_pay.jpeg" alt="Jsonz Alipay">
+        <p>Alipay</p>
+      </div>
+
   </div>
-  
-  
-  
+</div>
 
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Thinking/" rel="tag"># Thinking</a>
+              <a href="/tags/Model/" rel="tag"># Model</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/tim-web-build-upgrade-1/" rel="prev" title="tim项目构建升级(一)">
+      <i class="fa fa-chevron-left"></i> tim项目构建升级(一)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
 
@@ -488,7 +553,7 @@ if (document.querySelectorAll('pre.mermaid').length) {
       quicklink({
         timeout : 3000,
         priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/tags/Git/',]
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/form-auto-save-think/',]
       });
       });
   </script>

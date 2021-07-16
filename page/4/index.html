@@ -131,7 +131,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">29</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">31</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -141,7 +141,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">46</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">47</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -194,6 +194,73 @@
 
           <div class="content index posts-expand">
             
+    
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/video-to-chat/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/video-to-chat/" class="post-title-link" itemprop="url">视频转字符画</a>
+        </h2>
+
+      </header>
+
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>先看一下效果，原视频是这样的</p>
+<p><video src="../2018-07-27/b_1.mp4" width="300" controls></video></p>
+<p>我们要实现的效果是这样子的，之所以找这个视频是因为…这个视频和背景的对比度比较高做出来比较有辨识度，没有其他的意思 ( *・ω・)✄╰ひ╯</p>
+<p><video src="../2018-07-27/b.mp4" width="300" controls></video></p>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><img data-src="./wechat.png" width="300">
+某天一个基友在群里问我，在抖音看到一种视频，问我是不是能实现。我说可以的~ 
+于是当天晚上花了一个多小时折腾了一个粗糙版本... 
+
+<p>先把视频丢到部门技术群问有没有关键字，给了一个keyword <strong>图片转字符串</strong> 于是照着这个思路去gayhub找资源拼乐高！</p>
+<h2 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h2><ul>
+<li>第一步我们通过 <code>input[type=&quot;file&quot;]</code> 获取文件</li>
+<li>拿到文件之后，用 <code>URL.createObjectURL</code>来获取视频的路径</li>
+<li>通过 <code>ctx.drawImage</code> 我们可以把某个 video 当前的图像渲染到 canvas里面</li>
+<li><code>ctx.getImageData</code> 可以获取当前canvas 里面图片的色值，利用公式计算出灰度</li>
+<li>根据灰度的深浅去匹配要显示的字符，深色匹配比较密集的字符，最浅的直接用空格代替，然后用 <code>ctx.fillText</code>重绘进去</li>
+<li>设置 <code>video.currentTime</code> 来获得视频的某一时刻图像，重复上述重绘过程<!-- 灰度超过某个值用#，低于某个值用 · 代替 --></li>
+</ul>
+<p>既然大概的思路已经理清，接下来就是具体的编码，把想法写出来的过程</p>
+          <!--noindex-->
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+    
     
       
   
@@ -669,56 +736,6 @@
   
 
     
-    
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/2018-04-29/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Jsonz">
-      <meta itemprop="description" content="前端👴🥬🐣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jsonz bug-log">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018-04-29/" class="post-title-link" itemprop="url">2018-04-29面试记A</a>
-        </h2>
-
-      </header>
-
-    
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p class="post-prev-description">面试记录</p>
-          <!--noindex-->
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
 
   
   <nav class="pagination">
@@ -790,7 +807,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-count">47</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -803,7 +820,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
