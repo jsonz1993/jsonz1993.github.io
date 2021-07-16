@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="最近接到一个需求，是做tim系统某个模块的多语言，只是多语言还没到本地化的程度。因为这块主要是想解决海外的同事看不懂中文的问题，所以要求没有特别高。 因为目前团队开发和维护多个项目，所以想着多语言的框架可以尽可能的统一，最后选定了社区比较流行的 i18n。这样虽然项目有些用react，老项目用angular，有一些项目混着angular和react，但是都可以基于i18n去开发，减少开发使用和配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多语言需求及后续方案思考">
+<meta property="og:url" content="http://jsonz1993.github.io/i18n-replace-with-solution/index.html">
+<meta property="og:site_name" content="Jsonz bug-log">
+<meta property="og:description" content="最近接到一个需求，是做tim系统某个模块的多语言，只是多语言还没到本地化的程度。因为这块主要是想解决海外的同事看不懂中文的问题，所以要求没有特别高。 因为目前团队开发和维护多个项目，所以想着多语言的框架可以尽可能的统一，最后选定了社区比较流行的 i18n。这样虽然项目有些用react，老项目用angular，有一些项目混着angular和react，但是都可以基于i18n去开发，减少开发使用和配置">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-07-16T12:46:53.000Z">
+<meta property="article:modified_time" content="2021-07-16T07:50:35.415Z">
+<meta property="article:author" content="Jsonz">
+<meta property="article:tag" content="Thinking">
+<meta property="article:tag" content="I18n">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://jsonz1993.github.io/i18n-replace-with-solution/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>多语言需求及后续方案思考 | Jsonz bug-log</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c8a069a38f5fa73f5b6bcff8d176157f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Jsonz bug-log" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Jsonz bug-log</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">前端/JavaScript/React</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">32</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">2</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">48</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/i18n-replace-with-solution/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          多语言需求及后续方案思考
+        </h1>
+        <div class="post-meta ">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-16 12:46:53 / Modified: 07:50:35" itemprop="dateCreated datePublished" datetime="2021-07-16T12:46:53+00:00">2021-07-16</time>
+            </span>
+
+          
+
+        </div>
+
+      </header>
+
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>最近接到一个需求，是做tim系统某个模块的多语言，只是多语言还没到本地化的程度。因为这块主要是想解决海外的同事看不懂中文的问题，所以要求没有特别高。</p>
+<p>因为目前团队开发和维护多个项目，所以想着多语言的框架可以尽可能的统一，最后选定了社区比较流行的 i18n。<br>这样虽然项目有些用react，老项目用angular，有一些项目混着angular和react，但是都可以基于i18n去开发，减少开发使用和配置的成本。对于工具这块不再过多赘述。</p>
+<p>在上家公司也做过多语言，当时是有个管理后台维护，然后前端负责把词条写上去并且新建一个key去替换本地的文件。这种方案适合一些文案很多，维护灵活的项目，比如电商项目等就比较合适。</p>
+<p>目前项目里的多语言都是放在前端维护，前端讲产品和供应商给出的翻译写成两个js文件，然后判断当前的语言环境选择对应的语言包来展示，适合词条比较少的，或者业务文案相对稳定的。比如投资系统就很适合，专业名词改动少，也很少出现大片大片的文案。</p>
+<p>这次做的是某个模块的替换，给的时间3-4天，相对比较宽松。所以决定花点时间写个小小的工具来节约一点时间划水摸鱼…</p>
+<h1 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h1><p>这里我负责是tim项目的某个模块，这个模块都是angular1.x实现的。文案绝大部分是写在模板 html中，少部分写在 js中，还有一些是参杂了变量的。</p>
+<p>首先我们明确要做的事情：</p>
+<ul>
+<li>第一步是将产品给出的在线excel转换为我们的 xxx-en.js 和 xxx-zh-cn.js</li>
+<li>第二步将项目中html的词条替换成我们多语言中对应的key</li>
+<li>第三步将项目中js的词条也做对应的替换</li>
+</ul>
+<p>这里第二步举例来讲就是<code>&lt;span&gt;截止录入时间&lt;/span&gt;</code> 替换为 <code>&lt;span&gt;&#123;&#123; 'portfolioMonitoring:entry_deadline' | i18next &#125;&#125;&lt;/span&gt;</code>。<br>这里的 <code>&#123;&#123; key | i18next &#125;&#125;</code> 是angularJs中filter的写法，其他框架思路不变，key则是由 namespace和wordKey组成。</p>
+<p>第三步是js替换，所以和其他框架没有什么区别，比如将 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vm.crumbs = [&#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;截止录入时间&#x27;</span>,</span><br><span class="line">	<span class="attr">link</span>: <span class="string">&#x27;...&#x27;</span></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">vm.crumbs = [&#123;</span><br><span class="line">  <span class="attr">name</span>: $i18next.t(<span class="string">&#x27;portfolioMonitoring:entry_deadline&#x27;</span>),</span><br><span class="line">  <span class="attr">link</span>: <span class="string">&#x27;...&#x27;</span></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>这次的目标是先写个小工具来简化一些工作。</p>
+<h2 id="第一步-excel转语言包"><a href="#第一步-excel转语言包" class="headerlink" title="第一步 excel转语言包:"></a>第一步 excel转语言包:</h2><p>这一块比较简单，先将产品给的在线文档，导出一份csv格式。然后直接用Node去把csv转成对应的两份语言包文件。<br>具体的做法是利用 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/csvtojson">csvtojson</a> 将csv转成json，然后取里面英文翻译做一个 snakeCase 转换，比如 <code>Entry Deadline</code>转为 <code>entry_deadline</code>，作为中英文的key，最后生成两份文件:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// xxx-en.js</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&#x27;entry_deadline&#x27;</span>: <span class="string">&#x27;Entry Deadline&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// xxx-zh-cn.js</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&#x27;entry_deadline&#x27;</span>: <span class="string">&#x27;截止录入时间&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="第二步-html模板的替换"><a href="#第二步-html模板的替换" class="headerlink" title="第二步 html模板的替换:"></a>第二步 html模板的替换:</h2><p>读取目标模板，解析模板并对里面单块的文字进行提取（这里没有对值替换模板做处理，省事），然后根据这个文字在我们的语言包里面查找，如果找到的话，就做对应的key值替换。</p>
+<p>具体做法是先读取语言包，生成一份中文与key匹配表， <code>map = &#123; &#39;截止录入时间&#39;: &#39;entry_deadline&#39; &#125;</code>。然后对模板文件进行语法分析，这里我用的 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/posthtml">posthtml</a>来解析html ast。然后对html中的 innerText 或 attr 属性进行取值匹配，如果匹配到了，就替换为对应的key值，最后将替换后的文件重新写入到对应的模板文件中。</p>
+<h2 id="第三步-js模板的替换"><a href="#第三步-js模板的替换" class="headerlink" title="第三步 js模板的替换:"></a>第三步 js模板的替换:</h2><p>js的替换其实和html的思路一样，只不过选择的解析工具是 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/@babel/parser">@babel/parser</a>，然后配合 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/@babel/traverse">@babel/traverse</a> 和 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/@babel/template">@babel/template</a> 来实现替换。</p>
+<p>具体实现是先解析js文件将其解析为 ast，然后用 traverse 来处理这段ast，对里面的 StringLiteral 类型进行处理，如果匹配到对应的中文语言包，则替换为对应的ast。最后将ast重新用 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/@babel/generator">@babel/generator</a> 生成js文件替换源文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> i18nCallExpression = template(<span class="string">`</span></span><br><span class="line"><span class="string">  $i18n.t(&#x27;I18N_KEY&#x27;)</span></span><br><span class="line"><span class="string">`</span>)</span><br><span class="line">traverse(ast, &#123;</span><br><span class="line">  <span class="function"><span class="title">StringLiteral</span>(<span class="params">path</span>)</span> &#123;</span><br><span class="line">    ... 匹配 ...</span><br><span class="line">    path.replaceWith(</span><br><span class="line">      i18nCallExpression(&#123;</span><br><span class="line">        <span class="attr">I18N_KEY</span>: <span class="string">`<span class="subst">$&#123;namespace&#125;</span>:<span class="subst">$&#123;key&#125;</span>`</span></span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="next"><a href="#next" class="headerlink" title="next"></a>next</h1><p>这个小组件花了半天时间写，跑完估摸着比手动替换节约了至少60%的工作量，投入产出比还是挺高的。</p>
+<p>不过项目中必不可少的还是要人工过一遍，这和项目的性质有关，如果是一些比如文档类型的，这种很容易做词条替换。但是对于一个投资系统来说，里面有着大量的模板值替换，单复数形式目前还是要手动去替换，比如<code>a company</code>和 <code>3 companies</code>这种场景。所以下一步想把这块做深入，也不会考虑做构建后的替换，而是采取预构建替换，然后人工再审核一遍。</p>
+<p>还有一个问题就是旧项目没有严格的 eslint和 prettier，所以用js转换之后，会出现大量的格式问题，虽然不会报错，但是在cr的时候会造成非常大的影响。<br>对于这次迭代我的解决方法是直接先用js跑一遍这样格式可以保持统一，然后提交cr，再跑一遍去替换。</p>
+<p>这只是一个最基础的beta原型，我们接下来可以往几个方面去深入优化。</p>
+<ol>
+<li>目前文案的收集是产品在页面上人工收集的，可以改为用脚本去扫项目，将识别到的中文提取出来转换为csv文件，减少人力成本。</li>
+<li>csv生成js的模式，目前是全量替换，后面应该是做到增量替换，比如我原本已经有一个语言包文件，转换完后我又去改了一个地方，但是后面有一份新的csv，这时候跑完应该是增量的添加到文件中而不是全量替换了。</li>
+<li>对于 多语言方案，应该是有一个工具提供基础的服务，比如csvToJs, 文件提取中文，中文替换为i18nKey。然后对应的各个模块用插件去实现，比如 提取中文，可以是 html，也可以是 js或jsx，这些提取的能力都是插件去提供。比如我在tim项目中用的是angular的模板，那我的解析规则可能就和tpp项目中普通的html模板或者jsx不一样。再比如替换的规则，可能tpp和tip用的都是react，但是他们内部基于 i18next封装的组件有一点差异，这些都可以通过自定义插件去磨平这些差异。</li>
+<li>定位难的问题。 做过多语言项目的人应该都知道，如果替换为词条有一个很蛋疼的问题就是，比如我在页面上发现一个问题，我要去改，最直接的方式就是搜一下这段文案。但是你都替换成词条了，这就很尴尬。所以如果是文档型的页面，你可以使用构建替换的方式去解决这个问题，写的时候常规的写，构建的时候再去替换。但是对于我们项目来说这不太行。解决的方法目前我能想到的有两个：<ul>
+<li>将中文做为多语言的key，这样对于开发人员相当友好。但是会有一个问题，如果后面这个key改了的话，可能会很诡异，比如最后变成 ‘取消’: ‘确定’，让人摸不着头脑。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// zh-cn.js</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&#x27;截止录入时间&#x27;</span>: <span class="string">&#x27;截止录入时间&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// en.js</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&#x27;截止录入时间&#x27;</span>: <span class="string">&#x27;Entry Deadline&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// js</span></span><br><span class="line"><span class="keyword">const</span> name = i18next.t(<span class="string">&#x27;截止录入时间&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// html</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123; &#x27;截止录入时间&#x27; | i18next &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br></pre></td></tr></table></figure></li>
+<li>将中文作为默认的fallback，比如 `i18n.t(‘entry_deadline’, ‘截止录入时间’)，然后中文的维护可以不单独写一个语言包，这也是一个折中方案。</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    Donate
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechat_pay.jpeg" alt="Jsonz WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ali_pay.jpeg" alt="Jsonz Alipay">
+        <p>Alipay</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Thinking/" rel="tag"># Thinking</a>
+              <a href="/tags/I18n/" rel="tag"># I18n</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/form-auto-save-think/" rel="prev" title="业务表单自动保存引发的小思考">
+      <i class="fa fa-chevron-left"></i> 业务表单自动保存引发的小思考
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">需求分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5-excel%E8%BD%AC%E8%AF%AD%E8%A8%80%E5%8C%85"><span class="nav-number">2.1.</span> <span class="nav-text">第一步 excel转语言包:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-html%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%9B%BF%E6%8D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">第二步 html模板的替换:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5-js%E6%A8%A1%E6%9D%BF%E7%9A%84%E6%9B%BF%E6%8D%A2"><span class="nav-number">2.3.</span> <span class="nav-text">第三步 js模板的替换:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#next"><span class="nav-number">3.</span> <span class="nav-text">next</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jsonz"
+      src="/images/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">Jsonz</p>
+  <div class="site-description" itemprop="description">前端👴🥬🐣</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/jsonz1993" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jsonz1993" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:jsonz@qq.com" title="E-Mail → mailto:jsonz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://juejin.im/user/58dbb0b844d904006954ca8e" title="掘金 → https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;58dbb0b844d904006954ca8e" rel="noopener" target="_blank"><i class="fa fa-bullseye fa-fw"></i>掘金</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.hhking.cn/" title="hhking → https:&#x2F;&#x2F;blog.hhking.cn" rel="noopener" target="_blank"><i class="fa fa-user-friends fa-fw"></i>hhking</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">粤ICP备18066881号 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jsonz</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+  <script>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'forest',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://jsonz1993.github.io/i18n-replace-with-solution/',]
+      });
+      });
+  </script>
+
+</body>
+</html>

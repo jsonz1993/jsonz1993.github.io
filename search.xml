@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>多语言需求及后续方案思考</title>
+    <url>/i18n-replace-with-solution/</url>
+    <content><![CDATA[<p>最近接到一个需求，是做tim系统某个模块的多语言，只是多语言还没到本地化的程度。因为这块主要是想解决海外的同事看不懂中文的问题，所以要求没有特别高。</p>
+<p>因为目前团队开发和维护多个项目，所以想着多语言的框架可以尽可能的统一，最后选定了社区比较流行的 i18n。<br>这样虽然项目有些用react，老项目用angular，有一些项目混着angular和react，但是都可以基于i18n去开发，减少开发使用和配置的成本。对于工具这块不再过多赘述。</p>
+<p>在上家公司也做过多语言，当时是有个管理后台维护，然后前端负责把词条写上去并且新建一个key去替换本地的文件。这种方案适合一些文案很多，维护灵活的项目，比如电商项目等就比较合适。</p>
+<p>目前项目里的多语言都是放在前端维护，前端讲产品和供应商给出的翻译写成两个js文件，然后判断当前的语言环境选择对应的语言包来展示，适合词条比较少的，或者业务文案相对稳定的。比如投资系统就很适合，专业名词改动少，也很少出现大片大片的文案。</p>
+<p>这次做的是某个模块的替换，给的时间3-4天，相对比较宽松。所以决定花点时间写个小小的工具来节约一点时间划水摸鱼…</p>
+<h1 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h1><p>这里我负责是tim项目的某个模块，这个模块都是angular1.x实现的。文案绝大部分是写在模板 html中，少部分写在 js中，还有一些是参杂了变量的。</p>
+<p>首先我们明确要做的事情：</p>
+<ul>
+<li>第一步是将产品给出的在线excel转换为我们的 xxx-en.js 和 xxx-zh-cn.js</li>
+<li>第二步将项目中html的词条替换成我们多语言中对应的key</li>
+<li>第三步将项目中js的词条也做对应的替换</li>
+</ul>
+<p>这里第二步举例来讲就是<code>&lt;span&gt;截止录入时间&lt;/span&gt;</code> 替换为 <code>&lt;span&gt;&#123;&#123; 'portfolioMonitoring:entry_deadline' | i18next &#125;&#125;&lt;/span&gt;</code>。<br>这里的 <code>&#123;&#123; key | i18next &#125;&#125;</code> 是angularJs中filter的写法，其他框架思路不变，key则是由 namespace和wordKey组成。</p>
+<p>第三步是js替换，所以和其他框架没有什么区别，比如将 </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">vm.crumbs = [&#123;</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;截止录入时间&#x27;</span>,</span><br><span class="line">	<span class="attr">link</span>: <span class="string">&#x27;...&#x27;</span></span><br><span class="line">&#125;];</span><br><span class="line"></span><br><span class="line">vm.crumbs = [&#123;</span><br><span class="line">  <span class="attr">name</span>: $i18next.t(<span class="string">&#x27;portfolioMonitoring:entry_deadline&#x27;</span>),</span><br><span class="line">  <span class="attr">link</span>: <span class="string">&#x27;...&#x27;</span></span><br><span class="line">&#125;];</span><br></pre></td></tr></table></figure>
+
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><p>这次的目标是先写个小工具来简化一些工作。</p>
+<h2 id="第一步-excel转语言包"><a href="#第一步-excel转语言包" class="headerlink" title="第一步 excel转语言包:"></a>第一步 excel转语言包:</h2><p>这一块比较简单，先将产品给的在线文档，导出一份csv格式。然后直接用Node去把csv转成对应的两份语言包文件。<br>具体的做法是利用 <a href="https://www.npmjs.com/package/csvtojson">csvtojson</a> 将csv转成json，然后取里面英文翻译做一个 snakeCase 转换，比如 <code>Entry Deadline</code>转为 <code>entry_deadline</code>，作为中英文的key，最后生成两份文件:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// xxx-en.js</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&#x27;entry_deadline&#x27;</span>: <span class="string">&#x27;Entry Deadline&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// xxx-zh-cn.js</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&#x27;entry_deadline&#x27;</span>: <span class="string">&#x27;截止录入时间&#x27;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="第二步-html模板的替换"><a href="#第二步-html模板的替换" class="headerlink" title="第二步 html模板的替换:"></a>第二步 html模板的替换:</h2><p>读取目标模板，解析模板并对里面单块的文字进行提取（这里没有对值替换模板做处理，省事），然后根据这个文字在我们的语言包里面查找，如果找到的话，就做对应的key值替换。</p>
+<p>具体做法是先读取语言包，生成一份中文与key匹配表， <code>map = &#123; &#39;截止录入时间&#39;: &#39;entry_deadline&#39; &#125;</code>。然后对模板文件进行语法分析，这里我用的 <a href="https://www.npmjs.com/package/posthtml">posthtml</a>来解析html ast。然后对html中的 innerText 或 attr 属性进行取值匹配，如果匹配到了，就替换为对应的key值，最后将替换后的文件重新写入到对应的模板文件中。</p>
+<h2 id="第三步-js模板的替换"><a href="#第三步-js模板的替换" class="headerlink" title="第三步 js模板的替换:"></a>第三步 js模板的替换:</h2><p>js的替换其实和html的思路一样，只不过选择的解析工具是 <a href="https://www.npmjs.com/package/@babel/parser">@babel/parser</a>，然后配合 <a href="https://www.npmjs.com/package/@babel/traverse">@babel/traverse</a> 和 <a href="https://www.npmjs.com/package/@babel/template">@babel/template</a> 来实现替换。</p>
+<p>具体实现是先解析js文件将其解析为 ast，然后用 traverse 来处理这段ast，对里面的 StringLiteral 类型进行处理，如果匹配到对应的中文语言包，则替换为对应的ast。最后将ast重新用 <a href="https://www.npmjs.com/package/@babel/generator">@babel/generator</a> 生成js文件替换源文件。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> i18nCallExpression = template(<span class="string">`</span></span><br><span class="line"><span class="string">  $i18n.t(&#x27;I18N_KEY&#x27;)</span></span><br><span class="line"><span class="string">`</span>)</span><br><span class="line">traverse(ast, &#123;</span><br><span class="line">  <span class="function"><span class="title">StringLiteral</span>(<span class="params">path</span>)</span> &#123;</span><br><span class="line">    ... 匹配 ...</span><br><span class="line">    path.replaceWith(</span><br><span class="line">      i18nCallExpression(&#123;</span><br><span class="line">        <span class="attr">I18N_KEY</span>: <span class="string">`<span class="subst">$&#123;namespace&#125;</span>:<span class="subst">$&#123;key&#125;</span>`</span></span><br><span class="line">      &#125;)</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="next"><a href="#next" class="headerlink" title="next"></a>next</h1><p>这个小组件花了半天时间写，跑完估摸着比手动替换节约了至少60%的工作量，投入产出比还是挺高的。</p>
+<p>不过项目中必不可少的还是要人工过一遍，这和项目的性质有关，如果是一些比如文档类型的，这种很容易做词条替换。但是对于一个投资系统来说，里面有着大量的模板值替换，单复数形式目前还是要手动去替换，比如<code>a company</code>和 <code>3 companies</code>这种场景。所以下一步想把这块做深入，也不会考虑做构建后的替换，而是采取预构建替换，然后人工再审核一遍。</p>
+<p>还有一个问题就是旧项目没有严格的 eslint和 prettier，所以用js转换之后，会出现大量的格式问题，虽然不会报错，但是在cr的时候会造成非常大的影响。<br>对于这次迭代我的解决方法是直接先用js跑一遍这样格式可以保持统一，然后提交cr，再跑一遍去替换。</p>
+<p>这只是一个最基础的beta原型，我们接下来可以往几个方面去深入优化。</p>
+<ol>
+<li>目前文案的收集是产品在页面上人工收集的，可以改为用脚本去扫项目，将识别到的中文提取出来转换为csv文件，减少人力成本。</li>
+<li>csv生成js的模式，目前是全量替换，后面应该是做到增量替换，比如我原本已经有一个语言包文件，转换完后我又去改了一个地方，但是后面有一份新的csv，这时候跑完应该是增量的添加到文件中而不是全量替换了。</li>
+<li>对于 多语言方案，应该是有一个工具提供基础的服务，比如csvToJs, 文件提取中文，中文替换为i18nKey。然后对应的各个模块用插件去实现，比如 提取中文，可以是 html，也可以是 js或jsx，这些提取的能力都是插件去提供。比如我在tim项目中用的是angular的模板，那我的解析规则可能就和tpp项目中普通的html模板或者jsx不一样。再比如替换的规则，可能tpp和tip用的都是react，但是他们内部基于 i18next封装的组件有一点差异，这些都可以通过自定义插件去磨平这些差异。</li>
+<li>定位难的问题。 做过多语言项目的人应该都知道，如果替换为词条有一个很蛋疼的问题就是，比如我在页面上发现一个问题，我要去改，最直接的方式就是搜一下这段文案。但是你都替换成词条了，这就很尴尬。所以如果是文档型的页面，你可以使用构建替换的方式去解决这个问题，写的时候常规的写，构建的时候再去替换。但是对于我们项目来说这不太行。解决的方法目前我能想到的有两个：<ul>
+<li>将中文做为多语言的key，这样对于开发人员相当友好。但是会有一个问题，如果后面这个key改了的话，可能会很诡异，比如最后变成 ‘取消’: ‘确定’，让人摸不着头脑。<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// zh-cn.js</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&#x27;截止录入时间&#x27;</span>: <span class="string">&#x27;截止录入时间&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// en.js</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&#x27;截止录入时间&#x27;</span>: <span class="string">&#x27;Entry Deadline&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// js</span></span><br><span class="line"><span class="keyword">const</span> name = i18next.t(<span class="string">&#x27;截止录入时间&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// html</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>&#123;&#123; &#x27;截止录入时间&#x27; | i18next &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span><br></pre></td></tr></table></figure></li>
+<li>将中文作为默认的fallback，比如 `i18n.t(‘entry_deadline’, ‘截止录入时间’)，然后中文的维护可以不单独写一个语言包，这也是一个折中方案。</li>
+</ul>
+</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>Thinking</tag>
+        <tag>I18n</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>业务表单自动保存引发的小思考</title>
     <url>/form-auto-save-think/</url>
     <content><![CDATA[<p>最近接到一个表单自动保存的需求，一开始以为只是简单的数据保存，抄起键盘就干，十行代码不到实现个大概的:</p>
@@ -568,7 +617,7 @@
 <p>限制时间 <code>git log --since=2.days</code> 具体看链接文档</p>
 <p>不展示merge节点 <code>git log --no-merges</code></p>
 <h2 id="撤消操作"><a href="#撤消操作" class="headerlink" title="撤消操作"></a>撤消操作</h2><p><code>git reset file</code> 把暂存区的文件取出来<br><code>git checkout -- file</code> 把工作区文件修改撤销(变为已暂存/已提交的文件状态)</p>
-<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><p><code>git remote -v</code> 显示git读写的仓库地址<br><code>git remote add &lt;name&gt; &lt;url&gt;</code> 添加远程仓库 git add origin <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#x69;&#116;&#46;&#x78;&#x78;&#x78;&#120;">&#103;&#105;&#116;&#64;&#x67;&#x69;&#116;&#46;&#x78;&#x78;&#x78;&#120;</a></p>
+<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><p><code>git remote -v</code> 显示git读写的仓库地址<br><code>git remote add &lt;name&gt; &lt;url&gt;</code> 添加远程仓库 git add origin <a href="mailto:&#103;&#105;&#x74;&#x40;&#103;&#x69;&#116;&#46;&#120;&#x78;&#x78;&#x78;">&#103;&#105;&#x74;&#x40;&#103;&#x69;&#116;&#46;&#120;&#x78;&#x78;&#x78;</a></p>
 <h2 id="打标签"><a href="#打标签" class="headerlink" title="打标签"></a>打标签</h2><p>添加tag<br><code>git tag -a tagName </code> 简单模式<br><code>git tag -a tagName -m message</code> 添加tag的说明</p>
 <p>展示tag<br><code>git show tagName</code><br><code>git tag</code><br><code>git tag -l &#39;tagName glob</code></p>
 <p>删除tag<br><code>git tag -d tagName</code> 只会删除本地<br><code>git push origin --delete tagName</code> 删除本地与远程<br><code>git push origin :refs/tags/tagName</code> 同上</p>
