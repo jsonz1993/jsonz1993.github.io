@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"jsonz1993.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":true,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="前端👴🥬🐣">
+  <meta name="description" content="前端👴🥬🐣&#x2F;JavaScript&#x2F;React">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Jsonz bug-log">
 <meta property="og:url" content="http://jsonz1993.github.io/page/4/index.html">
 <meta property="og:site_name" content="Jsonz bug-log">
-<meta property="og:description" content="前端👴🥬🐣">
+<meta property="og:description" content="前端👴🥬🐣&#x2F;JavaScript&#x2F;React">
 <meta property="og:locale">
 <meta property="article:author" content="Jsonz">
 <meta property="article:tag" content="Jsonz Jsonz1993 张耿欣 React">
@@ -109,7 +109,7 @@
       <h1 class="site-title">Jsonz bug-log</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
-      <p class="site-subtitle" itemprop="description">前端/JavaScript/React</p>
+      <p class="site-subtitle" itemprop="description">后续更新会放在 github.com/jsonz1993/blog</p>
   </div>
 
   <div class="site-nav-right">
@@ -141,7 +141,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">48</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">49</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -199,12 +199,75 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/fp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+      <meta itemprop="name" content="Jsonz">
+      <meta itemprop="description" content="前端👴🥬🐣/JavaScript/React">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jsonz bug-log">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/fp/" class="post-title-link" itemprop="url">函数式编程</a>
+        </h2>
+
+      </header>
+
+    
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a target="_blank" rel="noopener" href="https://ppt.baomitu.com/d/b063f5fc">本文ppt请笑纳</a></p>
+<h1 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h1><p>维基百科对函数式编程的定义：函数式编程（英语：functional programming）或称函数程序设计，是一种编程典范，它将计算机运算视为数学上的函数计算，并且避免使用程序状态以及易变对象。这里的函数指的是数学上的函数，既自变量（数据）的映射。</p>
+<p>与<code>命令式编程</code>对比，<code>函数式编程</code>更加强调__程序执行的结果__而非__执行的过程__，倡导利用若干简单的执行单元(小函数)让计算结果不断渐进，逐层推导复杂的运算，而不是设计一个复杂的执行过程。</p>
+<p>我的理解是，以纯函数（ 避免使用程序状态以及异变对象）为单元，去抽象、拆分模块功能的编程思想。其实函数式编程我们平时不陌生，比如react, redux 都多多少少有一些相关。</p>
+<p>所以我们得出几个函数式编程的要点：</p>
+<ol>
+<li>避免使用程序状态以及异变对象，数据映射=&gt; 纯函数</li>
+<li>强调执行结果而非过程=&gt; 声明式</li>
+</ol>
+<h1 id="纯函数"><a href="#纯函数" class="headerlink" title="纯函数"></a>纯函数</h1><p>纯函数：输出结果只由输入决定，并且不产生副作用(effects)。 </p>
+<ol>
+<li>避免使用 this，window 等外部变量</li>
+<li>没有产生副作用(Effects)，既把Effects抽离出来</li>
+</ol>
+          <!--noindex-->
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+    
+    
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/circular-reference/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
       <meta itemprop="name" content="Jsonz">
-      <meta itemprop="description" content="前端👴🥬🐣">
+      <meta itemprop="description" content="前端👴🥬🐣/JavaScript/React">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -254,7 +317,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
       <meta itemprop="name" content="Jsonz">
-      <meta itemprop="description" content="前端👴🥬🐣">
+      <meta itemprop="description" content="前端👴🥬🐣/JavaScript/React">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -321,7 +384,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
       <meta itemprop="name" content="Jsonz">
-      <meta itemprop="description" content="前端👴🥬🐣">
+      <meta itemprop="description" content="前端👴🥬🐣/JavaScript/React">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -371,7 +434,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
       <meta itemprop="name" content="Jsonz">
-      <meta itemprop="description" content="前端👴🥬🐣">
+      <meta itemprop="description" content="前端👴🥬🐣/JavaScript/React">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -421,7 +484,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
       <meta itemprop="name" content="Jsonz">
-      <meta itemprop="description" content="前端👴🥬🐣">
+      <meta itemprop="description" content="前端👴🥬🐣/JavaScript/React">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -471,7 +534,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
       <meta itemprop="name" content="Jsonz">
-      <meta itemprop="description" content="前端👴🥬🐣">
+      <meta itemprop="description" content="前端👴🥬🐣/JavaScript/React">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -537,7 +600,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
       <meta itemprop="name" content="Jsonz">
-      <meta itemprop="description" content="前端👴🥬🐣">
+      <meta itemprop="description" content="前端👴🥬🐣/JavaScript/React">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -587,7 +650,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
       <meta itemprop="name" content="Jsonz">
-      <meta itemprop="description" content="前端👴🥬🐣">
+      <meta itemprop="description" content="前端👴🥬🐣/JavaScript/React">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -608,7 +671,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>直入主题。之前做移动端的需求时，经常遇到一种常见，就是:<br>a页面是一个长列表，我们滑动到某个地方假设为 <strong>100px</strong> ，点击之后进入到b页面<br>再从b页面回到a页面，这时候浏览器的滚动条会自动回到我们跳转前的位置，也就是 <strong>100px</strong> 的位置。<br><img data-src="/history-scroll-restoration/history-scroll-restoration.gif" title="浏览器记住滚动行为"></p>
+          <p>直入主题。之前做移动端的需求时，经常遇到一种常见，就是:<br>a页面是一个长列表，我们滑动到某个地方假设为 <strong>100px</strong> ，点击之后进入到b页面<br>再从b页面回到a页面，这时候浏览器的滚动条会自动回到我们跳转前的位置，也就是 <strong>100px</strong> 的位置。<br><img data-src="/history-scroll-restoration/history-scroll-restoration.gif"></p>
 <p>这种体贴的行为我是很喜欢的~ 但是有时候产品就非要抬杠，说 我就不想要这种行为，你给我回到顶部去(╯‵□′)╯︵┻━┻</p>
 <p>以前没办法就经常用什么 setTimeout 大法去手动处理这些东西</p>
 <p>氮素!!! 如果只是说setTimeout大法的话，就没我什么事了。<br>今天要说的是 <strong>history.scrollRestoration</strong> ，这个属性是实验性的属性，他的作用是: <strong>允许Web应用程序在历史导航上显式地设置默认滚动恢复行为。此属性可以是自动的（auto）或者手动的（manual）。</strong></p>
@@ -646,7 +709,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpeg">
       <meta itemprop="name" content="Jsonz">
-      <meta itemprop="description" content="前端👴🥬🐣">
+      <meta itemprop="description" content="前端👴🥬🐣/JavaScript/React">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -668,56 +731,6 @@
 
       
           <p class="post-prev-description">探索create-react-app框架的源码及思想（二）</p>
-          <!--noindex-->
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
-    
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://jsonz1993.github.io/2018-05-08/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-      <meta itemprop="name" content="Jsonz">
-      <meta itemprop="description" content="前端👴🥬🐣">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jsonz bug-log">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018-05-08/" class="post-title-link" itemprop="url">2018-05-08面试记B</a>
-        </h2>
-
-      </header>
-
-    
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p class="post-prev-description">面试记录</p>
           <!--noindex-->
           <!--/noindex-->
         
@@ -800,14 +813,14 @@
     <img class="site-author-image" itemprop="image" alt="Jsonz"
       src="/images/avatar.jpeg">
   <p class="site-author-name" itemprop="name">Jsonz</p>
-  <div class="site-description" itemprop="description">前端👴🥬🐣</div>
+  <div class="site-description" itemprop="description">前端👴🥬🐣/JavaScript/React</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-count">49</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -827,7 +840,7 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="https://github.com/jsonz1993" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;jsonz1993" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+        <a href="https://github.com/jsonz1993/blog" title="Blog → https:&#x2F;&#x2F;github.com&#x2F;jsonz1993&#x2F;blog" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>Blog</a>
       </span>
       <span class="links-of-author-item">
         <a href="mailto:jsonz@qq.com" title="E-Mail → mailto:jsonz@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
