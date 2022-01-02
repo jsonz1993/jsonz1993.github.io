@@ -659,7 +659,7 @@
 <p>限制时间 <code>git log --since=2.days</code> 具体看链接文档</p>
 <p>不展示merge节点 <code>git log --no-merges</code></p>
 <h2 id="撤消操作"><a href="#撤消操作" class="headerlink" title="撤消操作"></a>撤消操作</h2><p><code>git reset file</code> 把暂存区的文件取出来<br><code>git checkout -- file</code> 把工作区文件修改撤销(变为已暂存/已提交的文件状态)</p>
-<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><p><code>git remote -v</code> 显示git读写的仓库地址<br><code>git remote add &lt;name&gt; &lt;url&gt;</code> 添加远程仓库 git add origin <a href="mailto:&#x67;&#105;&#x74;&#64;&#103;&#105;&#x74;&#x2e;&#x78;&#120;&#120;&#x78;">&#x67;&#105;&#x74;&#64;&#103;&#105;&#x74;&#x2e;&#x78;&#120;&#120;&#x78;</a></p>
+<h2 id="远程仓库的使用"><a href="#远程仓库的使用" class="headerlink" title="远程仓库的使用"></a>远程仓库的使用</h2><p><code>git remote -v</code> 显示git读写的仓库地址<br><code>git remote add &lt;name&gt; &lt;url&gt;</code> 添加远程仓库 git add origin <a href="mailto:&#x67;&#x69;&#116;&#64;&#103;&#105;&#x74;&#46;&#x78;&#x78;&#120;&#x78;">&#x67;&#x69;&#116;&#64;&#103;&#105;&#x74;&#46;&#x78;&#x78;&#120;&#x78;</a></p>
 <h2 id="打标签"><a href="#打标签" class="headerlink" title="打标签"></a>打标签</h2><p>添加tag<br><code>git tag -a tagName </code> 简单模式<br><code>git tag -a tagName -m message</code> 添加tag的说明</p>
 <p>展示tag<br><code>git show tagName</code><br><code>git tag</code><br><code>git tag -l &#39;tagName glob</code></p>
 <p>删除tag<br><code>git tag -d tagName</code> 只会删除本地<br><code>git push origin --delete tagName</code> 删除本地与远程<br><code>git push origin :refs/tags/tagName</code> 同上</p>
